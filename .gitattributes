@@ -1,0 +1,5 @@
+# Upstream and generated snapshots are hashed by content; keep them LF on every OS.
+packages/styles/upstream/** text eol=lf
+packages/styles/generated/** text eol=lf
+packages/styles/contracts/** text eol=lf
+packages/styles/manifest.json text eol=lf

@@ -5,6 +5,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  readdirSync,
   rmSync,
   writeFileSync
 } from "node:fs";
@@ -80,6 +81,33 @@ describe("sync:styles contract", () => {
     );
 
     expect(output).toContain("sync:styles check passed: 96 CSS files");
+  });
+
+  it("accepts the same snapshot with LF and CRLF checkouts", () => {
+    const fixture = createStylesFixture({generated: false});
+    const files = readdirSync(join(fixture.root, "upstream"), {
+      recursive: true,
+      withFileTypes: true
+    })
+      .filter((entry) => entry.isFile())
+      .map((entry) => join(entry.parentPath, entry.name));
+    const rewrite = (eol: "\n" | "\r\n") => {
+      for (const file of files) {
+        const text = readFileSync(file, "utf8").replace(/\r\n/g, "\n").replace(/\n/g, eol);
+
+        writeFileSync(file, text);
+      }
+    };
+
+    try {
+      rewrite("\r\n");
+      expect(fixture.run("sync-styles.mjs", ["--check"]).status).toBe(0);
+
+      rewrite("\n");
+      expect(fixture.run("sync-styles.mjs", ["--check"]).status).toBe(0);
+    } finally {
+      fixture.dispose();
+    }
   });
 
   it("fails when an upstream file no longer matches the pinned hash", () => {

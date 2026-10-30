@@ -1,6 +1,6 @@
 import {execFileSync} from "node:child_process";
 import {createHash} from "node:crypto";
-import {appendFileSync, readFileSync, readdirSync} from "node:fs";
+import {appendFileSync, readFileSync, readdirSync, writeFileSync} from "node:fs";
 import {join} from "node:path";
 
 import postcss, {type AtRule, type Rule} from "postcss";
@@ -58,7 +58,9 @@ const pin = JSON.parse(
   readFileSync(join(contractsRoot, "upstream.json"), "utf8")
 ) as {version: string; commit: string};
 
-const sha256 = (value: string) => createHash("sha256").update(value).digest("hex");
+const normalizeNewlines = (value: string) => value.replace(/\r\n/g, "\n");
+const sha256 = (value: string) =>
+  createHash("sha256").update(normalizeNewlines(value)).digest("hex");
 
 const ATTRIBUTE_PATTERN =
   /\[(data-[a-z0-9-]+)(?:\s*[~|^$*]?=\s*(?:"[^"]*"|'[^']*'|[^\]]+))?\]/g;
@@ -94,6 +96,12 @@ function upstreamCssFiles() {
     .map((entry) => join(entry.parentPath, entry.name));
 }
 
+function fixtureFiles(root: string) {
+  return readdirSync(root, {recursive: true, withFileTypes: true})
+    .filter((entry) => entry.isFile())
+    .map((entry) => join(entry.parentPath, entry.name));
+}
+
 describe("compat generation contract", () => {
   it("is deterministic against the generated snapshot", () => {
     const output = execFileSync(
@@ -103,6 +111,28 @@ describe("compat generation contract", () => {
     );
 
     expect(output).toContain("gen-compat check passed");
+  });
+
+  it("checks the same snapshot with CRLF and LF checkouts", () => {
+    const fixture = createStylesFixture();
+    const files = fixtureFiles(join(fixture.root, "upstream"));
+    const rewrite = (eol: "\n" | "\r\n") => {
+      for (const file of files) {
+        const text = readFileSync(file, "utf8").replace(/\r\n/g, "\n").replace(/\n/g, eol);
+
+        writeFileSync(file, text);
+      }
+    };
+
+    try {
+      rewrite("\r\n");
+      expect(fixture.run("gen-compat.mjs", ["--check"]).status).toBe(0);
+
+      rewrite("\n");
+      expect(fixture.run("gen-compat.mjs", ["--check"]).status).toBe(0);
+    } finally {
+      fixture.dispose();
+    }
   });
 
   it("pins the upstream version and commit", () => {
@@ -141,14 +171,18 @@ describe("compat generation contract", () => {
       const source = readFileSync(join(upstreamRoot, file.path), "utf8");
       const generated = readFileSync(join(generatedRoot, file.path), "utf8");
 
-      expect(generated, file.path).toBe(source);
+      expect(generated, file.path).toBe(normalizeNewlines(source));
     }
   });
 
   it("appends aliases in place without reordering rules or declarations", () => {
     for (const file of manifest.files.filter((entry) => entry.scoped)) {
-      const source = postcss.parse(readFileSync(join(upstreamRoot, file.path), "utf8"));
-      const generated = postcss.parse(readFileSync(join(generatedRoot, file.path), "utf8"));
+      const source = postcss.parse(
+        normalizeNewlines(readFileSync(join(upstreamRoot, file.path), "utf8"))
+      );
+      const generated = postcss.parse(
+        normalizeNewlines(readFileSync(join(generatedRoot, file.path), "utf8"))
+      );
       const sourceRules: Rule[] = [];
       const generatedRules: Rule[] = [];
 

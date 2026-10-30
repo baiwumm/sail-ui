@@ -36,7 +36,8 @@ if (customUpstreamRoot && !checkMode) {
   die("--upstream-root is only supported with --check.");
 }
 
-const hash = (value) => createHash("sha256").update(value).digest("hex");
+const normalizeNewlines = (value) => value.replace(/\r\n/g, "\n");
+const hash = (value) => createHash("sha256").update(normalizeNewlines(value)).digest("hex");
 const toPosix = (value) => value.split("\\").join("/");
 
 function readOption(name) {
@@ -65,7 +66,7 @@ function readText(path) {
     die(`${toPosix(relative(packageRoot, path))} is missing.`);
   }
 
-  return readFileSync(path, "utf8");
+  return normalizeNewlines(readFileSync(path, "utf8"));
 }
 
 function readJson(path) {
@@ -261,7 +262,7 @@ const upstreamFiles = [];
 
 for (const file of upstreamCssFiles) {
   const path = toPosix(relative(upstreamRoot, file));
-  const css = readFileSync(file, "utf8");
+  const css = normalizeNewlines(readFileSync(file, "utf8"));
 
   upstreamFiles.push({path, hash: hash(css)});
 
@@ -409,7 +410,7 @@ let aliasTotal = 0;
 for (const sourceFile of componentFiles) {
   const name = toPosix(relative(upstreamComponents, sourceFile));
   const component = name.replace(/\.css$/, "").split("/")[0];
-  const sourceCss = readFileSync(sourceFile, "utf8");
+  const sourceCss = normalizeNewlines(readFileSync(sourceFile, "utf8"));
   const scoped = component !== "index" && scopeSet.has(component);
 
   let generatedCss = sourceCss;
@@ -499,7 +500,7 @@ if (checkMode) {
   if (!existsSync(manifestPath)) {
     errors.push("manifest.json is missing");
   } else {
-    const committedText = readFileSync(manifestPath, "utf8");
+    const committedText = normalizeNewlines(readFileSync(manifestPath, "utf8"));
     let committed;
 
     try {
@@ -544,7 +545,7 @@ if (checkMode) {
       continue;
     }
 
-    if (readFileSync(absolute, "utf8") !== content) {
+    if (normalizeNewlines(readFileSync(absolute, "utf8")) !== content) {
       errors.push(`${path} is stale`);
     }
   }

@@ -119,6 +119,7 @@ Choose an owner in packages/styles/contracts/attributes.json
 - 契约测试 45 条：生成器 13、data-slot 8、同步 9、Vue SSR/交互 15；每个 CSS 属性要么断言，要么在 `STATE_COVERAGE` 登记缺口。
 - 故障注入 3 项、生成确定性、同步拒绝均有自动化用例；`pnpm verify`、浏览器 18/18、视觉 8/8 通过。
 - 冷环境暴露的 `nuxt-fixture#typecheck` 依赖构建产物问题已用 `dependsOn: ["^build"]` 修复。
+- T03 推送后的 CI 暴露快照哈希的换行符差异：Windows 按 CRLF、CI 按 LF 计算。`check:styles` 与 `gen-compat` 现统一按 LF 规范化哈希与生成输出，并用 `.gitattributes` 固定快照文件为 `eol=lf`；新增 CRLF/LF 双 checkout 回归用例。
 - 未在本次实现：WebKit 视觉基线、其余 80 个组件的契约表、Select/Modal 的 ARIA 欠账（仍归 T05）。
 
 ## Demo

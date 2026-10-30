@@ -104,6 +104,8 @@ pnpm sync:styles --source ../heroui   # 用本地 checkout 覆盖快照
 4. `--allow-upstream-change` 未提供 `--commit <sha>`，或提供的 commit 与源 `HEAD` 不符；
 5. `--check` 与 `--source` 同时使用（check 不读源码）。
 
+快照哈希按 **LF 规范化**计算：Windows 的 CRLF checkout 与 Linux CI 的 LF checkout 会得到同一结果。`.gitattributes` 同时把 `upstream/**`、`generated/**`、`contracts/**` 和 `manifest.json` 固定为 `eol=lf`，避免换行符造成快照漂移。
+
 正常同步会先比对哈希再比对版本，错误信息会列出第一个不匹配的文件：
 
 ```

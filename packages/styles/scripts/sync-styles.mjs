@@ -32,7 +32,8 @@ if (commitArg && !allowUpstreamChange) {
   die("--commit requires --allow-upstream-change.");
 }
 
-const hash = (value) => createHash("sha256").update(value).digest("hex");
+const normalizeNewlines = (value) => value.toString("utf8").replace(/\r\n/g, "\n");
+const hash = (value) => createHash("sha256").update(normalizeNewlines(value)).digest("hex");
 const toPosix = (value) => value.split("\\").join("/");
 
 function readOption(name) {
