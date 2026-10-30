@@ -82,5 +82,3 @@ Select 复用 T05 的 popover 状态机；ListBox 同时作为 Select/Combobox/D
 | typeahead 与 IME 冲突                              | `isComposing` 检查；多语言 fixture  |
 | Menu 子菜单/滚动                                   | 按上游能力裁剪；不在 MVP 硬做       |
 | Pagination 的省略号可访问性                        | 提供可聚焦入口；键盘测试            |
-
-</content>

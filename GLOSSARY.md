@@ -64,4 +64,3 @@ Shared vocabulary for Sail UI. If a term here conflicts with a local nickname, t
 - Write **Sail UI** (two words) for the product, and `@sail-ui/*` for packages.
 - Do not call the project "HeroUI Vue" in package names or public docs; use "Sail UI — unofficial Vue port of HeroUI v3".
 - Use **React Aria Components** or **RAC**, never "react-aria" alone when referring to the behavior layer.
-</content>

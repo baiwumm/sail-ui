@@ -50,4 +50,3 @@
 - **Mast UI / Reef UI**：同样实测未发现，备选保留。
 - **`heroui-vue` 作为仓库名**：搜索发现性更好，但包名仍不能用 `@heroui/*`，且 README 首行必须声明 Unofficial；当前不采用，避免长期混淆。
 - **自建 scope**：成本更高，且没有解决品牌问题。
-</content>

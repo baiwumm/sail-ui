@@ -119,5 +119,3 @@ pnpm pack:check         # tarball 安装
 | WebKit 退场动画 pending                            | 复刻 exit hold；浏览器测试留 WebKit 项目             |
 | 子路径导出类型解析                                 | `pack:check` + `moduleResolution: bundler` fixture   |
 | scope 未确认                                       | 不阻塞 T01；在 T09 前完成                            |
-
-</content>

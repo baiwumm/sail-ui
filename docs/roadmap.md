@@ -23,13 +23,13 @@
 
 ## M0 — 架构 spike（1–2 周）
 
-- [ ] Monorepo / 构建 / 类型 / lint / vitest / changesets
-- [ ] `@sail-ui/styles` 上游快照 + 最小生成链路
-- [ ] 4 个 composable + overlay exit hold
-- [ ] Button / Input / Modal / Select
-- [ ] Vite + Nuxt SSR fixtures
-- [ ] 契约 / SSR / 视觉 / tarball 四条最小门禁
-- [ ] 验证 Vue 复合 API、Reka 属性、Tailwind v4、子路径导出
+- [x] Monorepo / 构建 / 类型 / lint / vitest / changesets
+- [x] `@sail-ui/styles` 上游快照 + 最小生成链路
+- [x] 4 个 composable + overlay exit hold
+- [x] Button / Input / Modal / Select
+- [x] Vite + Nuxt SSR fixtures
+- [x] 契约 / SSR / 视觉 / tarball 四条最小门禁
+- [x] 验证 Vue 复合 API、Reka 属性、Tailwind v4、子路径导出
 
 演示：四个组件在两种 SSR 环境可运行、可截图、可安装。
 
@@ -109,4 +109,3 @@
 - ticket 状态：[tickets/README.md](./spec/tickets/README.md)
 - 组件状态：[component-matrix.md](./component-matrix.md)
 - 每周更新一次；里程碑结束做 retro。
-</content>

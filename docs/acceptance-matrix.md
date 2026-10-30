@@ -142,4 +142,3 @@
 - 浏览器失败保留 trace/video（Playwright）。
 - 每个 ticket 的 PR 描述必须写：跑了哪些门禁、哪些没跑、为什么。
 - 不允许用 `test.skip` / 降低阈值 / 删除断言来“修复”失败；先记录，再修复根因。
-</content>

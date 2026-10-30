@@ -147,5 +147,3 @@ pnpm test:contract   # 预期通过
 | 选择器扩展破坏 `:not()` / `:has()` 等复杂选择器   | PostCSS AST 级别处理，不字符串替换；加针对性 fixture               |
 | `data-slots.json` 从 React 源码提取误伤内部组件   | 只取公共导出组件的文件；对 `rac/`、`icons/` 排除                   |
 | 生成产物提交造成 review 噪音                      | 生成文件与源文件分开目录；PR 附 `--stat` 摘要                      |
-
-</content>

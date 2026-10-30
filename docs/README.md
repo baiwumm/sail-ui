@@ -65,7 +65,6 @@ docs/
 ## 当前状态
 
 - 上游：HeroUI `3.2.7` / `89cd95ec1`（2026-10-29）。
-- 本仓库：T01（M0 spike）与 T02（契约工具链）已完成；尚未发布任何 npm 包。
-- 当前组件：Button / Input / Modal / Select，`pnpm verify` 为完整门禁。
-- 下一步：T03、T04、T05、T07（T02 已解除阻塞）。
-</content>
+- 本仓库：T01–T04 已完成（M0 与 M1），共 43 个组件；尚未发布任何 npm 包。
+- `pnpm verify` 为完整门禁（格式 + lint + 类型 + 契约 + 单测 + SSR + 构建）。
+- 下一步：T05（覆盖层与 Toast）；T07、T08 可并行，T06 依赖 T05。

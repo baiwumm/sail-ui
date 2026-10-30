@@ -68,4 +68,3 @@ By contributing, you agree that your contribution is licensed under Apache-2.0. 
 ## Questions
 
 Open an issue with the `question` or `grilling` label. If the question affects scope, API, or visual parity, it belongs in the spec discussion before implementation.
-</content>

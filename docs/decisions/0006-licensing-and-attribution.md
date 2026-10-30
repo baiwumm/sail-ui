@@ -42,4 +42,3 @@ Sail UI 复用 HeroUI 的 CSS，并参考其 React 源码与文档。上游元�
 - **MIT**：与上游实际元数据不一致，且不能覆盖上游 Apache-2.0 CSS 的声明义务，排除。
 - **CC BY / MPL**：与生态不匹配，排除。
 - **不写 NOTICE，仅链接上游**：不满足 Apache-2.0 的保留声明要求，排除。
-</content>

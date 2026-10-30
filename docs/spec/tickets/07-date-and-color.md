@@ -80,5 +80,3 @@
 | Calendar 的 `data-outside-month` 映射错误 | 契约测试 + 视觉跨月截图                          |
 | ComboBox 异步与受控状态竞态               | 受控优先；取消过期请求的示例                     |
 | `calendar-year-picker` 上游未稳定         | 标 preview；不阻塞 MVP                           |
-
-</content>

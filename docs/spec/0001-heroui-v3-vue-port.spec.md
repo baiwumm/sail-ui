@@ -352,4 +352,3 @@ Reka UI 2.11.0
 - 生成的属性别名能覆盖绝大多数差异，剩余差异不超过 4 个 composable 的范围。
 - TanStack Vue Table 能在不牺牲键盘/ARIA 的前提下复刻 Raptor 的表格语义。
 - 上游 `calendar-year-picker` 会在 M3 前稳定；否则按当前快照交付并标注 preview。
-</content>

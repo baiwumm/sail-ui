@@ -77,4 +77,3 @@ HeroUI React 的 API 建立在 RAC 之上：`isDisabled`、`isRequired`、`isInv
 - **完全 Vue 化（`disabled`、`open`、`value`、`change`）**：更符合 Vue 习惯，但迁移映射和上游文档对照会变复杂，且容易与原生属性冲突；不采用。
 - **双 API（`disabled` + `isDisabled`）**：短期友好，长期增加测试矩阵和文档负担；v1 不采用。
 - **保留 React 事件名（`onPress`）**：Vue 模板不支持 `@onPress` 的语义，且与 Vue 事件系统冲突；不采用。
-</content>

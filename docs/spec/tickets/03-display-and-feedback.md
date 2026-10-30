@@ -89,5 +89,3 @@
 | Avatar 的图片加载/尺寸在 SSR 下不稳定                        | 固定尺寸 + 本地 fixture；浏览器测试覆盖       |
 | ProgressCircle 的 SVG 几何与上游有细微差异                   | 直接复用上游 CSS 变量；截图为验收             |
 | Field id 在 SSR/客户端不一致                                 | 统一 `useId()`；禁止 `Math.random()`          |
-
-</content>

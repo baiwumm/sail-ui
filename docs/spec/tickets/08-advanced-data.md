@@ -100,5 +100,3 @@ Table 是最大的一块：必须同时满足数据模型、2D 键盘导航、AR
 | ScrollShadow 的 ResizeObserver 性能 | rAF 节流；只观察容器与内容尺寸                        |
 | OTP 粘贴在移动端差异                | 浏览器测试；保留逐格输入兜底                          |
 | Meter role 兼容性                   | 保留 `aria-valuetext`；文档说明 AT 支持差异           |
-
-</content>

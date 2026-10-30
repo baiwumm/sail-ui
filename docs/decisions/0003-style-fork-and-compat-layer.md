@@ -129,4 +129,3 @@ pnpm sync:styles --source ../heroui   # 用已校验的本地 checkout 覆盖快
 - **末尾追加 alias 文件**：层叠风险，排除。
 - **只用组件补属性、不改 CSS**：无法覆盖上游 CSS 中已有的选择器，且漏一个属性就视觉错误，排除。
 - **重写 CSS**：无法保证像素一致，排除。
-</content>

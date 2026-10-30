@@ -382,4 +382,3 @@ export default defineNuxtConfig({
 - [ ] Toast 改为 `<ToastProvider />` + `useToast()`。
 - [ ] Nuxt：加 `@sail-ui/nuxt`，确认前缀与 SSR。
 - [ ] 跑一遍键盘与 SSR 冒烟；对照 [验收矩阵](./acceptance-matrix.md)。
-</content>

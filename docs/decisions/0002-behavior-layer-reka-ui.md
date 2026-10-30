@@ -60,4 +60,3 @@ Reka 不发射 `data-hovered`、`data-focus-visible`、`data-open`、`data-enter
 - **Ark UI / Zag.js**：状态机驱动，跨框架强；但属性词汇更偏 Zag，Table/Calendar 组合不如 Reka 贴合 HeroUI。
 - **自研 composables**：完全可控，但日期/颜色/浮层成本过高，且难以达到 RAC 的边界处理。
 - **移植 RAC**：工作量最大，且 Vue 端没有收益。
-</content>

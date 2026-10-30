@@ -111,5 +111,3 @@
 | Toast 模块级单例导致 SSR 串数据                | 每请求 manager；SSR fixture 并发测试                  |
 | 定位词 `data-side` 与 `data-placement` 混淆    | 组件层统一映射；文档明确                              |
 | 焦点陷阱在 Teleport 后失效                     | 以 Reka FocusScope 为准；打开后手动聚焦首个可聚焦元素 |
-
-</content>

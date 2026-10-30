@@ -283,4 +283,3 @@ Do not ship a component with only a render test. "Renders without crashing" is n
 ## 14. When blocked
 
 Ask a concise question when a decision affects public API, licensing, package names, visual parity, or scope. Do not silently choose a different contract. If the answer is already in the spec/ADRs, follow it and cite the file.
-</content>

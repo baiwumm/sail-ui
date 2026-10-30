@@ -101,4 +101,3 @@ M0（[Ticket 01](../spec/tickets/01-m0-foundation-spike.md)）必须包含：
 - `<SelectTrigger>` 在 `<script setup>` 中正常解析；
 - `<component :is="Select.Trigger" />` 正常渲染；
 - 对静态 `<Select.Trigger>` 输出明确文档警告（不在库内做运行时兜底）。
-</content>

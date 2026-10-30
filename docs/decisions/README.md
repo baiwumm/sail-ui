@@ -30,5 +30,3 @@
 
 ## Alternatives considered
 ```
-
-</content>

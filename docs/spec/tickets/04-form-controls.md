@@ -42,19 +42,19 @@
 
 ## Acceptance
 
-- [ ] 19 个组件的 `data-slot` 快照与上游一致。
-- [ ] Button：全部变体/尺寸/loading/disabled/icon-only 截图通过。
-- [ ] Checkbox/Radio/Switch：选中、半选、hover、press、focus-visible 的 `data-*` 契约通过。
-- [ ] Switch/Radio 的 `useHover` / `usePress` / `useFocusRing` 在触屏与键盘下行为正确。
-- [ ] Input/Textarea/Search/Number/Slider 的受控 + 非受控测试通过。
-- [ ] 组合输入法（IME）不误触发提交/选择。
-- [ ] 表单：提交、校验、错误聚焦、重置、禁用整组。
-- [ ] 键盘：Tab 顺序、Space/Enter 激活、方向键切换 radio/toggle、Slider 方向键。
-- [ ] RTL：RadioGroup、Slider、ToggleButtonGroup 方向正确。
-- [ ] SSR：全部可服务端渲染；id 稳定；无 hydration mismatch。
-- [ ] 视觉：light/dark × 默认/hover/focus/disabled/invalid × sm/md/lg。
-- [ ] 文档：19 个 demo + API 表 + 与 React 的事件差异。
-- [ ] 组件矩阵状态更新。
+- [x] 19 个组件的 `data-slot` 快照与上游一致（`form-controls.contract.test.ts` 对照 `data-slots.json`）。
+- [x] Button：全部变体/尺寸/loading/disabled/icon-only 截图通过（视觉 50/50）。
+- [x] Checkbox/Radio/Switch：选中、半选、hover、press、focus-visible 的 `data-*` 契约通过。
+- [x] Switch/Radio 的 `useHover` / `usePress` / `useFocusRing` 在触屏与键盘下行为正确。
+- [x] Input/Textarea/Search/Number/Slider 的受控 + 非受控测试通过。
+- [x] 组合输入法（IME）不误触发提交/选择。
+- [x] 表单：提交、校验、错误聚焦、重置、禁用整组。
+- [x] 键盘：Tab 顺序、Space/Enter 激活、方向键切换 radio/toggle、Slider 方向键。
+- [ ] RTL：ToggleButtonGroup/Toolbar 已有 RTL 浏览器测试（`tests/browser/form-controls.spec.ts`）；RadioGroup 与 Slider 的 RTL 行为未单独覆盖，后续补测。
+- [x] SSR：全部可服务端渲染；id 稳定；无 hydration mismatch。
+- [x] 视觉：light/dark × 默认/hover/focus/disabled/invalid × sm/md/lg（`#forms` 5 个场景 0 像素差，50 条视觉对比通过）。
+- [ ] 文档站：19 个 demo + API 表 + 迁移差异。`apps/docs` 尚未创建；按 T03 约定以 playground 画廊替代 demo，API 表与迁移差异随 T09 收口。
+- [x] 组件矩阵状态更新。
 
 ## Demo
 
@@ -103,5 +103,3 @@
 | CheckboxGroup 的 indeterminate 级联 | 明确“全选/半选”规则；单测覆盖                           |
 | Reka NumberField 与上游格式化差异   | 用 `@internationalized/number`；固定 locale fixture     |
 | 表单错误 id 在 SSR 下重复           | `useId()` + field context；禁止手写随机 id              |
-
-</content>

@@ -75,4 +75,3 @@ Reka UI 覆盖了大部分 HeroUI 组件，但有四类缺口：
 - **移植 RAC Table**：工作量与风险最高，且 Vue 端没有收益，排除。
 - **用原生 `<table>`**：无法满足 RAC 的 grid 键盘/虚拟化契约，排除。
 - **CSS-only ScrollShadow**：无法感知滚动位置与边缘阈值，排除。
-</content>
