@@ -106,24 +106,25 @@ button/
 
 These commands are implemented. T01 wired the scaffold; T02 added the contract gates. Do not lower a threshold or delete a test to make a gate green.
 
-| Action                | Command                                                          |
-| --------------------- | ---------------------------------------------------------------- |
-| Install               | `pnpm install`                                                   |
-| Build libraries       | `pnpm build`                                                     |
-| Dev playground        | `pnpm dev`                                                       |
-| Dev Nuxt fixture      | `pnpm dev:nuxt`                                                  |
-| Dev docs              | `pnpm dev:docs`                                                  |
-| Lint / typecheck      | `pnpm lint` · `pnpm typecheck`                                   |
-| Unit tests (jsdom)    | `pnpm test`                                                      |
-| SSR smoke             | `pnpm test:ssr`                                                  |
-| Browser tests         | `pnpm test:browser`                                              |
-| Contract tests        | `pnpm test:contract`                                             |
-| Visual regression     | `pnpm test:visual`                                               |
-| Full gate             | `pnpm verify` (lint + typecheck + contract + unit + SSR + build) |
-| Regenerate compat CSS | `pnpm gen:compat`                                                |
-| Sync upstream styles  | `pnpm sync:styles`                                               |
-| Scaffold component    | `pnpm add:component <Name>`                                      |
-| Pack dry-run          | `pnpm pack:check`                                                |
+| Action                | Command                                                                   |
+| --------------------- | ------------------------------------------------------------------------- |
+| Install               | `pnpm install`                                                            |
+| Build libraries       | `pnpm build`                                                              |
+| Dev playground        | `pnpm dev`                                                                |
+| Dev Nuxt fixture      | `pnpm dev:nuxt`                                                           |
+| Dev docs              | `pnpm dev:docs`                                                           |
+| Lint / typecheck      | `pnpm lint` · `pnpm typecheck`                                            |
+| Format check          | `pnpm format:check`                                                       |
+| Unit tests (jsdom)    | `pnpm test`                                                               |
+| SSR smoke             | `pnpm test:ssr`                                                           |
+| Browser tests         | `pnpm test:browser`                                                       |
+| Contract tests        | `pnpm test:contract`                                                      |
+| Visual regression     | `pnpm test:visual`                                                        |
+| Full gate             | `pnpm verify` (format + lint + typecheck + contract + unit + SSR + build) |
+| Regenerate compat CSS | `pnpm gen:compat`                                                         |
+| Sync upstream styles  | `pnpm sync:styles`                                                        |
+| Scaffold component    | `pnpm add:component <Name>`                                               |
+| Pack dry-run          | `pnpm pack:check`                                                         |
 
 If a command fails, read the error and fix the cause. Never lower a threshold or delete a test to make a gate green.
 

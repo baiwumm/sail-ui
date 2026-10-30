@@ -28,6 +28,9 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Verify formatting
+        run: pnpm format:check
+
       - name: Verify upstream snapshot
         run: pnpm check:styles
 

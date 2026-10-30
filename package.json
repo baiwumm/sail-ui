@@ -19,7 +19,7 @@
     "test:ssr": "vitest run --project ssr",
     "test:browser": "pnpm --filter @sail-ui/playground build && playwright test",
     "test:visual": "pnpm --filter @sail-ui/playground build && pnpm --filter @sail-ui/reference-react build && playwright test --config tests/visual/playwright.config.ts",
-    "verify": "pnpm lint && pnpm typecheck && pnpm typecheck:tests && pnpm check:styles && pnpm check:slots && pnpm check:compat && pnpm test:contract && pnpm test && pnpm test:ssr && pnpm build",
+    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm typecheck:tests && pnpm check:styles && pnpm check:slots && pnpm check:compat && pnpm test:contract && pnpm test && pnpm test:ssr && pnpm build",
     "gen:compat": "pnpm --filter @sail-ui/styles gen:compat",
     "check:compat": "pnpm --filter @sail-ui/styles check:compat",
     "gen:slots": "pnpm --filter @sail-ui/styles gen:slots",
