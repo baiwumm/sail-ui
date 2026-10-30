@@ -60,7 +60,7 @@
 - [x] Input：label/description/error 组合，`isInvalid`/`isRequired`/`isDisabled`，受控与非受控。
 - [x] Modal：`v-model:open`，trigger/overlay/container/dialog/header/body/footer/close 的 `data-slot`，焦点陷阱、Esc、点击遮罩关闭、退场动画。
 - [x] Select：`v-model`，trigger/value/popover/listbox/option 的 `data-slot`，键盘（Arrow/Enter/Esc/typeahead），`data-selected`、`data-open`。
-- [x] 四个组件的 `data-slot` 与上游 React 逐项一致（T01 以契约列表核对四组件 DOM parts；全量 332 值快照由 T02 生成）。
+- [x] 四个组件的 `data-slot` 与上游 React 逐项一致（T01 以契约列表核对四组件 DOM parts；全量快照由 T02 生成，完整提取为 334 值，见 [T02 findings](../../research/t02-contract-findings.md#2-data-slot332--334)）。
 - [x] CSS 依赖的 `data-*` 在正确状态下出现/移除。
 
 ### 测试

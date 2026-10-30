@@ -17,7 +17,7 @@ HeroUI v3 的组件是薄封装，行为在 React Aria Components（RAC）；样
 | `packages/styles/components` 组件 CSS | 86 |
 | `packages/styles/src/components` 变体模块 | 85 |
 | `packages/react/src/components` 目录 | 87（含 `rac`、`icons` 等内部目录） |
-| React 源码中唯一 `data-slot` 值 | 332 |
+| React 源码中唯一 `data-slot` 值 | 334（T02 完整提取；早期 JSX-only 统计为 332，漏掉 2 个对象键形式） |
 | 上游 CSS 中出现的 `data-*` 选择器种类 | 65 |
 
 关键点：CSS 选中的是 `[data-hovered="true"]`、`[data-selected="true"]`、`[data-open="true"]` 这类属性，没有任何 React 运行时痕迹。只要 Vue 侧产出同样的 DOM/ARIA，视觉即可一致。

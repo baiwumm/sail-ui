@@ -2,7 +2,7 @@
 
 Instructions for AI agents and contributors working on **Sail UI** — an unofficial Vue 3 / Nuxt port of HeroUI v3.
 
-> **Current phase: specification.** The repository contains design and delivery documents only. There is no runnable package yet. Do not invent scripts or claim a command passed until the scaffold from [T01](./docs/spec/tickets/01-m0-foundation-spike.md) exists.
+> **Current phase: M1.** T01 (M0 architecture spike) and T02 (contract tooling) are complete. The workspace builds and `pnpm verify` is the full gate. Button, Input, Modal, and Select are the only ported components; every other entry in the component matrix is still pending.
 
 ---
 
@@ -104,7 +104,7 @@ button/
 
 ## 6. Target command surface
 
-These commands are **planned**, not implemented. T01 wires them. Do not run them before the scaffold exists.
+These commands are implemented. T01 wired the scaffold; T02 added the contract gates. Do not lower a threshold or delete a test to make a gate green.
 
 | Action | Command |
 |---|---|
@@ -160,7 +160,7 @@ Rules that prevent the common failures:
 
 ### 8.2 DOM contract
 
-- Every component and part must emit the exact upstream `data-slot` value (332 unique values in React source at the pinned commit).
+- Every component and part must emit the exact upstream `data-slot` value (334 unique values in React source at the pinned commit; the earlier JSX-only count of 332 missed two object-key slots).
 - Interaction states must use the upstream attribute names and values, e.g. `data-hovered="true"`, `data-selected="true"`, `data-focus-visible="true"`, `data-open="true"`, `data-entering`, `data-exiting`.
 - Prefer omitting the attribute over emitting `"false"` when upstream CSS selects on presence or `="true"`.
 - `data-placement` is HeroUI's own modal/drawer placement (`auto|top|center|bottom|left|right`), not Floating UI's `data-side`.

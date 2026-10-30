@@ -65,6 +65,7 @@ docs/
 ## 当前状态
 
 - 上游：HeroUI `3.2.7` / `89cd95ec1`（2026-10-29）。
-- 本仓库：specification，尚未发布任何 npm 包。
-- 下一步：T01（M0 spike）。验收目标是 Button / Input / Modal / Select 的视觉与 SSR 对齐。
+- 本仓库：T01（M0 spike）与 T02（契约工具链）已完成；尚未发布任何 npm 包。
+- 当前组件：Button / Input / Modal / Select，`pnpm verify` 为完整门禁。
+- 下一步：T03、T04、T05、T07（T02 已解除阻塞）。
 </content>

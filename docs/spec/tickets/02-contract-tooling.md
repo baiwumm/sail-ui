@@ -1,10 +1,10 @@
 # T02 — 契约工具链与属性归属
 
 - Milestone: M0/M1
-- Status: Pending
+- Status: Done
 - Blocked by: [T01](./01-m0-foundation-spike.md)
 - Unblocks: [T03](./03-display-and-feedback.md), [T04](./04-form-controls.md), [T05](./05-overlays.md), [T07](./07-date-and-color.md)
-- Related: [ADR 0003](../../decisions/0003-style-fork-and-compat-layer.md), [验收矩阵](../../acceptance-matrix.md)
+- Related: [ADR 0003](../../decisions/0003-style-fork-and-compat-layer.md), [验收矩阵](../../acceptance-matrix.md), [T02 findings](../../research/t02-contract-findings.md)
 
 ## What to build
 
@@ -13,7 +13,7 @@
 1. `attributes.json` 覆盖上游 CSS 的 65 种 `data-*` 选择器；
 2. `gen-compat.mjs` 完整、确定性、可读；
 3. `manifest.json`（版本/commit/源与生成哈希/别名统计）；
-4. `data-slot` 快照从上游 React 源码生成（332 个值）；
+4. `data-slot` 快照从上游 React 源码生成（完整提取为 334 个值；初稿的 332 漏掉了对象键形式，见 [findings](../../research/t02-contract-findings.md#2-data-slot332--334)）；
 5. 契约测试：渲染 SSR → 断言 `data-slot` 与 CSS 需要的状态属性；
 6. CI：未知属性、缺失属性、生成漂移、快照差异全部失败；
 7. 一份“如何加新属性”的维护文档。
@@ -29,7 +29,7 @@ T01 已跑通最小生成链路，T02 在其上扩展，不要推倒重来。实
 | `attributes.json` | 18 条：compat 9 / component 8 / reka 1 | 覆盖上游 65 种属性，47 个 pending 逐个定 owner |
 | scope | 15 个组件（Button/Input/Modal/Select 及其 parts） | 扩展到全部组件，并按组件分组 |
 | 别名 | 29 个，分布在 8 个生成文件 | 评审每个别名；新增别名必须保持原位追加 |
-| `data-slots` | 4 个组件以契约列表人工核对 | 从 React 源码生成 332 值快照 |
+| `data-slots` | 4 个组件以契约列表人工核对 | 从 React 源码生成快照（完整提取 334 值） |
 | 生成器 | PostCSS 原位追加、`:not()` 内跳过、同组已存在则跳过、`--check` 确定性 | 65 属性冲突检测、未知属性报错、漂移 CI |
 | manifest | 版本/commit/96 文件哈希/别名统计/pending 属性 | 与 `sync-styles` 联动校验 |
 
@@ -98,18 +98,28 @@ Choose an owner in packages/styles/contracts/attributes.json
 
 ## Acceptance
 
-- [ ] `attributes.json` 覆盖 65 种属性，无遗漏、无重复、无未知。
-- [ ] `gen-compat` 对 Button/Input/Modal/Select 的生成结果与 T01 视觉一致。
-- [ ] `manifest.json` 记录上游 `3.2.7` / `89cd95ec1` / 96 个 CSS 文件哈希。
-- [ ] `data-slots.json` 含 332 个值，按组件分组。
-- [ ] 契约测试覆盖 4 个 spike 组件的默认/交互状态。
-- [ ] **故障注入 1**：删除 Button 的 `data-hovered` → `pnpm test:contract` 红；恢复 → 绿。
-- [ ] **故障注入 2**：在 `button.css` 中加入未知 `data-foo` → CI 红并提示 owner；恢复 → 绿。
-- [ ] **故障注入 3**：手改 `generated/` → CI 因漂移红；重新生成 → 绿。
-- [ ] 生成器连续运行两次输出一致。
-- [ ] `pnpm sync:styles` 在错误版本/哈希不匹配时拒绝覆盖。
-- [ ] 维护文档完成，并在 [ADR 0003](../../decisions/0003-style-fork-and-compat-layer.md) 记录 owner 分布。
-- [ ] `pnpm verify` 通过。
+- [x] `attributes.json` 覆盖 65 种属性，无遗漏、无重复、无未知。
+- [x] `gen-compat` 对 Button/Input/Modal/Select 的生成结果与 T01 视觉一致（视觉 8/8，light/dark）。
+- [x] `manifest.json` 记录上游 `3.2.7` / `89cd95ec1` / 96 个 CSS 文件哈希。
+- [x] `data-slots.json` 含 334 个值（初稿 332，已校正），按组件分组（81 个组件）。
+- [x] 契约测试覆盖 4 个 spike 组件的默认/交互状态。
+- [x] **故障注入 1**：删除 Button 的 `data-hovered` → `pnpm test:contract` 红；恢复 → 绿。
+- [x] **故障注入 2**：在 `button.css` 中加入未知 `data-foo` → CI 红并提示 owner；恢复 → 绿。
+- [x] **故障注入 3**：手改 `generated/` → CI 因漂移红；重新生成 → 绿。
+- [x] 生成器连续运行两次输出一致（manifest 与 86 个生成文件哈希一致）。
+- [x] `pnpm sync:styles` 在错误版本/哈希不匹配时拒绝覆盖（9 个同步契约用例）。
+- [x] 维护文档完成，并在 [ADR 0003](../../decisions/0003-style-fork-and-compat-layer.md) 记录 owner 分布（12/52/0/1）。
+- [x] `pnpm verify` 通过。
+
+## Outcome
+
+- 65 个属性：compat 12 / component 52 / native 0 / reka 1；263 个别名分布在 50 个生成文件。
+- `data-slots.json` 为 334 个值 / 81 个组件；与初稿 332 的差异及原因见 [findings](../../research/t02-contract-findings.md#2-data-slot332--334)。
+- 新增 `scripts/sync-styles.mjs`、`scripts/gen-data-slots.mjs`、`packages/styles/CONTRIBUTING.md`、`.github/workflows/contract.yml`。
+- 契约测试 45 条：生成器 13、data-slot 8、同步 9、Vue SSR/交互 15；每个 CSS 属性要么断言，要么在 `STATE_COVERAGE` 登记缺口。
+- 故障注入 3 项、生成确定性、同步拒绝均有自动化用例；`pnpm verify`、浏览器 18/18、视觉 8/8 通过。
+- 冷环境暴露的 `nuxt-fixture#typecheck` 依赖构建产物问题已用 `dependsOn: ["^build"]` 修复。
+- 未在本次实现：WebKit 视觉基线、其余 80 个组件的契约表、Select/Modal 的 ARIA 欠账（仍归 T05）。
 
 ## Demo
 

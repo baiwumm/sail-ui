@@ -27,64 +27,80 @@ HeroUI 的视觉一致性建立在 9,959 行 CSS 上。CSS 依赖 `data-*` 属�
 
 “compat.css”在本文中指生成后的组件样式集合；包入口仍然是 `@sail-ui/styles`。
 
-### 默认别名表
+### 实际别名表（生成器输出）
 
-| 上游需要 | Reka 现状 | 生成策略 |
+| 上游需要 | owner | 生成策略 |
 |---|---|---|
-| `data-hovered="true"` | 不发射 | 追加 `:hover`（在 `@media (hover:hover)` 内）；无原生回退的组件用 `useHover` |
-| `data-pressed="true"` | 部分组件发射 | 追加 `:active`；`accordion` / `radio` / `combobox` / `switch` 用 `usePress` 补齐 |
-| `data-focused="true"` | 发射 | 不需要别名 |
-| `data-focus-visible="true"` | 不发射 | 依赖上游已有的 `:focus-visible` 回退；少数无回退处用 `useFocusRing` |
-| `data-selected="true"` | 多数发射 `data-selected`；部分为 `data-state="checked/on"` | 追加 `[data-state="checked"]`、`[data-state="on"]`；按组件核对 |
-| `data-open="true"` | `data-state="open"` | 追加 `[data-state="open"]`，同时在组件 trigger 上补 `data-open` |
-| `data-expanded="true"` | `data-state="open"` / `data-expanded` | 追加 `[data-state="open"]`，必要时组件补齐 |
-| `data-disabled="true"` | `data-disabled` presence | 追加 `[data-disabled]` |
-| `data-invalid="true"` | 发射 | 不需要别名 |
-| `data-indeterminate="true"` | `data-state="indeterminate"` | 追加 `[data-state="indeterminate"]` |
-| `data-outside-month="true"` | `data-outside-view` | 追加 `[data-outside-view]` |
-| `data-entering` / `data-exiting` | 不发射 | 自研覆盖层状态机，组件直接设置 |
-| `data-placement` | 不发射 | 组件根据 props 直接设置 |
-| `data-slot` | 不发射 | 组件硬编码 |
+| `data-hovered="true"` | `compat` | 追加 `:hover`；组件另用 `useHover` 补齐 |
+| `data-pressed="true"` | `compat` | 追加 `:active`、`[data-state="pressed"]`；组件另用 `usePress` |
+| `data-focus="true"` | `compat` | 追加 `[data-highlighted]`（Reka 的活动集合项） |
+| `data-focused="true"` | `component` | 不生成别名；`useFocusRing` / Reka FieldRoot 发射 presence |
+| `data-focus-visible="true"` | `compat` | 追加 `:focus-visible`；跳过 `:not()` 内和同组已含该伪类的选择器 |
+| `data-focus-within="true"` | `compat` | 追加 `:focus-within` |
+| `data-selected="true"` | `compat` | 追加 `[data-state="checked"]`、`[data-state="on"]` |
+| `data-open="true"` | `compat` | 追加 `[data-state="open"]`；trigger 同时补 `data-open` |
+| `data-expanded="true"` | `compat` | 追加 `[data-state="open"]`；`except: ["sheet", "toast"]`，这两个自绘表面自己设置 |
+| `data-disabled="true"` | `compat` | 追加 `[data-disabled]`（presence） |
+| `data-invalid="true"` | `compat` | 追加 `[data-invalid]`；字段发射 presence 形式 |
+| `data-indeterminate="true"` | `compat` | 追加 `[data-state="indeterminate"]` |
+| `data-outside-month="true"` | `compat` | 追加 `[data-outside-view]` |
+| `data-entering` / `data-exiting` | `component` | 自研覆盖层状态机直接设置 |
+| `data-placement` | `component` | 组件根据 props 直接设置；不是 Floating UI 的 `data-side` |
+| `data-slot` | `component` | 组件硬编码 |
 
 ### 属性归属清单（防回归）
 
-上游 CSS 目前出现 65 种 `data-*` 选择器。每个属性必须在 `packages/styles/contracts/attributes.json` 中声明归属：
+上游 CSS 目前出现 65 种 `data-*` 选择器。每个属性必须在 `packages/styles/contracts/attributes.json` 中声明**恰好一个** owner，`manifest.json` 记录实际分布：
+
+| owner | 数量 | 含义 |
+|---|---|---|
+| `compat` | 12 | 生成选择器别名 |
+| `component` | 52 | Vue 组件显式发射（`data-slot`、`data-*` 状态、`data-theme` 等） |
+| `native` | 0 | 上游已有原生回退，无需额外处理；当前所有回退都通过 `compat` 追加原生伪类实现，因此计数为 0 |
+| `reka` | 1 | `data-orientation`，Reka 原样发射 |
+
+条目格式：
 
 ```json
 {
-  "data-hovered": { "owner": "compat", "map": ":hover" },
-  "data-focus-visible": { "owner": "native", "fallback": ":focus-visible" },
-  "data-selected": { "owner": "compat", "map": ["[data-state=checked]", "[data-state=on]"] },
-  "data-slot": { "owner": "component" },
-  "data-entering": { "owner": "component" },
-  "data-placement": { "owner": "component" }
+  "data-hovered": {"owner": "compat", "map": [":hover"]},
+  "data-focus-visible": {"owner": "compat", "map": [":focus-visible"]},
+  "data-selected": {"owner": "compat", "map": ["[data-state=\"checked\"]", "[data-state=\"on\"]"]},
+  "data-expanded": {"owner": "compat", "map": ["[data-state=\"open\"]"], "except": ["sheet", "toast"]},
+  "data-slot": {"owner": "component"},
+  "data-entering": {"owner": "component"},
+  "data-placement": {"owner": "component"}
 }
 ```
 
 `gen-compat.mjs` 的行为：
 
-1. 扫描上游 CSS，收集所有 `[data-*]` 属性；
-2. 与归属清单比对，出现未知属性 → **CI 失败**，要求选择 owner；
-3. 对 `owner: compat` 的属性做选择器扩展；
-4. 生成文件 + `manifest.json`（上游版本、commit、每个源文件/生成文件哈希、别名数）；
-5. 再跑一次生成，若结果不一致 → CI 失败（保证确定性）。
+1. 扫描全部 96 个上游 CSS，收集所有 `[data-*]` 属性；
+2. 与归属清单比对：未知属性、重复键、未使用属性、`map` 非 compat / 为空 / 非法选择器、`except` 未知组件 → **CI 失败**，并给出修复指引；
+3. 校验 `scope.json` 与上游组件 CSS 一一对应，`data-slots.json` 的 pin 与总数；
+4. 对 `owner: compat` 的属性在原规则位置追加选择器别名，跳过 `:not()` 等伪类函数内部、跳过同组已含的原生伪类、按组件应用 `except`；
+5. 生成 `generated/components/**` 与 `manifest.json`（上游版本/commit、每个源文件与生成文件哈希、别名数、属性使用文件/组件、owner 分布、data-slot 哈希）；
+6. `--check` 逐字节比对 manifest 和每个生成文件，并检测多余生成文件与上游文件增删改；CI 用 `--check`，不重新写盘，因此确定性由“期望输出 = 提交输出”保证。
+
+`data-slots.json` 实测为 **334 个唯一值 / 81 个组件**，不是 ticket 初稿的 332。初稿只匹配 JSX 字面量，漏掉了对象键形式（`"data-slot": "select-indicator"`、`"data-slot": "autocomplete-indicator"`）。以完整提取的 334 为准，差异记录在 [T02 findings](../research/t02-contract-findings.md#2-data-slot332--334)。
 
 ### 上游同步流程
 
 ```bash
-pnpm sync:styles --version 3.2.7
+pnpm check:styles                     # 离线校验本地快照，CI 使用
+pnpm sync:styles --source ../heroui   # 用已校验的本地 checkout 覆盖快照
 ```
 
-脚本必须：
+维护脚本必须：
 
-1. 从 npm 取指定版本 tarball（或固定本地快照），校验版本与哈希；
-2. 覆盖 `packages/styles/upstream/**`；
-3. 重新生成 `generated/**`；
-4. 运行 `pnpm test:contract`；
-5. 运行视觉回归；
+1. 确认源仓库 `packages/styles` 工作区干净；
+2. **先**逐文件比对源 CSS 哈希与快照，再比对版本/commit；不匹配且未显式 `--allow-upstream-change` 时拒绝覆盖，并列出第一个不匹配的文件；
+3. 显式升级必须同时提供 `--commit <sha>`，且与源 `HEAD` 一致；
+4. 覆盖 98 个文件（96 个 CSS + LICENSE + README）；
+5. 更新 `contracts/upstream.json` 后，由维护者重新运行 `gen:compat`、`gen:slots`、`test:contract` 和视觉回归；
 6. 在 PR 中输出：上游 commit、CSS 变更摘要、新增/移除的 `data-*`、视觉差异截图。
 
-不修改上游 CSS；不把上游同步和功能开发混在一个 PR。
+不修改上游 CSS；不把上游同步和功能开发混在一个 PR。维护细节见 [packages/styles/CONTRIBUTING.md](../../packages/styles/CONTRIBUTING.md)。
 
 ## Consequences
 
@@ -94,6 +110,7 @@ pnpm sync:styles --version 3.2.7
 - 别名与原始规则同位置，层叠顺序与上游一致。
 - 属性清单让“AI 批量移植”导致的漏属性在 CI 暴露，而不是上线后由用户发现。
 - 生成过程确定性可校验，review 可读。
+- `manifest.json` 把 96 个上游文件、86 个生成文件、65 个属性、263 个别名和 334 个 data-slot 固定为可 diff 的契约；未知属性、未使用属性、生成漂移、快照差异都会让 CI 失败。
 
 负面：
 

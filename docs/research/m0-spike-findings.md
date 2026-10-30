@@ -204,13 +204,15 @@ CSS 不依赖这两个属性，视觉无差异；属于可访问性/语义 parit
 | 项 | 交给 |
 |---|---|
 | `attributes.json` 从 18 扩到 65，47 个 pending 属性逐个归属 | T02 |
-| 从上游 React 源码生成 332 个 `data-slot` 快照；故障注入 CI | T02 |
+| 从上游 React 源码生成 `data-slot` 快照；故障注入 CI | T02（已完成，完整提取为 334 值，见 [T02 findings](./t02-contract-findings.md#2-data-slot332--334)） |
 | `sync-styles`、维护文档、owner 分布写回 ADR 0003 | T02 |
 | Select trigger `role`/`aria-haspopup` 决策与实现 | T05 |
 | 预先选中值的 SSR 安全文本 API（如 `SelectValue` 的显式 label 或 root item map） | T05 |
 | `ModalTrigger` 与上游 `div role="button"` 的标签差异 | T05 |
 | WebKit 视觉回归（当前视觉仅 Chromium；跨引擎基线需分别维护） | visual ticket |
 | 本地固定 Chromium 下载；CI 浏览器矩阵 | CI ticket |
+
+T02 已完成前三条工具链欠账（属性扩到 65、快照与故障注入、同步脚本与维护文档），实测见 [T02 findings](./t02-contract-findings.md)。
 
 ## 6. 复现命令
 

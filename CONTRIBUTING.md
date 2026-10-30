@@ -2,7 +2,7 @@
 
 Thanks for helping port HeroUI v3 to Vue. Sail UI is an unofficial community project; it is not affiliated with HeroUI.
 
-> **Phase note:** the repository is at the specification stage. The most useful contribution right now is review of the [spec](./docs/spec/0001-heroui-v3-vue-port.spec.md), [tickets](./docs/spec/tickets/README.md), and [ADRs](./docs/decisions/README.md). Implementation starts with [T01](./docs/spec/tickets/01-m0-foundation-spike.md).
+> **Phase note:** T01 (M0 spike) and T02 (contract tooling) are complete. Button, Input, Modal, and Select are ported; the rest of the component matrix is still pending. Read the [active tickets](./docs/spec/tickets/README.md) and [ADRs](./docs/decisions/README.md) before starting work.
 
 ## Before you code
 
@@ -14,16 +14,14 @@ Thanks for helping port HeroUI v3 to Vue. Sail UI is an unofficial community pro
    - What is explicitly out of scope?
 4. If the change alters public API, add or update an ADR in `docs/decisions/`.
 
-## Development setup (after T01)
+## Development setup
 
 ```bash
 pnpm install
 pnpm dev          # playground
-pnpm dev:docs     # docs site
+pnpm dev:nuxt     # Nuxt SSR fixture
 pnpm verify       # lint + typecheck + contract + unit + SSR + build
 ```
-
-Do not run commands from the target command surface until the scaffold exists; see [AGENTS.md section 6](./AGENTS.md#6-target-command-surface).
 
 ## Pull requests
 
