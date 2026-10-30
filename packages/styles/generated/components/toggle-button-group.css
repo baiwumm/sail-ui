@@ -68,7 +68,8 @@
 
 /* Remove scale transform on active/pressed state for buttons in group */
 .toggle-button-group .toggle-button:active,
-.toggle-button-group .toggle-button[data-pressed="true"] {
+.toggle-button-group .toggle-button[data-pressed="true"],
+.toggle-button-group .toggle-button[data-state="pressed"] {
   transform: none;
 }
 

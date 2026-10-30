@@ -42,6 +42,10 @@
     "build": "pnpm gen:compat && tsup src/index.ts --format esm --dts --clean --external tailwind-variants",
     "gen:compat": "node scripts/gen-compat.mjs",
     "check:compat": "node scripts/gen-compat.mjs --check",
+    "gen:slots": "node scripts/gen-data-slots.mjs",
+    "check:slots": "node scripts/gen-data-slots.mjs --check",
+    "sync:styles": "node scripts/sync-styles.mjs",
+    "check:styles": "node scripts/sync-styles.mjs --check",
     "lint": "eslint src scripts --max-warnings=0",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },

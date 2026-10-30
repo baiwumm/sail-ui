@@ -169,7 +169,7 @@
 
   &:active,
   &[data-pressed="true"],
-  &[data-state=pressed] {
+  &[data-state="pressed"] {
     transform: scale(0.93);
   }
 }
@@ -177,7 +177,7 @@
 .select__indicator {
   @apply absolute inset-y-0 end-2 my-auto flex shrink-0 items-center justify-center text-field-placeholder transition duration-150;
 
-  &[data-open="true"], &[data-state=open] {
+  &[data-open="true"], &[data-state="open"] {
     @apply rotate-180;
   }
 

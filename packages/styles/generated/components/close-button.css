@@ -49,7 +49,7 @@
 
   &:active,
   &[data-pressed="true"],
-  &[data-state=pressed] {
+  &[data-state="pressed"] {
   }
 
   @media (hover: hover) {
@@ -61,7 +61,7 @@
 
   &:active,
   &[data-pressed="true"],
-  &[data-state=pressed] {
+  &[data-state="pressed"] {
     transform: scale(0.93);
   }
 }

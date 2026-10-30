@@ -1,0 +1,44 @@
+name: contract
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: contract-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    name: styles contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.7
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.15.0
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify upstream snapshot
+        run: pnpm check:styles
+
+      - name: Verify data-slot snapshot
+        run: pnpm check:slots
+
+      - name: Verify generated compat CSS
+        run: pnpm check:compat
+
+      - name: Contract tests
+        run: pnpm test:contract
+
+      - name: SSR tests
+        run: pnpm test:ssr

@@ -1,0 +1,506 @@
+{
+  "upstream": {
+    "version": "3.2.7",
+    "commit": "89cd95ec17dfbbf952ef0d61af300f287aec223d"
+  },
+  "source": "packages/react/src/components",
+  "total": 334,
+  "components": {
+    "accordion": [
+      "accordion",
+      "accordion-body",
+      "accordion-heading",
+      "accordion-indicator",
+      "accordion-item",
+      "accordion-panel",
+      "accordion-trigger"
+    ],
+    "alert": [
+      "alert-content",
+      "alert-default-icon",
+      "alert-description",
+      "alert-indicator",
+      "alert-root",
+      "alert-title"
+    ],
+    "alert-dialog": [
+      "alert-dialog-backdrop",
+      "alert-dialog-body",
+      "alert-dialog-close-trigger",
+      "alert-dialog-container",
+      "alert-dialog-default-icon",
+      "alert-dialog-dialog",
+      "alert-dialog-footer",
+      "alert-dialog-header",
+      "alert-dialog-heading",
+      "alert-dialog-icon",
+      "alert-dialog-root",
+      "alert-dialog-trigger"
+    ],
+    "autocomplete": [
+      "autocomplete",
+      "autocomplete-clear-button",
+      "autocomplete-clear-button-icon",
+      "autocomplete-default-indicator",
+      "autocomplete-filter",
+      "autocomplete-indicator",
+      "autocomplete-popover",
+      "autocomplete-trigger",
+      "autocomplete-value"
+    ],
+    "avatar": [
+      "avatar-fallback"
+    ],
+    "avatar-group": [
+      "avatar-group",
+      "avatar-group-count"
+    ],
+    "badge": [
+      "badge",
+      "badge-anchor",
+      "badge-label"
+    ],
+    "breadcrumbs": [
+      "breadcrumbs",
+      "breadcrumbs-item",
+      "breadcrumbs-separator"
+    ],
+    "button": [
+      "button"
+    ],
+    "button-group": [
+      "button-group",
+      "button-group-separator"
+    ],
+    "calendar": [
+      "calendar",
+      "calendar-cell",
+      "calendar-cell-indicator",
+      "calendar-grid",
+      "calendar-grid-body",
+      "calendar-grid-header",
+      "calendar-header",
+      "calendar-header-cell",
+      "calendar-heading",
+      "calendar-nav-button",
+      "calendar-nav-button-icon"
+    ],
+    "calendar-year-picker": [
+      "calendar-year-picker-grid",
+      "calendar-year-picker-trigger",
+      "calendar-year-picker-trigger-heading",
+      "calendar-year-picker-trigger-indicator",
+      "calendar-year-picker-year-cell"
+    ],
+    "card": [
+      "card",
+      "card-content",
+      "card-description",
+      "card-footer",
+      "card-header",
+      "card-title"
+    ],
+    "checkbox": [
+      "checkbox",
+      "checkbox-content",
+      "checkbox-control",
+      "checkbox-default-indicator--checkmark",
+      "checkbox-default-indicator--indeterminate",
+      "checkbox-indicator"
+    ],
+    "checkbox-group": [
+      "checkbox-group"
+    ],
+    "chip": [
+      "chip",
+      "chip-label"
+    ],
+    "close-button": [
+      "close-button",
+      "close-button-icon"
+    ],
+    "color-area": [
+      "color-area",
+      "color-area-thumb"
+    ],
+    "color-field": [
+      "color-field"
+    ],
+    "color-input-group": [
+      "color-input-group",
+      "color-input-group-input",
+      "color-input-group-prefix",
+      "color-input-group-suffix"
+    ],
+    "color-picker": [
+      "color-picker",
+      "color-picker-popover",
+      "color-picker-trigger"
+    ],
+    "color-slider": [
+      "color-slider",
+      "color-slider-output",
+      "color-slider-thumb",
+      "color-slider-track"
+    ],
+    "color-swatch": [
+      "color-swatch"
+    ],
+    "color-swatch-picker": [
+      "color-swatch-picker",
+      "color-swatch-picker-checkmark",
+      "color-swatch-picker-indicator",
+      "color-swatch-picker-item",
+      "color-swatch-picker-swatch"
+    ],
+    "combo-box": [
+      "combo-box",
+      "combo-box-input-group",
+      "combo-box-popover",
+      "combo-box-trigger",
+      "combo-box-trigger-default-icon",
+      "combo-box-value"
+    ],
+    "date-field": [
+      "date-field"
+    ],
+    "date-input-group": [
+      "date-input-group",
+      "date-input-group-input",
+      "date-input-group-input-container",
+      "date-input-group-prefix",
+      "date-input-group-segment",
+      "date-input-group-suffix"
+    ],
+    "date-picker": [
+      "date-picker",
+      "date-picker-popover",
+      "date-picker-trigger",
+      "date-picker-trigger-indicator"
+    ],
+    "date-range-picker": [
+      "date-range-picker",
+      "date-range-picker-popover",
+      "date-range-picker-range-separator",
+      "date-range-picker-trigger",
+      "date-range-picker-trigger-indicator"
+    ],
+    "description": [
+      "description"
+    ],
+    "disclosure": [
+      "disclosure",
+      "disclosure-body",
+      "disclosure-content",
+      "disclosure-heading",
+      "disclosure-indicator",
+      "disclosure-trigger"
+    ],
+    "disclosure-group": [
+      "disclosure-group"
+    ],
+    "drawer": [
+      "drawer-backdrop",
+      "drawer-body",
+      "drawer-close-trigger",
+      "drawer-content",
+      "drawer-dialog",
+      "drawer-footer",
+      "drawer-handle",
+      "drawer-handle-bar",
+      "drawer-header",
+      "drawer-heading",
+      "drawer-root",
+      "drawer-trigger"
+    ],
+    "dropdown": [
+      "dropdown-menu",
+      "dropdown-popover",
+      "dropdown-submenu-trigger",
+      "dropdown-trigger"
+    ],
+    "empty-state": [
+      "empty-state"
+    ],
+    "error-message": [
+      "error-message"
+    ],
+    "field-error": [
+      "field-error"
+    ],
+    "fieldset": [
+      "fieldset",
+      "fieldset-actions",
+      "fieldset-field-group",
+      "fieldset-legend"
+    ],
+    "header": [
+      "header"
+    ],
+    "input": [
+      "input"
+    ],
+    "input-group": [
+      "input-group",
+      "input-group-input",
+      "input-group-prefix",
+      "input-group-suffix",
+      "input-group-textarea"
+    ],
+    "input-otp": [
+      "input-otp",
+      "input-otp-caret",
+      "input-otp-group",
+      "input-otp-separator",
+      "input-otp-slot",
+      "input-otp-slot-value"
+    ],
+    "label": [
+      "label"
+    ],
+    "link": [
+      "link",
+      "link-default-icon",
+      "link-icon"
+    ],
+    "list-box": [
+      "list-box"
+    ],
+    "list-box-item": [
+      "list-box-item",
+      "list-box-item-indicator",
+      "list-box-item-indicator--checkmark"
+    ],
+    "menu": [
+      "menu"
+    ],
+    "menu-item": [
+      "menu-item",
+      "menu-item-indicator",
+      "menu-item-indicator--checkmark",
+      "menu-item-indicator--dot",
+      "submenu-indicator"
+    ],
+    "meter": [
+      "meter",
+      "meter-fill",
+      "meter-output",
+      "meter-track"
+    ],
+    "modal": [
+      "modal-backdrop",
+      "modal-body",
+      "modal-close-trigger",
+      "modal-container",
+      "modal-dialog",
+      "modal-footer",
+      "modal-header",
+      "modal-heading",
+      "modal-icon",
+      "modal-root",
+      "modal-trigger"
+    ],
+    "number-field": [
+      "number-field",
+      "number-field-decrement-button",
+      "number-field-decrement-button-icon",
+      "number-field-group",
+      "number-field-increment-button",
+      "number-field-increment-button-icon",
+      "number-field-input"
+    ],
+    "pagination": [
+      "pagination",
+      "pagination-content",
+      "pagination-ellipsis",
+      "pagination-item",
+      "pagination-link",
+      "pagination-next",
+      "pagination-next-icon",
+      "pagination-previous",
+      "pagination-previous-icon",
+      "pagination-summary"
+    ],
+    "popover": [
+      "popover-dialog",
+      "popover-overlay-arrow",
+      "popover-overlay-arrow-group",
+      "popover-root",
+      "popover-trigger"
+    ],
+    "progress-bar": [
+      "progress-bar",
+      "progress-bar-fill",
+      "progress-bar-output",
+      "progress-bar-track"
+    ],
+    "progress-circle": [
+      "progress-circle",
+      "progress-circle-fill-circle",
+      "progress-circle-track",
+      "progress-circle-track-circle"
+    ],
+    "radio": [
+      "radio",
+      "radio-content",
+      "radio-control",
+      "radio-indicator"
+    ],
+    "radio-group": [
+      "radio-group"
+    ],
+    "range-calendar": [
+      "range-calendar",
+      "range-calendar-cell",
+      "range-calendar-cell-button",
+      "range-calendar-cell-indicator",
+      "range-calendar-grid",
+      "range-calendar-grid-body",
+      "range-calendar-grid-header",
+      "range-calendar-header",
+      "range-calendar-header-cell",
+      "range-calendar-heading",
+      "range-calendar-nav-button",
+      "range-calendar-nav-button-icon"
+    ],
+    "scroll-shadow": [
+      "scroll-shadow"
+    ],
+    "search-field": [
+      "search-field",
+      "search-field-clear-button",
+      "search-field-group",
+      "search-field-input",
+      "search-field-search-icon"
+    ],
+    "select": [
+      "select",
+      "select-clear-button",
+      "select-clear-button-icon",
+      "select-default-indicator",
+      "select-indicator",
+      "select-popover",
+      "select-trigger",
+      "select-value"
+    ],
+    "separator": [
+      "separator"
+    ],
+    "sheet": [
+      "sheet-backdrop",
+      "sheet-body",
+      "sheet-close-trigger",
+      "sheet-content",
+      "sheet-dialog",
+      "sheet-footer",
+      "sheet-handle",
+      "sheet-handle-bar",
+      "sheet-header",
+      "sheet-heading",
+      "sheet-overlay"
+    ],
+    "slider": [
+      "slider",
+      "slider-fill",
+      "slider-mark",
+      "slider-marks",
+      "slider-output",
+      "slider-step",
+      "slider-steps",
+      "slider-thumb",
+      "slider-track"
+    ],
+    "spinner": [
+      "spinner",
+      "spinner-icon"
+    ],
+    "surface": [
+      "surface"
+    ],
+    "switch": [
+      "switch",
+      "switch-content",
+      "switch-control",
+      "switch-icon",
+      "switch-thumb"
+    ],
+    "switch-group": [
+      "switch-group",
+      "switch-group-items"
+    ],
+    "table": [
+      "table",
+      "table-body",
+      "table-cell",
+      "table-column",
+      "table-column-resizer",
+      "table-content",
+      "table-footer",
+      "table-header",
+      "table-load-more",
+      "table-load-more-content",
+      "table-resizable-container",
+      "table-row",
+      "table-scroll-container",
+      "table-sortable-column-header",
+      "table-sortable-column-indicator"
+    ],
+    "tabs": [
+      "tabs",
+      "tabs-indicator",
+      "tabs-list",
+      "tabs-list-container",
+      "tabs-panel",
+      "tabs-separator",
+      "tabs-tab"
+    ],
+    "tag": [
+      "tag",
+      "tag-remove-button"
+    ],
+    "tag-group": [
+      "tag-group",
+      "tag-group-list"
+    ],
+    "textarea": [
+      "textarea"
+    ],
+    "textfield": [
+      "textfield"
+    ],
+    "time-field": [
+      "time-field"
+    ],
+    "toast": [
+      "toast",
+      "toast-action-button",
+      "toast-close",
+      "toast-content",
+      "toast-default-icon",
+      "toast-description",
+      "toast-indicator",
+      "toast-region",
+      "toast-title"
+    ],
+    "toggle-button": [
+      "toggle-button"
+    ],
+    "toggle-button-group": [
+      "toggle-button-group",
+      "toggle-button-group-separator"
+    ],
+    "toolbar": [
+      "toolbar"
+    ],
+    "tooltip": [
+      "overlay-arrow",
+      "tooltip-arrow",
+      "tooltip-root",
+      "tooltip-trigger"
+    ],
+    "typography": [
+      "prose",
+      "typography"
+    ]
+  }
+}

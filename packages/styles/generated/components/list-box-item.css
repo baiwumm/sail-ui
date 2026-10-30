@@ -48,7 +48,7 @@
   /* Pressed state */
   &:active,
   &[data-pressed="true"],
-  &[data-state=pressed] {
+  &[data-state="pressed"] {
     transform: scale(0.98);
   }
 
@@ -63,8 +63,8 @@
   /* Selected state */
   &[aria-selected="true"],
   &[data-selected="true"],
-  &[data-state=checked],
-  &[data-state=on] {
+  &[data-state="checked"],
+  &[data-state="on"] {
   }
 
   /* Disabled state */
@@ -97,8 +97,8 @@
 
   .list-box-item[aria-selected="true"] [data-slot="list-box-item-indicator--checkmark"],
   .list-box-item[data-selected="true"] [data-slot="list-box-item-indicator--checkmark"],
-  .list-box-item[data-state=checked] [data-slot="list-box-item-indicator--checkmark"],
-  .list-box-item[data-state=on] [data-slot="list-box-item-indicator--checkmark"] {
+  .list-box-item[data-state="checked"] [data-slot="list-box-item-indicator--checkmark"],
+  .list-box-item[data-state="on"] [data-slot="list-box-item-indicator--checkmark"] {
     /**
      * Transitions
      * CRITICAL: motion-reduce must be AFTER transition for correct override specificity

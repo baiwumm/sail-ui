@@ -3,7 +3,8 @@
   @apply flex flex-col gap-1;
 
   &[data-invalid="true"],
-  &[aria-invalid="true"] {
+  &[aria-invalid="true"],
+  &[data-invalid] {
     [data-slot="description"] {
       @apply hidden;
     }
@@ -57,7 +58,7 @@
   }
 
   /* Invalid state */
-  &[data-invalid="true"] {
+  &[data-invalid="true"], &[data-invalid] {
     @apply status-invalid-field;
     --search-field-group-bg: var(--search-field-group-bg-focus);
     background-color: var(--search-field-group-bg);
@@ -66,7 +67,8 @@
 
   /* Disabled state */
   &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[aria-disabled="true"],
+  &[data-disabled] {
     @apply status-disabled;
   }
 }
@@ -165,7 +167,7 @@
   }
 
   /* Invalid state */
-  &[data-invalid="true"] {
+  &[data-invalid="true"], &[data-invalid] {
     @apply status-invalid-field;
     border-color: var(--color-field-border-invalid);
     --search-field-group-bg: var(--search-field-group-bg-focus);

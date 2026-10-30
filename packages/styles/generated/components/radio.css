@@ -32,7 +32,8 @@
   /* Disabled state */
   &:disabled,
   &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[aria-disabled="true"],
+  &[data-disabled] {
     @apply status-disabled;
 
     [data-slot="description"],
@@ -100,7 +101,8 @@
   .radio:has([data-slot="radio-content"]:active) &,
   .radio [data-slot="radio-content"]:active &,
   .radio:has([data-slot="radio-content"][data-pressed="true"]) &,
-  .radio [data-slot="radio-content"][data-pressed="true"] & {
+  .radio [data-slot="radio-content"][data-pressed="true"] &,
+  .radio [data-slot="radio-content"][data-state="pressed"] & {
     @apply scale-95;
   }
 
@@ -108,7 +110,9 @@
   /* Selected */
   .radio[data-selected] &,
   .radio:has([data-slot="radio-content"][aria-checked="true"]) &,
-  .radio:has(input:checked) & {
+  .radio:has(input:checked) &,
+  .radio[data-state="checked"] &,
+  .radio[data-state="on"] & {
     @apply border-transparent bg-accent;
   }
 
@@ -117,14 +121,19 @@
   .radio:has(input:checked):has([data-slot="radio-content"]:active) &,
   .radio[data-selected]:has([data-slot="radio-content"][data-pressed="true"]) &,
   .radio:has([data-slot="radio-content"][data-pressed="true"][aria-checked="true"]) &,
-  .radio:has(input:checked):has([data-slot="radio-content"][data-pressed="true"]) & {
+  .radio:has(input:checked):has([data-slot="radio-content"][data-pressed="true"]) &,
+  .radio[data-state="checked"]:has([data-slot="radio-content"]:active) &,
+  .radio[data-state="on"]:has([data-slot="radio-content"]:active) &,
+  .radio[data-state="checked"]:has([data-slot="radio-content"][data-pressed="true"]) &,
+  .radio[data-state="on"]:has([data-slot="radio-content"][data-pressed="true"]) & {
     @apply bg-accent-hover;
   }
 
   /* Validation states */
   /* Invalid */
   .radio[data-invalid="true"] &,
-  .radio[aria-invalid="true"] & {
+  .radio[aria-invalid="true"] &,
+  .radio[data-invalid] & {
     @apply status-invalid-field;
   }
 
@@ -132,7 +141,13 @@
   .radio[data-invalid="true"][data-selected] &,
   .radio[aria-invalid="true"][data-selected] &,
   .radio[data-invalid="true"]:has(input:checked) &,
-  .radio[aria-invalid="true"]:has(input:checked) & {
+  .radio[aria-invalid="true"]:has(input:checked) &,
+  .radio[data-invalid][data-selected] &,
+  .radio[data-invalid="true"][data-state="checked"] &,
+  .radio[data-invalid="true"][data-state="on"] &,
+  .radio[aria-invalid="true"][data-state="checked"] &,
+  .radio[aria-invalid="true"][data-state="on"] &,
+  .radio[data-invalid]:has(input:checked) & {
     @apply status-invalid-field;
   }
 }
@@ -170,7 +185,9 @@
 /* Selected state */
 .radio[data-selected] .radio__indicator:empty::before,
 .radio:has([data-slot="radio-content"][aria-checked="true"]) .radio__indicator:empty::before,
-.radio:has(input:checked) .radio__indicator:empty::before {
+.radio:has(input:checked) .radio__indicator:empty::before,
+.radio[data-state="checked"] .radio__indicator:empty::before,
+.radio[data-state="on"] .radio__indicator:empty::before {
   @apply bg-accent-foreground;
   scale: 0.4286; /* 6px */
 }
@@ -183,6 +200,12 @@
 .radio:has([data-slot="radio-content"][data-pressed="true"][aria-checked="true"])
   .radio__indicator:empty::before,
 .radio:has(input:checked):has([data-slot="radio-content"][data-pressed="true"])
+  .radio__indicator:empty::before,
+.radio[data-state="checked"]:has([data-slot="radio-content"]:active) .radio__indicator:empty::before,
+.radio[data-state="on"]:has([data-slot="radio-content"]:active) .radio__indicator:empty::before,
+.radio[data-state="checked"]:has([data-slot="radio-content"][data-pressed="true"])
+  .radio__indicator:empty::before,
+.radio[data-state="on"]:has([data-slot="radio-content"][data-pressed="true"])
   .radio__indicator:empty::before {
   scale: 0.5714; /* 8px */
 }

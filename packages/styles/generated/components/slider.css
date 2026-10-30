@@ -99,12 +99,12 @@
     }
 
     /* Focus state - increase z-index */
-    &[data-focus-visible="true"] {
+    &[data-focus-visible="true"], &:focus-visible {
       @apply z-10 status-focused;
     }
 
     /* Disabled state */
-    &[data-disabled="true"] {
+    &[data-disabled="true"], &[data-disabled] {
       @apply cursor-default;
     }
   }
@@ -112,7 +112,8 @@
   /* Disabled state */
   &:disabled,
   &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[aria-disabled="true"],
+  &[data-disabled] {
     @apply status-disabled;
 
     [data-slot="label"] {

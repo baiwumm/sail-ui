@@ -13,7 +13,7 @@
   --switch-control-bg-checked-hover: var(--accent-hover);
 
   /* Disabled state */
-  &[data-disabled="true"] {
+  &[data-disabled="true"], &[data-disabled] {
     @apply status-disabled;
 
     [data-slot="description"],
@@ -57,7 +57,15 @@
   &[data-disabled="true"][aria-checked="true"],
   &[data-disabled="true"][data-selected="true"],
   &[aria-disabled="true"][aria-checked="true"],
-  &[aria-disabled="true"][data-selected="true"] {
+  &[aria-disabled="true"][data-selected="true"],
+  &:disabled[data-state="checked"],
+  &:disabled[data-state="on"],
+  &[data-disabled][aria-checked="true"],
+  &[data-disabled][data-selected="true"],
+  &[data-disabled="true"][data-state="checked"],
+  &[data-disabled="true"][data-state="on"],
+  &[aria-disabled="true"][data-state="checked"],
+  &[aria-disabled="true"][data-state="on"] {
     .switch__thumb {
       opacity: 0.4;
     }
@@ -112,14 +120,17 @@
   /* Pressed states */
   .switch:active &,
   .switch:has([data-slot="switch-content"][data-pressed="true"]) &,
-  .switch [data-slot="switch-content"][data-pressed="true"] & {
+  .switch [data-slot="switch-content"][data-pressed="true"] &,
+  .switch [data-slot="switch-content"][data-state="pressed"] & {
     background-color: var(--switch-control-bg-pressed);
     @apply motion-reduce:transform-none;
   }
 
   /* Checked states */
   .switch[aria-checked="true"] &,
-  .switch[data-selected="true"] & {
+  .switch[data-selected="true"] &,
+  .switch[data-state="checked"] &,
+  .switch[data-state="on"] & {
     background-color: var(--switch-control-bg-checked);
   }
 
@@ -128,7 +139,13 @@
   .switch[data-selected="true"]:hover &,
   .switch[aria-checked="true"][data-hovered="true"] &,
   .switch[data-selected="true"][data-hovered="true"] &,
-  .switch:has([data-slot="switch-content"][data-hovered="true"])[data-selected="true"] & {
+  .switch:has([data-slot="switch-content"][data-hovered="true"])[data-selected="true"] &,
+  .switch[data-state="checked"]:hover &,
+  .switch[data-state="on"]:hover &,
+  .switch[data-state="checked"][data-hovered="true"] &,
+  .switch[data-state="on"][data-hovered="true"] &,
+  .switch:has([data-slot="switch-content"][data-hovered="true"])[data-state="checked"] &,
+  .switch:has([data-slot="switch-content"][data-hovered="true"])[data-state="on"] & {
     background-color: var(--switch-control-bg-checked-hover);
   }
 
@@ -137,7 +154,15 @@
   .switch[data-selected="true"]:active &,
   .switch[aria-checked="true"][data-pressed="true"] &,
   .switch[data-selected="true"][data-pressed="true"] &,
-  .switch:has([data-slot="switch-content"][data-pressed="true"])[data-selected="true"] & {
+  .switch:has([data-slot="switch-content"][data-pressed="true"])[data-selected="true"] &,
+  .switch[data-state="checked"]:active &,
+  .switch[data-state="on"]:active &,
+  .switch[aria-checked="true"][data-state="pressed"] &,
+  .switch[data-state="checked"][data-pressed="true"] &,
+  .switch[data-state="on"][data-pressed="true"] &,
+  .switch[data-selected="true"][data-state="pressed"] &,
+  .switch:has([data-slot="switch-content"][data-pressed="true"])[data-state="checked"] &,
+  .switch:has([data-slot="switch-content"][data-pressed="true"])[data-state="on"] & {
     background-color: var(--switch-control-bg-checked-hover);
   }
 }
@@ -187,7 +212,9 @@
 
   /* Selected/checked state - slide to the end of the track */
   .switch[aria-checked="true"] &,
-  .switch[data-selected="true"] & {
+  .switch[data-selected="true"] &,
+  .switch[data-state="checked"] &,
+  .switch[data-state="on"] & {
     @apply bg-accent-foreground text-accent;
     inset-inline-start: var(--switch-thumb-offset);
     box-shadow:
@@ -197,7 +224,8 @@
   }
 
   .switch:active &,
-  .switch[data-pressed="true"] & {
+  .switch[data-pressed="true"] &,
+  .switch[data-state="pressed"] & {
   }
 }
 

@@ -138,7 +138,7 @@
   @apply motion-reduce:transition-none;
 
   /* Selected state */
-  &[data-selected="true"] {
+  &[data-selected="true"], &[data-state="checked"], &[data-state="on"] {
     @apply text-segment-foreground;
 
     /* Hide separator on the selected tab and the one following it */
@@ -151,7 +151,8 @@
   /* Disabled state */
   &:disabled,
   &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[aria-disabled="true"],
+  &[data-disabled] {
     @apply status-disabled;
   }
 
@@ -269,7 +270,7 @@
       @apply rounded-none;
 
       /* Selected state - use text-foreground */
-      &[data-selected="true"] {
+      &[data-selected="true"], &[data-state="checked"], &[data-state="on"] {
         @apply text-foreground;
       }
     }

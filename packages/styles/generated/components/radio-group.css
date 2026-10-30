@@ -28,7 +28,8 @@
 
   /* Hover state */
   .radio:has([data-slot="radio-content"][data-hovered="true"]) &,
-  .radio [data-slot="radio-content"][data-hovered="true"] & {
+  .radio [data-slot="radio-content"][data-hovered="true"] &,
+  .radio [data-slot="radio-content"]:hover & {
     @apply border-field-border-hover;
   }
 

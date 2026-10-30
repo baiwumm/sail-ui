@@ -82,11 +82,11 @@
 }
 
 /* Rotate chevron when open */
-.calendar-year-picker__trigger[data-open="true"] .calendar-year-picker__trigger-indicator {
+.calendar-year-picker__trigger[data-open="true"] .calendar-year-picker__trigger-indicator, .calendar-year-picker__trigger[data-state="open"] .calendar-year-picker__trigger-indicator {
   transform: rotate(90deg);
 }
 
-.calendar-year-picker__trigger[data-open="true"] .calendar-year-picker__trigger-heading {
+.calendar-year-picker__trigger[data-open="true"] .calendar-year-picker__trigger-heading, .calendar-year-picker__trigger[data-state="open"] .calendar-year-picker__trigger-heading {
   @apply text-accent-soft-foreground;
 }
 
@@ -104,7 +104,7 @@
   will-change: opacity;
 }
 
-.calendar-year-picker__year-grid[data-open="true"] {
+.calendar-year-picker__year-grid[data-open="true"], .calendar-year-picker__year-grid[data-state="open"] {
   @apply pointer-events-auto opacity-100;
 
   /* When opening: slight delay so the day grid starts fading out first */
@@ -142,7 +142,9 @@
 
   /* Selected state (current year) – same as .tag[data-selected] */
   &[data-selected="true"],
-  &[aria-selected="true"] {
+  &[aria-selected="true"],
+  &[data-state="checked"],
+  &[data-state="on"] {
     @apply bg-accent text-accent-foreground;
 
     @media (hover: hover) and (pointer: fine) {

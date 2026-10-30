@@ -40,7 +40,7 @@
   }
 
   /* Invalid state */
-  &[data-invalid="true"] {
+  &[data-invalid="true"], &[data-invalid] {
     @apply status-invalid-field;
     --color-input-group-bg: var(--color-input-group-bg-focus);
     background-color: var(--color-input-group-bg);
@@ -49,7 +49,8 @@
 
   /* Disabled state */
   &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[aria-disabled="true"],
+  &[data-disabled] {
     @apply status-disabled;
   }
 }
@@ -149,7 +150,7 @@
   }
 
   /* Invalid state */
-  &[data-invalid="true"] {
+  &[data-invalid="true"], &[data-invalid] {
     @apply status-invalid-field;
     border-color: var(--color-field-border-invalid);
     --color-input-group-bg: var(--color-input-group-bg-focus);

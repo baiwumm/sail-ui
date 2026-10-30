@@ -107,7 +107,8 @@
 
   /* Pressed state */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     transform: scale(0.95);
   }
 
@@ -119,7 +120,8 @@
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled="true"] {
+  &[data-disabled="true"],
+  &[data-disabled] {
     @apply status-disabled;
   }
 }
@@ -241,19 +243,19 @@
   }
 
   /* Range selected track (middle segment) */
-  &[data-selected="true"]:not([data-outside-month="true"]) {
+  &[data-selected="true"]:not([data-outside-month="true"]), &[data-state="checked"]:not([data-outside-month="true"]), &[data-state="on"]:not([data-outside-month="true"]) {
     @apply rounded-none bg-accent-soft;
   }
 
   /* Round row boundaries so the range track looks continuous across weeks */
-  &[data-selected="true"]:is(td:first-child > *, [aria-disabled] + td > *) {
+  &[data-selected="true"]:is(td:first-child > *, [aria-disabled] + td > *), &[data-state="checked"]:is(td:first-child > *, [aria-disabled] + td > *), &[data-state="on"]:is(td:first-child > *, [aria-disabled] + td > *) {
     @apply rounded-ss-lg rounded-es-lg;
     &[data-selection-start="true"] {
       @apply rounded-ss-3xl rounded-es-3xl;
     }
   }
 
-  &[data-selected="true"]:is(td:last-child > *, td:has(+ [aria-disabled]) > *) {
+  &[data-selected="true"]:is(td:last-child > *, td:has(+ [aria-disabled]) > *), &[data-state="checked"]:is(td:last-child > *, td:has(+ [aria-disabled]) > *), &[data-state="on"]:is(td:last-child > *, td:has(+ [aria-disabled]) > *) {
     @apply rounded-se-lg rounded-ee-lg;
     &[data-selection-end="true"] {
       @apply rounded-se-3xl rounded-ee-3xl;
@@ -284,7 +286,8 @@
 
   /* Pressed state */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     .range-calendar__cell-button {
       scale: 0.9;
     }
@@ -308,11 +311,23 @@
   }
 
   /* Outside month (previous/next month days) */
-  &[data-outside-month="true"] {
+  &[data-outside-month="true"], &[data-outside-view] {
     @apply text-muted opacity-50;
   }
 
   &[data-selected="true"][data-outside-month="true"]:not(
+      [data-selection-start="true"],
+      [data-selection-end="true"]
+    ),
+      &[data-state="checked"][data-outside-month="true"]:not(
+      [data-selection-start="true"],
+      [data-selection-end="true"]
+    ),
+      &[data-state="on"][data-outside-month="true"]:not(
+      [data-selection-start="true"],
+      [data-selection-end="true"]
+    ),
+      &[data-selected="true"][data-outside-view]:not(
       [data-selection-start="true"],
       [data-selection-end="true"]
     ) {
@@ -326,7 +341,8 @@
 
   /* Disabled state */
   &:disabled:not([data-outside-month="true"]),
-  &[data-disabled="true"]:not([data-outside-month="true"]) {
+  &[data-disabled="true"]:not([data-outside-month="true"]),
+  &[data-disabled]:not([data-outside-month="true"]) {
     @apply status-disabled;
 
     text-decoration: line-through;
@@ -337,11 +353,18 @@
 .range-calendar__grid-body
   td:has(> .range-calendar__cell[data-outside-month="true"])
   + td
-  > .range-calendar__cell[data-selected="true"] {
+  > .range-calendar__cell[data-selected="true"], .range-calendar__grid-body
+  td:has(> .range-calendar__cell[data-outside-month="true"])
+  + td
+  > .range-calendar__cell[data-state="checked"], .range-calendar__grid-body
+  td:has(> .range-calendar__cell[data-outside-month="true"])
+  + td
+  > .range-calendar__cell[data-state="on"] {
   @apply rounded-ss-lg rounded-es-lg;
 
   &[data-outside-month="true"],
-  &[data-selection-start="true"] {
+  &[data-selection-start="true"],
+  &[data-outside-view] {
     @apply rounded-ss-3xl rounded-es-3xl;
   }
 }
@@ -351,11 +374,20 @@
   td:has(> .range-calendar__cell[data-selected="true"]):has(
     + td > .range-calendar__cell[data-outside-month="true"]
   )
-  > .range-calendar__cell[data-selected="true"] {
+  > .range-calendar__cell[data-selected="true"], .range-calendar__grid-body
+  td:has(> .range-calendar__cell[data-selected="true"]):has(
+    + td > .range-calendar__cell[data-outside-month="true"]
+  )
+  > .range-calendar__cell[data-state="checked"], .range-calendar__grid-body
+  td:has(> .range-calendar__cell[data-selected="true"]):has(
+    + td > .range-calendar__cell[data-outside-month="true"]
+  )
+  > .range-calendar__cell[data-state="on"] {
   @apply rounded-se-lg rounded-ee-lg;
 
   &[data-outside-month="true"],
-  &[data-selection-end="true"] {
+  &[data-selection-end="true"],
+  &[data-outside-view] {
     @apply rounded-se-3xl rounded-ee-3xl;
   }
 }
@@ -365,7 +397,7 @@
   @apply absolute bottom-1 left-1/2 size-[3px] -translate-x-1/2 rounded-xs bg-muted;
 
   /* Indicator color changes when cell is selected */
-  [data-selected="true"] > & {
+  [data-selected="true"] > &, [data-state="checked"] > &, [data-state="on"] > & {
     @apply bg-accent-foreground;
   }
 }

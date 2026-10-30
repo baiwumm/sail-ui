@@ -3,7 +3,8 @@
   @apply flex flex-col gap-1;
 
   &[data-invalid="true"],
-  &[aria-invalid="true"] {
+  &[aria-invalid="true"],
+  &[data-invalid] {
     [data-slot="description"] {
       @apply hidden;
     }

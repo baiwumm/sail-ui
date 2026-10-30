@@ -45,7 +45,7 @@
     background-color: var(--textarea-bg);
   }
 
-  &[data-invalid="true"] {
+  &[data-invalid="true"], &[data-invalid] {
     @apply status-invalid-field;
     --textarea-bg: var(--textarea-bg-focus);
     background-color: var(--textarea-bg);
@@ -54,7 +54,8 @@
   /* Disabled state */
   &:disabled,
   &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[aria-disabled="true"],
+  &[data-disabled] {
     @apply status-disabled;
   }
 
@@ -118,7 +119,7 @@
   }
 
   /* Invalid state */
-  &[data-invalid="true"] {
+  &[data-invalid="true"], &[data-invalid] {
     @apply status-invalid-field;
     --textarea-bg: var(--textarea-bg-focus);
     background-color: var(--textarea-bg);

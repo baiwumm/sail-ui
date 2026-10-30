@@ -30,7 +30,8 @@
 
   &:disabled,
   &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[aria-disabled="true"],
+  &[data-disabled] {
     @apply status-disabled;
   }
 }

@@ -69,7 +69,8 @@
 
   /* Active / pressed */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     background-color: var(--pagination-link-bg-pressed);
     transform: scale(0.97);
   }
@@ -106,7 +107,8 @@
     @apply size-8 text-xs md:size-7;
 
     &:active,
-    &[data-pressed="true"] {
+    &[data-pressed="true"],
+    &[data-state="pressed"] {
       transform: scale(0.98);
     }
   }
@@ -133,7 +135,8 @@
     @apply size-10 text-base md:size-9;
 
     &:active,
-    &[data-pressed="true"] {
+    &[data-pressed="true"],
+    &[data-state="pressed"] {
       transform: scale(0.96);
     }
   }

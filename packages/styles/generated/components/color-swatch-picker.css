@@ -33,12 +33,12 @@
   }
 
   /* Disabled state */
-  &[data-disabled="true"] {
+  &[data-disabled="true"], &[data-disabled] {
     @apply status-disabled;
   }
 
   /* Selected state */
-  &[data-selected="true"] {
+  &[data-selected="true"], &[data-state="checked"], &[data-state="on"] {
     border-color: var(--color-swatch-current);
     box-shadow: var(--field-shadow);
     /* Shrink the swatch to reveal the white gap */
@@ -98,7 +98,7 @@
   }
 
   /* Scale up when parent item is selected */
-  .color-swatch-picker__item[data-selected="true"] & > * {
+  .color-swatch-picker__item[data-selected="true"] & > *, .color-swatch-picker__item[data-state="checked"] & > *, .color-swatch-picker__item[data-state="on"] & > * {
     transform: scale(1) translateZ(0);
   }
 }
@@ -165,7 +165,7 @@
     .color-swatch-picker__swatch {
       @apply rounded-lg;
     }
-    &[data-selected="true"] {
+    &[data-selected="true"], &[data-state="checked"], &[data-state="on"] {
       .color-swatch-picker__swatch {
         @apply rounded-lg;
       }
@@ -180,7 +180,7 @@
     .color-swatch-picker__swatch {
       @apply rounded-md;
     }
-    &[data-selected="true"] {
+    &[data-selected="true"], &[data-state="checked"], &[data-state="on"] {
       .color-swatch-picker__swatch {
         @apply rounded-md;
       }
@@ -195,7 +195,7 @@
     .color-swatch-picker__swatch {
       @apply rounded-lg;
     }
-    &[data-selected="true"] {
+    &[data-selected="true"], &[data-state="checked"], &[data-state="on"] {
       .color-swatch-picker__swatch {
         @apply rounded-md;
       }
@@ -215,7 +215,7 @@
     .color-swatch-picker__swatch {
       @apply rounded-lg;
     }
-    &[data-selected="true"] {
+    &[data-selected="true"], &[data-state="checked"], &[data-state="on"] {
       .color-swatch-picker__swatch {
         @apply rounded-lg;
       }
@@ -230,7 +230,7 @@
     .color-swatch-picker__swatch {
       @apply rounded-lg;
     }
-    &[data-selected="true"] {
+    &[data-selected="true"], &[data-state="checked"], &[data-state="on"] {
       .color-swatch-picker__swatch {
         @apply rounded-lg;
       }

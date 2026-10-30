@@ -30,7 +30,8 @@
 
   /* Pressed state */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     @apply underline decoration-muted;
 
     .link__icon {

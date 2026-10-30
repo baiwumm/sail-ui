@@ -54,12 +54,14 @@
 
   /* Focus state */
   &:focus,
-  &[data-focus="true"] {
+  &[data-focus="true"],
+  &[data-highlighted] {
   }
 
   /* Pressed state */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     @apply will-change-transform;
     transform: scale(0.98);
   }
@@ -75,7 +77,9 @@
   /* Selected state */
   &[aria-checked="true"],
   &[aria-selected="true"],
-  &[data-selected="true"] {
+  &[data-selected="true"],
+  &[data-state="checked"],
+  &[data-state="on"] {
     [data-slot="menu-item-indicator--checkmark"] {
       /**
      * Transitions
@@ -94,7 +98,7 @@
   }
 
   /* Disabled state */
-  &[data-disabled="true"] {
+  &[data-disabled="true"], &[data-disabled] {
     @apply status-disabled;
   }
 }

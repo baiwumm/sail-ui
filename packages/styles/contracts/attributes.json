@@ -1,7 +1,41 @@
 {
+  "data-active": {
+    "owner": "component"
+  },
+  "data-allows-sorting": {
+    "owner": "component"
+  },
+  "data-animation-ready": {
+    "owner": "component"
+  },
+  "data-bottom-scroll": {
+    "owner": "component"
+  },
+  "data-closed": {
+    "owner": "component"
+  },
+  "data-current": {
+    "owner": "component"
+  },
+  "data-default-icon": {
+    "owner": "component"
+  },
+  "data-detached": {
+    "owner": "component"
+  },
+  "data-direction": {
+    "owner": "component"
+  },
   "data-disabled": {
     "owner": "compat",
-    "map": ["[data-disabled]"]
+    "map": ["[data-disabled]"],
+    "notes": "Upstream selects on data-disabled=\"true\"; Reka emits the presence form, so the alias drops the value."
+  },
+  "data-dragging": {
+    "owner": "component"
+  },
+  "data-drop-target": {
+    "owner": "component"
   },
   "data-empty": {
     "owner": "component"
@@ -12,54 +46,179 @@
   "data-exiting": {
     "owner": "component"
   },
+  "data-expanded": {
+    "owner": "compat",
+    "map": ["[data-state=\"open\"]"],
+    "except": ["sheet", "toast"],
+    "notes": "Accordion and disclosure use Reka open state. Sheet and toast are custom surfaces that set data-expanded themselves."
+  },
+  "data-fill-end": {
+    "owner": "component"
+  },
+  "data-fill-start": {
+    "owner": "component"
+  },
+  "data-filled": {
+    "owner": "component"
+  },
   "data-focus": {
     "owner": "compat",
-    "map": ["[data-highlighted]"]
+    "map": ["[data-highlighted]"],
+    "notes": "Reka emits data-highlighted for the active collection item."
   },
   "data-focus-visible": {
     "owner": "compat",
-    "map": [":focus-visible"]
+    "map": [":focus-visible"],
+    "notes": "Components also emit the attribute via useFocusRing; the alias covers native keyboard focus. Never expand inside :not() or when :focus-visible is already in the same selector list."
+  },
+  "data-focus-within": {
+    "owner": "compat",
+    "map": [":focus-within"]
   },
   "data-focused": {
-    "owner": "compat",
-    "map": ["[data-focused]"]
+    "owner": "component",
+    "notes": "Presence attribute. useFocusRing emits it for Select items; Reka FieldRoot emits it for form fields. It suppresses the native focus ring when React Aria owns focus."
+  },
+  "data-frontmost": {
+    "owner": "component"
+  },
+  "data-handle-dragging": {
+    "owner": "component"
+  },
+  "data-has-descendants": {
+    "owner": "component"
+  },
+  "data-has-submenu": {
+    "owner": "component"
+  },
+  "data-hidden": {
+    "owner": "component"
+  },
+  "data-hide-separator": {
+    "owner": "component"
   },
   "data-hovered": {
     "owner": "compat",
-    "map": [":hover"]
+    "map": [":hover"],
+    "notes": "Components also emit the attribute via useHover; the alias preserves the native pointer fallback."
+  },
+  "data-indeterminate": {
+    "owner": "compat",
+    "map": ["[data-state=\"indeterminate\"]"]
   },
   "data-invalid": {
     "owner": "compat",
-    "map": ["[data-invalid]"]
+    "map": ["[data-invalid]"],
+    "notes": "Upstream selects on data-invalid=\"true\"; Reka and Sail fields emit the presence form."
+  },
+  "data-left-right-scroll": {
+    "owner": "component"
+  },
+  "data-left-scroll": {
+    "owner": "component"
+  },
+  "data-light-color": {
+    "owner": "component"
   },
   "data-open": {
     "owner": "compat",
-    "map": ["[data-state=open]"]
+    "map": ["[data-state=\"open\"]"]
   },
   "data-orientation": {
     "owner": "reka"
   },
+  "data-outside-month": {
+    "owner": "compat",
+    "map": ["[data-outside-view]"]
+  },
   "data-pending": {
     "owner": "component"
+  },
+  "data-placeholder": {
+    "owner": "component",
+    "notes": "SelectValue normalizes the value to \"true\"; Reka's own data-placeholder is a presence attribute."
   },
   "data-placement": {
     "owner": "component"
   },
-  "data-placeholder": {
-    "owner": "component"
-  },
   "data-pressed": {
     "owner": "compat",
-    "map": [":active", "[data-state=pressed]"]
+    "map": [":active", "[data-state=\"pressed\"]"],
+    "notes": "Components also emit the attribute via usePress; the alias preserves the native active fallback."
+  },
+  "data-reduce-motion": {
+    "owner": "component",
+    "notes": "Applied to the document root by the application, not by a component part."
   },
   "data-required": {
+    "owner": "component",
+    "notes": "Label styling currently uses the label--required variant class; a component-owned data-required is reserved for group roots."
+  },
+  "data-resizing": {
     "owner": "component"
+  },
+  "data-right-scroll": {
+    "owner": "component"
+  },
+  "data-scroll-shadow-mode": {
+    "owner": "component"
+  },
+  "data-scrollbar": {
+    "owner": "component",
+    "notes": "CSS-only opt-in applied to the document root by the application."
   },
   "data-selected": {
     "owner": "compat",
-    "map": ["[data-state=checked]", "[data-state=on]"]
+    "map": ["[data-state=\"checked\"]", "[data-state=\"on\"]"]
+  },
+  "data-selection-end": {
+    "owner": "component"
+  },
+  "data-selection-mode": {
+    "owner": "component"
+  },
+  "data-selection-start": {
+    "owner": "component"
+  },
+  "data-sheet-scroll": {
+    "owner": "component"
   },
   "data-slot": {
     "owner": "component"
+  },
+  "data-snap-points": {
+    "owner": "component"
+  },
+  "data-stack-index": {
+    "owner": "component"
+  },
+  "data-swapped": {
+    "owner": "component"
+  },
+  "data-theme": {
+    "owner": "component",
+    "notes": "Applied to <html> by the theme layer; not emitted by a component part."
+  },
+  "data-today": {
+    "owner": "component"
+  },
+  "data-top-bottom-scroll": {
+    "owner": "component"
+  },
+  "data-top-scroll": {
+    "owner": "component"
+  },
+  "data-tree-column": {
+    "owner": "component"
+  },
+  "data-type": {
+    "owner": "component"
+  },
+  "data-unavailable": {
+    "owner": "component"
+  },
+  "data-vibrant-palette": {
+    "owner": "component",
+    "notes": "Applied to <html> by the theme layer; not emitted by a component part."
   }
 }

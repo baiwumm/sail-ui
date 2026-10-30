@@ -46,12 +46,14 @@
 
   /* Focus state */
   &:focus,
-  &[data-focus="true"] {
+  &[data-focus="true"],
+  &[data-highlighted] {
   }
 
   /* Invalid state */
   .autocomplete[data-invalid="true"] &,
-  .autocomplete[aria-invalid="true"] & {
+  .autocomplete[aria-invalid="true"] &,
+  .autocomplete[data-invalid] & {
     @apply status-invalid-field;
     background-color: var(--field-focus);
   }
@@ -59,7 +61,8 @@
   /* Disabled state */
   &:disabled,
   &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[aria-disabled="true"],
+  &[data-disabled] {
     @apply status-disabled;
   }
 }
@@ -91,11 +94,13 @@
   }
 
   &:focus,
-  &[data-focus="true"] {
+  &[data-focus="true"],
+  &[data-highlighted] {
   }
 
   .autocomplete[data-invalid="true"] &,
-  .autocomplete[aria-invalid="true"] & {
+  .autocomplete[aria-invalid="true"] &,
+  .autocomplete[data-invalid] & {
     background-color: var(--autocomplete-trigger-bg-focus);
   }
 }
@@ -119,7 +124,7 @@
   /* Cursor */
   cursor: var(--cursor-interactive);
 
-  &[data-open="true"] {
+  &[data-open="true"], &[data-state="open"] {
     @apply rotate-180;
   }
 
@@ -269,7 +274,8 @@
   }
 
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
   }
 
   @media (hover: hover) {
@@ -280,7 +286,8 @@
   }
 
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     transform: scale(0.93);
   }
 }

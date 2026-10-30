@@ -35,8 +35,7 @@
 
   /* Focus state */
   &:focus,
-  &[data-focused="true"],
-  &[data-focused] {
+  &[data-focused="true"] {
     @apply status-focused-field;
     border-color: var(--field-border-focus);
     --input-bg: var(--input-bg-focus);
@@ -113,8 +112,7 @@
   }
 
   &:focus,
-  &[data-focused="true"],
-  &[data-focused] {
+  &[data-focused="true"] {
     --input-bg: var(--input-bg-focus);
     background-color: var(--input-bg);
   }

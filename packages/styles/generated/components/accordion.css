@@ -28,7 +28,7 @@
   @apply transition duration-250 motion-reduce:transition-none;
 
   /* Expanded state for indicator rotation */
-  &[data-expanded="true"] {
+  &[data-expanded="true"], &[data-state="open"] {
     @apply -rotate-180;
   }
 }
@@ -85,7 +85,7 @@
   }
 
   /* Pressed state */
-  &[data-pressed="true"]:not([aria-expanded="true"]) {
+  &[data-pressed="true"]:not([aria-expanded="true"]), &:active:not([aria-expanded="true"]), &[data-state="pressed"]:not([aria-expanded="true"]) {
   }
 
   /* Focus state */
@@ -115,7 +115,7 @@
     opacity 200ms var(--ease-out);
   @apply motion-reduce:transition-none;
 
-  &[data-expanded="true"] {
+  &[data-expanded="true"], &[data-state="open"] {
     will-change: height, opacity;
     opacity: 1;
   }

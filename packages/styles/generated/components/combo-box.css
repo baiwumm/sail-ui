@@ -3,7 +3,8 @@
   @apply flex flex-col gap-1;
 
   &[data-invalid="true"],
-  &[aria-invalid="true"] {
+  &[aria-invalid="true"],
+  &[data-invalid] {
     [data-slot="description"] {
       @apply hidden;
     }
@@ -24,7 +25,8 @@
     /* This rule is imported after `.input` and replaces its box-shadow with the focus ring.
        Reassign the input fill so `[data-focus]` tracks the variant, not the primary field. */
     &:focus,
-    &[data-focus] {
+    &[data-focus],
+    &[data-highlighted] {
       @apply status-focused-field;
       border-color: var(--field-border-focus);
       --input-bg: var(--input-bg-focus);
@@ -105,7 +107,7 @@
   }
 
   /* Pressed state */
-  &[data-pressed="true"] {
+  &[data-pressed="true"], &:active, &[data-state="pressed"] {
     @apply opacity-70;
   }
 
@@ -121,7 +123,7 @@
   }
 
   /* Rotate icon when trigger is open */
-  &[data-open="true"] [data-slot="combo-box-trigger-default-icon"] {
+  &[data-open="true"] [data-slot="combo-box-trigger-default-icon"], &[data-state="open"] [data-slot="combo-box-trigger-default-icon"] {
     @apply rotate-180;
   }
 }

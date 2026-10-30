@@ -21,4 +21,5 @@ playwright-report/
 test-results/
 storybook-static/
 *.tgz
+.fixtures/
 </content>

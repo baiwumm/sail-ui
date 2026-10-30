@@ -33,7 +33,8 @@
 
   /* Active/pressed state */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     transform: scale(0.97);
   }
 }

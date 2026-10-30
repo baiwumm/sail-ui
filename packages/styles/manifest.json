@@ -3,212 +3,1481 @@
     "version": "3.2.7",
     "commit": "89cd95ec17dfbbf952ef0d61af300f287aec223d"
   },
+  "dataSlots": {
+    "total": 334,
+    "components": 81,
+    "hash": "7cfe25d877ff14f1ecff9d032a4eb7e5b30b1c000bb59833770c371b043124ee"
+  },
+  "counts": {
+    "upstreamCssFiles": 96,
+    "componentCssFiles": 86,
+    "scopedComponents": 85,
+    "attributes": 65,
+    "aliases": 263
+  },
+  "owners": {
+    "compat": 12,
+    "component": 52,
+    "native": 0,
+    "reka": 1
+  },
+  "attributes": {
+    "data-active": {
+      "owner": "component",
+      "files": [
+        "components/input-otp.css",
+        "components/pagination.css"
+      ],
+      "components": [
+        "input-otp",
+        "pagination"
+      ]
+    },
+    "data-allows-sorting": {
+      "owner": "component",
+      "files": [
+        "components/table.css"
+      ],
+      "components": [
+        "table"
+      ]
+    },
+    "data-animation-ready": {
+      "owner": "component",
+      "files": [
+        "components/tabs.css"
+      ],
+      "components": [
+        "tabs"
+      ]
+    },
+    "data-bottom-scroll": {
+      "owner": "component",
+      "files": [
+        "components/scroll-shadow.css",
+        "components/tabs.css"
+      ],
+      "components": [
+        "scroll-shadow",
+        "tabs"
+      ]
+    },
+    "data-closed": {
+      "owner": "component",
+      "files": [
+        "components/sheet.css"
+      ],
+      "components": [
+        "sheet"
+      ]
+    },
+    "data-current": {
+      "owner": "component",
+      "files": [
+        "components/breadcrumbs.css"
+      ],
+      "components": [
+        "breadcrumbs"
+      ]
+    },
+    "data-default-icon": {
+      "owner": "component",
+      "files": [
+        "components/link.css"
+      ],
+      "components": [
+        "link"
+      ]
+    },
+    "data-detached": {
+      "owner": "component",
+      "files": [
+        "components/sheet.css"
+      ],
+      "components": [
+        "sheet"
+      ]
+    },
+    "data-direction": {
+      "owner": "component",
+      "files": [
+        "components/slider.css",
+        "components/table.css"
+      ],
+      "components": [
+        "slider",
+        "table"
+      ]
+    },
+    "data-disabled": {
+      "owner": "compat",
+      "map": [
+        "[data-disabled]"
+      ],
+      "files": [
+        "components/autocomplete.css",
+        "components/calendar.css",
+        "components/checkbox.css",
+        "components/color-area.css",
+        "components/color-input-group.css",
+        "components/color-picker.css",
+        "components/color-slider.css",
+        "components/color-swatch-picker.css",
+        "components/combo-box.css",
+        "components/date-input-group.css",
+        "components/date-picker.css",
+        "components/date-range-picker.css",
+        "components/input-group.css",
+        "components/input-otp.css",
+        "components/input.css",
+        "components/label.css",
+        "components/list-box-item.css",
+        "components/menu-item.css",
+        "components/meter.css",
+        "components/number-field.css",
+        "components/progress-bar.css",
+        "components/progress-circle.css",
+        "components/radio.css",
+        "components/range-calendar.css",
+        "components/search-field.css",
+        "components/select.css",
+        "components/slider.css",
+        "components/switch.css",
+        "components/table.css",
+        "components/tabs.css",
+        "components/tag.css",
+        "components/textarea.css"
+      ],
+      "components": [
+        "autocomplete",
+        "calendar",
+        "checkbox",
+        "color-area",
+        "color-input-group",
+        "color-picker",
+        "color-slider",
+        "color-swatch-picker",
+        "combo-box",
+        "date-input-group",
+        "date-picker",
+        "date-range-picker",
+        "input",
+        "input-group",
+        "input-otp",
+        "label",
+        "list-box-item",
+        "menu-item",
+        "meter",
+        "number-field",
+        "progress-bar",
+        "progress-circle",
+        "radio",
+        "range-calendar",
+        "search-field",
+        "select",
+        "slider",
+        "switch",
+        "table",
+        "tabs",
+        "tag",
+        "textarea"
+      ]
+    },
+    "data-dragging": {
+      "owner": "component",
+      "files": [
+        "components/color-area.css",
+        "components/color-slider.css",
+        "components/sheet.css",
+        "components/slider.css",
+        "components/table.css"
+      ],
+      "components": [
+        "color-area",
+        "color-slider",
+        "sheet",
+        "slider",
+        "table"
+      ]
+    },
+    "data-drop-target": {
+      "owner": "component",
+      "files": [
+        "components/table.css"
+      ],
+      "components": [
+        "table"
+      ]
+    },
+    "data-empty": {
+      "owner": "component",
+      "files": [
+        "components/autocomplete.css",
+        "components/search-field.css",
+        "components/select.css"
+      ],
+      "components": [
+        "autocomplete",
+        "search-field",
+        "select"
+      ]
+    },
+    "data-entering": {
+      "owner": "component",
+      "files": [
+        "components/alert-dialog.css",
+        "components/autocomplete.css",
+        "components/color-picker.css",
+        "components/combo-box.css",
+        "components/date-picker.css",
+        "components/date-range-picker.css",
+        "components/drawer.css",
+        "components/dropdown.css",
+        "components/modal.css",
+        "components/popover.css",
+        "components/select.css",
+        "components/toast.css",
+        "components/tooltip.css"
+      ],
+      "components": [
+        "alert-dialog",
+        "autocomplete",
+        "color-picker",
+        "combo-box",
+        "date-picker",
+        "date-range-picker",
+        "drawer",
+        "dropdown",
+        "modal",
+        "popover",
+        "select",
+        "toast",
+        "tooltip"
+      ]
+    },
+    "data-exiting": {
+      "owner": "component",
+      "files": [
+        "components/alert-dialog.css",
+        "components/autocomplete.css",
+        "components/color-picker.css",
+        "components/combo-box.css",
+        "components/date-picker.css",
+        "components/date-range-picker.css",
+        "components/drawer.css",
+        "components/dropdown.css",
+        "components/modal.css",
+        "components/popover.css",
+        "components/select.css",
+        "components/tabs.css",
+        "components/toast.css",
+        "components/tooltip.css"
+      ],
+      "components": [
+        "alert-dialog",
+        "autocomplete",
+        "color-picker",
+        "combo-box",
+        "date-picker",
+        "date-range-picker",
+        "drawer",
+        "dropdown",
+        "modal",
+        "popover",
+        "select",
+        "tabs",
+        "toast",
+        "tooltip"
+      ]
+    },
+    "data-expanded": {
+      "owner": "compat",
+      "map": [
+        "[data-state=\"open\"]"
+      ],
+      "except": [
+        "sheet",
+        "toast"
+      ],
+      "files": [
+        "components/accordion.css",
+        "components/disclosure.css",
+        "components/sheet.css",
+        "components/toast.css"
+      ],
+      "components": [
+        "accordion",
+        "disclosure",
+        "sheet",
+        "toast"
+      ]
+    },
+    "data-fill-end": {
+      "owner": "component",
+      "files": [
+        "components/slider.css"
+      ],
+      "components": [
+        "slider"
+      ]
+    },
+    "data-fill-start": {
+      "owner": "component",
+      "files": [
+        "components/slider.css"
+      ],
+      "components": [
+        "slider"
+      ]
+    },
+    "data-filled": {
+      "owner": "component",
+      "files": [
+        "components/input-otp.css",
+        "components/slider.css"
+      ],
+      "components": [
+        "input-otp",
+        "slider"
+      ]
+    },
+    "data-focus": {
+      "owner": "compat",
+      "map": [
+        "[data-highlighted]"
+      ],
+      "files": [
+        "components/autocomplete.css",
+        "components/combo-box.css",
+        "components/list-box-item.css",
+        "components/menu-item.css",
+        "components/select.css"
+      ],
+      "components": [
+        "autocomplete",
+        "combo-box",
+        "list-box-item",
+        "menu-item",
+        "select"
+      ]
+    },
+    "data-focus-visible": {
+      "owner": "compat",
+      "map": [
+        ":focus-visible"
+      ],
+      "files": [
+        "components/accordion.css",
+        "components/alert-dialog.css",
+        "components/autocomplete.css",
+        "components/button-group.css",
+        "components/button.css",
+        "components/calendar.css",
+        "components/checkbox.css",
+        "components/close-button.css",
+        "components/color-area.css",
+        "components/color-picker.css",
+        "components/color-slider.css",
+        "components/color-swatch-picker.css",
+        "components/combo-box.css",
+        "components/date-picker.css",
+        "components/date-range-picker.css",
+        "components/disclosure.css",
+        "components/drawer.css",
+        "components/dropdown.css",
+        "components/input.css",
+        "components/link.css",
+        "components/list-box-item.css",
+        "components/menu-item.css",
+        "components/modal.css",
+        "components/pagination.css",
+        "components/popover.css",
+        "components/radio.css",
+        "components/range-calendar.css",
+        "components/select.css",
+        "components/sheet.css",
+        "components/slider.css",
+        "components/switch.css",
+        "components/table.css",
+        "components/tabs.css",
+        "components/tag.css",
+        "components/textarea.css",
+        "components/toast.css",
+        "components/toggle-button-group.css",
+        "components/toggle-button.css",
+        "components/tooltip.css",
+        "utilities/index.css"
+      ],
+      "components": [
+        "accordion",
+        "alert-dialog",
+        "autocomplete",
+        "button",
+        "button-group",
+        "calendar",
+        "checkbox",
+        "close-button",
+        "color-area",
+        "color-picker",
+        "color-slider",
+        "color-swatch-picker",
+        "combo-box",
+        "date-picker",
+        "date-range-picker",
+        "disclosure",
+        "drawer",
+        "dropdown",
+        "input",
+        "link",
+        "list-box-item",
+        "menu-item",
+        "modal",
+        "pagination",
+        "popover",
+        "radio",
+        "range-calendar",
+        "select",
+        "sheet",
+        "slider",
+        "switch",
+        "table",
+        "tabs",
+        "tag",
+        "textarea",
+        "toast",
+        "toggle-button",
+        "toggle-button-group",
+        "tooltip"
+      ]
+    },
+    "data-focus-within": {
+      "owner": "compat",
+      "map": [
+        ":focus-within"
+      ],
+      "files": [
+        "components/color-input-group.css",
+        "components/date-input-group.css",
+        "components/input-group.css",
+        "components/number-field.css",
+        "components/search-field.css",
+        "utilities/index.css"
+      ],
+      "components": [
+        "color-input-group",
+        "date-input-group",
+        "input-group",
+        "number-field",
+        "search-field"
+      ]
+    },
+    "data-focused": {
+      "owner": "component",
+      "files": [
+        "components/accordion.css",
+        "components/alert-dialog.css",
+        "components/autocomplete.css",
+        "components/button-group.css",
+        "components/button.css",
+        "components/calendar.css",
+        "components/close-button.css",
+        "components/color-picker.css",
+        "components/combo-box.css",
+        "components/date-input-group.css",
+        "components/date-picker.css",
+        "components/date-range-picker.css",
+        "components/disclosure.css",
+        "components/drawer.css",
+        "components/dropdown.css",
+        "components/input.css",
+        "components/link.css",
+        "components/list-box-item.css",
+        "components/menu-item.css",
+        "components/modal.css",
+        "components/popover.css",
+        "components/range-calendar.css",
+        "components/select.css",
+        "components/sheet.css",
+        "components/tabs.css",
+        "components/textarea.css",
+        "components/toggle-button-group.css",
+        "components/toggle-button.css",
+        "components/tooltip.css",
+        "utilities/index.css"
+      ],
+      "components": [
+        "accordion",
+        "alert-dialog",
+        "autocomplete",
+        "button",
+        "button-group",
+        "calendar",
+        "close-button",
+        "color-picker",
+        "combo-box",
+        "date-input-group",
+        "date-picker",
+        "date-range-picker",
+        "disclosure",
+        "drawer",
+        "dropdown",
+        "input",
+        "link",
+        "list-box-item",
+        "menu-item",
+        "modal",
+        "popover",
+        "range-calendar",
+        "select",
+        "sheet",
+        "tabs",
+        "textarea",
+        "toggle-button",
+        "toggle-button-group",
+        "tooltip"
+      ]
+    },
+    "data-frontmost": {
+      "owner": "component",
+      "files": [
+        "components/toast.css"
+      ],
+      "components": [
+        "toast"
+      ]
+    },
+    "data-handle-dragging": {
+      "owner": "component",
+      "files": [
+        "components/sheet.css"
+      ],
+      "components": [
+        "sheet"
+      ]
+    },
+    "data-has-descendants": {
+      "owner": "component",
+      "files": [
+        "components/sheet.css"
+      ],
+      "components": [
+        "sheet"
+      ]
+    },
+    "data-has-submenu": {
+      "owner": "component",
+      "files": [
+        "components/menu-item.css"
+      ],
+      "components": [
+        "menu-item"
+      ]
+    },
+    "data-hidden": {
+      "owner": "component",
+      "files": [
+        "components/toast.css"
+      ],
+      "components": [
+        "toast"
+      ]
+    },
+    "data-hide-separator": {
+      "owner": "component",
+      "files": [
+        "components/accordion.css"
+      ],
+      "components": [
+        "accordion"
+      ]
+    },
+    "data-hovered": {
+      "owner": "compat",
+      "map": [
+        ":hover"
+      ],
+      "files": [
+        "components/autocomplete.css",
+        "components/breadcrumbs.css",
+        "components/button.css",
+        "components/calendar-year-picker.css",
+        "components/calendar.css",
+        "components/checkbox.css",
+        "components/close-button.css",
+        "components/color-input-group.css",
+        "components/combo-box.css",
+        "components/date-input-group.css",
+        "components/input-group.css",
+        "components/input-otp.css",
+        "components/input.css",
+        "components/link.css",
+        "components/list-box-item.css",
+        "components/menu-item.css",
+        "components/number-field.css",
+        "components/pagination.css",
+        "components/radio-group.css",
+        "components/radio.css",
+        "components/range-calendar.css",
+        "components/search-field.css",
+        "components/select.css",
+        "components/sheet.css",
+        "components/switch.css",
+        "components/table.css",
+        "components/tabs.css",
+        "components/tag.css",
+        "components/textarea.css",
+        "components/toast.css",
+        "components/toggle-button.css"
+      ],
+      "components": [
+        "autocomplete",
+        "breadcrumbs",
+        "button",
+        "calendar",
+        "calendar-year-picker",
+        "checkbox",
+        "close-button",
+        "color-input-group",
+        "combo-box",
+        "date-input-group",
+        "input",
+        "input-group",
+        "input-otp",
+        "link",
+        "list-box-item",
+        "menu-item",
+        "number-field",
+        "pagination",
+        "radio",
+        "radio-group",
+        "range-calendar",
+        "search-field",
+        "select",
+        "sheet",
+        "switch",
+        "table",
+        "tabs",
+        "tag",
+        "textarea",
+        "toast",
+        "toggle-button"
+      ]
+    },
+    "data-indeterminate": {
+      "owner": "compat",
+      "map": [
+        "[data-state=\"indeterminate\"]"
+      ],
+      "files": [
+        "components/checkbox.css"
+      ],
+      "components": [
+        "checkbox"
+      ]
+    },
+    "data-invalid": {
+      "owner": "compat",
+      "map": [
+        "[data-invalid]"
+      ],
+      "files": [
+        "components/autocomplete.css",
+        "components/checkbox.css",
+        "components/color-field.css",
+        "components/color-input-group.css",
+        "components/combo-box.css",
+        "components/date-field.css",
+        "components/date-input-group.css",
+        "components/input-group.css",
+        "components/input-otp.css",
+        "components/input.css",
+        "components/label.css",
+        "components/number-field.css",
+        "components/radio.css",
+        "components/search-field.css",
+        "components/select.css",
+        "components/textarea.css",
+        "components/textfield.css",
+        "components/time-field.css"
+      ],
+      "components": [
+        "autocomplete",
+        "checkbox",
+        "color-field",
+        "color-input-group",
+        "combo-box",
+        "date-field",
+        "date-input-group",
+        "input",
+        "input-group",
+        "input-otp",
+        "label",
+        "number-field",
+        "radio",
+        "search-field",
+        "select",
+        "textarea",
+        "textfield",
+        "time-field"
+      ]
+    },
+    "data-left-right-scroll": {
+      "owner": "component",
+      "files": [
+        "components/scroll-shadow.css",
+        "components/tabs.css"
+      ],
+      "components": [
+        "scroll-shadow",
+        "tabs"
+      ]
+    },
+    "data-left-scroll": {
+      "owner": "component",
+      "files": [
+        "components/scroll-shadow.css",
+        "components/tabs.css"
+      ],
+      "components": [
+        "scroll-shadow",
+        "tabs"
+      ]
+    },
+    "data-light-color": {
+      "owner": "component",
+      "files": [
+        "components/color-swatch-picker.css"
+      ],
+      "components": [
+        "color-swatch-picker"
+      ]
+    },
+    "data-open": {
+      "owner": "compat",
+      "map": [
+        "[data-state=\"open\"]"
+      ],
+      "files": [
+        "components/autocomplete.css",
+        "components/calendar-year-picker.css",
+        "components/calendar.css",
+        "components/combo-box.css",
+        "components/range-calendar.css",
+        "components/select.css"
+      ],
+      "components": [
+        "autocomplete",
+        "calendar",
+        "calendar-year-picker",
+        "combo-box",
+        "range-calendar",
+        "select"
+      ]
+    },
+    "data-orientation": {
+      "owner": "reka",
+      "files": [
+        "components/color-slider.css",
+        "components/list-box.css",
+        "components/radio-group.css",
+        "components/slider.css",
+        "components/tabs.css"
+      ],
+      "components": [
+        "color-slider",
+        "list-box",
+        "radio-group",
+        "slider",
+        "tabs"
+      ]
+    },
+    "data-outside-month": {
+      "owner": "compat",
+      "map": [
+        "[data-outside-view]"
+      ],
+      "files": [
+        "components/calendar.css",
+        "components/range-calendar.css"
+      ],
+      "components": [
+        "calendar",
+        "range-calendar"
+      ]
+    },
+    "data-pending": {
+      "owner": "component",
+      "files": [
+        "components/button.css",
+        "components/close-button.css",
+        "components/dropdown.css"
+      ],
+      "components": [
+        "button",
+        "close-button",
+        "dropdown"
+      ]
+    },
+    "data-placeholder": {
+      "owner": "component",
+      "files": [
+        "components/autocomplete.css",
+        "components/combo-box.css",
+        "components/date-input-group.css",
+        "components/select.css"
+      ],
+      "components": [
+        "autocomplete",
+        "combo-box",
+        "date-input-group",
+        "select"
+      ]
+    },
+    "data-placement": {
+      "owner": "component",
+      "files": [
+        "components/alert-dialog.css",
+        "components/autocomplete.css",
+        "components/color-picker.css",
+        "components/combo-box.css",
+        "components/date-picker.css",
+        "components/date-range-picker.css",
+        "components/drawer.css",
+        "components/dropdown.css",
+        "components/modal.css",
+        "components/popover.css",
+        "components/select.css",
+        "components/tooltip.css"
+      ],
+      "components": [
+        "alert-dialog",
+        "autocomplete",
+        "color-picker",
+        "combo-box",
+        "date-picker",
+        "date-range-picker",
+        "drawer",
+        "dropdown",
+        "modal",
+        "popover",
+        "select",
+        "tooltip"
+      ]
+    },
+    "data-pressed": {
+      "owner": "compat",
+      "map": [
+        ":active",
+        "[data-state=\"pressed\"]"
+      ],
+      "files": [
+        "components/accordion.css",
+        "components/alert-dialog.css",
+        "components/autocomplete.css",
+        "components/button-group.css",
+        "components/button.css",
+        "components/calendar.css",
+        "components/checkbox.css",
+        "components/close-button.css",
+        "components/combo-box.css",
+        "components/drawer.css",
+        "components/dropdown.css",
+        "components/link.css",
+        "components/list-box-item.css",
+        "components/menu-item.css",
+        "components/modal.css",
+        "components/number-field.css",
+        "components/pagination.css",
+        "components/radio.css",
+        "components/range-calendar.css",
+        "components/select.css",
+        "components/switch.css",
+        "components/tag.css",
+        "components/toggle-button-group.css",
+        "components/toggle-button.css"
+      ],
+      "components": [
+        "accordion",
+        "alert-dialog",
+        "autocomplete",
+        "button",
+        "button-group",
+        "calendar",
+        "checkbox",
+        "close-button",
+        "combo-box",
+        "drawer",
+        "dropdown",
+        "link",
+        "list-box-item",
+        "menu-item",
+        "modal",
+        "number-field",
+        "pagination",
+        "radio",
+        "range-calendar",
+        "select",
+        "switch",
+        "tag",
+        "toggle-button",
+        "toggle-button-group"
+      ]
+    },
+    "data-reduce-motion": {
+      "owner": "component",
+      "files": [
+        "variants/index.css"
+      ],
+      "components": []
+    },
+    "data-required": {
+      "owner": "component",
+      "files": [
+        "components/label.css"
+      ],
+      "components": [
+        "label"
+      ]
+    },
+    "data-resizing": {
+      "owner": "component",
+      "files": [
+        "components/table.css"
+      ],
+      "components": [
+        "table"
+      ]
+    },
+    "data-right-scroll": {
+      "owner": "component",
+      "files": [
+        "components/scroll-shadow.css",
+        "components/tabs.css"
+      ],
+      "components": [
+        "scroll-shadow",
+        "tabs"
+      ]
+    },
+    "data-scroll-shadow-mode": {
+      "owner": "component",
+      "files": [
+        "components/scroll-shadow.css"
+      ],
+      "components": [
+        "scroll-shadow"
+      ]
+    },
+    "data-scrollbar": {
+      "owner": "component",
+      "files": [
+        "base/scrollbar.css"
+      ],
+      "components": []
+    },
+    "data-selected": {
+      "owner": "compat",
+      "map": [
+        "[data-state=\"checked\"]",
+        "[data-state=\"on\"]"
+      ],
+      "files": [
+        "components/calendar-year-picker.css",
+        "components/calendar.css",
+        "components/checkbox.css",
+        "components/color-swatch-picker.css",
+        "components/list-box-item.css",
+        "components/menu-item.css",
+        "components/radio-group.css",
+        "components/radio.css",
+        "components/range-calendar.css",
+        "components/switch.css",
+        "components/table.css",
+        "components/tabs.css",
+        "components/tag.css",
+        "components/toggle-button.css"
+      ],
+      "components": [
+        "calendar",
+        "calendar-year-picker",
+        "checkbox",
+        "color-swatch-picker",
+        "list-box-item",
+        "menu-item",
+        "radio",
+        "radio-group",
+        "range-calendar",
+        "switch",
+        "table",
+        "tabs",
+        "tag",
+        "toggle-button"
+      ]
+    },
+    "data-selection-end": {
+      "owner": "component",
+      "files": [
+        "components/range-calendar.css"
+      ],
+      "components": [
+        "range-calendar"
+      ]
+    },
+    "data-selection-mode": {
+      "owner": "component",
+      "files": [
+        "components/menu-item.css"
+      ],
+      "components": [
+        "menu-item"
+      ]
+    },
+    "data-selection-start": {
+      "owner": "component",
+      "files": [
+        "components/range-calendar.css"
+      ],
+      "components": [
+        "range-calendar"
+      ]
+    },
+    "data-sheet-scroll": {
+      "owner": "component",
+      "files": [
+        "components/sheet.css"
+      ],
+      "components": [
+        "sheet"
+      ]
+    },
+    "data-slot": {
+      "owner": "component",
+      "files": [
+        "components/accordion.css",
+        "components/alert-dialog.css",
+        "components/alert.css",
+        "components/autocomplete.css",
+        "components/button.css",
+        "components/calendar-year-picker.css",
+        "components/checkbox-group.css",
+        "components/checkbox.css",
+        "components/color-field.css",
+        "components/color-input-group.css",
+        "components/color-picker.css",
+        "components/color-slider.css",
+        "components/combo-box.css",
+        "components/date-field.css",
+        "components/date-input-group.css",
+        "components/drawer.css",
+        "components/dropdown.css",
+        "components/field-error.css",
+        "components/input-group.css",
+        "components/label.css",
+        "components/list-box-item.css",
+        "components/list-box.css",
+        "components/menu-item.css",
+        "components/menu.css",
+        "components/meter.css",
+        "components/number-field.css",
+        "components/pagination.css",
+        "components/popover.css",
+        "components/progress-bar.css",
+        "components/radio-group.css",
+        "components/radio.css",
+        "components/search-field.css",
+        "components/select.css",
+        "components/slider.css",
+        "components/switch.css",
+        "components/tag-group.css",
+        "components/textfield.css",
+        "components/time-field.css",
+        "components/toast.css",
+        "components/tooltip.css"
+      ],
+      "components": [
+        "accordion",
+        "alert",
+        "alert-dialog",
+        "autocomplete",
+        "button",
+        "calendar-year-picker",
+        "checkbox",
+        "checkbox-group",
+        "color-field",
+        "color-input-group",
+        "color-picker",
+        "color-slider",
+        "combo-box",
+        "date-field",
+        "date-input-group",
+        "drawer",
+        "dropdown",
+        "field-error",
+        "input-group",
+        "label",
+        "list-box",
+        "list-box-item",
+        "menu",
+        "menu-item",
+        "meter",
+        "number-field",
+        "pagination",
+        "popover",
+        "progress-bar",
+        "radio",
+        "radio-group",
+        "search-field",
+        "select",
+        "slider",
+        "switch",
+        "tag-group",
+        "textfield",
+        "time-field",
+        "toast",
+        "tooltip"
+      ]
+    },
+    "data-snap-points": {
+      "owner": "component",
+      "files": [
+        "components/sheet.css"
+      ],
+      "components": [
+        "sheet"
+      ]
+    },
+    "data-stack-index": {
+      "owner": "component",
+      "files": [
+        "components/sheet.css"
+      ],
+      "components": [
+        "sheet"
+      ]
+    },
+    "data-swapped": {
+      "owner": "component",
+      "files": [
+        "components/toast.css"
+      ],
+      "components": [
+        "toast"
+      ]
+    },
+    "data-theme": {
+      "owner": "component",
+      "files": [
+        "themes/default/variables.css",
+        "variants/index.css"
+      ],
+      "components": []
+    },
+    "data-today": {
+      "owner": "component",
+      "files": [
+        "components/calendar.css",
+        "components/range-calendar.css"
+      ],
+      "components": [
+        "calendar",
+        "range-calendar"
+      ]
+    },
+    "data-top-bottom-scroll": {
+      "owner": "component",
+      "files": [
+        "components/scroll-shadow.css",
+        "components/tabs.css"
+      ],
+      "components": [
+        "scroll-shadow",
+        "tabs"
+      ]
+    },
+    "data-top-scroll": {
+      "owner": "component",
+      "files": [
+        "components/scroll-shadow.css",
+        "components/tabs.css"
+      ],
+      "components": [
+        "scroll-shadow",
+        "tabs"
+      ]
+    },
+    "data-tree-column": {
+      "owner": "component",
+      "files": [
+        "components/table.css"
+      ],
+      "components": [
+        "table"
+      ]
+    },
+    "data-type": {
+      "owner": "component",
+      "files": [
+        "components/date-input-group.css"
+      ],
+      "components": [
+        "date-input-group"
+      ]
+    },
+    "data-unavailable": {
+      "owner": "component",
+      "files": [
+        "components/calendar.css",
+        "components/range-calendar.css"
+      ],
+      "components": [
+        "calendar",
+        "range-calendar"
+      ]
+    },
+    "data-vibrant-palette": {
+      "owner": "component",
+      "files": [
+        "themes/default/variables.css"
+      ],
+      "components": []
+    }
+  },
   "files": [
     {
       "path": "components/accordion.css",
+      "component": "accordion",
       "sourceHash": "5cf2ad61c10e4c2f4581041798cb8b3199716e2fc680cb18c7f7ed2977ee2905",
-      "generatedHash": "5cf2ad61c10e4c2f4581041798cb8b3199716e2fc680cb18c7f7ed2977ee2905",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "5547de8eeec44c91210ba1abb53b59ef755fc33ba5aa4973a65763c9ada07ea8",
+      "aliases": 4,
+      "scoped": true
     },
     {
       "path": "components/alert-dialog.css",
+      "component": "alert-dialog",
       "sourceHash": "2f8ab6dd2768308cf782b1640da1551ed084099c33f0b420fccccd491ff3e736",
-      "generatedHash": "2f8ab6dd2768308cf782b1640da1551ed084099c33f0b420fccccd491ff3e736",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "bd41134c9bfdf9d48a20c37996bb1d7d3902f66875f1673f098f4889e22ff20b",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/alert.css",
+      "component": "alert",
       "sourceHash": "450a56f7ce9b8531869f7ad41905cb569d44f8286095850bcdbcb2c9466b002e",
       "generatedHash": "450a56f7ce9b8531869f7ad41905cb569d44f8286095850bcdbcb2c9466b002e",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/autocomplete.css",
+      "component": "autocomplete",
       "sourceHash": "732ce624988da8f412d240697c4b6bc96adde5349bb3f50572f76bb65986ef10",
-      "generatedHash": "732ce624988da8f412d240697c4b6bc96adde5349bb3f50572f76bb65986ef10",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "174c4e7d705810587a857534249b1242e33c90ff032947e748e18fb84f777ffd",
+      "aliases": 8,
+      "scoped": true
     },
     {
       "path": "components/avatar-group.css",
+      "component": "avatar-group",
       "sourceHash": "5dae265f8bf08fc517f1f5de4a9ebc95051d2ab5dcab62e5b3fa60d2ed301dd9",
       "generatedHash": "5dae265f8bf08fc517f1f5de4a9ebc95051d2ab5dcab62e5b3fa60d2ed301dd9",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/avatar.css",
+      "component": "avatar",
       "sourceHash": "7e08fb24ad1e0b375a7390ba1930afd8d2fa8abddb2304d6bfa11301f206f4b3",
       "generatedHash": "7e08fb24ad1e0b375a7390ba1930afd8d2fa8abddb2304d6bfa11301f206f4b3",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/badge.css",
+      "component": "badge",
       "sourceHash": "58763cc085925622a647d0ff9986d52f864c6af2a5fde93a2b339b3ea4fa59a9",
       "generatedHash": "58763cc085925622a647d0ff9986d52f864c6af2a5fde93a2b339b3ea4fa59a9",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/breadcrumbs.css",
+      "component": "breadcrumbs",
       "sourceHash": "434556642dee0435c583865889c8703544ee71ae9f5ca3799cfb8457ea6b49e6",
       "generatedHash": "434556642dee0435c583865889c8703544ee71ae9f5ca3799cfb8457ea6b49e6",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/button-group.css",
+      "component": "button-group",
       "sourceHash": "9125d881e9bae500533bed1cc8931a7df0daf01e26ae3ec162c8bf0f68ce8cdc",
-      "generatedHash": "9125d881e9bae500533bed1cc8931a7df0daf01e26ae3ec162c8bf0f68ce8cdc",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "b8fc9141c1cee05d0e99d162ae783a60efc41a81c69ccfccdc7e4bcf11ba039f",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/button.css",
+      "component": "button",
       "sourceHash": "f74f4c07e09c2630426475f2247fab566d4289c6d5d9e1b7c097a873eed164ed",
-      "generatedHash": "3c34429bb9379ad16e44b25619afcf21a3febcdb9c63a50b1928b47a995b333c",
+      "generatedHash": "5e10bd06ba4cd88a83a990ee367625a47c195311f3bd1b2038ee7366463c746a",
       "aliases": 3,
       "scoped": true
     },
     {
       "path": "components/calendar-year-picker.css",
+      "component": "calendar-year-picker",
       "sourceHash": "de842826c072920c4d4a3b0dc2ae9b9b35617515817fd4df487af71184777bce",
-      "generatedHash": "de842826c072920c4d4a3b0dc2ae9b9b35617515817fd4df487af71184777bce",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "333d2c499bf7e41eaa9ffb954934a91bdcfe46bfbad42fbe9b1de7f0a5057742",
+      "aliases": 5,
+      "scoped": true
     },
     {
       "path": "components/calendar.css",
+      "component": "calendar",
       "sourceHash": "188cf222c514ce790eadaa73322516b6f200f31d2e9688f2eca4287f32ea1ee6",
-      "generatedHash": "188cf222c514ce790eadaa73322516b6f200f31d2e9688f2eca4287f32ea1ee6",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "d811d7ba4de905696a76c59ffdca5623f17f8cdeca85faab059a22668b544e09",
+      "aliases": 14,
+      "scoped": true
     },
     {
       "path": "components/card.css",
+      "component": "card",
       "sourceHash": "6173745c8b79a63702453da07789d4452a21f853deeaaa1924553713d4d43f5f",
       "generatedHash": "6173745c8b79a63702453da07789d4452a21f853deeaaa1924553713d4d43f5f",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/checkbox-group.css",
+      "component": "checkbox-group",
       "sourceHash": "bb844eab781291bfe91da8d06bc779c12ec475a87a3e38dae848d63d11cd8b43",
       "generatedHash": "bb844eab781291bfe91da8d06bc779c12ec475a87a3e38dae848d63d11cd8b43",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/checkbox.css",
+      "component": "checkbox",
       "sourceHash": "191729350a60f4d45bb7343fa47e1e0c91c9490f8a2ba54448d13efc7cb9df10",
-      "generatedHash": "191729350a60f4d45bb7343fa47e1e0c91c9490f8a2ba54448d13efc7cb9df10",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "153ee6bd31ba18bcf0d3bfba69b8a2593ce6b3247ffe07385493d924cd079e6e",
+      "aliases": 37,
+      "scoped": true
     },
     {
       "path": "components/chip.css",
+      "component": "chip",
       "sourceHash": "429bec683f22bdfbe5ccef8a7ab86094763f5a4cdcb40e9dbe7e37dd94d338a0",
       "generatedHash": "429bec683f22bdfbe5ccef8a7ab86094763f5a4cdcb40e9dbe7e37dd94d338a0",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/close-button.css",
+      "component": "close-button",
       "sourceHash": "a952b10c487df92ff7382cc6b1a213dcf8f926d667731e52ce663d6dd1c800d5",
-      "generatedHash": "271ef30e328d3571076aded5783631931350abd2e8edc6827ad8a71b794b029b",
+      "generatedHash": "bfb614705ba1229ffe4830e2d5ad8f236c72cc2b2e2b2f0723e5f8ddfc8f678b",
       "aliases": 2,
       "scoped": true
     },
     {
       "path": "components/color-area.css",
+      "component": "color-area",
       "sourceHash": "daf1815761217e1d577d4e5b91bcd769830594ac972f9c2f1582cfea888f5d3b",
-      "generatedHash": "daf1815761217e1d577d4e5b91bcd769830594ac972f9c2f1582cfea888f5d3b",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "49cc672c1c5432d454e8f3cd0f2a8057592543a0f491c2398080a4e5f203c32b",
+      "aliases": 3,
+      "scoped": true
     },
     {
       "path": "components/color-field.css",
+      "component": "color-field",
       "sourceHash": "431d4faeda513b88b8b40fe4ce8e443e78eb6adfcc97e341f34a1bdf3d6c76d5",
-      "generatedHash": "431d4faeda513b88b8b40fe4ce8e443e78eb6adfcc97e341f34a1bdf3d6c76d5",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "be42671f810a54ba7075076ee1616ec2a1a5f1f3fafcbb78a4dfdde1a21b3042",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/color-input-group.css",
+      "component": "color-input-group",
       "sourceHash": "e51212ae28da5c98a5f00d079e4b5f9e0e81f77c0d45732168a46ce833494485",
-      "generatedHash": "e51212ae28da5c98a5f00d079e4b5f9e0e81f77c0d45732168a46ce833494485",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "4b0ab818a66fb34ef5f081faa0ea85f1fcd1114c0c4270ac79f81665e6bce9fe",
+      "aliases": 3,
+      "scoped": true
     },
     {
       "path": "components/color-picker.css",
+      "component": "color-picker",
       "sourceHash": "f6b0c89084e0d9396de05e17de1d7667050c8e8974d293488456d860b4d744a9",
-      "generatedHash": "f6b0c89084e0d9396de05e17de1d7667050c8e8974d293488456d860b4d744a9",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "409291d5692c090285f0d21376121424a90b77cf4924eb7c3092cbe3a152426b",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/color-slider.css",
+      "component": "color-slider",
       "sourceHash": "291242e50948120673a3520e3094365a2634f9194c735bef8a26a4fb99d4853c",
-      "generatedHash": "291242e50948120673a3520e3094365a2634f9194c735bef8a26a4fb99d4853c",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "d552fda98052ab5f4417547439069bbec83a5c52981eb59f9791520825e92a96",
+      "aliases": 3,
+      "scoped": true
     },
     {
       "path": "components/color-swatch-picker.css",
+      "component": "color-swatch-picker",
       "sourceHash": "2279c0779206ec7027d370f2a31f154f8e41330bbc71a6a697fa7c0cc0eeeee1",
-      "generatedHash": "2279c0779206ec7027d370f2a31f154f8e41330bbc71a6a697fa7c0cc0eeeee1",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "a035bc3acf4988923fc5b8171f2a49bc7eb2d80e5e06165ed3be8707a5e4da0b",
+      "aliases": 15,
+      "scoped": true
     },
     {
       "path": "components/color-swatch.css",
+      "component": "color-swatch",
       "sourceHash": "2c17a3c3b12cfeea6a4e6e3b5379fc1d3fd603a4730c27f205e7a6c1abb6c356",
       "generatedHash": "2c17a3c3b12cfeea6a4e6e3b5379fc1d3fd603a4730c27f205e7a6c1abb6c356",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/combo-box.css",
+      "component": "combo-box",
       "sourceHash": "56fda7db4e3e9f0edd32dd63bfdd2af163314de552ce7d71b0d895a2e5146c1e",
-      "generatedHash": "56fda7db4e3e9f0edd32dd63bfdd2af163314de552ce7d71b0d895a2e5146c1e",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "6bf1d59813481fe44ae6869ef66cd4fb1e9e1c3417cee30e8d0f96a2cbdca2fe",
+      "aliases": 5,
+      "scoped": true
     },
     {
       "path": "components/date-field.css",
+      "component": "date-field",
       "sourceHash": "45eda1cfcb4c3679bf35397ca56de664ddc55b7c066a7baf01694fcb6d68d6da",
-      "generatedHash": "45eda1cfcb4c3679bf35397ca56de664ddc55b7c066a7baf01694fcb6d68d6da",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "8aa9e72673e1ec14887bdb6aceea1feb86256ed271e1d799f66016c94ca3b2b1",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/date-input-group.css",
+      "component": "date-input-group",
       "sourceHash": "f0262aaf56f518435a22a6b70593df7573a18134756ada645c79fa6d2a4d50a8",
-      "generatedHash": "f0262aaf56f518435a22a6b70593df7573a18134756ada645c79fa6d2a4d50a8",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "2692db33a053cea73848b01367147e74896e29ad5ea1b335d5d854e1836dfb46",
+      "aliases": 5,
+      "scoped": true
     },
     {
       "path": "components/date-picker.css",
+      "component": "date-picker",
       "sourceHash": "8e33c7268fd85f38a2735dd6da18f430c2edc4dfab1c483e9bd7844bf0deb47b",
-      "generatedHash": "8e33c7268fd85f38a2735dd6da18f430c2edc4dfab1c483e9bd7844bf0deb47b",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "7d565caf6673ffec3ff21dbd42a91c0f673030cd7c6884700c2cbcad9b01e289",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/date-range-picker.css",
+      "component": "date-range-picker",
       "sourceHash": "f4f715bb04d5d34c81053b6f0d2589771c7fd1718cde62e0ce4cef0c10a13652",
-      "generatedHash": "f4f715bb04d5d34c81053b6f0d2589771c7fd1718cde62e0ce4cef0c10a13652",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "fa59c5358782490413bb375f4d7d8aa156de277c138910e585965ea8e85c15dc",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/description.css",
+      "component": "description",
       "sourceHash": "f03ed445ce95829cba3a3d4e4ef744cb19a6cf78c629ed1f65c66b02540a4d0f",
       "generatedHash": "f03ed445ce95829cba3a3d4e4ef744cb19a6cf78c629ed1f65c66b02540a4d0f",
       "aliases": 0,
@@ -216,48 +1485,55 @@
     },
     {
       "path": "components/disclosure-group.css",
+      "component": "disclosure-group",
       "sourceHash": "367cb84b3174df2c4399b5d79dc2e0a76bdaf0b82da1f32046674a6eff2d73a0",
       "generatedHash": "367cb84b3174df2c4399b5d79dc2e0a76bdaf0b82da1f32046674a6eff2d73a0",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/disclosure.css",
+      "component": "disclosure",
       "sourceHash": "3f908f0a78b9c890c7ef0b374bd617f2d9edbf6359a598cb7ea49db4dba894fe",
-      "generatedHash": "3f908f0a78b9c890c7ef0b374bd617f2d9edbf6359a598cb7ea49db4dba894fe",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "0ce899c453f56d492e7ba53b673012065702a19165304e99579dfc748f3f80f6",
+      "aliases": 2,
+      "scoped": true
     },
     {
       "path": "components/drawer.css",
+      "component": "drawer",
       "sourceHash": "d7d86012314ca9352bfdf01374dcb24e71bf09bf71b4f3fd671f0528e9e49f54",
-      "generatedHash": "d7d86012314ca9352bfdf01374dcb24e71bf09bf71b4f3fd671f0528e9e49f54",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "4f8c60da665622eb876bf0eb6e19237a4f985328f4adf0c4629020146450db55",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/dropdown.css",
+      "component": "dropdown",
       "sourceHash": "4ebb8c7979f39effbb887fcb45876633be19d487eb221f696a6a4bf3e449c7c7",
-      "generatedHash": "4ebb8c7979f39effbb887fcb45876633be19d487eb221f696a6a4bf3e449c7c7",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "f587713d8cd697fc21b833d0382ddd625839665bf4592c7d3e6f959836964b02",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/empty-state.css",
+      "component": "empty-state",
       "sourceHash": "80681c020d781a8be4a6885ed7428af117fd62ced5598159cffa472c22cdfa1b",
       "generatedHash": "80681c020d781a8be4a6885ed7428af117fd62ced5598159cffa472c22cdfa1b",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/error-message.css",
+      "component": "error-message",
       "sourceHash": "1c9b5a88fc384afd6e7046683ae4cbc45b4bf4ff61f8a2abaf6b604bd4e2d12c",
       "generatedHash": "1c9b5a88fc384afd6e7046683ae4cbc45b4bf4ff61f8a2abaf6b604bd4e2d12c",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/field-error.css",
+      "component": "field-error",
       "sourceHash": "812f9fbf0633549e33e1b01d433a63070ddcb859278d79510e57502385257033",
       "generatedHash": "812f9fbf0633549e33e1b01d433a63070ddcb859278d79510e57502385257033",
       "aliases": 0,
@@ -265,20 +1541,23 @@
     },
     {
       "path": "components/fieldset.css",
+      "component": "fieldset",
       "sourceHash": "683070d84e6040402ddde139684e327ebea269b34e70057cab70439be9b718a0",
       "generatedHash": "683070d84e6040402ddde139684e327ebea269b34e70057cab70439be9b718a0",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/header.css",
+      "component": "header",
       "sourceHash": "c2cf260c11907bc2d3dfacd7ada1d3e7aa32bbd5545e94e28578c44cdc49eb25",
       "generatedHash": "c2cf260c11907bc2d3dfacd7ada1d3e7aa32bbd5545e94e28578c44cdc49eb25",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/index.css",
+      "component": "index",
       "sourceHash": "b64cd17f1ace0fe0d67cfec329e2ad2f8b37e369c05f76d82542872d9a319058",
       "generatedHash": "b64cd17f1ace0fe0d67cfec329e2ad2f8b37e369c05f76d82542872d9a319058",
       "aliases": 0,
@@ -286,34 +1565,39 @@
     },
     {
       "path": "components/input-group.css",
+      "component": "input-group",
       "sourceHash": "68ec372790fc2efb6c0497f1940358ddb278cee3c43ba96baf9371da036108e1",
-      "generatedHash": "68ec372790fc2efb6c0497f1940358ddb278cee3c43ba96baf9371da036108e1",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "b368744ce3a307be94b469ed0e18687cb7f336244abcd854fda598c94ff60369",
+      "aliases": 3,
+      "scoped": true
     },
     {
       "path": "components/input-otp.css",
+      "component": "input-otp",
       "sourceHash": "e5c7a65702df87a8c22df96126e7de13dfaf439c4eba7221c0f9b5e2c688c69f",
-      "generatedHash": "e5c7a65702df87a8c22df96126e7de13dfaf439c4eba7221c0f9b5e2c688c69f",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "95f5f4fad519e184e84be72d585fe59acfbe16c0c2e737ef472941943142ad65",
+      "aliases": 3,
+      "scoped": true
     },
     {
       "path": "components/input.css",
+      "component": "input",
       "sourceHash": "5c024c344ebdda09b8576d7413cadf8054d3a43d94af0c349070c903050114db",
-      "generatedHash": "cae611cb1cf1f781a96da44c53da83fdf51fe05e5525d32c82d81263782d4304",
-      "aliases": 5,
+      "generatedHash": "94b4b79b1def0398e522655fd6a50250e4ee0fd8f52687e45fa1259c39f1e43c",
+      "aliases": 3,
       "scoped": true
     },
     {
       "path": "components/kbd.css",
+      "component": "kbd",
       "sourceHash": "ce385e1fd3e96e4c40e206d068d61a3da3f68033d922534240c8e35e1b42565d",
       "generatedHash": "ce385e1fd3e96e4c40e206d068d61a3da3f68033d922534240c8e35e1b42565d",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/label.css",
+      "component": "label",
       "sourceHash": "95438264ef4f70225623c999afde8734da818372184d7d894dd6630790ff792c",
       "generatedHash": "417d2a58f6a1452e9d26c2d07f7fe3492787ef553beb9f42e9e9f2aba0f3cc6d",
       "aliases": 2,
@@ -321,27 +1605,31 @@
     },
     {
       "path": "components/link.css",
+      "component": "link",
       "sourceHash": "8ac80a3d8ac213bf1de0f4f385185879e48cb34991901ee5813f3ae3c4fdbab3",
-      "generatedHash": "8ac80a3d8ac213bf1de0f4f385185879e48cb34991901ee5813f3ae3c4fdbab3",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "12e1169294a4a4da4d97318928157e52b2192a7a0f6c820c73f6b79c387c30fe",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/list-box-item.css",
+      "component": "list-box-item",
       "sourceHash": "8ed6549d4cb771521eaaefcadb67eaf627779600878c01bd7efaee97045cf8ce",
-      "generatedHash": "b5eab9a4dc0990a3222e9ac1c20ff204db970f98a69d79864e2e992b6c686f3f",
+      "generatedHash": "ba06c5f27f305f5d8e2456f4a727da252cf47be67b3f8351bc0c0c09408ace01",
       "aliases": 7,
       "scoped": true
     },
     {
       "path": "components/list-box-section.css",
+      "component": "list-box-section",
       "sourceHash": "a315de2fe85e4a666a12ea6fca5ad98bc3074635fdff7c447a754b90c485495a",
       "generatedHash": "a315de2fe85e4a666a12ea6fca5ad98bc3074635fdff7c447a754b90c485495a",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/list-box.css",
+      "component": "list-box",
       "sourceHash": "eaa0f356c30a4c2d73c799fa3ca963895c030993e101881ca675cfb4d5003086",
       "generatedHash": "eaa0f356c30a4c2d73c799fa3ca963895c030993e101881ca675cfb4d5003086",
       "aliases": 0,
@@ -349,55 +1637,63 @@
     },
     {
       "path": "components/menu-item.css",
+      "component": "menu-item",
       "sourceHash": "00592344262ad2df30f13ae60903f1c78d1c18d6c1b2f5782fa4f8650812564a",
-      "generatedHash": "00592344262ad2df30f13ae60903f1c78d1c18d6c1b2f5782fa4f8650812564a",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "8019a4e1f21b28fe03cf49dd5f1a9296c850f99f82793e83654a825a45d3e2c8",
+      "aliases": 5,
+      "scoped": true
     },
     {
       "path": "components/menu-section.css",
+      "component": "menu-section",
       "sourceHash": "9fe9002565db64ea574a6b18b23cc6e97079e2b5ec2daf7e646f93b16646a1e3",
       "generatedHash": "9fe9002565db64ea574a6b18b23cc6e97079e2b5ec2daf7e646f93b16646a1e3",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/menu.css",
+      "component": "menu",
       "sourceHash": "2b72ed91703d531557e2321ccbff142970dcd71e5282f3e15733849b9b7cf6a5",
       "generatedHash": "2b72ed91703d531557e2321ccbff142970dcd71e5282f3e15733849b9b7cf6a5",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/meter.css",
+      "component": "meter",
       "sourceHash": "19215648e58e53ece1a281a7a17be62503fb9417fe9f504e7cabfcc40f24b39c",
-      "generatedHash": "19215648e58e53ece1a281a7a17be62503fb9417fe9f504e7cabfcc40f24b39c",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "25025de9d90e87540a0aabd83f593c61f072d582dee48760011eb856cadfa956",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/modal.css",
+      "component": "modal",
       "sourceHash": "3429295c0003cd7c418ce98b0e9c9fdd9475538759f1a8ef9efa719f164c76b4",
-      "generatedHash": "02082b4498b85ed98a1f7213cc61214c76f81fee3c2574970bbd5f8a723f7ce2",
+      "generatedHash": "832f34538421a951851017e0681a2b310215e73c298e16933c7aa64bd5e9b0eb",
       "aliases": 1,
       "scoped": true
     },
     {
       "path": "components/number-field.css",
+      "component": "number-field",
       "sourceHash": "5062cebddb44f1738bcaf4a9f73bacb824ce0f6b6e4830c47abd242d845982a2",
-      "generatedHash": "5062cebddb44f1738bcaf4a9f73bacb824ce0f6b6e4830c47abd242d845982a2",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "bf462261fd292ff609d434f2a1e644baec0b18acef47e2170074f71e2f4aeee2",
+      "aliases": 6,
+      "scoped": true
     },
     {
       "path": "components/pagination.css",
+      "component": "pagination",
       "sourceHash": "4700708eff4915f845d723d883cfc39750c0f0a65ac3c4635a4829aa058a1d61",
-      "generatedHash": "4700708eff4915f845d723d883cfc39750c0f0a65ac3c4635a4829aa058a1d61",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "33166bf7b88c97c78de27bf611a8b753b3943c0d2ec064af1f911c13839caa25",
+      "aliases": 3,
+      "scoped": true
     },
     {
       "path": "components/popover.css",
+      "component": "popover",
       "sourceHash": "81adef764cdef6e506a64cc45a009994d5c401845b5939f2c81817c9b42c0c53",
       "generatedHash": "81adef764cdef6e506a64cc45a009994d5c401845b5939f2c81817c9b42c0c53",
       "aliases": 0,
@@ -405,62 +1701,71 @@
     },
     {
       "path": "components/progress-bar.css",
+      "component": "progress-bar",
       "sourceHash": "f4620f112af2851871b18a0eaed5a2d0a9558826abec08dfcb68ee4d6d686339",
-      "generatedHash": "f4620f112af2851871b18a0eaed5a2d0a9558826abec08dfcb68ee4d6d686339",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "d2c0e42c93177572c2a4443dfb2fa9bc48b55eebad6565931bdddf0039463da4",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/progress-circle.css",
+      "component": "progress-circle",
       "sourceHash": "ae1e38b4213b340c0336ed341fd94a30a749f0c2f244cf940431ee4f69e9554f",
-      "generatedHash": "ae1e38b4213b340c0336ed341fd94a30a749f0c2f244cf940431ee4f69e9554f",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "12de9aa3a4c29fa32748a6754c77b27918f4fbf9bb590028660a0fac17c1d53b",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/radio-group.css",
+      "component": "radio-group",
       "sourceHash": "9f4e87a48d7fb88b9168c680b9ea9186cb8223ec5cb0fb3cbf9f89efedcc5aaa",
-      "generatedHash": "9f4e87a48d7fb88b9168c680b9ea9186cb8223ec5cb0fb3cbf9f89efedcc5aaa",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "1e222fbb2050e57235d7a773503033793fe12304ef2a44c281d854cfd027171e",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/radio.css",
+      "component": "radio",
       "sourceHash": "b9a2aa0c421d4f325bc4801dcae1150380e0a8a7c4439c990b8eaed80f858db0",
-      "generatedHash": "b9a2aa0c421d4f325bc4801dcae1150380e0a8a7c4439c990b8eaed80f858db0",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "5ecc6314b0a1904e69a4708470fb75a9dca99e67cdafff0ebccfb5326ddd3aff",
+      "aliases": 21,
+      "scoped": true
     },
     {
       "path": "components/range-calendar.css",
+      "component": "range-calendar",
       "sourceHash": "a484984edde39cc1366d7f4b079331b64038bb389534285dcc8325380fc8cf4a",
-      "generatedHash": "a484984edde39cc1366d7f4b079331b64038bb389534285dcc8325380fc8cf4a",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "84cc781e48380bd370eae0875cb2f841fa4234ea64e6257653f13caf9f787e70",
+      "aliases": 22,
+      "scoped": true
     },
     {
       "path": "components/scroll-shadow.css",
+      "component": "scroll-shadow",
       "sourceHash": "15d118ec403bca4095577608b9842adb5d9708e3cb0e932b297933be3ca05683",
       "generatedHash": "15d118ec403bca4095577608b9842adb5d9708e3cb0e932b297933be3ca05683",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/search-field.css",
+      "component": "search-field",
       "sourceHash": "4e348e8572d0678067639a36a29ffe8e5a41d45d10cadccf9da3552fe3c8bae2",
-      "generatedHash": "4e348e8572d0678067639a36a29ffe8e5a41d45d10cadccf9da3552fe3c8bae2",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "8f05bf5e3401a743917e5312e253864f48fe9067a0fcb9718f933a14130872c1",
+      "aliases": 4,
+      "scoped": true
     },
     {
       "path": "components/select.css",
+      "component": "select",
       "sourceHash": "d8a14058688ebdac41b332fbcbd367e9411e22c1adba51ccc83b84816847f6ed",
-      "generatedHash": "cc1f73af05b590aa3581c8e8e407b258f73598cdcd2fe4bb19257e8bd4a48ef1",
+      "generatedHash": "625632ba0cbdf65dcba4e9330b2020ccf24997fab53c8cae0743ac841b1331a6",
       "aliases": 8,
       "scoped": true
     },
     {
       "path": "components/separator.css",
+      "component": "separator",
       "sourceHash": "f52a6e2795171d767f34f936b0cf4adb7833b300e6bf0ee26ea2dded69fe8bfc",
       "generatedHash": "f52a6e2795171d767f34f936b0cf4adb7833b300e6bf0ee26ea2dded69fe8bfc",
       "aliases": 0,
@@ -468,27 +1773,31 @@
     },
     {
       "path": "components/sheet.css",
+      "component": "sheet",
       "sourceHash": "6d7525600065ab5386c5270dd4aba860af7692764f6001427a70cb3ad3dc6819",
       "generatedHash": "6d7525600065ab5386c5270dd4aba860af7692764f6001427a70cb3ad3dc6819",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/skeleton.css",
+      "component": "skeleton",
       "sourceHash": "2f6fd03ef850c32d625c1b66d82470d5c42f5e76591822e21758325fc1b47daa",
       "generatedHash": "2f6fd03ef850c32d625c1b66d82470d5c42f5e76591822e21758325fc1b47daa",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/slider.css",
+      "component": "slider",
       "sourceHash": "87cfe0be65a18c8b9680c8b44ce9a20918a4c47be4732128a43a32cef18c5c2b",
-      "generatedHash": "87cfe0be65a18c8b9680c8b44ce9a20918a4c47be4732128a43a32cef18c5c2b",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "dec586897749879d878ac2a34deceab41089339b54686296d31de7c25e45110f",
+      "aliases": 3,
+      "scoped": true
     },
     {
       "path": "components/spinner.css",
+      "component": "spinner",
       "sourceHash": "f40fbca30e66b8e1b1692e58154d5eda03b27acd538c0ad4573ece9ba60d2915",
       "generatedHash": "f40fbca30e66b8e1b1692e58154d5eda03b27acd538c0ad4573ece9ba60d2915",
       "aliases": 0,
@@ -496,6 +1805,7 @@
     },
     {
       "path": "components/surface.css",
+      "component": "surface",
       "sourceHash": "5b80ddbfd97a86f5dcc6b5f98244d8d36866c2d1689c6f8da7cc8eefff3a8699",
       "generatedHash": "5b80ddbfd97a86f5dcc6b5f98244d8d36866c2d1689c6f8da7cc8eefff3a8699",
       "aliases": 0,
@@ -503,55 +1813,63 @@
     },
     {
       "path": "components/switch-group.css",
+      "component": "switch-group",
       "sourceHash": "7eaa5ac0feccdafe6b5d047bc4e23680f85d90ed28244a1c50fa741880ee454d",
       "generatedHash": "7eaa5ac0feccdafe6b5d047bc4e23680f85d90ed28244a1c50fa741880ee454d",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/switch.css",
+      "component": "switch",
       "sourceHash": "170392351005fbde14e5132e5809ca2728b4dbbea19ce94dd606f89967aea91e",
-      "generatedHash": "170392351005fbde14e5132e5809ca2728b4dbbea19ce94dd606f89967aea91e",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "874f4904af89dff2a19cc5101f63cbfdf2e8ba5f5f2a012f6f96fcc577c6338c",
+      "aliases": 29,
+      "scoped": true
     },
     {
       "path": "components/table.css",
+      "component": "table",
       "sourceHash": "61f1871a42b75b6eb6b6d4a379086cd7b95db305522b4d037d569ac39a54d307",
-      "generatedHash": "61f1871a42b75b6eb6b6d4a379086cd7b95db305522b4d037d569ac39a54d307",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "8dd6d2ed8b0984ca5df23021841d28f883f428b595ad3cea79bde527547fa7f0",
+      "aliases": 3,
+      "scoped": true
     },
     {
       "path": "components/tabs.css",
+      "component": "tabs",
       "sourceHash": "64119232ef879ea894802845ac144cc90c68c0bc139037e960f7dcc645452c78",
-      "generatedHash": "64119232ef879ea894802845ac144cc90c68c0bc139037e960f7dcc645452c78",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "290c612897f8592a7419ca131bd885310003ebfb5a1ccd387ae58a31e249deaf",
+      "aliases": 5,
+      "scoped": true
     },
     {
       "path": "components/tag-group.css",
+      "component": "tag-group",
       "sourceHash": "4b307899fa03252a0ff6b90901e7e88f873df2de3fe773a712fa575f9d25369f",
       "generatedHash": "4b307899fa03252a0ff6b90901e7e88f873df2de3fe773a712fa575f9d25369f",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/tag.css",
+      "component": "tag",
       "sourceHash": "5350fb395201a92688b8694ed52acf3136ff8b83f8c8c2905656b46fe701cb5a",
       "generatedHash": "5350fb395201a92688b8694ed52acf3136ff8b83f8c8c2905656b46fe701cb5a",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/textarea.css",
+      "component": "textarea",
       "sourceHash": "f3180734012d3703a0c2a651bf2c3e83cd89816814b150c591e11abda65c57a8",
-      "generatedHash": "f3180734012d3703a0c2a651bf2c3e83cd89816814b150c591e11abda65c57a8",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "abcd39a518abac30e705c5471dc5d711fb87efb129906b6a14c3a33065edfd15",
+      "aliases": 3,
+      "scoped": true
     },
     {
       "path": "components/textfield.css",
+      "component": "textfield",
       "sourceHash": "9d07a16efe38bb8b2cfd43e32340b9a8bd57e908f3b7c1e8abf6a56374aa3f24",
       "generatedHash": "32243bc179780b6e47b97f7d45de63e3e1de73ad83540eff3cda202de34e2a34",
       "aliases": 1,
@@ -559,238 +1877,445 @@
     },
     {
       "path": "components/time-field.css",
+      "component": "time-field",
       "sourceHash": "eb4e9511ebbc50f6aabe60fcd32704aaf48cfaa3424b885dc9a7a680544c37b5",
-      "generatedHash": "eb4e9511ebbc50f6aabe60fcd32704aaf48cfaa3424b885dc9a7a680544c37b5",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "7d679d341fbcfc8afae8992766d6ad38e9b32bb7bd7df8a8bc636f2ce8ba56f8",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/toast.css",
+      "component": "toast",
       "sourceHash": "65e88d8f12bd63de63bb618ca28b2227f050a9910c7af0df0fc251cef4fdc3b6",
       "generatedHash": "65e88d8f12bd63de63bb618ca28b2227f050a9910c7af0df0fc251cef4fdc3b6",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/toggle-button-group.css",
+      "component": "toggle-button-group",
       "sourceHash": "f5f3f895e2d0d8099b6a2b5d4321bc9e635dbc205c48ad30fea0b2c7278d080a",
-      "generatedHash": "f5f3f895e2d0d8099b6a2b5d4321bc9e635dbc205c48ad30fea0b2c7278d080a",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "42bb622eeef26320f649eb160e183d9db81735ec98f25ffc55b5ee306cdd3a71",
+      "aliases": 1,
+      "scoped": true
     },
     {
       "path": "components/toggle-button.css",
+      "component": "toggle-button",
       "sourceHash": "6bc6f319bd79677ac081278179c1861552bb7b23464475ed210489d2de692e53",
-      "generatedHash": "6bc6f319bd79677ac081278179c1861552bb7b23464475ed210489d2de692e53",
-      "aliases": 0,
-      "scoped": false
+      "generatedHash": "4fb6885a053264a0ecbe1185af8e5038eb4fe866a37634fbd5fbff829e9dc057",
+      "aliases": 6,
+      "scoped": true
     },
     {
       "path": "components/toolbar.css",
+      "component": "toolbar",
       "sourceHash": "864924ffc2e37680379603bb8c62d4f9faf253c919bfd6c079aa4b082847b2ff",
       "generatedHash": "864924ffc2e37680379603bb8c62d4f9faf253c919bfd6c079aa4b082847b2ff",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/tooltip.css",
+      "component": "tooltip",
       "sourceHash": "3ceacc5e7d83442f14193545889001d9d518702147a8c72a3bdfcee52b245e1d",
       "generatedHash": "3ceacc5e7d83442f14193545889001d9d518702147a8c72a3bdfcee52b245e1d",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     },
     {
       "path": "components/typography.css",
+      "component": "typography",
       "sourceHash": "3c7fbc3cf9e9c2a43d58142d15ea68f57c5d2728d6ef40e84d8bb0bc2fcc5dd6",
       "generatedHash": "3c7fbc3cf9e9c2a43d58142d15ea68f57c5d2728d6ef40e84d8bb0bc2fcc5dd6",
       "aliases": 0,
-      "scoped": false
+      "scoped": true
     }
   ],
-  "aliases": 29,
-  "scope": [
-    "button",
-    "close-button",
-    "description",
-    "field-error",
-    "input",
-    "label",
-    "list-box",
-    "list-box-item",
-    "modal",
-    "popover",
-    "select",
-    "separator",
-    "spinner",
-    "surface",
-    "textfield"
-  ],
-  "pendingAttributes": {
-    "data-active": [
-      "components/input-otp.css",
-      "components/pagination.css"
-    ],
-    "data-allows-sorting": [
-      "components/table.css"
-    ],
-    "data-animation-ready": [
-      "components/tabs.css"
-    ],
-    "data-bottom-scroll": [
-      "components/scroll-shadow.css",
-      "components/tabs.css"
-    ],
-    "data-closed": [
-      "components/sheet.css"
-    ],
-    "data-current": [
-      "components/breadcrumbs.css"
-    ],
-    "data-default-icon": [
-      "components/link.css"
-    ],
-    "data-detached": [
-      "components/sheet.css"
-    ],
-    "data-direction": [
-      "components/slider.css",
-      "components/table.css"
-    ],
-    "data-dragging": [
-      "components/color-area.css",
-      "components/color-slider.css",
-      "components/sheet.css",
-      "components/slider.css",
-      "components/table.css"
-    ],
-    "data-drop-target": [
-      "components/table.css"
-    ],
-    "data-expanded": [
-      "components/accordion.css",
-      "components/disclosure.css",
-      "components/sheet.css",
-      "components/toast.css"
-    ],
-    "data-fill-end": [
-      "components/slider.css"
-    ],
-    "data-fill-start": [
-      "components/slider.css"
-    ],
-    "data-filled": [
-      "components/input-otp.css",
-      "components/slider.css"
-    ],
-    "data-focus-within": [
-      "components/color-input-group.css",
-      "components/date-input-group.css",
-      "components/input-group.css",
-      "components/number-field.css",
-      "components/search-field.css",
-      "utilities/index.css"
-    ],
-    "data-frontmost": [
-      "components/toast.css"
-    ],
-    "data-handle-dragging": [
-      "components/sheet.css"
-    ],
-    "data-has-descendants": [
-      "components/sheet.css"
-    ],
-    "data-has-submenu": [
-      "components/menu-item.css"
-    ],
-    "data-hidden": [
-      "components/toast.css"
-    ],
-    "data-hide-separator": [
-      "components/accordion.css"
-    ],
-    "data-indeterminate": [
-      "components/checkbox.css"
-    ],
-    "data-left-right-scroll": [
-      "components/scroll-shadow.css",
-      "components/tabs.css"
-    ],
-    "data-left-scroll": [
-      "components/scroll-shadow.css",
-      "components/tabs.css"
-    ],
-    "data-light-color": [
-      "components/color-swatch-picker.css"
-    ],
-    "data-outside-month": [
-      "components/calendar.css",
-      "components/range-calendar.css"
-    ],
-    "data-reduce-motion": [
-      "variants/index.css"
-    ],
-    "data-resizing": [
-      "components/table.css"
-    ],
-    "data-right-scroll": [
-      "components/scroll-shadow.css",
-      "components/tabs.css"
-    ],
-    "data-scroll-shadow-mode": [
-      "components/scroll-shadow.css"
-    ],
-    "data-scrollbar": [
-      "base/scrollbar.css"
-    ],
-    "data-selection-end": [
-      "components/range-calendar.css"
-    ],
-    "data-selection-mode": [
-      "components/menu-item.css"
-    ],
-    "data-selection-start": [
-      "components/range-calendar.css"
-    ],
-    "data-sheet-scroll": [
-      "components/sheet.css"
-    ],
-    "data-snap-points": [
-      "components/sheet.css"
-    ],
-    "data-stack-index": [
-      "components/sheet.css"
-    ],
-    "data-swapped": [
-      "components/toast.css"
-    ],
-    "data-theme": [
-      "themes/default/variables.css",
-      "variants/index.css"
-    ],
-    "data-today": [
-      "components/calendar.css",
-      "components/range-calendar.css"
-    ],
-    "data-top-bottom-scroll": [
-      "components/scroll-shadow.css",
-      "components/tabs.css"
-    ],
-    "data-top-scroll": [
-      "components/scroll-shadow.css",
-      "components/tabs.css"
-    ],
-    "data-tree-column": [
-      "components/table.css"
-    ],
-    "data-type": [
-      "components/date-input-group.css"
-    ],
-    "data-unavailable": [
-      "components/calendar.css",
-      "components/range-calendar.css"
-    ],
-    "data-vibrant-palette": [
-      "themes/default/variables.css"
-    ]
-  }
+  "upstreamFiles": [
+    {
+      "path": "base/base.css",
+      "hash": "12b2e9502e6ab27e9ca8760240d6ef6cb16f440e3608682ab33da4f81e7a117d"
+    },
+    {
+      "path": "base/overlay-motion.css",
+      "hash": "bed4cbcd8c3835ac2ddd952a808ac3c47740344d422f506224a5bd33491b9966"
+    },
+    {
+      "path": "base/scrollbar.css",
+      "hash": "6be01a9e395907356a3741847852bcf98b46f0c83c2aaac125e9328bbf6c6960"
+    },
+    {
+      "path": "components/accordion.css",
+      "hash": "5cf2ad61c10e4c2f4581041798cb8b3199716e2fc680cb18c7f7ed2977ee2905"
+    },
+    {
+      "path": "components/alert-dialog.css",
+      "hash": "2f8ab6dd2768308cf782b1640da1551ed084099c33f0b420fccccd491ff3e736"
+    },
+    {
+      "path": "components/alert.css",
+      "hash": "450a56f7ce9b8531869f7ad41905cb569d44f8286095850bcdbcb2c9466b002e"
+    },
+    {
+      "path": "components/autocomplete.css",
+      "hash": "732ce624988da8f412d240697c4b6bc96adde5349bb3f50572f76bb65986ef10"
+    },
+    {
+      "path": "components/avatar-group.css",
+      "hash": "5dae265f8bf08fc517f1f5de4a9ebc95051d2ab5dcab62e5b3fa60d2ed301dd9"
+    },
+    {
+      "path": "components/avatar.css",
+      "hash": "7e08fb24ad1e0b375a7390ba1930afd8d2fa8abddb2304d6bfa11301f206f4b3"
+    },
+    {
+      "path": "components/badge.css",
+      "hash": "58763cc085925622a647d0ff9986d52f864c6af2a5fde93a2b339b3ea4fa59a9"
+    },
+    {
+      "path": "components/breadcrumbs.css",
+      "hash": "434556642dee0435c583865889c8703544ee71ae9f5ca3799cfb8457ea6b49e6"
+    },
+    {
+      "path": "components/button-group.css",
+      "hash": "9125d881e9bae500533bed1cc8931a7df0daf01e26ae3ec162c8bf0f68ce8cdc"
+    },
+    {
+      "path": "components/button.css",
+      "hash": "f74f4c07e09c2630426475f2247fab566d4289c6d5d9e1b7c097a873eed164ed"
+    },
+    {
+      "path": "components/calendar-year-picker.css",
+      "hash": "de842826c072920c4d4a3b0dc2ae9b9b35617515817fd4df487af71184777bce"
+    },
+    {
+      "path": "components/calendar.css",
+      "hash": "188cf222c514ce790eadaa73322516b6f200f31d2e9688f2eca4287f32ea1ee6"
+    },
+    {
+      "path": "components/card.css",
+      "hash": "6173745c8b79a63702453da07789d4452a21f853deeaaa1924553713d4d43f5f"
+    },
+    {
+      "path": "components/checkbox-group.css",
+      "hash": "bb844eab781291bfe91da8d06bc779c12ec475a87a3e38dae848d63d11cd8b43"
+    },
+    {
+      "path": "components/checkbox.css",
+      "hash": "191729350a60f4d45bb7343fa47e1e0c91c9490f8a2ba54448d13efc7cb9df10"
+    },
+    {
+      "path": "components/chip.css",
+      "hash": "429bec683f22bdfbe5ccef8a7ab86094763f5a4cdcb40e9dbe7e37dd94d338a0"
+    },
+    {
+      "path": "components/close-button.css",
+      "hash": "a952b10c487df92ff7382cc6b1a213dcf8f926d667731e52ce663d6dd1c800d5"
+    },
+    {
+      "path": "components/color-area.css",
+      "hash": "daf1815761217e1d577d4e5b91bcd769830594ac972f9c2f1582cfea888f5d3b"
+    },
+    {
+      "path": "components/color-field.css",
+      "hash": "431d4faeda513b88b8b40fe4ce8e443e78eb6adfcc97e341f34a1bdf3d6c76d5"
+    },
+    {
+      "path": "components/color-input-group.css",
+      "hash": "e51212ae28da5c98a5f00d079e4b5f9e0e81f77c0d45732168a46ce833494485"
+    },
+    {
+      "path": "components/color-picker.css",
+      "hash": "f6b0c89084e0d9396de05e17de1d7667050c8e8974d293488456d860b4d744a9"
+    },
+    {
+      "path": "components/color-slider.css",
+      "hash": "291242e50948120673a3520e3094365a2634f9194c735bef8a26a4fb99d4853c"
+    },
+    {
+      "path": "components/color-swatch-picker.css",
+      "hash": "2279c0779206ec7027d370f2a31f154f8e41330bbc71a6a697fa7c0cc0eeeee1"
+    },
+    {
+      "path": "components/color-swatch.css",
+      "hash": "2c17a3c3b12cfeea6a4e6e3b5379fc1d3fd603a4730c27f205e7a6c1abb6c356"
+    },
+    {
+      "path": "components/combo-box.css",
+      "hash": "56fda7db4e3e9f0edd32dd63bfdd2af163314de552ce7d71b0d895a2e5146c1e"
+    },
+    {
+      "path": "components/date-field.css",
+      "hash": "45eda1cfcb4c3679bf35397ca56de664ddc55b7c066a7baf01694fcb6d68d6da"
+    },
+    {
+      "path": "components/date-input-group.css",
+      "hash": "f0262aaf56f518435a22a6b70593df7573a18134756ada645c79fa6d2a4d50a8"
+    },
+    {
+      "path": "components/date-picker.css",
+      "hash": "8e33c7268fd85f38a2735dd6da18f430c2edc4dfab1c483e9bd7844bf0deb47b"
+    },
+    {
+      "path": "components/date-range-picker.css",
+      "hash": "f4f715bb04d5d34c81053b6f0d2589771c7fd1718cde62e0ce4cef0c10a13652"
+    },
+    {
+      "path": "components/description.css",
+      "hash": "f03ed445ce95829cba3a3d4e4ef744cb19a6cf78c629ed1f65c66b02540a4d0f"
+    },
+    {
+      "path": "components/disclosure-group.css",
+      "hash": "367cb84b3174df2c4399b5d79dc2e0a76bdaf0b82da1f32046674a6eff2d73a0"
+    },
+    {
+      "path": "components/disclosure.css",
+      "hash": "3f908f0a78b9c890c7ef0b374bd617f2d9edbf6359a598cb7ea49db4dba894fe"
+    },
+    {
+      "path": "components/drawer.css",
+      "hash": "d7d86012314ca9352bfdf01374dcb24e71bf09bf71b4f3fd671f0528e9e49f54"
+    },
+    {
+      "path": "components/dropdown.css",
+      "hash": "4ebb8c7979f39effbb887fcb45876633be19d487eb221f696a6a4bf3e449c7c7"
+    },
+    {
+      "path": "components/empty-state.css",
+      "hash": "80681c020d781a8be4a6885ed7428af117fd62ced5598159cffa472c22cdfa1b"
+    },
+    {
+      "path": "components/error-message.css",
+      "hash": "1c9b5a88fc384afd6e7046683ae4cbc45b4bf4ff61f8a2abaf6b604bd4e2d12c"
+    },
+    {
+      "path": "components/field-error.css",
+      "hash": "812f9fbf0633549e33e1b01d433a63070ddcb859278d79510e57502385257033"
+    },
+    {
+      "path": "components/fieldset.css",
+      "hash": "683070d84e6040402ddde139684e327ebea269b34e70057cab70439be9b718a0"
+    },
+    {
+      "path": "components/header.css",
+      "hash": "c2cf260c11907bc2d3dfacd7ada1d3e7aa32bbd5545e94e28578c44cdc49eb25"
+    },
+    {
+      "path": "components/index.css",
+      "hash": "b64cd17f1ace0fe0d67cfec329e2ad2f8b37e369c05f76d82542872d9a319058"
+    },
+    {
+      "path": "components/input-group.css",
+      "hash": "68ec372790fc2efb6c0497f1940358ddb278cee3c43ba96baf9371da036108e1"
+    },
+    {
+      "path": "components/input-otp.css",
+      "hash": "e5c7a65702df87a8c22df96126e7de13dfaf439c4eba7221c0f9b5e2c688c69f"
+    },
+    {
+      "path": "components/input.css",
+      "hash": "5c024c344ebdda09b8576d7413cadf8054d3a43d94af0c349070c903050114db"
+    },
+    {
+      "path": "components/kbd.css",
+      "hash": "ce385e1fd3e96e4c40e206d068d61a3da3f68033d922534240c8e35e1b42565d"
+    },
+    {
+      "path": "components/label.css",
+      "hash": "95438264ef4f70225623c999afde8734da818372184d7d894dd6630790ff792c"
+    },
+    {
+      "path": "components/link.css",
+      "hash": "8ac80a3d8ac213bf1de0f4f385185879e48cb34991901ee5813f3ae3c4fdbab3"
+    },
+    {
+      "path": "components/list-box-item.css",
+      "hash": "8ed6549d4cb771521eaaefcadb67eaf627779600878c01bd7efaee97045cf8ce"
+    },
+    {
+      "path": "components/list-box-section.css",
+      "hash": "a315de2fe85e4a666a12ea6fca5ad98bc3074635fdff7c447a754b90c485495a"
+    },
+    {
+      "path": "components/list-box.css",
+      "hash": "eaa0f356c30a4c2d73c799fa3ca963895c030993e101881ca675cfb4d5003086"
+    },
+    {
+      "path": "components/menu-item.css",
+      "hash": "00592344262ad2df30f13ae60903f1c78d1c18d6c1b2f5782fa4f8650812564a"
+    },
+    {
+      "path": "components/menu-section.css",
+      "hash": "9fe9002565db64ea574a6b18b23cc6e97079e2b5ec2daf7e646f93b16646a1e3"
+    },
+    {
+      "path": "components/menu.css",
+      "hash": "2b72ed91703d531557e2321ccbff142970dcd71e5282f3e15733849b9b7cf6a5"
+    },
+    {
+      "path": "components/meter.css",
+      "hash": "19215648e58e53ece1a281a7a17be62503fb9417fe9f504e7cabfcc40f24b39c"
+    },
+    {
+      "path": "components/modal.css",
+      "hash": "3429295c0003cd7c418ce98b0e9c9fdd9475538759f1a8ef9efa719f164c76b4"
+    },
+    {
+      "path": "components/number-field.css",
+      "hash": "5062cebddb44f1738bcaf4a9f73bacb824ce0f6b6e4830c47abd242d845982a2"
+    },
+    {
+      "path": "components/pagination.css",
+      "hash": "4700708eff4915f845d723d883cfc39750c0f0a65ac3c4635a4829aa058a1d61"
+    },
+    {
+      "path": "components/popover.css",
+      "hash": "81adef764cdef6e506a64cc45a009994d5c401845b5939f2c81817c9b42c0c53"
+    },
+    {
+      "path": "components/progress-bar.css",
+      "hash": "f4620f112af2851871b18a0eaed5a2d0a9558826abec08dfcb68ee4d6d686339"
+    },
+    {
+      "path": "components/progress-circle.css",
+      "hash": "ae1e38b4213b340c0336ed341fd94a30a749f0c2f244cf940431ee4f69e9554f"
+    },
+    {
+      "path": "components/radio-group.css",
+      "hash": "9f4e87a48d7fb88b9168c680b9ea9186cb8223ec5cb0fb3cbf9f89efedcc5aaa"
+    },
+    {
+      "path": "components/radio.css",
+      "hash": "b9a2aa0c421d4f325bc4801dcae1150380e0a8a7c4439c990b8eaed80f858db0"
+    },
+    {
+      "path": "components/range-calendar.css",
+      "hash": "a484984edde39cc1366d7f4b079331b64038bb389534285dcc8325380fc8cf4a"
+    },
+    {
+      "path": "components/scroll-shadow.css",
+      "hash": "15d118ec403bca4095577608b9842adb5d9708e3cb0e932b297933be3ca05683"
+    },
+    {
+      "path": "components/search-field.css",
+      "hash": "4e348e8572d0678067639a36a29ffe8e5a41d45d10cadccf9da3552fe3c8bae2"
+    },
+    {
+      "path": "components/select.css",
+      "hash": "d8a14058688ebdac41b332fbcbd367e9411e22c1adba51ccc83b84816847f6ed"
+    },
+    {
+      "path": "components/separator.css",
+      "hash": "f52a6e2795171d767f34f936b0cf4adb7833b300e6bf0ee26ea2dded69fe8bfc"
+    },
+    {
+      "path": "components/sheet.css",
+      "hash": "6d7525600065ab5386c5270dd4aba860af7692764f6001427a70cb3ad3dc6819"
+    },
+    {
+      "path": "components/skeleton.css",
+      "hash": "2f6fd03ef850c32d625c1b66d82470d5c42f5e76591822e21758325fc1b47daa"
+    },
+    {
+      "path": "components/slider.css",
+      "hash": "87cfe0be65a18c8b9680c8b44ce9a20918a4c47be4732128a43a32cef18c5c2b"
+    },
+    {
+      "path": "components/spinner.css",
+      "hash": "f40fbca30e66b8e1b1692e58154d5eda03b27acd538c0ad4573ece9ba60d2915"
+    },
+    {
+      "path": "components/surface.css",
+      "hash": "5b80ddbfd97a86f5dcc6b5f98244d8d36866c2d1689c6f8da7cc8eefff3a8699"
+    },
+    {
+      "path": "components/switch-group.css",
+      "hash": "7eaa5ac0feccdafe6b5d047bc4e23680f85d90ed28244a1c50fa741880ee454d"
+    },
+    {
+      "path": "components/switch.css",
+      "hash": "170392351005fbde14e5132e5809ca2728b4dbbea19ce94dd606f89967aea91e"
+    },
+    {
+      "path": "components/table.css",
+      "hash": "61f1871a42b75b6eb6b6d4a379086cd7b95db305522b4d037d569ac39a54d307"
+    },
+    {
+      "path": "components/tabs.css",
+      "hash": "64119232ef879ea894802845ac144cc90c68c0bc139037e960f7dcc645452c78"
+    },
+    {
+      "path": "components/tag-group.css",
+      "hash": "4b307899fa03252a0ff6b90901e7e88f873df2de3fe773a712fa575f9d25369f"
+    },
+    {
+      "path": "components/tag.css",
+      "hash": "5350fb395201a92688b8694ed52acf3136ff8b83f8c8c2905656b46fe701cb5a"
+    },
+    {
+      "path": "components/textarea.css",
+      "hash": "f3180734012d3703a0c2a651bf2c3e83cd89816814b150c591e11abda65c57a8"
+    },
+    {
+      "path": "components/textfield.css",
+      "hash": "9d07a16efe38bb8b2cfd43e32340b9a8bd57e908f3b7c1e8abf6a56374aa3f24"
+    },
+    {
+      "path": "components/time-field.css",
+      "hash": "eb4e9511ebbc50f6aabe60fcd32704aaf48cfaa3424b885dc9a7a680544c37b5"
+    },
+    {
+      "path": "components/toast.css",
+      "hash": "65e88d8f12bd63de63bb618ca28b2227f050a9910c7af0df0fc251cef4fdc3b6"
+    },
+    {
+      "path": "components/toggle-button-group.css",
+      "hash": "f5f3f895e2d0d8099b6a2b5d4321bc9e635dbc205c48ad30fea0b2c7278d080a"
+    },
+    {
+      "path": "components/toggle-button.css",
+      "hash": "6bc6f319bd79677ac081278179c1861552bb7b23464475ed210489d2de692e53"
+    },
+    {
+      "path": "components/toolbar.css",
+      "hash": "864924ffc2e37680379603bb8c62d4f9faf253c919bfd6c079aa4b082847b2ff"
+    },
+    {
+      "path": "components/tooltip.css",
+      "hash": "3ceacc5e7d83442f14193545889001d9d518702147a8c72a3bdfcee52b245e1d"
+    },
+    {
+      "path": "components/typography.css",
+      "hash": "3c7fbc3cf9e9c2a43d58142d15ea68f57c5d2728d6ef40e84d8bb0bc2fcc5dd6"
+    },
+    {
+      "path": "index.css",
+      "hash": "84ba43b1758f141107221b1dde7c8e4799cdbc7d332bba0b3325768b4c6f2d64"
+    },
+    {
+      "path": "themes/default/components/index.css",
+      "hash": "28c884ac3fc1b5bf39a2f93434016f38d052816a36e5cba893c316e7d9967767"
+    },
+    {
+      "path": "themes/default/index.css",
+      "hash": "f0b2f1d71f477b44685f747960879a4f5dcf64ec908d261368891fc145ff4dbd"
+    },
+    {
+      "path": "themes/default/variables.css",
+      "hash": "8253cd51c1c389aa0ed70c2978994c805c3124e7117466d39506055eb1396989"
+    },
+    {
+      "path": "themes/shared/theme.css",
+      "hash": "d1a3114f6341fbf5bbbf383739879cff465ac553eeaf1da25440b0d0986a9c6f"
+    },
+    {
+      "path": "utilities/index.css",
+      "hash": "f99d008378edbf177d67e3c7b10c38754a1848ecb986c1d634dc254c9b07032d"
+    },
+    {
+      "path": "variants/index.css",
+      "hash": "934406518140deef2b93499d26ff4e52f8d67fc82ef486360d6d2a84599106f3"
+    }
+  ]
 }

@@ -56,13 +56,14 @@
 
   /* Active / pressed */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     background-color: var(--toggle-button-bg-pressed);
     transform: scale(0.97);
   }
 
   /* Selected state */
-  &[data-selected="true"] {
+  &[data-selected="true"], &[data-state="checked"], &[data-state="on"] {
     background-color: var(--toggle-button-bg-selected);
     color: var(--toggle-button-fg-selected);
 
@@ -74,7 +75,8 @@
     }
 
     &:active,
-    &[data-pressed="true"] {
+    &[data-pressed="true"],
+    &[data-state="pressed"] {
       background-color: var(--toggle-button-bg-selected-pressed);
     }
   }
@@ -97,7 +99,8 @@
   }
 
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     transform: scale(0.98);
   }
 }
@@ -110,7 +113,8 @@
   @apply h-11 text-base md:h-10;
 
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     transform: scale(0.96);
   }
 }

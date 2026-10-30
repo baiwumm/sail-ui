@@ -22,7 +22,7 @@
   }
 
   /* Disabled state */
-  &[data-disabled="true"] {
+  &[data-disabled="true"], &[data-disabled] {
     @apply status-disabled;
 
     [data-slot="description"],
@@ -33,7 +33,10 @@
 
   /* Indicator styles */
   &[data-selected="true"],
-  &[data-indeterminate="true"] {
+  &[data-indeterminate="true"],
+  &[data-state="checked"],
+  &[data-state="on"],
+  &[data-state="indeterminate"] {
     .checkbox__indicator {
       border-color: var(--accent-foreground);
     }
@@ -49,7 +52,7 @@
     @apply transition-all duration-200 motion-reduce:transition-none;
   }
 
-  &[data-selected="true"] [data-slot="checkbox-default-indicator--checkmark"] {
+  &[data-selected="true"] [data-slot="checkbox-default-indicator--checkmark"], &[data-state="checked"] [data-slot="checkbox-default-indicator--checkmark"], &[data-state="on"] [data-slot="checkbox-default-indicator--checkmark"] {
     transition: stroke-dashoffset 150ms linear 15ms;
   }
 
@@ -57,12 +60,18 @@
   &[data-invalid="true"][data-selected="true"] [data-slot="checkbox-default-indicator--checkmark"],
   &[data-invalid="true"][aria-checked="true"] [data-slot="checkbox-default-indicator--checkmark"],
   &[aria-invalid="true"][data-selected="true"] [data-slot="checkbox-default-indicator--checkmark"],
-  &[aria-invalid="true"][aria-checked="true"] [data-slot="checkbox-default-indicator--checkmark"] {
+  &[aria-invalid="true"][aria-checked="true"] [data-slot="checkbox-default-indicator--checkmark"],
+  &[data-invalid][data-selected="true"] [data-slot="checkbox-default-indicator--checkmark"],
+  &[data-invalid="true"][data-state="checked"] [data-slot="checkbox-default-indicator--checkmark"],
+  &[data-invalid="true"][data-state="on"] [data-slot="checkbox-default-indicator--checkmark"],
+  &[data-invalid][aria-checked="true"] [data-slot="checkbox-default-indicator--checkmark"],
+  &[aria-invalid="true"][data-state="checked"] [data-slot="checkbox-default-indicator--checkmark"],
+  &[aria-invalid="true"][data-state="on"] [data-slot="checkbox-default-indicator--checkmark"] {
     @apply text-danger-foreground;
   }
 
   /* Indeterminate line indicator */
-  &[data-indeterminate="true"] {
+  &[data-indeterminate="true"], &[data-state="indeterminate"] {
     [data-slot="checkbox-default-indicator--indeterminate"] {
       @apply absolute size-3;
     }
@@ -72,6 +81,12 @@
   &[data-indeterminate="true"][data-invalid="true"]
     [data-slot="checkbox-default-indicator--indeterminate"],
   &[data-indeterminate="true"][aria-invalid="true"]
+    [data-slot="checkbox-default-indicator--indeterminate"],
+  &[data-state="indeterminate"][data-invalid="true"]
+    [data-slot="checkbox-default-indicator--indeterminate"],
+  &[data-indeterminate="true"][data-invalid]
+    [data-slot="checkbox-default-indicator--indeterminate"],
+  &[data-state="indeterminate"][aria-invalid="true"]
     [data-slot="checkbox-default-indicator--indeterminate"] {
     @apply text-danger-foreground;
   }
@@ -133,13 +148,16 @@
   /* Pressed */
   .checkbox:active &,
   .checkbox:has([data-slot="checkbox-content"][data-pressed="true"]) &,
-  .checkbox [data-slot="checkbox-content"][data-pressed="true"] & {
+  .checkbox [data-slot="checkbox-content"][data-pressed="true"] &,
+  .checkbox [data-slot="checkbox-content"][data-state="pressed"] & {
   }
 
   /* Selection states */
   /* Selected */
   .checkbox[aria-checked="true"] &,
-  .checkbox[data-selected="true"] & {
+  .checkbox[data-selected="true"] &,
+  .checkbox[data-state="checked"] &,
+  .checkbox[data-state="on"] & {
     @apply border-transparent text-accent-foreground;
 
     &::before {
@@ -148,14 +166,18 @@
   }
 
   /* Indeterminate */
-  .checkbox[data-indeterminate="true"] & {
+  .checkbox[data-indeterminate="true"] &, .checkbox[data-state="indeterminate"] & {
     @apply bg-accent text-accent-foreground;
   }
 
   /* Indeterminate + Pressed */
   .checkbox:active[data-indeterminate="true"] &,
   .checkbox[data-pressed="true"][data-indeterminate="true"] &,
-  .checkbox:has([data-slot="checkbox-content"][data-pressed="true"])[data-indeterminate="true"] & {
+  .checkbox:has([data-slot="checkbox-content"][data-pressed="true"])[data-indeterminate="true"] &,
+  .checkbox:active[data-state="indeterminate"] &,
+  .checkbox[data-state="pressed"][data-indeterminate="true"] &,
+  .checkbox[data-pressed="true"][data-state="indeterminate"] &,
+  .checkbox:has([data-slot="checkbox-content"][data-pressed="true"])[data-state="indeterminate"] & {
     @apply bg-accent-hover;
   }
 
@@ -168,6 +190,10 @@
   .checkbox[aria-invalid="true"]:not([aria-checked="true"]):not([data-selected="true"]):not(
       [data-indeterminate="true"]
     )
+    &,
+  .checkbox[data-invalid]:not([aria-checked="true"]):not([data-selected="true"]):not(
+      [data-indeterminate="true"]
+    )
     & {
     @apply status-invalid-field;
   }
@@ -176,7 +202,13 @@
   .checkbox[data-invalid="true"][aria-checked="true"] &,
   .checkbox[data-invalid="true"][data-selected="true"] &,
   .checkbox[aria-invalid="true"][aria-checked="true"] &,
-  .checkbox[aria-invalid="true"][data-selected="true"] & {
+  .checkbox[aria-invalid="true"][data-selected="true"] &,
+  .checkbox[data-invalid][aria-checked="true"] &,
+  .checkbox[data-invalid][data-selected="true"] &,
+  .checkbox[data-invalid="true"][data-state="checked"] &,
+  .checkbox[data-invalid="true"][data-state="on"] &,
+  .checkbox[aria-invalid="true"][data-state="checked"] &,
+  .checkbox[aria-invalid="true"][data-state="on"] & {
     @apply border-transparent bg-danger text-danger-foreground;
 
     &::before {
@@ -186,7 +218,10 @@
 
   /* Invalid + Indeterminate */
   .checkbox[data-indeterminate="true"][aria-invalid="true"] &,
-  .checkbox[data-indeterminate="true"][data-invalid="true"] & {
+  .checkbox[data-indeterminate="true"][data-invalid="true"] &,
+  .checkbox[data-state="indeterminate"][aria-invalid="true"] &,
+  .checkbox[data-state="indeterminate"][data-invalid="true"] &,
+  .checkbox[data-indeterminate="true"][data-invalid] & {
     @apply bg-danger text-danger-foreground;
   }
 }
@@ -240,14 +275,16 @@
 
 /* Selected state on secondary variant */
 .checkbox--secondary[aria-checked="true"] .checkbox__control,
-.checkbox--secondary[data-selected="true"] .checkbox__control {
+.checkbox--secondary[data-selected="true"] .checkbox__control,
+.checkbox--secondary[data-state="checked"] .checkbox__control,
+.checkbox--secondary[data-state="on"] .checkbox__control {
   &::before {
     @apply bg-accent;
   }
 }
 
 /* Indeterminate state on secondary variant */
-.checkbox--secondary[data-indeterminate="true"] .checkbox__control {
+.checkbox--secondary[data-indeterminate="true"] .checkbox__control, .checkbox--secondary[data-state="indeterminate"] .checkbox__control {
   @apply bg-accent;
 
   &::before {

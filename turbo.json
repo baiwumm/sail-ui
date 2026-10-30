@@ -19,6 +19,10 @@
     "typecheck": {
       "outputs": []
     },
+    "nuxt-fixture#typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
     "test": {
       "outputs": []
     },

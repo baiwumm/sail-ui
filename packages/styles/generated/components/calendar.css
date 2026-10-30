@@ -107,7 +107,8 @@
 
   /* Pressed state */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     transform: scale(0.95);
   }
 
@@ -119,7 +120,8 @@
 
   /* Disabled state */
   &:disabled,
-  &[data-disabled="true"] {
+  &[data-disabled="true"],
+  &[data-disabled] {
     @apply status-disabled;
   }
 }
@@ -226,17 +228,18 @@
   }
 
   /* Selected state */
-  &[data-selected="true"] {
+  &[data-selected="true"], &[data-state="checked"], &[data-state="on"] {
     @apply bg-accent text-accent-foreground;
   }
 
   /* Pressed state */
   &:active,
-  &[data-pressed="true"] {
+  &[data-pressed="true"],
+  &[data-state="pressed"] {
     @apply bg-default;
     transform: scale(0.95);
 
-    &[data-selected="true"] {
+    &[data-selected="true"], &[data-state="checked"], &[data-state="on"] {
       @apply bg-accent-hover;
     }
   }
@@ -250,11 +253,11 @@
   }
 
   /* Outside month (previous/next month days) */
-  &[data-outside-month="true"] {
+  &[data-outside-month="true"], &[data-outside-view] {
     @apply text-muted opacity-50;
   }
 
-  &[data-selected="true"][data-outside-month="true"] {
+  &[data-selected="true"][data-outside-month="true"], &[data-state="checked"][data-outside-month="true"], &[data-state="on"][data-outside-month="true"], &[data-selected="true"][data-outside-view] {
     @apply bg-default;
   }
 
@@ -265,7 +268,8 @@
 
   /* Disabled state */
   &:disabled:not([data-outside-month="true"]),
-  &[data-disabled="true"]:not([data-outside-month="true"]) {
+  &[data-disabled="true"]:not([data-outside-month="true"]),
+  &[data-disabled]:not([data-outside-month="true"]) {
     @apply status-disabled;
 
     text-decoration: line-through;
@@ -277,7 +281,7 @@
   @apply absolute bottom-1 left-1/2 size-[3px] -translate-x-1/2 rounded-xs bg-muted;
 
   /* Indicator color changes when cell is selected */
-  [data-selected="true"] > & {
+  [data-selected="true"] > &, [data-state="checked"] > &, [data-state="on"] > & {
     @apply bg-accent-foreground;
   }
 }

@@ -56,7 +56,8 @@
 
 /* Remove scale transform on active/pressed state for buttons in group */
 .button-group .button:active,
-.button-group .button[data-pressed="true"] {
+.button-group .button[data-pressed="true"],
+.button-group .button[data-state="pressed"] {
   transform: none;
 }
 

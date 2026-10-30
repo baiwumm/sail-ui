@@ -2,7 +2,7 @@
 .input-otp {
   @apply relative flex w-full items-center gap-2;
 
-  &[data-disabled="true"] {
+  &[data-disabled="true"], &[data-disabled] {
     @apply cursor-not-allowed opacity-50;
   }
 }
@@ -51,12 +51,12 @@
   }
 
   /* Disabled */
-  &[data-disabled="true"] {
+  &[data-disabled="true"], &[data-disabled] {
     @apply status-disabled;
   }
 
   /* Invalid */
-  &[data-invalid="true"] {
+  &[data-invalid="true"], &[data-invalid] {
     @apply status-invalid-field;
     background-color: var(--field-focus);
   }

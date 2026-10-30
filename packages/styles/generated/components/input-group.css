@@ -45,7 +45,7 @@
   }
 
   /* Invalid state */
-  &[data-invalid="true"] {
+  &[data-invalid="true"], &[data-invalid] {
     @apply status-invalid-field;
     --input-group-bg: var(--input-group-bg-focus);
     background-color: var(--input-group-bg);
@@ -54,7 +54,8 @@
 
   /* Disabled state */
   &[data-disabled="true"],
-  &[aria-disabled="true"] {
+  &[aria-disabled="true"],
+  &[data-disabled] {
     @apply status-disabled;
   }
 }
@@ -204,7 +205,7 @@
   }
 
   /* Invalid state */
-  &[data-invalid="true"] {
+  &[data-invalid="true"], &[data-invalid] {
     @apply status-invalid-field;
     border-color: var(--color-field-border-invalid);
     --input-group-bg: var(--input-group-bg-focus);
