@@ -13,8 +13,30 @@ import {
   renderSSR,
 } from "@sail-ui/testing";
 
+import AlertDialog from "../components/alert-dialog/alert-dialog-root.vue";
+import AlertDialogBackdrop from "../components/alert-dialog/alert-dialog-backdrop.vue";
+import AlertDialogBody from "../components/alert-dialog/alert-dialog-body.vue";
+import AlertDialogCloseTrigger from "../components/alert-dialog/alert-dialog-close-trigger.vue";
+import AlertDialogContainer from "../components/alert-dialog/alert-dialog-container.vue";
+import AlertDialogDialog from "../components/alert-dialog/alert-dialog-dialog.vue";
+import AlertDialogFooter from "../components/alert-dialog/alert-dialog-footer.vue";
+import AlertDialogHeader from "../components/alert-dialog/alert-dialog-header.vue";
+import AlertDialogHeading from "../components/alert-dialog/alert-dialog-heading.vue";
+import AlertDialogIcon from "../components/alert-dialog/alert-dialog-icon.vue";
+import AlertDialogTrigger from "../components/alert-dialog/alert-dialog-trigger.vue";
 import Button from "../components/button/button.vue";
 import Description from "../components/description/description.vue";
+import Drawer from "../components/drawer/drawer-root.vue";
+import DrawerBackdrop from "../components/drawer/drawer-backdrop.vue";
+import DrawerBody from "../components/drawer/drawer-body.vue";
+import DrawerCloseTrigger from "../components/drawer/drawer-close-trigger.vue";
+import DrawerContent from "../components/drawer/drawer-content.vue";
+import DrawerDialog from "../components/drawer/drawer-dialog.vue";
+import DrawerFooter from "../components/drawer/drawer-footer.vue";
+import DrawerHandle from "../components/drawer/drawer-handle.vue";
+import DrawerHeader from "../components/drawer/drawer-header.vue";
+import DrawerHeading from "../components/drawer/drawer-heading.vue";
+import DrawerTrigger from "../components/drawer/drawer-trigger.vue";
 import FieldError from "../components/field-error/field-error.vue";
 import Input from "../components/input/input.vue";
 import Label from "../components/label/label.vue";
@@ -38,6 +60,29 @@ import SelectPopover from "../components/select/select-popover.vue";
 import Select from "../components/select/select-root.vue";
 import SelectTrigger from "../components/select/select-trigger.vue";
 import SelectValue from "../components/select/select-value.vue";
+import Popover from "../components/popover/popover-root.vue";
+import PopoverArrow from "../components/popover/popover-arrow.vue";
+import PopoverContent from "../components/popover/popover-content.vue";
+import PopoverDialog from "../components/popover/popover-dialog.vue";
+import PopoverHeading from "../components/popover/popover-heading.vue";
+import PopoverTrigger from "../components/popover/popover-trigger.vue";
+import Sheet from "../components/sheet/sheet-root.vue";
+import SheetBackdrop from "../components/sheet/sheet-backdrop.vue";
+import SheetBody from "../components/sheet/sheet-body.vue";
+import SheetCloseTrigger from "../components/sheet/sheet-close-trigger.vue";
+import SheetContent from "../components/sheet/sheet-content.vue";
+import SheetDialog from "../components/sheet/sheet-dialog.vue";
+import SheetFooter from "../components/sheet/sheet-footer.vue";
+import SheetHandle from "../components/sheet/sheet-handle.vue";
+import SheetHeader from "../components/sheet/sheet-header.vue";
+import SheetHeading from "../components/sheet/sheet-heading.vue";
+import SheetTrigger from "../components/sheet/sheet-trigger.vue";
+import ToastProvider from "../components/toast/toast-provider.vue";
+import {ToastQueue} from "../components/toast/toast-queue";
+import Tooltip from "../components/tooltip/tooltip-root.vue";
+import TooltipArrow from "../components/tooltip/tooltip-arrow.vue";
+import TooltipContent from "../components/tooltip/tooltip-content.vue";
+import TooltipTrigger from "../components/tooltip/tooltip-trigger.vue";
 
 const stylesRoot = join(process.cwd(), "packages", "styles");
 const slotSnapshot = JSON.parse(
@@ -92,6 +137,178 @@ function createModalHost(open: boolean) {
                   }),
                 ],
               }),
+            ],
+          },
+        );
+    },
+  });
+}
+
+function createAlertDialogHost(open: boolean) {
+  return defineComponent({
+    setup() {
+      const isOpen = ref(open);
+
+      return () =>
+        h(
+          AlertDialog,
+          {open: isOpen.value},
+          {
+            default: () => [
+              h(AlertDialogTrigger, null, {default: () => "Delete project"}),
+              h(AlertDialogBackdrop, null, {
+                default: () => [
+                  h(AlertDialogContainer, null, {
+                    default: () => [
+                      h(AlertDialogDialog, null, {
+                        default: () => [
+                          h(AlertDialogCloseTrigger),
+                          h(AlertDialogHeader, null, {
+                            default: () => [
+                              h(AlertDialogIcon, {status: "danger"}),
+                              h(AlertDialogHeading, null, {default: () => "Delete project?"}),
+                            ],
+                          }),
+                          h(AlertDialogBody, null, {default: () => "Body"}),
+                          h(AlertDialogFooter, null, {default: () => "Footer"}),
+                        ],
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          },
+        );
+    },
+  });
+}
+
+function createDrawerHost(open: boolean) {
+  return defineComponent({
+    setup() {
+      const isOpen = ref(open);
+
+      return () =>
+        h(
+          Drawer,
+          {open: isOpen.value},
+          {
+            default: () => [
+              h(DrawerTrigger, null, {default: () => "Open Drawer"}),
+              h(DrawerBackdrop, null, {
+                default: () => [
+                  h(
+                    DrawerContent,
+                    {placement: "bottom"},
+                    {
+                      default: () => [
+                        h(DrawerDialog, null, {
+                          default: () => [
+                            h(DrawerCloseTrigger),
+                            h(DrawerHandle),
+                            h(DrawerHeader, null, {
+                              default: () => [h(DrawerHeading, null, {default: () => "Title"})],
+                            }),
+                            h(DrawerBody, null, {default: () => "Body"}),
+                            h(DrawerFooter, null, {default: () => "Footer"}),
+                          ],
+                        }),
+                      ],
+                    },
+                  ),
+                ],
+              }),
+            ],
+          },
+        );
+    },
+  });
+}
+
+function createSheetHost(open: boolean) {
+  return defineComponent({
+    setup() {
+      const isOpen = ref(open);
+
+      return () =>
+        h(
+          Sheet,
+          {open: isOpen.value, placement: "left"},
+          {
+            default: () => [
+              h(SheetTrigger, null, {default: () => "Open Sheet"}),
+              h(
+                SheetBackdrop,
+                {variant: "blur"},
+                {
+                  default: () => [
+                    h(SheetContent, null, {
+                      default: () => [
+                        h(SheetDialog, null, {
+                          default: () => [
+                            h(SheetCloseTrigger),
+                            h(SheetHandle),
+                            h(SheetHeader, null, {
+                              default: () => [h(SheetHeading, null, {default: () => "Title"})],
+                            }),
+                            h(SheetBody, null, {default: () => "Body"}),
+                            h(SheetFooter, null, {default: () => "Footer"}),
+                          ],
+                        }),
+                      ],
+                    }),
+                  ],
+                },
+              ),
+            ],
+          },
+        );
+    },
+  });
+}
+
+function createPopoverHost() {
+  return defineComponent({
+    setup() {
+      return () =>
+        h(Popover, null, {
+          default: () => [
+            h(PopoverTrigger, null, {default: () => "Open Popover"}),
+            h(PopoverContent, null, {
+              default: () => [
+                h(PopoverArrow),
+                h(PopoverDialog, null, {
+                  default: () => [
+                    h(PopoverHeading, null, {default: () => "Popover title"}),
+                    h("p", null, "Popover body"),
+                  ],
+                }),
+              ],
+            }),
+          ],
+        });
+    },
+  });
+}
+
+function createTooltipHost() {
+  return defineComponent({
+    setup() {
+      return () =>
+        h(
+          Tooltip,
+          {delay: 0, closeDelay: 0},
+          {
+            default: () => [
+              h(TooltipTrigger, null, {default: () => "Tooltip trigger"}),
+              h(
+                TooltipContent,
+                {showArrow: true},
+                {
+                  default: () => [h(TooltipArrow), "Tooltip body"],
+                },
+              ),
             ],
           },
         );
@@ -252,7 +469,7 @@ describe("contract snapshots", () => {
   it("closed Modal renders only the trigger", async () => {
     const html = await renderSSR(createModalHost(false));
 
-    expect(dataSlotsOfTag(html, "button")).toEqual(["modal-trigger"]);
+    expect(dataSlotsOfTag(html, "div")).toEqual(["modal-trigger"]);
     expectKnownSlots(html);
     expect(html).not.toContain('data-slot="modal-backdrop"');
     expect(html).not.toContain('data-slot="modal-dialog"');
@@ -263,7 +480,7 @@ describe("contract snapshots", () => {
     // never the overlay DOM. The full open contract is covered in jsdom.
     const html = await renderSSR(createModalHost(true));
 
-    expect(dataSlotsOfTag(html, "button")).toEqual(["modal-trigger"]);
+    expect(dataSlotsOfTag(html, "div")).toEqual(["modal-trigger"]);
     expect(html).toContain('aria-expanded="true"');
     expect(html).toContain("aria-controls=");
     expect(html).not.toContain('data-slot="modal-backdrop"');
@@ -356,7 +573,7 @@ describe("interactive state contract", () => {
   it("open Modal emits placement and entering on the overlay parts", async () => {
     const wrapper = mount(createModalHost(false), {attachTo: document.body});
 
-    await wrapper.get("button").trigger("click");
+    await wrapper.get('[data-slot="modal-trigger"]').trigger("click");
     await nextTick();
 
     const html = document.body.innerHTML;
@@ -391,6 +608,225 @@ describe("interactive state contract", () => {
     pointer(closeTrigger, "pointerenter");
     await nextTick();
     expect(closeTrigger.getAttribute("data-hovered")).toBe("true");
+
+    wrapper.unmount();
+    await nextTick();
+  });
+
+  it("open AlertDialog emits the alertdialog role, placement, entering, and status", async () => {
+    const wrapper = mount(createAlertDialogHost(false), {attachTo: document.body});
+
+    await wrapper.get('[data-slot="alert-dialog-trigger"]').trigger("click");
+    await nextTick();
+
+    const html = document.body.innerHTML;
+
+    expect(dataSlots(html).sort()).toEqual([
+      "alert-dialog-backdrop",
+      "alert-dialog-body",
+      "alert-dialog-close-trigger",
+      "alert-dialog-container",
+      "alert-dialog-default-icon",
+      "alert-dialog-dialog",
+      "alert-dialog-footer",
+      "alert-dialog-header",
+      "alert-dialog-heading",
+      "alert-dialog-icon",
+      "alert-dialog-trigger",
+      "close-button-icon",
+    ]);
+    expectKnownSlots(html);
+
+    const backdrop = dataAttributesOfSlot(html, "alert-dialog-backdrop")[0]!;
+    const container = dataAttributesOfSlot(html, "alert-dialog-container")[0]!;
+    const dialog = dataAttributesOfSlot(html, "alert-dialog-dialog")[0]!;
+    const icon = document.querySelector<HTMLElement>('[data-slot="alert-dialog-icon"]')!;
+    const closeTrigger = document.querySelector<HTMLElement>(
+      '[data-slot="alert-dialog-close-trigger"]',
+    )!;
+
+    expect(backdrop["data-entering"]).toBe("true");
+    expect(container["data-entering"]).toBe("true");
+    expect(container["data-placement"]).toBe("auto");
+    expect(dialog["data-placement"]).toBe("auto");
+    expect(document.querySelector('[data-slot="alert-dialog-dialog"]')?.getAttribute("role")).toBe(
+      "alertdialog",
+    );
+    expect(icon.className).toContain("alert-dialog__icon--danger");
+
+    pointer(closeTrigger, "pointerenter");
+    await nextTick();
+    expect(closeTrigger.getAttribute("data-hovered")).toBe("true");
+
+    wrapper.unmount();
+    await nextTick();
+  });
+
+  it("open Drawer emits placement, entering, dialog semantics, and drag parts", async () => {
+    const wrapper = mount(createDrawerHost(false), {attachTo: document.body});
+
+    await wrapper.get('[data-slot="drawer-trigger"]').trigger("click");
+    await nextTick();
+
+    const html = document.body.innerHTML;
+
+    expect(dataSlots(html).sort()).toEqual([
+      "close-button-icon",
+      "drawer-backdrop",
+      "drawer-body",
+      "drawer-close-trigger",
+      "drawer-content",
+      "drawer-dialog",
+      "drawer-footer",
+      "drawer-handle",
+      "drawer-handle-bar",
+      "drawer-header",
+      "drawer-heading",
+      "drawer-trigger",
+    ]);
+    expectKnownSlots(html);
+
+    const backdrop = dataAttributesOfSlot(html, "drawer-backdrop")[0]!;
+    const content = dataAttributesOfSlot(html, "drawer-content")[0]!;
+    const dialog = dataAttributesOfSlot(html, "drawer-dialog")[0]!;
+    const handle = document.querySelector<HTMLElement>('[data-slot="drawer-handle"]')!;
+    const body = document.querySelector<HTMLElement>('[data-slot="drawer-body"]')!;
+
+    expect(backdrop["data-entering"]).toBe("true");
+    expect(content["data-entering"]).toBe("true");
+    expect(content["data-placement"]).toBe("bottom");
+    expect(dialog["data-placement"]).toBe("bottom");
+    expect(document.querySelector('[data-slot="drawer-dialog"]')?.getAttribute("aria-modal")).toBe(
+      "true",
+    );
+    expect(handle.getAttribute("aria-hidden")).toBe("true");
+    expect(body.style.touchAction).toBe("pan-y");
+
+    wrapper.unmount();
+    await nextTick();
+  });
+
+  it("open Sheet emits overlay, placement, entering, and dialog semantics", async () => {
+    const wrapper = mount(createSheetHost(false), {attachTo: document.body});
+
+    await wrapper.get('[aria-haspopup="dialog"]').trigger("click");
+    await nextTick();
+
+    const html = document.body.innerHTML;
+
+    expect(dataSlots(html).sort()).toEqual([
+      "close-button-icon",
+      "sheet-backdrop",
+      "sheet-body",
+      "sheet-close-trigger",
+      "sheet-content",
+      "sheet-dialog",
+      "sheet-footer",
+      "sheet-handle",
+      "sheet-handle-bar",
+      "sheet-header",
+      "sheet-heading",
+      "sheet-overlay",
+    ]);
+    expectKnownSlots(html);
+
+    const overlay = dataAttributesOfSlot(html, "sheet-overlay")[0]!;
+    const backdrop = dataAttributesOfSlot(html, "sheet-backdrop")[0]!;
+    const content = dataAttributesOfSlot(html, "sheet-content")[0]!;
+    const dialog = dataAttributesOfSlot(html, "sheet-dialog")[0]!;
+    const handle = document.querySelector<HTMLElement>('[data-slot="sheet-handle"]')!;
+
+    expect(overlay["data-entering"]).toBe("true");
+    expect(backdrop["data-stack-index"]).toBe("0");
+    expect(content["data-entering"]).toBe("true");
+    expect(content["data-expanded"]).toBe("");
+    expect(content["data-placement"]).toBe("left");
+    expect(dialog["data-placement"]).toBe("left");
+    expect(document.querySelector('[data-slot="sheet-dialog"]')?.getAttribute("aria-modal")).toBe(
+      "true",
+    );
+    expect(handle.getAttribute("aria-hidden")).toBe("true");
+    expect(handle.hasAttribute("data-sheet-handle")).toBe(true);
+
+    const closeTrigger = document.querySelector<HTMLElement>('[data-slot="sheet-close-trigger"]')!;
+
+    pointer(closeTrigger, "pointerenter");
+    await nextTick();
+    expect(closeTrigger.getAttribute("data-hovered")).toBe("true");
+
+    // Reka autofocuses the first focusable part, so blur before re-focusing
+    // to fire a fresh focus event under keyboard modality.
+    closeTrigger.blur();
+    await focusWithKeyboard(closeTrigger);
+    expect(closeTrigger.getAttribute("data-focus-visible")).toBe("true");
+
+    document.dispatchEvent(
+      new KeyboardEvent("keydown", {bubbles: true, cancelable: true, key: "Escape"}),
+    );
+    await nextTick();
+
+    expect(
+      document
+        .querySelector<HTMLElement>('[data-slot="sheet-overlay"]')
+        ?.hasAttribute("data-closed"),
+    ).toBe(true);
+    expect(
+      document
+        .querySelector<HTMLElement>('[data-slot="sheet-overlay"]')
+        ?.getAttribute("data-exiting"),
+    ).toBe("true");
+
+    wrapper.unmount();
+    await nextTick();
+  });
+
+  it("open Popover emits the trigger, dialog, heading, and arrow slots", async () => {
+    const wrapper = mount(createPopoverHost(), {attachTo: document.body});
+    const trigger = document.querySelector<HTMLElement>('[data-slot="popover-trigger"]')!;
+
+    trigger.click();
+    await flushPromises();
+
+    const html = document.body.innerHTML;
+    const content = document.querySelector<HTMLElement>(".popover")!;
+    const dialog = document.querySelector<HTMLElement>('[data-slot="popover-dialog"]')!;
+
+    expect(dataSlots(html).sort()).toEqual([
+      "popover-dialog",
+      "popover-overlay-arrow",
+      "popover-overlay-arrow-group",
+      "popover-trigger",
+    ]);
+    expectKnownSlots(html);
+    expect(content.getAttribute("data-entering")).toBe("true");
+    expect(content.getAttribute("data-placement")).toBe("bottom");
+    expect(content.getAttribute("role")).toBe("dialog");
+    expect(content.getAttribute("aria-labelledby")).toBeTruthy();
+    expect(dialog.classList.contains("popover__dialog")).toBe(true);
+    expect(trigger.getAttribute("aria-expanded")).toBe("true");
+    expect(trigger.getAttribute("aria-controls")).toBe(content.id);
+
+    wrapper.unmount();
+    await nextTick();
+  });
+
+  it("open Tooltip emits the trigger, arrow, and hidden tooltip role", async () => {
+    const wrapper = mount(createTooltipHost(), {attachTo: document.body});
+    const trigger = document.querySelector<HTMLElement>('[data-slot="tooltip-trigger"]')!;
+
+    trigger.focus();
+    await flushPromises();
+
+    const html = document.body.innerHTML;
+    const content = document.querySelector<HTMLElement>(".tooltip")!;
+    const describedBy = trigger.getAttribute("aria-describedby")!;
+
+    expect(dataSlots(html).sort()).toEqual(["overlay-arrow", "tooltip-arrow", "tooltip-trigger"]);
+    expectKnownSlots(html);
+    expect(content.getAttribute("data-entering")).toBe("true");
+    expect(content.getAttribute("data-placement")).toBe("top");
+    expect(describedBy).toBeTruthy();
+    expect(document.getElementById(describedBy)?.getAttribute("role")).toBe("tooltip");
 
     wrapper.unmount();
     await nextTick();
@@ -466,6 +902,79 @@ describe("interactive state contract", () => {
 
     wrapper.unmount();
   });
+
+  it("Toast emits the region, stack, and toast state contract", async () => {
+    const queue = new ToastQueue();
+    const wrapper = mount(ToastProvider, {
+      attachTo: document.body,
+      props: {maxVisibleToasts: 1, queue},
+    });
+
+    queue.add({
+      actionProps: {children: "Undo"},
+      description: "Your changes have been saved.",
+      title: "Saved",
+      variant: "success",
+    });
+    const newestKey = queue.add({title: "Second"});
+    await flushPromises();
+
+    const region = document.querySelector<HTMLElement>('[data-slot="toast-region"]')!;
+    const toasts = [...document.querySelectorAll<HTMLElement>('[data-slot="toast"]')];
+    const newest = toasts[0]!;
+    const oldest = toasts[1]!;
+
+    expectKnownSlots(document.body.innerHTML);
+    expect(region.getAttribute("role")).toBe("region");
+    expect(region.getAttribute("aria-label")).toBe("2 notifications.");
+    expect(region.getAttribute("data-slot")).toBe("toast-region");
+    expect(region.hasAttribute("tabindex")).toBe(true);
+    expect(newest.getAttribute("data-frontmost")).toBe("true");
+    expect(newest.hasAttribute("data-hidden")).toBe(false);
+    expect(newest.getAttribute("data-placement")).toBe("bottom");
+    expect(oldest.getAttribute("data-hidden")).toBe("true");
+    expect(oldest.hasAttribute("inert")).toBe(true);
+    expect(document.querySelector('[data-slot="toast-action-button"]')).not.toBeNull();
+    expect(document.querySelector('[data-slot="toast-close"]')).not.toBeNull();
+
+    pointer(newest, "pointerenter");
+    await nextTick();
+    expect(newest.getAttribute("data-hovered")).toBe("true");
+
+    await focusWithKeyboard(newest);
+    expect(newest.getAttribute("data-focus-visible")).toBe("true");
+
+    document.dispatchEvent(
+      new KeyboardEvent("keydown", {altKey: true, bubbles: true, cancelable: true, code: "KeyT"}),
+    );
+    await nextTick();
+    expect(region.getAttribute("data-expanded")).toBe("true");
+
+    queue.close(newestKey);
+    await flushPromises();
+    expect(newest.getAttribute("data-exiting")).toBe("true");
+
+    const key = queue.add({isLoading: true, title: "Loading"}, {timeout: 0});
+
+    await flushPromises();
+    queue.update(key, {isLoading: false, title: "Settled"});
+    await flushPromises();
+    const indicator = document.querySelector<HTMLElement>('[data-slot="toast-indicator"]');
+
+    expect(indicator?.getAttribute("data-swapped")).toBe("true");
+
+    queue.add({title: "Entering"});
+    await nextTick();
+    expect(
+      document
+        .querySelector<HTMLElement>('[data-slot="toast"][data-frontmost="true"]')
+        ?.getAttribute("data-entering"),
+    ).toBe("true");
+
+    wrapper.unmount();
+    queue.destroy();
+    await nextTick();
+  });
 });
 
 interface StateCoverage {
@@ -524,13 +1033,67 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
     gaps: {},
   },
   modal: {
-    asserted: ["data-entering", "data-placement"],
+    asserted: [
+      "data-entering",
+      "data-exiting",
+      "data-focus-visible",
+      "data-placement",
+      "data-pressed",
+    ],
     gaps: {
-      "data-exiting": "Transient exit flag; covered by the browser visual suite.",
-      "data-focus-visible":
-        "Focus-trap managed; jsdom does not report :focus-visible for it (browser suite).",
       "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
-      "data-pressed": "Native :active fallback; ModalCloseTrigger does not run usePress.",
+    },
+  },
+  "alert-dialog": {
+    asserted: [
+      "data-entering",
+      "data-exiting",
+      "data-focus-visible",
+      "data-placement",
+      "data-pressed",
+      "data-slot",
+    ],
+    gaps: {
+      "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
+    },
+  },
+  drawer: {
+    asserted: [
+      "data-entering",
+      "data-exiting",
+      "data-focus-visible",
+      "data-placement",
+      "data-pressed",
+      "data-slot",
+    ],
+    gaps: {
+      "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
+    },
+  },
+  sheet: {
+    asserted: [
+      "data-closed",
+      "data-dragging",
+      "data-expanded",
+      "data-focus-visible",
+      "data-hovered",
+      "data-stack-index",
+    ],
+    gaps: {
+      "data-detached": "Detached sheets are outside T05 scope; the attribute is omitted.",
+      "data-entering":
+        "Sheet CSS has no animation selectors; Sail drives entry with WAAPI and asserts the flag in the Sheet contract test.",
+      "data-exiting":
+        "Sheet CSS has no animation selectors; Sail drives the exit hold with WAAPI and asserts the flag in the Sheet contract test.",
+      "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
+      "data-handle-dragging":
+        "Upstream writes it on the scroll-snap container; Sail drags the panel and marks the handle with data-dragging.",
+      "data-has-descendants": "Stacked sheets are outside T05 scope.",
+      "data-sheet-scroll":
+        "React Aria's scroll container; Sail positions the panel inside a fixed overlay.",
+      "data-slot":
+        "Sheet CSS does not select on data-slot; the contract snapshot asserts the slots.",
+      "data-snap-points": "Snap points are outside T05 scope.",
     },
   },
   "close-button": {
@@ -540,6 +1103,20 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-hovered",
       "data-pending",
       "data-pressed",
+    ],
+    gaps: {},
+  },
+  toast: {
+    asserted: [
+      "data-entering",
+      "data-exiting",
+      "data-expanded",
+      "data-focus-visible",
+      "data-frontmost",
+      "data-hidden",
+      "data-hovered",
+      "data-slot",
+      "data-swapped",
     ],
     gaps: {},
   },
@@ -731,6 +1308,30 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
   toolbar: {
     asserted: [],
     gaps: {},
+  },
+  popover: {
+    asserted: [
+      "data-entering",
+      "data-exiting",
+      "data-focus-visible",
+      "data-placement",
+      "data-slot",
+    ],
+    gaps: {
+      "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
+    },
+  },
+  tooltip: {
+    asserted: [
+      "data-entering",
+      "data-exiting",
+      "data-focus-visible",
+      "data-placement",
+      "data-slot",
+    ],
+    gaps: {
+      "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
+    },
   },
 };
 

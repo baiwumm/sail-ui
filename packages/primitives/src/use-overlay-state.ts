@@ -41,6 +41,16 @@ const cancelFrame = (handle: FrameHandle) => {
   clearTimeout(handle as ReturnType<typeof setTimeout>);
 };
 
+const prefersReducedMotion = () => {
+  if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+    return false;
+  }
+
+  const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  return Boolean(query && query.matches);
+};
+
 const animationDuration = (animation: Animation) => {
   const timing = animation.effect?.getTiming();
   const duration = typeof timing?.duration === "number" ? timing.duration : 0;
@@ -91,6 +101,9 @@ export function useOverlayState(props: UseOverlayStateProps = {}): UseOverlaySta
   let exitTimer: ReturnType<typeof setTimeout> | null = null;
   let cleanExitListeners: (() => void) | null = null;
   const pinnedOpacity = new Map<HTMLElement, string>();
+
+  const skipsAnimation = () =>
+    Boolean(toValue(props.shouldSkipAnimation)) || prefersReducedMotion();
 
   const clearEnterTimer = () => {
     if (enterTimer) {
@@ -285,7 +298,7 @@ export function useOverlayState(props: UseOverlayStateProps = {}): UseOverlaySta
     finishing = false;
     clearExitFrame();
 
-    if (toValue(props.shouldSkipAnimation)) {
+    if (skipsAnimation()) {
       exitFrame = scheduleFrame(() => {
         exitFrame = null;
         finishExit();
@@ -361,7 +374,7 @@ export function useOverlayState(props: UseOverlayStateProps = {}): UseOverlaySta
     isOpen.value = true;
     isMounted.value = true;
     isExiting.value = false;
-    isEntering.value = !toValue(props.shouldSkipAnimation);
+    isEntering.value = !skipsAnimation();
 
     if (!syncingFromProp) {
       props.onOpenChange?.(true);

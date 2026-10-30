@@ -2,7 +2,7 @@
 import {useFocusRing, useHover, usePress, type PressEvent} from "@sail-ui/primitives";
 import {buttonVariants, cx, spinnerVariants} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, inject, ref, type ComponentPublicInstance} from "vue";
+import {computed, inject, ref, useAttrs, type ComponentPublicInstance} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
 import {buttonGroupContextKey} from "../button-group/types";
@@ -22,7 +22,9 @@ const emit = defineEmits<{
   press: [event: PressEvent];
 }>();
 
+const attrs = useAttrs();
 const {className, forwarded} = useForwardedAttrs();
+const dataSlot = computed(() => (attrs["data-slot"] as string | undefined) ?? "button");
 const group = inject(buttonGroupContextKey, null);
 const buttonRef = ref<ComponentPublicInstance | null>(null);
 const element = computed(() => (buttonRef.value?.$el as Element | null | undefined) ?? null);
@@ -69,7 +71,7 @@ const spinnerClasses = computed(() => spinnerVariants({color: "current", size: "
     :data-hovered="isHovered ? 'true' : undefined"
     :data-pending="isLoading ? 'true' : undefined"
     :data-pressed="isPressed ? 'true' : undefined"
-    :data-slot="'button'"
+    :data-slot="dataSlot"
     :disabled="isDisabled || undefined"
     :type="isNativeButton ? type : undefined"
   >

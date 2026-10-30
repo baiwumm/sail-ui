@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import {useFocusRing, useHover, usePress} from "@sail-ui/primitives";
 import {cx} from "@sail-ui/styles";
-import {useFocusRing, useHover} from "@sail-ui/primitives";
-import {DialogTrigger} from "reka-ui";
-import {computed, ref, useAttrs} from "vue";
+import {computed, onScopeDispose, watch} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {useModalContext} from "./context";
 import type {ModalTriggerProps} from "./types";
 
@@ -11,33 +11,71 @@ defineOptions({name: "SailModalTrigger", inheritAttrs: false});
 
 const props = withDefaults(defineProps<ModalTriggerProps>(), {
   isDisabled: false,
-  type: "button",
 });
 
-const attrs = useAttrs();
-const {slots} = useModalContext();
-const buttonRef = ref<HTMLButtonElement | null>(null);
+const {forwarded, className} = useForwardedAttrs();
+const {slots, triggerRef, contentId, isOpen, open, close, isTriggerDisabled} = useModalContext();
 const isDisabled = computed(() => props.isDisabled);
 
-const {isHovered} = useHover(buttonRef, {isDisabled});
-const {isFocusVisible} = useFocusRing(buttonRef, {isDisabled});
+const {isHovered} = useHover(triggerRef, {isDisabled});
+const {isFocusVisible} = useFocusRing(triggerRef, {isDisabled});
+const {isPressed} = usePress(triggerRef, {
+  isDisabled,
+  onPress: (event) => {
+    if (event.pointerType === "keyboard") {
+      toggle();
+    }
+  },
+});
 
-const classes = computed(() => cx(slots.value.trigger(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.trigger(), className.value));
+
+watch(
+  isDisabled,
+  (value) => {
+    isTriggerDisabled.value = value;
+  },
+  {immediate: true},
+);
+
+onScopeDispose(() => {
+  isTriggerDisabled.value = false;
+});
+
+function setTriggerRef(element: unknown) {
+  triggerRef.value = element instanceof HTMLElement ? element : null;
+}
+
+function toggle() {
+  if (isDisabled.value) {
+    return;
+  }
+
+  if (isOpen.value) {
+    close();
+  } else {
+    open();
+  }
+}
 </script>
 
 <template>
-  <DialogTrigger as-child>
-    <button
-      ref="buttonRef"
-      v-bind="$attrs"
-      :class="classes"
-      :data-focus-visible="isFocusVisible ? 'true' : undefined"
-      :data-hovered="isHovered ? 'true' : undefined"
-      :data-slot="'modal-trigger'"
-      :disabled="isDisabled || undefined"
-      :type="type"
-    >
-      <slot />
-    </button>
-  </DialogTrigger>
+  <div
+    :ref="setTriggerRef"
+    v-bind="forwarded"
+    aria-haspopup="dialog"
+    :aria-controls="isOpen ? contentId : undefined"
+    :aria-disabled="isDisabled ? 'true' : undefined"
+    :aria-expanded="isOpen"
+    :class="classes"
+    :data-focus-visible="isFocusVisible ? 'true' : undefined"
+    :data-hovered="isHovered ? 'true' : undefined"
+    :data-pressed="isPressed ? 'true' : undefined"
+    :data-slot="'modal-trigger'"
+    :tabindex="isDisabled ? -1 : 0"
+    role="button"
+    @click="toggle"
+  >
+    <slot />
+  </div>
 </template>

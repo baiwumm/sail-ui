@@ -8,12 +8,12 @@ export interface ModalRootProps {
 
 export interface ModalTriggerProps {
   isDisabled?: boolean;
-  type?: "button" | "submit" | "reset";
 }
 
 export interface ModalBackdropProps {
   variant?: ModalVariants["variant"];
   isDismissable?: boolean;
+  isKeyboardDismissDisabled?: boolean;
 }
 
 export interface ModalContainerProps {

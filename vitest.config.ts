@@ -7,6 +7,7 @@ const resolvePath = (path: string) => fileURLToPath(new URL(path, import.meta.ur
 
 const componentAliases = [
   "alert",
+  "alert-dialog",
   "avatar",
   "avatar-group",
   "badge",
@@ -19,6 +20,7 @@ const componentAliases = [
   "chip",
   "close-button",
   "description",
+  "drawer",
   "empty-state",
   "error-message",
   "field-error",
@@ -32,6 +34,7 @@ const componentAliases = [
   "link",
   "modal",
   "number-field",
+  "popover",
   "progress-bar",
   "progress-circle",
   "radio",
@@ -39,6 +42,7 @@ const componentAliases = [
   "search-field",
   "select",
   "separator",
+  "sheet",
   "skeleton",
   "slider",
   "spinner",
@@ -46,9 +50,11 @@ const componentAliases = [
   "switch",
   "switch-group",
   "textarea",
+  "toast",
   "toggle-button",
   "toggle-button-group",
   "toolbar",
+  "tooltip",
   "typography",
 ] as const;
 

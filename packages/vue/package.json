@@ -17,6 +17,11 @@
       "import": "./dist/components/alert/index.js",
       "default": "./dist/components/alert/index.js"
     },
+    "./alert-dialog": {
+      "types": "./dist/components/alert-dialog/index.d.ts",
+      "import": "./dist/components/alert-dialog/index.js",
+      "default": "./dist/components/alert-dialog/index.js"
+    },
     "./avatar": {
       "types": "./dist/components/avatar/index.d.ts",
       "import": "./dist/components/avatar/index.js",
@@ -76,6 +81,11 @@
       "types": "./dist/components/description/index.d.ts",
       "import": "./dist/components/description/index.js",
       "default": "./dist/components/description/index.js"
+    },
+    "./drawer": {
+      "types": "./dist/components/drawer/index.d.ts",
+      "import": "./dist/components/drawer/index.js",
+      "default": "./dist/components/drawer/index.js"
     },
     "./empty-state": {
       "types": "./dist/components/empty-state/index.d.ts",
@@ -142,6 +152,11 @@
       "import": "./dist/components/number-field/index.js",
       "default": "./dist/components/number-field/index.js"
     },
+    "./popover": {
+      "types": "./dist/components/popover/index.d.ts",
+      "import": "./dist/components/popover/index.js",
+      "default": "./dist/components/popover/index.js"
+    },
     "./package.json": "./package.json",
     "./progress-bar": {
       "types": "./dist/components/progress-bar/index.d.ts",
@@ -178,6 +193,11 @@
       "import": "./dist/components/separator/index.js",
       "default": "./dist/components/separator/index.js"
     },
+    "./sheet": {
+      "types": "./dist/components/sheet/index.d.ts",
+      "import": "./dist/components/sheet/index.js",
+      "default": "./dist/components/sheet/index.js"
+    },
     "./skeleton": {
       "types": "./dist/components/skeleton/index.d.ts",
       "import": "./dist/components/skeleton/index.js",
@@ -213,6 +233,11 @@
       "import": "./dist/components/textarea/index.js",
       "default": "./dist/components/textarea/index.js"
     },
+    "./toast": {
+      "types": "./dist/components/toast/index.d.ts",
+      "import": "./dist/components/toast/index.js",
+      "default": "./dist/components/toast/index.js"
+    },
     "./toggle-button": {
       "types": "./dist/components/toggle-button/index.d.ts",
       "import": "./dist/components/toggle-button/index.js",
@@ -227,6 +252,11 @@
       "types": "./dist/components/toolbar/index.d.ts",
       "import": "./dist/components/toolbar/index.js",
       "default": "./dist/components/toolbar/index.js"
+    },
+    "./tooltip": {
+      "types": "./dist/components/tooltip/index.d.ts",
+      "import": "./dist/components/tooltip/index.js",
+      "default": "./dist/components/tooltip/index.js"
     },
     "./typography": {
       "types": "./dist/components/typography/index.d.ts",

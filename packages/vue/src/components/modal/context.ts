@@ -11,9 +11,13 @@ export interface ModalContext {
   isEntering: Ref<boolean>;
   isExiting: Ref<boolean>;
   contentRef: Ref<HTMLElement | null>;
+  triggerRef: Ref<HTMLElement | null>;
+  contentId: string;
   placement: ComputedRef<ModalPlacement>;
   slots: ComputedRef<ModalSlots>;
   isDismissable: Ref<boolean>;
+  isKeyboardDismissDisabled: Ref<boolean>;
+  isTriggerDisabled: Ref<boolean>;
   open: () => void;
   close: () => void;
 }

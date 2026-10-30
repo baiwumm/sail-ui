@@ -24,6 +24,7 @@ const isInteractiveDisabled = computed(() => props.isDisabled || props.isPending
 const classes = computed(() =>
   cx(closeButtonVariants({variant: props.variant}), attrs.class as string | undefined),
 );
+const dataSlot = computed(() => (attrs["data-slot"] as string | undefined) ?? "close-button");
 const ariaLabel = computed(() => {
   const label = attrs["aria-label"] as string | undefined;
 
@@ -54,7 +55,7 @@ const {isFocused, isFocusVisible} = useFocusRing(buttonRef, {isDisabled: isInter
     :data-hovered="isHovered ? 'true' : undefined"
     :data-pending="isPending ? 'true' : undefined"
     :data-pressed="isPressed ? 'true' : undefined"
-    :data-slot="'close-button'"
+    :data-slot="dataSlot"
     :disabled="isDisabled || undefined"
     :type="type"
   >

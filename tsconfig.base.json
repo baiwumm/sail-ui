@@ -24,10 +24,16 @@
       "@sail-ui/styles": ["packages/styles/src/index.ts"],
       "@sail-ui/primitives": ["packages/primitives/src/index.ts"],
       "@sail-ui/vue": ["packages/vue/src/index.ts"],
+      "@sail-ui/vue/alert-dialog": ["packages/vue/src/components/alert-dialog/index.ts"],
       "@sail-ui/vue/button": ["packages/vue/src/components/button/index.ts"],
+      "@sail-ui/vue/drawer": ["packages/vue/src/components/drawer/index.ts"],
       "@sail-ui/vue/input": ["packages/vue/src/components/input/index.ts"],
       "@sail-ui/vue/modal": ["packages/vue/src/components/modal/index.ts"],
+      "@sail-ui/vue/popover": ["packages/vue/src/components/popover/index.ts"],
       "@sail-ui/vue/select": ["packages/vue/src/components/select/index.ts"],
+      "@sail-ui/vue/sheet": ["packages/vue/src/components/sheet/index.ts"],
+      "@sail-ui/vue/toast": ["packages/vue/src/components/toast/index.ts"],
+      "@sail-ui/vue/tooltip": ["packages/vue/src/components/tooltip/index.ts"],
       "@sail-ui/testing": ["packages/testing/src/index.ts"]
     }
   },

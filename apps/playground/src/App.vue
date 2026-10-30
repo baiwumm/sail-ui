@@ -1,5 +1,45 @@
 <script setup lang="ts">
+import {
+  AlertDialog,
+  AlertDialogBackdrop,
+  AlertDialogBody,
+  AlertDialogCloseTrigger,
+  AlertDialogContainer,
+  AlertDialogDialog,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogHeading,
+  AlertDialogIcon,
+  AlertDialogTrigger,
+} from "@sail-ui/vue/alert-dialog";
 import {Button} from "@sail-ui/vue/button";
+import {
+  Drawer,
+  DrawerBackdrop,
+  DrawerBody,
+  DrawerCloseTrigger,
+  DrawerContent,
+  DrawerDialog,
+  DrawerFooter,
+  DrawerHandle,
+  DrawerHeader,
+  DrawerHeading,
+  DrawerTrigger,
+} from "@sail-ui/vue/drawer";
+import {
+  Sheet,
+  SheetBackdrop,
+  SheetBody,
+  SheetClose,
+  SheetCloseTrigger,
+  SheetContent,
+  SheetDialog,
+  SheetFooter,
+  SheetHandle,
+  SheetHeader,
+  SheetHeading,
+  SheetTrigger,
+} from "@sail-ui/vue/sheet";
 import {Input, TextField} from "@sail-ui/vue/input";
 import {Label} from "@sail-ui/vue/label";
 import {Description} from "@sail-ui/vue/description";
@@ -29,15 +69,30 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@sail-ui/vue/select";
+import {
+  Popover,
+  PopoverArrow,
+  PopoverContent,
+  PopoverDialog,
+  PopoverHeading,
+  PopoverTrigger,
+} from "@sail-ui/vue/popover";
+import {Tooltip, TooltipArrow, TooltipContent, TooltipTrigger} from "@sail-ui/vue/tooltip";
 import {onMounted, ref} from "vue";
 
 import Forms from "./Forms.vue";
 import Gallery from "./Gallery.vue";
+import Toasts from "./Toasts.vue";
 
 const inputValue = ref("heroui.com");
 const state = ref<string | undefined>("california");
 const compoundState = ref<string | undefined>("texas");
 const modalOpen = ref(false);
+const alertDialogOpen = ref(false);
+const drawerOpen = ref(false);
+const sideDrawerOpen = ref(false);
+const sheetOpen = ref(false);
+const filtersSheetOpen = ref(false);
 const isDark = ref(false);
 const showCompound = ref(false);
 
@@ -74,7 +129,7 @@ onMounted(() => {
       <div>
         <h1 class="text-2xl font-semibold">Sail UI playground</h1>
         <p class="text-sm text-muted">
-          Button · Input · Modal · Select · Forms · Display & feedback
+          Button · Input · Modal · Drawer · Sheet · Select · Forms · Display & feedback
         </p>
       </div>
       <Button variant="outline" size="sm" @press="toggleTheme">
@@ -177,6 +232,158 @@ onMounted(() => {
       </div>
     </section>
 
+    <section id="alert-dialog" class="flex flex-col gap-4">
+      <h2 class="text-lg font-semibold">AlertDialog</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <AlertDialog v-model:open="alertDialogOpen">
+          <AlertDialogTrigger class="button button--secondary button--md">
+            Delete project
+          </AlertDialogTrigger>
+          <AlertDialogBackdrop>
+            <AlertDialogContainer placement="center">
+              <AlertDialogDialog class="sm:max-w-[400px]">
+                <AlertDialogCloseTrigger />
+                <AlertDialogHeader>
+                  <AlertDialogIcon status="danger" />
+                  <AlertDialogHeading>Delete project permanently?</AlertDialogHeading>
+                </AlertDialogHeader>
+                <AlertDialogBody>
+                  <p>
+                    This will permanently delete <strong>Sail UI</strong> and all of its data. This
+                    action cannot be undone.
+                  </p>
+                </AlertDialogBody>
+                <AlertDialogFooter>
+                  <Button variant="tertiary" @press="alertDialogOpen = false"> Cancel </Button>
+                  <Button variant="danger" @press="alertDialogOpen = false">
+                    Delete project
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogDialog>
+            </AlertDialogContainer>
+          </AlertDialogBackdrop>
+        </AlertDialog>
+        <span class="text-sm text-muted" data-testid="alert-dialog-state">
+          open: {{ alertDialogOpen }}
+        </span>
+      </div>
+    </section>
+
+    <section id="drawer" class="flex flex-col gap-4">
+      <h2 class="text-lg font-semibold">Drawer</h2>
+      <p class="text-sm text-muted">
+        Drag the handle down to dismiss the bottom drawer, or use Escape.
+      </p>
+      <div class="flex flex-wrap items-center gap-3">
+        <Drawer v-model:open="drawerOpen">
+          <DrawerTrigger class="button button--secondary button--md">
+            Open bottom drawer
+          </DrawerTrigger>
+          <DrawerBackdrop>
+            <DrawerContent placement="bottom">
+              <DrawerDialog>
+                <DrawerCloseTrigger />
+                <DrawerHandle />
+                <DrawerHeader>
+                  <DrawerHeading>Quick settings</DrawerHeading>
+                </DrawerHeader>
+                <DrawerBody>
+                  <p>
+                    Bottom drawers keep the full width and cap their height, so long content stays
+                    scrollable while the panel slides from the bottom edge.
+                  </p>
+                </DrawerBody>
+                <DrawerFooter>
+                  <Button variant="tertiary" @press="drawerOpen = false"> Cancel </Button>
+                  <Button variant="primary" @press="drawerOpen = false"> Save </Button>
+                </DrawerFooter>
+              </DrawerDialog>
+            </DrawerContent>
+          </DrawerBackdrop>
+        </Drawer>
+        <Drawer v-model:open="sideDrawerOpen">
+          <DrawerTrigger class="button button--secondary button--md">
+            Open side drawer
+          </DrawerTrigger>
+          <DrawerBackdrop>
+            <DrawerContent placement="right">
+              <DrawerDialog>
+                <DrawerCloseTrigger />
+                <DrawerHeader>
+                  <DrawerHeading>Navigation</DrawerHeading>
+                </DrawerHeader>
+                <DrawerBody>
+                  <p>
+                    Side drawers use a fixed width and full height, sliding in from the right edge.
+                  </p>
+                </DrawerBody>
+                <DrawerFooter>
+                  <Button variant="secondary" @press="sideDrawerOpen = false"> Close </Button>
+                </DrawerFooter>
+              </DrawerDialog>
+            </DrawerContent>
+          </DrawerBackdrop>
+        </Drawer>
+        <span class="text-sm text-muted" data-testid="drawer-state"> open: {{ drawerOpen }} </span>
+      </div>
+    </section>
+
+    <section id="sheet" class="flex flex-col gap-4">
+      <h2 class="text-lg font-semibold">Sheet</h2>
+      <p class="text-sm text-muted">
+        Sheets slide from an edge and keep their own scrollable body.
+      </p>
+      <div class="flex flex-wrap items-center gap-3">
+        <Sheet v-model:open="sheetOpen" placement="left">
+          <SheetTrigger class="button button--secondary button--md">
+            Open navigation sheet
+          </SheetTrigger>
+          <SheetBackdrop variant="blur">
+            <SheetContent>
+              <SheetDialog>
+                <SheetCloseTrigger />
+                <SheetHeader>
+                  <SheetHeading>Navigation</SheetHeading>
+                </SheetHeader>
+                <SheetBody>
+                  <p>
+                    The left sheet slides in from the viewport edge, keeps focus inside, and closes
+                    from Escape, the backdrop, or the close button.
+                  </p>
+                </SheetBody>
+                <SheetFooter>
+                  <SheetClose class="button button--secondary button--md"> Close </SheetClose>
+                </SheetFooter>
+              </SheetDialog>
+            </SheetContent>
+          </SheetBackdrop>
+        </Sheet>
+        <Sheet v-model:open="filtersSheetOpen" placement="bottom">
+          <SheetTrigger class="button button--secondary button--md">
+            Open filters sheet
+          </SheetTrigger>
+          <SheetBackdrop>
+            <SheetContent class="mx-auto max-w-[420px]">
+              <SheetDialog>
+                <SheetCloseTrigger />
+                <SheetHandle />
+                <SheetHeader>
+                  <SheetHeading>Filters</SheetHeading>
+                </SheetHeader>
+                <SheetBody>
+                  <p>Drag the handle down to dismiss the bottom sheet.</p>
+                </SheetBody>
+                <SheetFooter>
+                  <SheetClose class="button button--secondary button--md"> Done </SheetClose>
+                </SheetFooter>
+              </SheetDialog>
+            </SheetContent>
+          </SheetBackdrop>
+        </Sheet>
+        <span class="text-sm text-muted" data-testid="sheet-state"> open: {{ sheetOpen }} </span>
+      </div>
+    </section>
+
     <section id="select" class="flex flex-col gap-4">
       <h2 class="text-lg font-semibold">Select</h2>
       <div class="flex flex-wrap items-start gap-6">
@@ -206,6 +413,45 @@ onMounted(() => {
         </p>
       </div>
     </section>
+    <section id="popover" class="flex flex-col gap-4">
+      <h2 class="text-lg font-semibold">Popover</h2>
+      <div class="flex flex-wrap items-start gap-3">
+        <Popover>
+          <PopoverTrigger class="button button--secondary button--md">Open popover</PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverDialog class="w-64">
+              <PopoverHeading>Popover title</PopoverHeading>
+              <p class="text-sm text-muted">
+                Anchored content with an arrow, placement flipping, and Escape dismissal.
+              </p>
+            </PopoverDialog>
+          </PopoverContent>
+        </Popover>
+      </div>
+    </section>
+
+    <section id="tooltip" class="flex flex-col gap-4">
+      <h2 class="text-lg font-semibold">Tooltip</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <Tooltip :delay="0">
+          <TooltipTrigger class="button button--secondary button--md">
+            Hover or focus for details
+          </TooltipTrigger>
+          <TooltipContent show-arrow>
+            <TooltipArrow />
+            Tooltips open after the shared delay and close with the grace period.
+          </TooltipContent>
+        </Tooltip>
+        <Tooltip :delay="0" trigger="focus">
+          <TooltipTrigger class="button button--secondary button--md">
+            Focus-only tooltip
+          </TooltipTrigger>
+          <TooltipContent placement="bottom">Opened on focus only.</TooltipContent>
+        </Tooltip>
+      </div>
+    </section>
+
     <section
       v-if="showCompound"
       id="compound"
@@ -240,5 +486,6 @@ onMounted(() => {
     </section>
     <Forms />
     <Gallery />
+    <Toasts />
   </main>
 </template>

@@ -174,7 +174,7 @@ for (const theme of ["light", "dark"] as const) {
       await openApp(vuePage, PLAYGROUND, theme);
       await openApp(reactPage, REFERENCE, theme);
 
-      const selector = "#modal button";
+      const selector = "#modal .button";
 
       await expectParity(vuePage, reactPage, selector, `modal-trigger-${theme}`);
 

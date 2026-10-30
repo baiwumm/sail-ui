@@ -10,6 +10,7 @@ defineOptions({name: "SailModalBackdrop", inheritAttrs: false});
 
 const props = withDefaults(defineProps<ModalBackdropProps>(), {
   isDismissable: true,
+  isKeyboardDismissDisabled: false,
 });
 
 const attrs = useAttrs();
@@ -20,10 +21,12 @@ const mergedSlots = computed(() => ({
   ...modalVariants({variant: props.variant}),
 }));
 const isDismissable = computed(() => props.isDismissable);
+const isKeyboardDismissDisabled = computed(() => props.isKeyboardDismissDisabled);
 
 provide(modalContextKey, {
   ...context,
   isDismissable,
+  isKeyboardDismissDisabled,
   slots: mergedSlots,
 });
 
