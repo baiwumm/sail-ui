@@ -22,6 +22,9 @@ export interface InputProps {
   fullWidth?: boolean;
   isDisabled?: boolean;
   isInvalid?: boolean;
+  name?: string;
+  isRequired?: boolean;
+  placeholder?: string;
 }
 
 export interface TextFieldContext {

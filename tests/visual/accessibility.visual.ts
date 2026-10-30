@@ -28,6 +28,7 @@ const GALLERY_SECTIONS = [
   "text",
   "typography",
   "empty-state",
+  "forms",
 ] as const;
 
 async function collectContrastViolations(page: Page) {

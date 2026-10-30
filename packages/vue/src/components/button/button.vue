@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import {buttonVariants, cx, spinnerVariants} from "@sail-ui/styles";
 import {useFocusRing, useHover, usePress, type PressEvent} from "@sail-ui/primitives";
-import {computed, ref, useAttrs} from "vue";
+import {buttonVariants, cx, spinnerVariants} from "@sail-ui/styles";
+import {Primitive} from "reka-ui";
+import {computed, inject, ref, type ComponentPublicInstance} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
+import {buttonGroupContextKey} from "../button-group/types";
 import type {ButtonProps} from "./types";
 
 defineOptions({name: "SailButton", inheritAttrs: false});
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  variant: "primary",
-  size: "md",
   fullWidth: false,
   isIconOnly: false,
   isDisabled: false,
@@ -21,26 +22,34 @@ const emit = defineEmits<{
   press: [event: PressEvent];
 }>();
 
-const attrs = useAttrs();
-const buttonRef = ref<HTMLButtonElement | null>(null);
-const isDisabled = computed(() => props.isDisabled || props.isLoading);
+const {className, forwarded} = useForwardedAttrs();
+const group = inject(buttonGroupContextKey, null);
+const buttonRef = ref<ComponentPublicInstance | null>(null);
+const element = computed(() => (buttonRef.value?.$el as Element | null | undefined) ?? null);
+const size = computed(() => props.size ?? group?.size.value);
+const variant = computed(() => props.variant ?? group?.variant.value);
+const fullWidth = computed(() => props.fullWidth || Boolean(group?.fullWidth.value));
+const isDisabled = computed(
+  () => props.isDisabled || Boolean(group?.isDisabled.value) || props.isLoading
+);
+const isNativeButton = computed(() => !props.as || props.as === "button");
 
-const {isHovered} = useHover(buttonRef, {isDisabled});
-const {isPressed} = usePress(buttonRef, {
+const {isHovered} = useHover(element, {isDisabled});
+const {isPressed} = usePress(element, {
   isDisabled,
   onPress: (event) => emit("press", event)
 });
-const {isFocusVisible} = useFocusRing(buttonRef, {isDisabled});
+const {isFocused, isFocusVisible} = useFocusRing(element, {isDisabled});
 
 const classes = computed(() =>
   cx(
     buttonVariants({
-      fullWidth: props.fullWidth,
+      fullWidth: fullWidth.value,
       isIconOnly: props.isIconOnly,
-      size: props.size,
-      variant: props.variant
+      size: size.value,
+      variant: variant.value
     }),
-    attrs.class as string | undefined
+    className.value
   )
 );
 
@@ -48,18 +57,21 @@ const spinnerClasses = computed(() => spinnerVariants({color: "current", size: "
 </script>
 
 <template>
-  <button
+  <Primitive
     ref="buttonRef"
-    v-bind="$attrs"
+    v-bind="forwarded"
     :aria-busy="isLoading || undefined"
+    :as="as ?? 'button'"
+    :as-child="asChild"
     :class="classes"
+    :data-focused="isFocused ? 'true' : undefined"
     :data-focus-visible="isFocusVisible ? 'true' : undefined"
     :data-hovered="isHovered ? 'true' : undefined"
     :data-pending="isLoading ? 'true' : undefined"
     :data-pressed="isPressed ? 'true' : undefined"
     :data-slot="'button'"
     :disabled="isDisabled || undefined"
-    :type="type"
+    :type="isNativeButton ? type : undefined"
   >
     <span
       v-if="isLoading"
@@ -85,6 +97,6 @@ const spinnerClasses = computed(() => spinnerVariants({color: "current", size: "
         />
       </svg>
     </span>
-    <slot />
-  </button>
+    <slot :is-loading="isLoading" />
+  </Primitive>
 </template>

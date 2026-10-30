@@ -82,3 +82,45 @@ export const ExternalLinkIcon: IconComponent = (_, {attrs}) =>
       })
     ]
   );
+
+export const SearchIcon: IconComponent = (_, {attrs}) =>
+  h(
+    "svg",
+    {...svgProps, ...attrs},
+    [
+      h("path", {
+        "clip-rule": "evenodd",
+        d: "M11.5 7a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0m-.82 4.74a6 6 0 1 1 1.06-1.06l2.79 2.79a.75.75 0 1 1-1.06 1.06z",
+        fill: "currentColor",
+        "fill-rule": "evenodd"
+      })
+    ]
+  );
+
+export const PlusIcon: IconComponent = (_, {attrs}) =>
+  h(
+    "svg",
+    {...svgProps, ...attrs},
+    [
+      h("path", {
+        "clip-rule": "evenodd",
+        d: "M8 1.75a.75.75 0 0 1 .75.75v4.75h4.75a.75.75 0 0 1 0 1.5H8.75v4.75a.75.75 0 0 1-1.5 0V8.75H2.5a.75.75 0 0 1 0-1.5h4.75V2.5A.75.75 0 0 1 8 1.75",
+        fill: "currentColor",
+        "fill-rule": "evenodd"
+      })
+    ]
+  );
+
+export const MinusIcon: IconComponent = (_, {attrs}) =>
+  h(
+    "svg",
+    {...svgProps, ...attrs},
+    [
+      h("path", {
+        "clip-rule": "evenodd",
+        d: "M1.75 8a.75.75 0 0 1 .75-.75h11a.75.75 0 0 1 0 1.5h-11A.75.75 0 0 1 1.75 8",
+        fill: "currentColor",
+        "fill-rule": "evenodd"
+      })
+    ]
+  );

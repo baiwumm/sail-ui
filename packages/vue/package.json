@@ -42,10 +42,25 @@
       "import": "./dist/components/button/index.js",
       "default": "./dist/components/button/index.js"
     },
+    "./button-group": {
+      "types": "./dist/components/button-group/index.d.ts",
+      "import": "./dist/components/button-group/index.js",
+      "default": "./dist/components/button-group/index.js"
+    },
     "./card": {
       "types": "./dist/components/card/index.d.ts",
       "import": "./dist/components/card/index.js",
       "default": "./dist/components/card/index.js"
+    },
+    "./checkbox": {
+      "types": "./dist/components/checkbox/index.d.ts",
+      "import": "./dist/components/checkbox/index.js",
+      "default": "./dist/components/checkbox/index.js"
+    },
+    "./checkbox-group": {
+      "types": "./dist/components/checkbox-group/index.d.ts",
+      "import": "./dist/components/checkbox-group/index.js",
+      "default": "./dist/components/checkbox-group/index.js"
     },
     "./chip": {
       "types": "./dist/components/chip/index.d.ts",
@@ -82,6 +97,11 @@
       "import": "./dist/components/fieldset/index.js",
       "default": "./dist/components/fieldset/index.js"
     },
+    "./form": {
+      "types": "./dist/components/form/index.d.ts",
+      "import": "./dist/components/form/index.js",
+      "default": "./dist/components/form/index.js"
+    },
     "./header": {
       "types": "./dist/components/header/index.d.ts",
       "import": "./dist/components/header/index.js",
@@ -91,6 +111,11 @@
       "types": "./dist/components/input/index.d.ts",
       "import": "./dist/components/input/index.js",
       "default": "./dist/components/input/index.js"
+    },
+    "./input-group": {
+      "types": "./dist/components/input-group/index.d.ts",
+      "import": "./dist/components/input-group/index.js",
+      "default": "./dist/components/input-group/index.js"
     },
     "./kbd": {
       "types": "./dist/components/kbd/index.d.ts",
@@ -112,6 +137,12 @@
       "import": "./dist/components/modal/index.js",
       "default": "./dist/components/modal/index.js"
     },
+    "./number-field": {
+      "types": "./dist/components/number-field/index.d.ts",
+      "import": "./dist/components/number-field/index.js",
+      "default": "./dist/components/number-field/index.js"
+    },
+    "./package.json": "./package.json",
     "./progress-bar": {
       "types": "./dist/components/progress-bar/index.d.ts",
       "import": "./dist/components/progress-bar/index.js",
@@ -121,6 +152,21 @@
       "types": "./dist/components/progress-circle/index.d.ts",
       "import": "./dist/components/progress-circle/index.js",
       "default": "./dist/components/progress-circle/index.js"
+    },
+    "./radio": {
+      "types": "./dist/components/radio/index.d.ts",
+      "import": "./dist/components/radio/index.js",
+      "default": "./dist/components/radio/index.js"
+    },
+    "./radio-group": {
+      "types": "./dist/components/radio-group/index.d.ts",
+      "import": "./dist/components/radio-group/index.js",
+      "default": "./dist/components/radio-group/index.js"
+    },
+    "./search-field": {
+      "types": "./dist/components/search-field/index.d.ts",
+      "import": "./dist/components/search-field/index.js",
+      "default": "./dist/components/search-field/index.js"
     },
     "./select": {
       "types": "./dist/components/select/index.d.ts",
@@ -137,6 +183,11 @@
       "import": "./dist/components/skeleton/index.js",
       "default": "./dist/components/skeleton/index.js"
     },
+    "./slider": {
+      "types": "./dist/components/slider/index.d.ts",
+      "import": "./dist/components/slider/index.js",
+      "default": "./dist/components/slider/index.js"
+    },
     "./spinner": {
       "types": "./dist/components/spinner/index.d.ts",
       "import": "./dist/components/spinner/index.js",
@@ -147,14 +198,45 @@
       "import": "./dist/components/surface/index.js",
       "default": "./dist/components/surface/index.js"
     },
+    "./switch": {
+      "types": "./dist/components/switch/index.d.ts",
+      "import": "./dist/components/switch/index.js",
+      "default": "./dist/components/switch/index.js"
+    },
+    "./switch-group": {
+      "types": "./dist/components/switch-group/index.d.ts",
+      "import": "./dist/components/switch-group/index.js",
+      "default": "./dist/components/switch-group/index.js"
+    },
+    "./textarea": {
+      "types": "./dist/components/textarea/index.d.ts",
+      "import": "./dist/components/textarea/index.js",
+      "default": "./dist/components/textarea/index.js"
+    },
+    "./toggle-button": {
+      "types": "./dist/components/toggle-button/index.d.ts",
+      "import": "./dist/components/toggle-button/index.js",
+      "default": "./dist/components/toggle-button/index.js"
+    },
+    "./toggle-button-group": {
+      "types": "./dist/components/toggle-button-group/index.d.ts",
+      "import": "./dist/components/toggle-button-group/index.js",
+      "default": "./dist/components/toggle-button-group/index.js"
+    },
+    "./toolbar": {
+      "types": "./dist/components/toolbar/index.d.ts",
+      "import": "./dist/components/toolbar/index.js",
+      "default": "./dist/components/toolbar/index.js"
+    },
     "./typography": {
       "types": "./dist/components/typography/index.d.ts",
       "import": "./dist/components/typography/index.js",
       "default": "./dist/components/typography/index.js"
-    },
-    "./package.json": "./package.json"
+    }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "vite build",

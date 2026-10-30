@@ -11,6 +11,7 @@ import {
 } from "@heroui/react";
 import {useEffect, useState} from "react";
 
+import Forms from "./Forms";
 import Gallery from "./Gallery";
 
 const states = [
@@ -46,7 +47,9 @@ export default function App() {
       <header className="flex items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold">Sail UI playground</h1>
-          <p className="text-sm text-muted">Button · Input · Modal · Select · Display & feedback</p>
+          <p className="text-sm text-muted">
+            Button · Input · Modal · Select · Forms · Display & feedback
+          </p>
         </div>
         <Button
           variant="outline"
@@ -263,6 +266,7 @@ export default function App() {
         </div>
       </section>
 
+      <Forms />
       <Gallery />
     </main>
   );

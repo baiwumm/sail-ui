@@ -1,7 +1,7 @@
 import type {InjectionKey} from "vue";
 
 export interface LabelContext {
-  id: string;
+  id?: string;
   /**
    * RAC renders a Label inside a non-labelable widget (progress bar) as a
    * `span` instead of a `label` element.

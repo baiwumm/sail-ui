@@ -102,4 +102,51 @@ describe("Button", () => {
 
     wrapper.unmount();
   });
+
+  it("renders the native button type", () => {
+    const submit = mount(Button, {props: {type: "submit"}});
+    const reset = mount(Button, {props: {type: "reset"}});
+
+    expect(submit.get("button").attributes("type")).toBe("submit");
+    expect(reset.get("button").attributes("type")).toBe("reset");
+
+    submit.unmount();
+    reset.unmount();
+  });
+
+  it("renders another element with the as prop", () => {
+    const wrapper = mount(Button, {props: {as: "a"}, slots: {default: "Link"}});
+
+    expect(wrapper.get("a").attributes("data-slot")).toBe("button");
+    expect(wrapper.get("a").attributes("type")).toBeUndefined();
+
+    wrapper.unmount();
+  });
+
+  it("merges the props into the child with asChild", () => {
+    const wrapper = mount(Button, {
+      props: {asChild: true},
+      slots: {default: '<a href="/docs">Docs</a>'}
+    });
+
+    expect(wrapper.get("a").attributes("data-slot")).toBe("button");
+    expect(wrapper.get("a").attributes("href")).toBe("/docs");
+
+    wrapper.unmount();
+  });
+
+  it("keeps the native submit activation of the keyboard", async () => {
+    const wrapper = mount(Button, {props: {type: "submit"}});
+    const event = new KeyboardEvent("keydown", {
+      key: " ",
+      bubbles: true,
+      cancelable: true
+    });
+
+    wrapper.get("button").element.dispatchEvent(event);
+
+    expect(event.defaultPrevented).toBe(false);
+
+    wrapper.unmount();
+  });
 });

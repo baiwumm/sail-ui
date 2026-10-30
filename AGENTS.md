@@ -2,7 +2,7 @@
 
 Instructions for AI agents and contributors working on **Sail UI** — an unofficial Vue 3 / Nuxt port of HeroUI v3.
 
-> **Current phase: M1.** T01 (M0 architecture spike), T02 (contract tooling), and T03 (24 display/layout/feedback components) are complete. The workspace builds and `pnpm verify` is the full gate. T04 (19 form controls) is next; Button, Input, Modal, and Select exist from T01, and the 24 T03 components are done. Every other entry in the component matrix is still pending.
+> **Current phase: M1 complete.** T01 (M0 architecture spike), T02 (contract tooling), T03 (24 display/layout/feedback components), and T04 (19 form controls) are complete. The workspace builds and `pnpm verify` is the full gate. M1 delivered 43 components; every other entry in the component matrix is still pending. T08 (advanced data) and T09 (Nuxt module, docs site, release) are now unblocked.
 
 ---
 
@@ -179,6 +179,9 @@ Rules that prevent the common failures:
 - Portals/teleports render only after the overlay is open (`v-if`), so the server does not emit overlay DOM.
 - Delete React-only concepts: `"use client"`, `forwardRef`, render props as functions in `class`, `useSyncExternalStore`, `createContext`.
 - Prop names stay close to upstream (`isDisabled`, `isIconOnly`, `isRequired`, `isInvalid`) for migration parity. Vue-idiomatic `v-model` / `v-model:open` replace controlled `value`/`isOpen` pairs. Do not add dual aliases unless an ADR accepts them.
+- Do not `extends` an imported type in a props interface: the SFC compiler cannot resolve it and fails the build. Declare the props explicitly, or use an indexed access (`ButtonVariants["variant"]`).
+- Merge the fallthrough attributes with `useForwardedAttrs()` from `packages/vue/src/shared/attrs.ts`. It drops `class` before forwarding, because `v-bind="$attrs"` plus `:class` renders the consumer class twice.
+- Some upstream CSS selects on the `slot` attribute (`:has([slot="increment"])`, `:has([slot="clear"])`). The literal attribute is deprecated in Vue templates, so bind it: `v-bind="{...forwarded, slot: 'increment'}"`. Two `v-bind` attributes on one element are a parse error.
 
 ### 8.4 Naming
 
@@ -272,6 +275,8 @@ Do not ship a component with only a render test. "Renders without crashing" is n
 - The upstream overlay exit logic waits for the real CSS animation (including WebKit's pending state) and pins opacity before unmount. Do not replace it with a naive `setTimeout`.
 - Upstream modal-level overlays (Modal/AlertDialog/Drawer/Sheet) use `--z-index-overlay: 100000`; toast uses `--z-index-toast: 100001`. Popover/tooltip rely on portal stacking; do not invent a higher layer.
 - `@heroui/styles` has zero inline utility classes in components, so Tailwind does not need to scan `node_modules` with `@source`.
+- Reka renders `CheckboxRoot`, `RadioGroupItem` and `SwitchRoot` as `<button role="checkbox|radio|switch">`. Upstream HeroUI renders a `<label>` with a visually hidden native input, so the upstream checkbox, radio and switch are self-implemented in Sail UI to keep the DOM contract.
+- `useFocusRing` only reports `data-focus-visible` after a keyboard interaction. Browser tests must press a key before focusing an element programmatically, otherwise the attribute is intentionally absent.
 - If the Nuxt UI reference clone is broken, re-clone instead of guessing its internals.
 
 ## 14. When blocked

@@ -25,6 +25,7 @@ const GALLERY_SECTIONS = [
   "text",
   "typography",
   "empty-state",
+  "forms",
 ] as const;
 
 interface AxeViolation {

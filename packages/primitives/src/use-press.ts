@@ -2,6 +2,32 @@ import type {MaybeRefOrGetter, Ref} from "vue";
 
 import {onBeforeUnmount, onMounted, ref, toValue, watch} from "vue";
 
+/**
+ * Submit and reset buttons keep their native Space activation so the browser
+ * still fires `click` and submits or resets the owning form.
+ */
+function keepsNativeActivation(element: Element | null) {
+  if (!element || !(element instanceof HTMLButtonElement)) {
+    return false;
+  }
+
+  return element.type === "submit" || element.type === "reset";
+}
+
+/**
+ * Form controls keep their native keyboard activation. Preventing the default
+ * Space action would stop a checkbox from toggling or a radio from selecting.
+ */
+function isWithinFormControl(target: EventTarget | null) {
+  const element = target as HTMLElement | null;
+
+  if (!element || typeof element.closest !== "function") {
+    return false;
+  }
+
+  return Boolean(element.closest("input, textarea, select, button"));
+}
+
 export interface PressEvent {
   pointerType: string;
   originalEvent: Event;
@@ -82,7 +108,15 @@ export function usePress(
     }
 
     if (keyboardEvent.key === " " || keyboardEvent.key === "Spacebar") {
-      keyboardEvent.preventDefault();
+      // Submit and reset buttons keep the native Space activation so the form
+      // still submits. React Aria makes the same exception.
+      if (
+        !keepsNativeActivation(element) &&
+        !isWithinFormControl(keyboardEvent.target)
+      ) {
+        keyboardEvent.preventDefault();
+      }
+
       isPressed.value = true;
       pressedWithKeyboard = true;
       return;
@@ -103,7 +137,13 @@ export function usePress(
     }
 
     if (keyboardEvent.key === " " || keyboardEvent.key === "Spacebar") {
-      keyboardEvent.preventDefault();
+      if (
+        !keepsNativeActivation(element) &&
+        !isWithinFormControl(keyboardEvent.target)
+      ) {
+        keyboardEvent.preventDefault();
+      }
+
       isPressed.value = false;
       pressedWithKeyboard = false;
       emitPress(keyboardEvent, "keyboard");

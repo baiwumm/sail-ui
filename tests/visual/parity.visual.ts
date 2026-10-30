@@ -25,7 +25,8 @@ const GALLERY_SECTIONS = [
   "surface",
   "text",
   "typography",
-  "empty-state"
+  "empty-state",
+  "forms"
 ] as const;
 
 type Theme = "light" | "dark";

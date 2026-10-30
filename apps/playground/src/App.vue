@@ -31,6 +31,7 @@ import {
 } from "@sail-ui/vue/select";
 import {onMounted, ref} from "vue";
 
+import Forms from "./Forms.vue";
 import Gallery from "./Gallery.vue";
 
 const inputValue = ref("heroui.com");
@@ -75,7 +76,7 @@ onMounted(() => {
           Sail UI playground
         </h1>
         <p class="text-sm text-muted">
-          Button · Input · Modal · Select · Display & feedback
+          Button · Input · Modal · Select · Forms · Display & feedback
         </p>
       </div>
       <Button
@@ -345,6 +346,7 @@ onMounted(() => {
         </component>
       </component>
     </section>
+    <Forms />
     <Gallery />
   </main>
 </template>

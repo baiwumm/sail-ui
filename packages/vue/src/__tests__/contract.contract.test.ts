@@ -326,7 +326,7 @@ describe("interactive state contract", () => {
     const input = wrapper.get('[data-slot="input"]');
 
     expect(textfield.attributes("data-invalid")).toBe("");
-    expect(input.attributes("data-invalid")).toBe("");
+    expect(input.attributes("data-invalid")).toBe("true");
 
     (input.element as HTMLElement).focus();
     await nextTick();
@@ -488,14 +488,13 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
   button: {
     asserted: [
       "data-focus-visible",
+      "data-focused",
       "data-hovered",
       "data-pending",
       "data-pressed",
       "data-slot"
     ],
-    gaps: {
-      "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused])."
-    }
+    gaps: {}
   },
   input: {
     asserted: ["data-disabled", "data-invalid"],
@@ -598,6 +597,151 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
   },
   "progress-circle": {
     asserted: ["data-disabled"],
+    gaps: {}
+  },
+  "button-group": {
+    asserted: [],
+    gaps: {
+      "data-focus-visible": "Descendant selector: the group only raises the z-index of a focused button.",
+      "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
+      "data-pressed": "Descendant selector: the pressed state belongs to the buttons of the group."
+    }
+  },
+  checkbox: {
+    asserted: [
+      "data-disabled",
+      "data-focus-visible",
+      "data-hovered",
+      "data-indeterminate",
+      "data-invalid",
+      "data-pressed",
+      "data-selected",
+      "data-slot"
+    ],
+    gaps: {
+      "data-focused": "The upstream CSS does not read the focus state of a checkbox."
+    }
+  },
+  "checkbox-group": {
+    asserted: ["data-slot"],
+    gaps: {}
+  },
+  radio: {
+    asserted: [
+      "data-disabled",
+      "data-focus-visible",
+      "data-hovered",
+      "data-pressed",
+      "data-selected",
+      "data-slot"
+    ],
+    gaps: {
+      "data-focused": "The upstream CSS does not read the focus state of a radio.",
+      "data-invalid": "The invalid state is inherited from the radio group and asserted there."
+    }
+  },
+  "radio-group": {
+    asserted: ["data-orientation", "data-selected", "data-slot"],
+    gaps: {
+      "data-hovered": "Descendant selector: the hover state belongs to the radio content."
+    }
+  },
+  switch: {
+    asserted: [
+      "data-disabled",
+      "data-focus-visible",
+      "data-hovered",
+      "data-pressed",
+      "data-selected",
+      "data-slot"
+    ],
+    gaps: {
+      "data-focused": "The upstream CSS does not read the focus state of a switch.",
+      "data-invalid": "The invalid state is only rendered by the field context of the switch."
+    }
+  },
+  "switch-group": {
+    asserted: [],
+    gaps: {}
+  },
+  "input-group": {
+    asserted: [
+      "data-disabled",
+      "data-focus-within",
+      "data-hovered",
+      "data-invalid",
+      "data-slot"
+    ],
+    gaps: {}
+  },
+  "search-field": {
+    asserted: [
+      "data-disabled",
+      "data-empty",
+      "data-focus-within",
+      "data-hovered",
+      "data-invalid",
+      "data-slot"
+    ],
+    gaps: {}
+  },
+  "number-field": {
+    asserted: [
+      "data-disabled",
+      "data-focus-within",
+      "data-hovered",
+      "data-pressed",
+      "data-slot"
+    ],
+    gaps: {
+      "data-invalid": "The upstream component never marks the group invalid; the root carries the state."
+    }
+  },
+  slider: {
+    asserted: [
+      "data-direction",
+      "data-dragging",
+      "data-fill-end",
+      "data-fill-start",
+      "data-orientation",
+      "data-slot"
+    ],
+    gaps: {
+      "data-disabled": "Disabled sliders mark the thumb and the root, not the track.",
+      "data-filled": "Only the decorative step and mark indicators use it.",
+      "data-focus-visible": "The focus ring of the thumb is asserted by the browser suite."
+    }
+  },
+  textarea: {
+    asserted: [
+      "data-disabled",
+      "data-focus-visible",
+      "data-focused",
+      "data-hovered",
+      "data-invalid"
+    ],
+    gaps: {}
+  },
+  "toggle-button": {
+    asserted: [
+      "data-focus-visible",
+      "data-focused",
+      "data-hovered",
+      "data-pressed",
+      "data-selected"
+    ],
+    gaps: {}
+  },
+  "toggle-button-group": {
+    asserted: [],
+    gaps: {
+      "data-focus-visible": "Descendant selector: the group only changes the ring inset of a focused button.",
+      "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
+      "data-pressed": "Descendant selector: the pressed state belongs to the buttons of the group."
+    }
+  },
+  toolbar: {
+    asserted: [],
     gaps: {}
   }
 };
