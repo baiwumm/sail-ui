@@ -2,7 +2,7 @@
 
 Instructions for AI agents and contributors working on **Sail UI** — an unofficial Vue 3 / Nuxt port of HeroUI v3.
 
-> **Current phase: M1.** T01 (M0 architecture spike) and T02 (contract tooling) are complete. The workspace builds and `pnpm verify` is the full gate. Button, Input, Modal, and Select are the only ported components; every other entry in the component matrix is still pending.
+> **Current phase: M1.** T01 (M0 architecture spike), T02 (contract tooling), and T03 (24 display/layout/feedback components) are complete. The workspace builds and `pnpm verify` is the full gate. T04 (19 form controls) is next; Button, Input, Modal, and Select exist from T01, and the 24 T03 components are done. Every other entry in the component matrix is still pending.
 
 ---
 

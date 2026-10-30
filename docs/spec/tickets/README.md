@@ -1,6 +1,6 @@
 # Tickets — 垂直切片
 
-> 状态：T01、T02 已完成；其余 `Pending`。按 `Blocked by` 顺序推进；完成一张再开下一张。
+> 状态：T01–T03 已完成；其余 `Pending`。按 `Blocked by` 顺序推进；完成一张再开下一张。
 > 每张 ticket 都是跨样式/组件/测试/文档的垂直切片，完成后可独立演示。
 
 ## 依赖图
@@ -26,7 +26,7 @@ T03..T08 ──> T09 Nuxt module + 文档站 + 发布门禁
 |---|---|---|---|---|---|---|
 | [T01](./01-m0-foundation-spike.md) | M0 架构 spike | M0 | — | T02 | Button/Input/Modal/Select 在 Vite + Nuxt SSR 中视觉对齐 | Done |
 | [T02](./02-contract-tooling.md) | 契约工具链与属性归属 | M0/M1 | T01 | T03, T04, T05, T07 | 删除任一属性 → 契约测试红；恢复 → 绿 | Done |
-| [T03](./03-display-and-feedback.md) | 展示 / 布局 / 反馈（24） | M1 | T02 | T09 | 展示画廊 + 主题/尺寸截图 | Pending |
+| [T03](./03-display-and-feedback.md) | 展示 / 布局 / 反馈（24） | M1 | T02 | T09 | 展示画廊 + 主题/尺寸截图 | Done |
 | [T04](./04-form-controls.md) | 表单控件（19） | M1 | T02 | T08, T09 | 完整表单：校验/受控/键盘 | Pending |
 | [T05](./05-overlays.md) | 覆盖层与 Toast（7） | M2 | T02 | T06, T09 | 覆盖层状态矩阵 + SSR + 动画 | Pending |
 | [T06](./06-collections-and-pickers.md) | 集合 / 选择器（15） | M2 | T02, T05 | T09 | Select/ListBox/Menu/Tabs/Accordion/Pagination | Pending |
