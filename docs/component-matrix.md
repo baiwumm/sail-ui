@@ -4,36 +4,36 @@
 - 公共组件：**84**（另有 2 个内部组合 `color-input-group`、`date-input-group`，以及内部目录 `rac`、`icons`，不计入公共 API）
 - 里程碑：M1 = 展示 + 表单；M2 = 覆盖层 + 集合；M3 = 日期/颜色/高级数据；M4 = 模块/文档/发布
 - `MVP` = 核心 40 组件（对外承诺的第一版能力）
-- 状态：`Spec` = 仅有设计；`M0` = spike；`WIP`；`Done`。实现后更新此列。
+- 状态：`Spec` = 仅有设计；`M0` = spike；`WIP`；`M1 done` = 里程碑验收通过。状态记录在各表「备注」列。
 
 ## 展示 / 布局 / 反馈（24）
 
 | 组件 | Reka 基础 | 里程碑 | MVP | 备注 |
 |---|---|---|---|---|
-| `alert` | 自研 | M1 | ✅ | `role` 按上游；关闭按钮 |
-| `avatar` | `AvatarRoot` / `AvatarImage` / `AvatarFallback` | M1 | ✅ | 图片失败回退、尺寸 |
-| `avatar-group` | 自研 | M1 | ✅ | 堆叠、溢出计数 |
-| `badge` | 自研 | M1 | ✅ | 颜色/尺寸/位置 |
-| `breadcrumbs` | 自研 | M1 | | `nav` + `aria-current`；RTL |
-| `card` | 自研 | M1 | ✅ | 复合：Header/Title/Description/Content/Footer |
-| `chip` | 自研 | M1 | ✅ | 可关闭、颜色 |
-| `close-button` | 自研（`asChild`） | M1 | | 默认 `aria-label` |
-| `description` | `FieldDescription` | M1 | ✅ | 与 Field 上下文关联 |
-| `empty-state` | 自研 | M1 | | 图标/标题/描述/动作 |
-| `error-message` | 自研 | M1 | | 语义与上游一致 |
-| `field-error` | `FieldError` | M1 | ✅ | 错误 id、`aria-live` |
-| `fieldset` | 自研 | M1 | | `role="group"` / legend |
-| `header` | 自研 | M1 | | 页面/区块标题 |
-| `kbd` | 自研 | M1 | | 组合键渲染 |
-| `label` | `FieldLabel` / `Label` | M1 | ✅ | `for`/`id` 关联 |
-| `link` | 自研（`asChild`） | M1 | ✅ | `href`/禁用/外链 |
-| `progress-bar` | `ProgressRoot` | M1 | | `aria-valuenow`、不确定态 |
-| `progress-circle` | `ProgressRoot` + SVG | M1 | | 几何/描边 |
-| `separator` | `Separator` | M1 | ✅ | orientation/decorative |
-| `skeleton` | 自研 | M1 | ✅ | 减少动画偏好 |
-| `spinner` | 自研 | M1 | ✅ | `role="status"` |
-| `surface` | 自研 | M1 | | 容器/层级 |
-| `typography` | 自研 | M1 | | 变体/`as` |
+| `alert` | 自研 | M1 | ✅ | `role` 按上游；关闭按钮；T03 M1 done |
+| `avatar` | `AvatarRoot` / `AvatarImage` / `AvatarFallback` | M1 | ✅ | 图片失败回退、尺寸；T03 M1 done |
+| `avatar-group` | 自研 | M1 | ✅ | 堆叠、溢出计数；`is-grid` 布尔 shorthand 已修复；T03 M1 done |
+| `badge` | 自研 | M1 | ✅ | 颜色/尺寸/位置；T03 M1 done |
+| `breadcrumbs` | 自研 | M1 | | `nav` + `aria-current`；RTL 冒烟；T03 M1 done |
+| `card` | 自研 | M1 | ✅ | 复合：Header/Title/Description/Content/Footer；T03 M1 done |
+| `chip` | 自研 | M1 | ✅ | 可关闭、颜色；T03 M1 done |
+| `close-button` | 自研（`asChild`） | M1 | | 默认 `aria-label`；T03 M1 done |
+| `description` | `FieldDescription` | M1 | ✅ | 与 Field 上下文关联；无 Provider 时可手动传 id；T03 M1 done |
+| `empty-state` | 自研 | M1 | | 图标/标题/描述/动作；T03 M1 done |
+| `error-message` | 自研 | M1 | | 语义与上游一致；T03 M1 done |
+| `field-error` | `FieldError` | M1 | ✅ | 错误 id、`aria-live`；SSR 下 `aria-describedby` 挂载后注册；T03 M1 done |
+| `fieldset` | 自研 | M1 | | `role="group"` / legend；Vue 使用 `isDisabled`（React 原生 `disabled`）；T03 M1 done |
+| `header` | 自研 | M1 | | 页面/区块标题；T03 M1 done |
+| `kbd` | 自研 | M1 | | 组合键渲染；上游无 `data-slot`；T03 M1 done |
+| `label` | `FieldLabel` / `Label` | M1 | ✅ | `for`/`id` 关联；T03 M1 done |
+| `link` | 自研（`asChild`） | M1 | ✅ | `href`/禁用/外链；T03 M1 done |
+| `progress-bar` | `ProgressRoot` | M1 | | `aria-valuenow`、不确定态；Vue 扩展 `isDisabled`；T03 M1 done |
+| `progress-circle` | `ProgressRoot` + SVG | M1 | | 几何/描边；Vue 扩展 `isDisabled`；T03 M1 done |
+| `separator` | `Separator` | M1 | ✅ | orientation/decorative；T03 M1 done |
+| `skeleton` | 自研 | M1 | ✅ | 减少动画偏好；上游无 `data-slot`；T03 M1 done |
+| `spinner` | 自研 | M1 | ✅ | `role="status"`；T03 M1 done |
+| `surface` | 自研 | M1 | | 容器/层级；T03 M1 done |
+| `typography` | 自研 | M1 | | 变体/`as`；Heading/Paragraph/Code/Prose；T03 M1 done |
 
 ## 表单 / 操作（19）
 
