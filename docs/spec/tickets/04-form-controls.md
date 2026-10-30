@@ -1,7 +1,7 @@
 # T04 — 表单控件（19）
 
 - Milestone: M1
-- Status: Pending
+- Status: Done
 - Blocked by: [T02](./02-contract-tooling.md)
 - Unblocks: [T08](./08-advanced-data.md), [T09](./09-nuxt-docs-release.md)
 - Related: [ADR 0007](../../decisions/0007-component-api-conventions.md), [验收矩阵](../../acceptance-matrix.md)
@@ -65,6 +65,26 @@
 3. 搜索框（SearchField + 清除 + 提交）；
 4. 工具栏（Toolbar + ToggleButtonGroup）；
 5. 全禁用 + 全错误两种极端状态。
+
+## Outcome
+
+- 19 个组件全部落地。`button`、`input`、`textfield` 三个 T01 组件补齐了 `as`/`asChild`、表单 `type`、受控/非受控、hover/focus 状态与 IME 守卫；其余 16 个为新增，均提供命名导出、复合对象、子路径导出与 `packages/vue/package.json` 的 exports 条目。
+- 契约：`packages/vue/src/__tests__/form-controls.contract.test.ts` 对照 `data-slots.json` 校验 19 个组件的 slot，并断言每个上游 slot 都被渲染；`STATE_COVERAGE` 登记了 T04 全部 CSS 依赖的 `data-*`（断言项与真实 gap 及原因）。`form` 上游本就没有 `data-slot`，未臆造。
+- DOM：Checkbox / Radio / Switch 采用**自研**结构（`<label>` + 视觉隐藏的原生 `input`），与上游 React Aria 的输出逐属性对齐（`data-selected` / `data-indeterminate` / `data-pressed` / `data-hovered` / `data-focus-visible` / `data-disabled` / `data-invalid`）。Reka 的 `CheckboxRoot` / `RadioGroupItem` / `SwitchRoot` 渲染的是 `<button role="checkbox|radio|switch">`，与上游 DOM 不同，因此未采用；RadioGroup 依赖原生 radio 组的浏览器行为获得方向键切换与 roving tabindex。
+- 视觉：playground 与 `reference-react` 的 `#forms` 区块（登录、设置、搜索、工具栏、全禁用/全错误 5 个场景）在 light 与 dark 下 **0 像素差**；`pnpm test:visual` 50 条全部通过。
+- 浏览器：Chromium 64 条通过（新增 `tests/browser/form-controls.spec.ts` 12 条：IME 不误提交、触屏 hover 不粘滞、press 与 click 分离、Radio/Toolbar 方向键、Slider 拖拽与步进、ToggleButtonGroup 选中态、SearchField 清除）。本机没有 WebKit 运行时，`PLAYWRIGHT_CHANNEL=chrome` 只跑了 Chromium；WebKit 需要 CI 复核。
+- axe：`#forms` 区块在 light/dark 下非 `color-contrast` 规则 critical/serious 为 0；`color-contrast` 逐分组计数与 React 参考一致。
+- 单元/契约/SSR：`pnpm verify` 通过——unit 183、contract 97、SSR 6。
+- API / parity 偏差：
+  - `Checkbox` 的半选状态映射为 `data-indeterminate="true"`（上游 CSS 选择的是 `[data-indeterminate]`），不是 `data-state="indeterminate"`。
+  - `ToggleButtonGroup` 单选模式使用 `role="radiogroup"` + `role="radio"`（与上游一致），多选模式使用 `role="group"` + `aria-pressed`；上游多选模式的组角色是 `toolbar`。
+  - `ToggleButtonGroup` 的 `value` 对应上游 React 的 `id`；选择模式用 `type="single" | "multiple"`，对应上游的 `selectionMode`。
+  - Reka 的 `RadioGroupItem` 会在按钮上渲染 `required="false"`（Reka 自身的产物，HTML 上无效但无副作用）。
+  - `Textarea` 的自适应高度是可选的 `autoResize`（默认关闭），因为上游 React Aria 的 TextArea 不自动增高，开启会破坏与参考实现的视觉一致性。
+  - `NumberField` 的 group 不会自动继承 `data-invalid`，与上游一致（上游从未给 group 设置该属性，CSS 中该分支实际不可达）。
+  - `Form` 不接管校验库，也不阻止默认提交；`@submit` 透传原生事件，`@invalid` 在捕获阶段监听。
+  - 未新增 `@internationalized/number` 直接依赖：Reka 的 `NumberFieldRoot` 已经在内部使用它（当前树中为 3.6.9），格式化、min/max、步进与 spinbutton 语义全部由 Reka 提供。
+- 文档偏差：`apps/docs` 不存在，未在本 ticket 搭站点；demo 以 playground 的 `#forms` 区块 + `reference-react` 同构页面交付，19 个 demo/API 表/迁移差异随 T09 收口。
 
 ## Out of scope
 

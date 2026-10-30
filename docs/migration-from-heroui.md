@@ -301,6 +301,25 @@ Nuxt 下 `<ToastProvider />` 由模块自动挂载，直接用 `useToast()`。
 </Form>
 ```
 
+### 6.7 表单控件（19 个）
+
+选择类控件统一用 `v-model` 取代 React 的 `value` / `onChange`：
+
+| React | Vue |
+|---|---|
+| `<CheckboxGroup value={list} onChange={setList}>` | `<CheckboxGroup v-model="list">`（数组） |
+| `<RadioGroup value={value} onChange={setValue}>` | `<RadioGroup v-model="value">` |
+| `<Switch isSelected={on} onChange={setOn}>` | `<Switch v-model="on">` |
+| `<ToggleButtonGroup selectionMode="multiple" selectedKeys={keys}>` | `<ToggleButtonGroup v-model="keys" type="multiple">` |
+| `<ToggleButtonGroup selectionMode="single" selectedKeys={keys}>` | `<ToggleButtonGroup v-model="key" type="single">` |
+| `<ToggleButton id="bold">` | `<ToggleButton value="bold">` |
+| `<Slider value={n} onChange={setN} minValue={0} maxValue={100}>` | `<Slider v-model="n" :min="0" :max="100">` |
+| `<NumberField value={n} onChange={setN} minValue={0} maxValue={10}>` | `<NumberField v-model="n" :min="0" :max="10">` |
+| `<SearchField value={q} onChange={setQ}>` | `<SearchField v-model="q">`，提交用 `@submit` |
+| `<Form onSubmit={submit}>` | `<Form @submit="submit">`（透传原生事件，不阻止默认行为） |
+
+复合部件保持上游命名：`Checkbox.Content` / `Checkbox.Control` / `Checkbox.Indicator`、`Radio.Content` / `Radio.Control` / `Radio.Indicator`、`Switch.Content` / `Switch.Control` / `Switch.Thumb`、`NumberField.Group` / `NumberField.Input` / `NumberField.IncrementButton`、`Slider.Track` / `Slider.Fill` / `Slider.Thumb`、`SearchField.Group` / `SearchField.Input` / `SearchField.ClearButton`、`InputGroup.Prefix` / `InputGroup.Input` / `InputGroup.Suffix`。静态 `<Checkbox.Control>` 标签不生效，用命名导出 `<CheckboxControl>`。
+
 ## 7. 样式与主题
 
 - 保留 `className` 里的 BEM/工具类写法，改为 `class`。
@@ -334,6 +353,11 @@ export default defineNuxtConfig({
 | Toast manager 不是全局单例 | 直接 import `toast` 的写法失效 | `useToast()` + `<ToastProvider />` |
 | `disabled` 不是 `isDisabled` 别名 | 误用会静默失效 | 统一 `isDisabled` |
 | 日期值类型 | React 用 `DateValue` 对象 | Vue 同样用 `@internationalized/date` 值，不用原生 `Date` |
+| `ToggleButtonGroup` 的选择模式 | React 用 `selectionMode` + `selectedKeys`（`Set`） | Vue 用 `type="single" \| "multiple"` + `v-model`（单选为字符串，多选为数组） |
+| `ToggleButton` 的标识 | React 用 `id` 作为选择键 | Vue 用 `value` |
+| `Checkbox` / `Radio` / `Switch` 的 DOM | React 是 `<label>` + 隐藏原生 `input` | Vue 同样输出 `<label>` + 隐藏原生 `input`，DOM 与参考实现一致 |
+| `Textarea` 自适应高度 | React 的 TextArea 不自动增高 | Vue 需显式开启 `autoResize` |
+| `Form` 的提交 | React 的 `onSubmit` 拿到合成事件 | Vue 的 `@submit` 拿到原生 `SubmitEvent`，组件不阻止默认行为 |
 
 ## 10. 迁移检查清单
 

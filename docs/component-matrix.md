@@ -39,25 +39,25 @@
 
 | 组件 | Reka 基础 | 里程碑 | MVP | 备注 |
 |---|---|---|---|---|
-| `button` | 自研（`Toggle` 复用 press） | M1（M0 spike） | ✅ | 变体/尺寸/loading/icon-only；T01 已验证 |
-| `button-group` | 自研 | M1 | ✅ | 组合、分隔、方向 |
-| `checkbox` | `CheckboxRoot` | M1 | ✅ | indeterminate |
-| `checkbox-group` | `CheckboxGroupRoot` | M1 | ✅ | 全选/半选、数组 `v-model` |
-| `form` | `FormRoot` / 原生 form | M1 | ✅ | 提交/校验聚合 |
-| `input` | 自研 + `FieldControl` | M1（M0 spike） | ✅ | 前后缀、清除、IME；T01 已验证（label/description/error 组合） |
-| `input-group` | 自研 | M1 | | 组合输入与按钮 |
-| `number-field` | `NumberFieldRoot` | M1 | ✅ | 步进/格式/min-max |
-| `radio` | `RadioGroupItem` / `RadioGroupIndicator` | M1 | ✅ | 内部 indicator 需 useHover/usePress |
-| `radio-group` | `RadioGroupRoot` | M1 | ✅ | 方向键、roving tabindex |
-| `search-field` | 自研 | M1 | ✅ | 清除/提交 |
-| `slider` | `SliderRoot` | M1 | ✅ | 单值/范围/RTL |
-| `switch` | `SwitchRoot` | M1 | ✅ | 内部 slot 需 3 个 composable |
-| `switch-group` | 自研 | M1 | | 分组/方向 |
-| `textarea` | 自研 | M1 | ✅ | 自适应高度 |
-| `textfield` | `FieldRoot` + 自研 | M1 | | 组合字段 |
-| `toggle-button` | `Toggle` | M1 | | `data-pressed` |
-| `toggle-button-group` | `ToggleGroupRoot` | M1 | | 单选/多选 |
-| `toolbar` | `ToolbarRoot` | M1 | | roving tabindex |
+| `button` | 自研（`Toggle` 复用 press） | M1（M0 spike） | ✅ | 变体/尺寸/loading/icon-only/`as`/`asChild`/表单 type；T04 M1 done |
+| `button-group` | 自研 | M1 | ✅ | 组合、分隔、方向；向子按钮传播 size/variant；T04 M1 done |
+| `checkbox` | 自研（隐藏原生 input） | M1 | ✅ | indeterminate/全选半选/数组 `v-model`；T04 M1 done |
+| `checkbox-group` | 自研（隐藏原生 input） | M1 | ✅ | 全选/半选、数组 `v-model`；T04 M1 done |
+| `form` | 原生 `form` | M1 | ✅ | 提交/`invalid`/原生约束/IME 守卫；T04 M1 done |
+| `input` | 自研 + `FieldControl` | M1（M0 spike） | ✅ | 受控/非受控、hover/focus 状态、IME；T04 M1 done |
+| `input-group` | 自研 | M1 | | 前后缀、点击聚焦、hover/focus-within；T04 M1 done |
+| `number-field` | `NumberFieldRoot` | M1 | ✅ | 步进/长按/格式/min-max/spinbutton；T04 M1 done |
+| `radio` | 自研（隐藏原生 input） | M1 | ✅ | 内部 indicator 需要 useHover/usePress；T04 M1 done |
+| `radio-group` | 自研（原生 radio 组） | M1 | ✅ | 方向键、roving tabindex；T04 M1 done |
+| `search-field` | 自研 | M1 | ✅ | 清除/提交/IME 守卫；T04 M1 done |
+| `slider` | `SliderRoot` + 自研 thumb/fill | M1 | ✅ | 单值/范围/拖拽/RTL/`data-dragging`；T04 M1 done |
+| `switch` | 自研（隐藏原生 input） | M1 | ✅ | 内部 slot 需要 3 个 composable；T04 M1 done |
+| `switch-group` | 自研 | M1 | | 分组/方向；T04 M1 done |
+| `textarea` | 自研 + `FieldControl` | M1 | ✅ | 受控/非受控、可选自适应高度；T04 M1 done |
+| `textfield` | `FieldRoot` + 自研 | M1 | | 组合字段；T04 M1 done |
+| `toggle-button` | `Toggle` / `ToggleGroupItem` | M1 | | `data-pressed`/`data-selected`；T04 M1 done |
+| `toggle-button-group` | `ToggleGroupRoot` / `RadioGroupRoot` | M1 | | 单选（radio 语义）/多选；T04 M1 done |
+| `toolbar` | 自研（方向键 roving） | M1 | | 方向键/RTL；T04 M1 done |
 
 ## 覆盖层 / 反馈（7）
 

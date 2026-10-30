@@ -35,12 +35,12 @@
 
 ## M1 — 展示 + 表单（3–4 周）
 
-- [ ] 24 个展示/布局/反馈组件（[T03](./spec/tickets/03-display-and-feedback.md)）
-- [ ] 19 个表单/操作组件（[T04](./spec/tickets/04-form-controls.md)）
-- [ ] 契约清单完整（65 个属性）
-- [ ] 主题（light/dark/system）+ 尺寸矩阵
-- [ ] playground 画廊
-- [ ] 视觉基线首批
+- [x] 24 个展示/布局/反馈组件（[T03](./spec/tickets/03-display-and-feedback.md)）
+- [x] 19 个表单/操作组件（[T04](./spec/tickets/04-form-controls.md)）
+- [x] 契约清单完整（65 个属性）
+- [ ] 主题（light/dark/system）+ 尺寸矩阵（light/dark 已覆盖，system 待做）
+- [x] playground 画廊
+- [x] 视觉基线首批
 
 风险：`asChild`/`$attrs` 透传、IME、Switch/Radio 的 composable。
 
