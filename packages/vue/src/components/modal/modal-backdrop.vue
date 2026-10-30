@@ -1,0 +1,56 @@
+<script setup lang="ts">
+import {cx, modalVariants} from "@sail-ui/styles";
+import {DialogOverlay, DialogPortal} from "reka-ui";
+import {computed, provide, useAttrs} from "vue";
+
+import {modalContextKey, useModalContext} from "./context";
+import type {ModalBackdropProps} from "./types";
+
+defineOptions({name: "SailModalBackdrop", inheritAttrs: false});
+
+const props = withDefaults(defineProps<ModalBackdropProps>(), {
+  isDismissable: true
+});
+
+const attrs = useAttrs();
+const context = useModalContext();
+
+const mergedSlots = computed(() => ({
+  ...context.slots.value,
+  ...modalVariants({variant: props.variant})
+}));
+const isDismissable = computed(() => props.isDismissable);
+
+provide(modalContextKey, {
+  ...context,
+  isDismissable,
+  slots: mergedSlots
+});
+
+const classes = computed(() =>
+  cx(mergedSlots.value.backdrop(), attrs.class as string | undefined)
+);
+
+// Function refs also run on unmount, so a closed overlay never keeps a stale element.
+function setBackdropRef(element: unknown) {
+  context.contentRef.value = element instanceof HTMLElement ? element : null;
+}
+</script>
+
+<template>
+  <DialogPortal v-if="context.isMounted.value">
+    <DialogOverlay as-child>
+      <div
+        :ref="setBackdropRef"
+        v-bind="$attrs"
+        :class="classes"
+        :data-entering="context.isEntering.value ? 'true' : undefined"
+        :data-exiting="context.isExiting.value ? 'true' : undefined"
+        :data-slot="'modal-backdrop'"
+        @click.stop
+      >
+        <slot />
+      </div>
+    </DialogOverlay>
+  </DialogPortal>
+</template>

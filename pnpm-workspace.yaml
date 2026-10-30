@@ -1,0 +1,8 @@
+packages:
+  - "packages/*"
+  - "apps/*"
+  - "apps/playground/nuxt"
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp

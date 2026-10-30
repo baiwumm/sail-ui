@@ -1,0 +1,796 @@
+{
+  "upstream": {
+    "version": "3.2.7",
+    "commit": "89cd95ec17dfbbf952ef0d61af300f287aec223d"
+  },
+  "files": [
+    {
+      "path": "components/accordion.css",
+      "sourceHash": "5cf2ad61c10e4c2f4581041798cb8b3199716e2fc680cb18c7f7ed2977ee2905",
+      "generatedHash": "5cf2ad61c10e4c2f4581041798cb8b3199716e2fc680cb18c7f7ed2977ee2905",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/alert-dialog.css",
+      "sourceHash": "2f8ab6dd2768308cf782b1640da1551ed084099c33f0b420fccccd491ff3e736",
+      "generatedHash": "2f8ab6dd2768308cf782b1640da1551ed084099c33f0b420fccccd491ff3e736",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/alert.css",
+      "sourceHash": "450a56f7ce9b8531869f7ad41905cb569d44f8286095850bcdbcb2c9466b002e",
+      "generatedHash": "450a56f7ce9b8531869f7ad41905cb569d44f8286095850bcdbcb2c9466b002e",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/autocomplete.css",
+      "sourceHash": "732ce624988da8f412d240697c4b6bc96adde5349bb3f50572f76bb65986ef10",
+      "generatedHash": "732ce624988da8f412d240697c4b6bc96adde5349bb3f50572f76bb65986ef10",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/avatar-group.css",
+      "sourceHash": "5dae265f8bf08fc517f1f5de4a9ebc95051d2ab5dcab62e5b3fa60d2ed301dd9",
+      "generatedHash": "5dae265f8bf08fc517f1f5de4a9ebc95051d2ab5dcab62e5b3fa60d2ed301dd9",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/avatar.css",
+      "sourceHash": "7e08fb24ad1e0b375a7390ba1930afd8d2fa8abddb2304d6bfa11301f206f4b3",
+      "generatedHash": "7e08fb24ad1e0b375a7390ba1930afd8d2fa8abddb2304d6bfa11301f206f4b3",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/badge.css",
+      "sourceHash": "58763cc085925622a647d0ff9986d52f864c6af2a5fde93a2b339b3ea4fa59a9",
+      "generatedHash": "58763cc085925622a647d0ff9986d52f864c6af2a5fde93a2b339b3ea4fa59a9",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/breadcrumbs.css",
+      "sourceHash": "434556642dee0435c583865889c8703544ee71ae9f5ca3799cfb8457ea6b49e6",
+      "generatedHash": "434556642dee0435c583865889c8703544ee71ae9f5ca3799cfb8457ea6b49e6",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/button-group.css",
+      "sourceHash": "9125d881e9bae500533bed1cc8931a7df0daf01e26ae3ec162c8bf0f68ce8cdc",
+      "generatedHash": "9125d881e9bae500533bed1cc8931a7df0daf01e26ae3ec162c8bf0f68ce8cdc",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/button.css",
+      "sourceHash": "f74f4c07e09c2630426475f2247fab566d4289c6d5d9e1b7c097a873eed164ed",
+      "generatedHash": "3c34429bb9379ad16e44b25619afcf21a3febcdb9c63a50b1928b47a995b333c",
+      "aliases": 3,
+      "scoped": true
+    },
+    {
+      "path": "components/calendar-year-picker.css",
+      "sourceHash": "de842826c072920c4d4a3b0dc2ae9b9b35617515817fd4df487af71184777bce",
+      "generatedHash": "de842826c072920c4d4a3b0dc2ae9b9b35617515817fd4df487af71184777bce",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/calendar.css",
+      "sourceHash": "188cf222c514ce790eadaa73322516b6f200f31d2e9688f2eca4287f32ea1ee6",
+      "generatedHash": "188cf222c514ce790eadaa73322516b6f200f31d2e9688f2eca4287f32ea1ee6",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/card.css",
+      "sourceHash": "6173745c8b79a63702453da07789d4452a21f853deeaaa1924553713d4d43f5f",
+      "generatedHash": "6173745c8b79a63702453da07789d4452a21f853deeaaa1924553713d4d43f5f",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/checkbox-group.css",
+      "sourceHash": "bb844eab781291bfe91da8d06bc779c12ec475a87a3e38dae848d63d11cd8b43",
+      "generatedHash": "bb844eab781291bfe91da8d06bc779c12ec475a87a3e38dae848d63d11cd8b43",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/checkbox.css",
+      "sourceHash": "191729350a60f4d45bb7343fa47e1e0c91c9490f8a2ba54448d13efc7cb9df10",
+      "generatedHash": "191729350a60f4d45bb7343fa47e1e0c91c9490f8a2ba54448d13efc7cb9df10",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/chip.css",
+      "sourceHash": "429bec683f22bdfbe5ccef8a7ab86094763f5a4cdcb40e9dbe7e37dd94d338a0",
+      "generatedHash": "429bec683f22bdfbe5ccef8a7ab86094763f5a4cdcb40e9dbe7e37dd94d338a0",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/close-button.css",
+      "sourceHash": "a952b10c487df92ff7382cc6b1a213dcf8f926d667731e52ce663d6dd1c800d5",
+      "generatedHash": "271ef30e328d3571076aded5783631931350abd2e8edc6827ad8a71b794b029b",
+      "aliases": 2,
+      "scoped": true
+    },
+    {
+      "path": "components/color-area.css",
+      "sourceHash": "daf1815761217e1d577d4e5b91bcd769830594ac972f9c2f1582cfea888f5d3b",
+      "generatedHash": "daf1815761217e1d577d4e5b91bcd769830594ac972f9c2f1582cfea888f5d3b",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/color-field.css",
+      "sourceHash": "431d4faeda513b88b8b40fe4ce8e443e78eb6adfcc97e341f34a1bdf3d6c76d5",
+      "generatedHash": "431d4faeda513b88b8b40fe4ce8e443e78eb6adfcc97e341f34a1bdf3d6c76d5",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/color-input-group.css",
+      "sourceHash": "e51212ae28da5c98a5f00d079e4b5f9e0e81f77c0d45732168a46ce833494485",
+      "generatedHash": "e51212ae28da5c98a5f00d079e4b5f9e0e81f77c0d45732168a46ce833494485",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/color-picker.css",
+      "sourceHash": "f6b0c89084e0d9396de05e17de1d7667050c8e8974d293488456d860b4d744a9",
+      "generatedHash": "f6b0c89084e0d9396de05e17de1d7667050c8e8974d293488456d860b4d744a9",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/color-slider.css",
+      "sourceHash": "291242e50948120673a3520e3094365a2634f9194c735bef8a26a4fb99d4853c",
+      "generatedHash": "291242e50948120673a3520e3094365a2634f9194c735bef8a26a4fb99d4853c",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/color-swatch-picker.css",
+      "sourceHash": "2279c0779206ec7027d370f2a31f154f8e41330bbc71a6a697fa7c0cc0eeeee1",
+      "generatedHash": "2279c0779206ec7027d370f2a31f154f8e41330bbc71a6a697fa7c0cc0eeeee1",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/color-swatch.css",
+      "sourceHash": "2c17a3c3b12cfeea6a4e6e3b5379fc1d3fd603a4730c27f205e7a6c1abb6c356",
+      "generatedHash": "2c17a3c3b12cfeea6a4e6e3b5379fc1d3fd603a4730c27f205e7a6c1abb6c356",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/combo-box.css",
+      "sourceHash": "56fda7db4e3e9f0edd32dd63bfdd2af163314de552ce7d71b0d895a2e5146c1e",
+      "generatedHash": "56fda7db4e3e9f0edd32dd63bfdd2af163314de552ce7d71b0d895a2e5146c1e",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/date-field.css",
+      "sourceHash": "45eda1cfcb4c3679bf35397ca56de664ddc55b7c066a7baf01694fcb6d68d6da",
+      "generatedHash": "45eda1cfcb4c3679bf35397ca56de664ddc55b7c066a7baf01694fcb6d68d6da",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/date-input-group.css",
+      "sourceHash": "f0262aaf56f518435a22a6b70593df7573a18134756ada645c79fa6d2a4d50a8",
+      "generatedHash": "f0262aaf56f518435a22a6b70593df7573a18134756ada645c79fa6d2a4d50a8",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/date-picker.css",
+      "sourceHash": "8e33c7268fd85f38a2735dd6da18f430c2edc4dfab1c483e9bd7844bf0deb47b",
+      "generatedHash": "8e33c7268fd85f38a2735dd6da18f430c2edc4dfab1c483e9bd7844bf0deb47b",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/date-range-picker.css",
+      "sourceHash": "f4f715bb04d5d34c81053b6f0d2589771c7fd1718cde62e0ce4cef0c10a13652",
+      "generatedHash": "f4f715bb04d5d34c81053b6f0d2589771c7fd1718cde62e0ce4cef0c10a13652",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/description.css",
+      "sourceHash": "f03ed445ce95829cba3a3d4e4ef744cb19a6cf78c629ed1f65c66b02540a4d0f",
+      "generatedHash": "f03ed445ce95829cba3a3d4e4ef744cb19a6cf78c629ed1f65c66b02540a4d0f",
+      "aliases": 0,
+      "scoped": true
+    },
+    {
+      "path": "components/disclosure-group.css",
+      "sourceHash": "367cb84b3174df2c4399b5d79dc2e0a76bdaf0b82da1f32046674a6eff2d73a0",
+      "generatedHash": "367cb84b3174df2c4399b5d79dc2e0a76bdaf0b82da1f32046674a6eff2d73a0",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/disclosure.css",
+      "sourceHash": "3f908f0a78b9c890c7ef0b374bd617f2d9edbf6359a598cb7ea49db4dba894fe",
+      "generatedHash": "3f908f0a78b9c890c7ef0b374bd617f2d9edbf6359a598cb7ea49db4dba894fe",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/drawer.css",
+      "sourceHash": "d7d86012314ca9352bfdf01374dcb24e71bf09bf71b4f3fd671f0528e9e49f54",
+      "generatedHash": "d7d86012314ca9352bfdf01374dcb24e71bf09bf71b4f3fd671f0528e9e49f54",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/dropdown.css",
+      "sourceHash": "4ebb8c7979f39effbb887fcb45876633be19d487eb221f696a6a4bf3e449c7c7",
+      "generatedHash": "4ebb8c7979f39effbb887fcb45876633be19d487eb221f696a6a4bf3e449c7c7",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/empty-state.css",
+      "sourceHash": "80681c020d781a8be4a6885ed7428af117fd62ced5598159cffa472c22cdfa1b",
+      "generatedHash": "80681c020d781a8be4a6885ed7428af117fd62ced5598159cffa472c22cdfa1b",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/error-message.css",
+      "sourceHash": "1c9b5a88fc384afd6e7046683ae4cbc45b4bf4ff61f8a2abaf6b604bd4e2d12c",
+      "generatedHash": "1c9b5a88fc384afd6e7046683ae4cbc45b4bf4ff61f8a2abaf6b604bd4e2d12c",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/field-error.css",
+      "sourceHash": "812f9fbf0633549e33e1b01d433a63070ddcb859278d79510e57502385257033",
+      "generatedHash": "812f9fbf0633549e33e1b01d433a63070ddcb859278d79510e57502385257033",
+      "aliases": 0,
+      "scoped": true
+    },
+    {
+      "path": "components/fieldset.css",
+      "sourceHash": "683070d84e6040402ddde139684e327ebea269b34e70057cab70439be9b718a0",
+      "generatedHash": "683070d84e6040402ddde139684e327ebea269b34e70057cab70439be9b718a0",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/header.css",
+      "sourceHash": "c2cf260c11907bc2d3dfacd7ada1d3e7aa32bbd5545e94e28578c44cdc49eb25",
+      "generatedHash": "c2cf260c11907bc2d3dfacd7ada1d3e7aa32bbd5545e94e28578c44cdc49eb25",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/index.css",
+      "sourceHash": "b64cd17f1ace0fe0d67cfec329e2ad2f8b37e369c05f76d82542872d9a319058",
+      "generatedHash": "b64cd17f1ace0fe0d67cfec329e2ad2f8b37e369c05f76d82542872d9a319058",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/input-group.css",
+      "sourceHash": "68ec372790fc2efb6c0497f1940358ddb278cee3c43ba96baf9371da036108e1",
+      "generatedHash": "68ec372790fc2efb6c0497f1940358ddb278cee3c43ba96baf9371da036108e1",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/input-otp.css",
+      "sourceHash": "e5c7a65702df87a8c22df96126e7de13dfaf439c4eba7221c0f9b5e2c688c69f",
+      "generatedHash": "e5c7a65702df87a8c22df96126e7de13dfaf439c4eba7221c0f9b5e2c688c69f",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/input.css",
+      "sourceHash": "5c024c344ebdda09b8576d7413cadf8054d3a43d94af0c349070c903050114db",
+      "generatedHash": "cae611cb1cf1f781a96da44c53da83fdf51fe05e5525d32c82d81263782d4304",
+      "aliases": 5,
+      "scoped": true
+    },
+    {
+      "path": "components/kbd.css",
+      "sourceHash": "ce385e1fd3e96e4c40e206d068d61a3da3f68033d922534240c8e35e1b42565d",
+      "generatedHash": "ce385e1fd3e96e4c40e206d068d61a3da3f68033d922534240c8e35e1b42565d",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/label.css",
+      "sourceHash": "95438264ef4f70225623c999afde8734da818372184d7d894dd6630790ff792c",
+      "generatedHash": "417d2a58f6a1452e9d26c2d07f7fe3492787ef553beb9f42e9e9f2aba0f3cc6d",
+      "aliases": 2,
+      "scoped": true
+    },
+    {
+      "path": "components/link.css",
+      "sourceHash": "8ac80a3d8ac213bf1de0f4f385185879e48cb34991901ee5813f3ae3c4fdbab3",
+      "generatedHash": "8ac80a3d8ac213bf1de0f4f385185879e48cb34991901ee5813f3ae3c4fdbab3",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/list-box-item.css",
+      "sourceHash": "8ed6549d4cb771521eaaefcadb67eaf627779600878c01bd7efaee97045cf8ce",
+      "generatedHash": "b5eab9a4dc0990a3222e9ac1c20ff204db970f98a69d79864e2e992b6c686f3f",
+      "aliases": 7,
+      "scoped": true
+    },
+    {
+      "path": "components/list-box-section.css",
+      "sourceHash": "a315de2fe85e4a666a12ea6fca5ad98bc3074635fdff7c447a754b90c485495a",
+      "generatedHash": "a315de2fe85e4a666a12ea6fca5ad98bc3074635fdff7c447a754b90c485495a",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/list-box.css",
+      "sourceHash": "eaa0f356c30a4c2d73c799fa3ca963895c030993e101881ca675cfb4d5003086",
+      "generatedHash": "eaa0f356c30a4c2d73c799fa3ca963895c030993e101881ca675cfb4d5003086",
+      "aliases": 0,
+      "scoped": true
+    },
+    {
+      "path": "components/menu-item.css",
+      "sourceHash": "00592344262ad2df30f13ae60903f1c78d1c18d6c1b2f5782fa4f8650812564a",
+      "generatedHash": "00592344262ad2df30f13ae60903f1c78d1c18d6c1b2f5782fa4f8650812564a",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/menu-section.css",
+      "sourceHash": "9fe9002565db64ea574a6b18b23cc6e97079e2b5ec2daf7e646f93b16646a1e3",
+      "generatedHash": "9fe9002565db64ea574a6b18b23cc6e97079e2b5ec2daf7e646f93b16646a1e3",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/menu.css",
+      "sourceHash": "2b72ed91703d531557e2321ccbff142970dcd71e5282f3e15733849b9b7cf6a5",
+      "generatedHash": "2b72ed91703d531557e2321ccbff142970dcd71e5282f3e15733849b9b7cf6a5",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/meter.css",
+      "sourceHash": "19215648e58e53ece1a281a7a17be62503fb9417fe9f504e7cabfcc40f24b39c",
+      "generatedHash": "19215648e58e53ece1a281a7a17be62503fb9417fe9f504e7cabfcc40f24b39c",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/modal.css",
+      "sourceHash": "3429295c0003cd7c418ce98b0e9c9fdd9475538759f1a8ef9efa719f164c76b4",
+      "generatedHash": "02082b4498b85ed98a1f7213cc61214c76f81fee3c2574970bbd5f8a723f7ce2",
+      "aliases": 1,
+      "scoped": true
+    },
+    {
+      "path": "components/number-field.css",
+      "sourceHash": "5062cebddb44f1738bcaf4a9f73bacb824ce0f6b6e4830c47abd242d845982a2",
+      "generatedHash": "5062cebddb44f1738bcaf4a9f73bacb824ce0f6b6e4830c47abd242d845982a2",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/pagination.css",
+      "sourceHash": "4700708eff4915f845d723d883cfc39750c0f0a65ac3c4635a4829aa058a1d61",
+      "generatedHash": "4700708eff4915f845d723d883cfc39750c0f0a65ac3c4635a4829aa058a1d61",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/popover.css",
+      "sourceHash": "81adef764cdef6e506a64cc45a009994d5c401845b5939f2c81817c9b42c0c53",
+      "generatedHash": "81adef764cdef6e506a64cc45a009994d5c401845b5939f2c81817c9b42c0c53",
+      "aliases": 0,
+      "scoped": true
+    },
+    {
+      "path": "components/progress-bar.css",
+      "sourceHash": "f4620f112af2851871b18a0eaed5a2d0a9558826abec08dfcb68ee4d6d686339",
+      "generatedHash": "f4620f112af2851871b18a0eaed5a2d0a9558826abec08dfcb68ee4d6d686339",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/progress-circle.css",
+      "sourceHash": "ae1e38b4213b340c0336ed341fd94a30a749f0c2f244cf940431ee4f69e9554f",
+      "generatedHash": "ae1e38b4213b340c0336ed341fd94a30a749f0c2f244cf940431ee4f69e9554f",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/radio-group.css",
+      "sourceHash": "9f4e87a48d7fb88b9168c680b9ea9186cb8223ec5cb0fb3cbf9f89efedcc5aaa",
+      "generatedHash": "9f4e87a48d7fb88b9168c680b9ea9186cb8223ec5cb0fb3cbf9f89efedcc5aaa",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/radio.css",
+      "sourceHash": "b9a2aa0c421d4f325bc4801dcae1150380e0a8a7c4439c990b8eaed80f858db0",
+      "generatedHash": "b9a2aa0c421d4f325bc4801dcae1150380e0a8a7c4439c990b8eaed80f858db0",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/range-calendar.css",
+      "sourceHash": "a484984edde39cc1366d7f4b079331b64038bb389534285dcc8325380fc8cf4a",
+      "generatedHash": "a484984edde39cc1366d7f4b079331b64038bb389534285dcc8325380fc8cf4a",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/scroll-shadow.css",
+      "sourceHash": "15d118ec403bca4095577608b9842adb5d9708e3cb0e932b297933be3ca05683",
+      "generatedHash": "15d118ec403bca4095577608b9842adb5d9708e3cb0e932b297933be3ca05683",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/search-field.css",
+      "sourceHash": "4e348e8572d0678067639a36a29ffe8e5a41d45d10cadccf9da3552fe3c8bae2",
+      "generatedHash": "4e348e8572d0678067639a36a29ffe8e5a41d45d10cadccf9da3552fe3c8bae2",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/select.css",
+      "sourceHash": "d8a14058688ebdac41b332fbcbd367e9411e22c1adba51ccc83b84816847f6ed",
+      "generatedHash": "cc1f73af05b590aa3581c8e8e407b258f73598cdcd2fe4bb19257e8bd4a48ef1",
+      "aliases": 8,
+      "scoped": true
+    },
+    {
+      "path": "components/separator.css",
+      "sourceHash": "f52a6e2795171d767f34f936b0cf4adb7833b300e6bf0ee26ea2dded69fe8bfc",
+      "generatedHash": "f52a6e2795171d767f34f936b0cf4adb7833b300e6bf0ee26ea2dded69fe8bfc",
+      "aliases": 0,
+      "scoped": true
+    },
+    {
+      "path": "components/sheet.css",
+      "sourceHash": "6d7525600065ab5386c5270dd4aba860af7692764f6001427a70cb3ad3dc6819",
+      "generatedHash": "6d7525600065ab5386c5270dd4aba860af7692764f6001427a70cb3ad3dc6819",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/skeleton.css",
+      "sourceHash": "2f6fd03ef850c32d625c1b66d82470d5c42f5e76591822e21758325fc1b47daa",
+      "generatedHash": "2f6fd03ef850c32d625c1b66d82470d5c42f5e76591822e21758325fc1b47daa",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/slider.css",
+      "sourceHash": "87cfe0be65a18c8b9680c8b44ce9a20918a4c47be4732128a43a32cef18c5c2b",
+      "generatedHash": "87cfe0be65a18c8b9680c8b44ce9a20918a4c47be4732128a43a32cef18c5c2b",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/spinner.css",
+      "sourceHash": "f40fbca30e66b8e1b1692e58154d5eda03b27acd538c0ad4573ece9ba60d2915",
+      "generatedHash": "f40fbca30e66b8e1b1692e58154d5eda03b27acd538c0ad4573ece9ba60d2915",
+      "aliases": 0,
+      "scoped": true
+    },
+    {
+      "path": "components/surface.css",
+      "sourceHash": "5b80ddbfd97a86f5dcc6b5f98244d8d36866c2d1689c6f8da7cc8eefff3a8699",
+      "generatedHash": "5b80ddbfd97a86f5dcc6b5f98244d8d36866c2d1689c6f8da7cc8eefff3a8699",
+      "aliases": 0,
+      "scoped": true
+    },
+    {
+      "path": "components/switch-group.css",
+      "sourceHash": "7eaa5ac0feccdafe6b5d047bc4e23680f85d90ed28244a1c50fa741880ee454d",
+      "generatedHash": "7eaa5ac0feccdafe6b5d047bc4e23680f85d90ed28244a1c50fa741880ee454d",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/switch.css",
+      "sourceHash": "170392351005fbde14e5132e5809ca2728b4dbbea19ce94dd606f89967aea91e",
+      "generatedHash": "170392351005fbde14e5132e5809ca2728b4dbbea19ce94dd606f89967aea91e",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/table.css",
+      "sourceHash": "61f1871a42b75b6eb6b6d4a379086cd7b95db305522b4d037d569ac39a54d307",
+      "generatedHash": "61f1871a42b75b6eb6b6d4a379086cd7b95db305522b4d037d569ac39a54d307",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/tabs.css",
+      "sourceHash": "64119232ef879ea894802845ac144cc90c68c0bc139037e960f7dcc645452c78",
+      "generatedHash": "64119232ef879ea894802845ac144cc90c68c0bc139037e960f7dcc645452c78",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/tag-group.css",
+      "sourceHash": "4b307899fa03252a0ff6b90901e7e88f873df2de3fe773a712fa575f9d25369f",
+      "generatedHash": "4b307899fa03252a0ff6b90901e7e88f873df2de3fe773a712fa575f9d25369f",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/tag.css",
+      "sourceHash": "5350fb395201a92688b8694ed52acf3136ff8b83f8c8c2905656b46fe701cb5a",
+      "generatedHash": "5350fb395201a92688b8694ed52acf3136ff8b83f8c8c2905656b46fe701cb5a",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/textarea.css",
+      "sourceHash": "f3180734012d3703a0c2a651bf2c3e83cd89816814b150c591e11abda65c57a8",
+      "generatedHash": "f3180734012d3703a0c2a651bf2c3e83cd89816814b150c591e11abda65c57a8",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/textfield.css",
+      "sourceHash": "9d07a16efe38bb8b2cfd43e32340b9a8bd57e908f3b7c1e8abf6a56374aa3f24",
+      "generatedHash": "32243bc179780b6e47b97f7d45de63e3e1de73ad83540eff3cda202de34e2a34",
+      "aliases": 1,
+      "scoped": true
+    },
+    {
+      "path": "components/time-field.css",
+      "sourceHash": "eb4e9511ebbc50f6aabe60fcd32704aaf48cfaa3424b885dc9a7a680544c37b5",
+      "generatedHash": "eb4e9511ebbc50f6aabe60fcd32704aaf48cfaa3424b885dc9a7a680544c37b5",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/toast.css",
+      "sourceHash": "65e88d8f12bd63de63bb618ca28b2227f050a9910c7af0df0fc251cef4fdc3b6",
+      "generatedHash": "65e88d8f12bd63de63bb618ca28b2227f050a9910c7af0df0fc251cef4fdc3b6",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/toggle-button-group.css",
+      "sourceHash": "f5f3f895e2d0d8099b6a2b5d4321bc9e635dbc205c48ad30fea0b2c7278d080a",
+      "generatedHash": "f5f3f895e2d0d8099b6a2b5d4321bc9e635dbc205c48ad30fea0b2c7278d080a",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/toggle-button.css",
+      "sourceHash": "6bc6f319bd79677ac081278179c1861552bb7b23464475ed210489d2de692e53",
+      "generatedHash": "6bc6f319bd79677ac081278179c1861552bb7b23464475ed210489d2de692e53",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/toolbar.css",
+      "sourceHash": "864924ffc2e37680379603bb8c62d4f9faf253c919bfd6c079aa4b082847b2ff",
+      "generatedHash": "864924ffc2e37680379603bb8c62d4f9faf253c919bfd6c079aa4b082847b2ff",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/tooltip.css",
+      "sourceHash": "3ceacc5e7d83442f14193545889001d9d518702147a8c72a3bdfcee52b245e1d",
+      "generatedHash": "3ceacc5e7d83442f14193545889001d9d518702147a8c72a3bdfcee52b245e1d",
+      "aliases": 0,
+      "scoped": false
+    },
+    {
+      "path": "components/typography.css",
+      "sourceHash": "3c7fbc3cf9e9c2a43d58142d15ea68f57c5d2728d6ef40e84d8bb0bc2fcc5dd6",
+      "generatedHash": "3c7fbc3cf9e9c2a43d58142d15ea68f57c5d2728d6ef40e84d8bb0bc2fcc5dd6",
+      "aliases": 0,
+      "scoped": false
+    }
+  ],
+  "aliases": 29,
+  "scope": [
+    "button",
+    "close-button",
+    "description",
+    "field-error",
+    "input",
+    "label",
+    "list-box",
+    "list-box-item",
+    "modal",
+    "popover",
+    "select",
+    "separator",
+    "spinner",
+    "surface",
+    "textfield"
+  ],
+  "pendingAttributes": {
+    "data-active": [
+      "components/input-otp.css",
+      "components/pagination.css"
+    ],
+    "data-allows-sorting": [
+      "components/table.css"
+    ],
+    "data-animation-ready": [
+      "components/tabs.css"
+    ],
+    "data-bottom-scroll": [
+      "components/scroll-shadow.css",
+      "components/tabs.css"
+    ],
+    "data-closed": [
+      "components/sheet.css"
+    ],
+    "data-current": [
+      "components/breadcrumbs.css"
+    ],
+    "data-default-icon": [
+      "components/link.css"
+    ],
+    "data-detached": [
+      "components/sheet.css"
+    ],
+    "data-direction": [
+      "components/slider.css",
+      "components/table.css"
+    ],
+    "data-dragging": [
+      "components/color-area.css",
+      "components/color-slider.css",
+      "components/sheet.css",
+      "components/slider.css",
+      "components/table.css"
+    ],
+    "data-drop-target": [
+      "components/table.css"
+    ],
+    "data-expanded": [
+      "components/accordion.css",
+      "components/disclosure.css",
+      "components/sheet.css",
+      "components/toast.css"
+    ],
+    "data-fill-end": [
+      "components/slider.css"
+    ],
+    "data-fill-start": [
+      "components/slider.css"
+    ],
+    "data-filled": [
+      "components/input-otp.css",
+      "components/slider.css"
+    ],
+    "data-focus-within": [
+      "components/color-input-group.css",
+      "components/date-input-group.css",
+      "components/input-group.css",
+      "components/number-field.css",
+      "components/search-field.css",
+      "utilities/index.css"
+    ],
+    "data-frontmost": [
+      "components/toast.css"
+    ],
+    "data-handle-dragging": [
+      "components/sheet.css"
+    ],
+    "data-has-descendants": [
+      "components/sheet.css"
+    ],
+    "data-has-submenu": [
+      "components/menu-item.css"
+    ],
+    "data-hidden": [
+      "components/toast.css"
+    ],
+    "data-hide-separator": [
+      "components/accordion.css"
+    ],
+    "data-indeterminate": [
+      "components/checkbox.css"
+    ],
+    "data-left-right-scroll": [
+      "components/scroll-shadow.css",
+      "components/tabs.css"
+    ],
+    "data-left-scroll": [
+      "components/scroll-shadow.css",
+      "components/tabs.css"
+    ],
+    "data-light-color": [
+      "components/color-swatch-picker.css"
+    ],
+    "data-outside-month": [
+      "components/calendar.css",
+      "components/range-calendar.css"
+    ],
+    "data-reduce-motion": [
+      "variants/index.css"
+    ],
+    "data-resizing": [
+      "components/table.css"
+    ],
+    "data-right-scroll": [
+      "components/scroll-shadow.css",
+      "components/tabs.css"
+    ],
+    "data-scroll-shadow-mode": [
+      "components/scroll-shadow.css"
+    ],
+    "data-scrollbar": [
+      "base/scrollbar.css"
+    ],
+    "data-selection-end": [
+      "components/range-calendar.css"
+    ],
+    "data-selection-mode": [
+      "components/menu-item.css"
+    ],
+    "data-selection-start": [
+      "components/range-calendar.css"
+    ],
+    "data-sheet-scroll": [
+      "components/sheet.css"
+    ],
+    "data-snap-points": [
+      "components/sheet.css"
+    ],
+    "data-stack-index": [
+      "components/sheet.css"
+    ],
+    "data-swapped": [
+      "components/toast.css"
+    ],
+    "data-theme": [
+      "themes/default/variables.css",
+      "variants/index.css"
+    ],
+    "data-today": [
+      "components/calendar.css",
+      "components/range-calendar.css"
+    ],
+    "data-top-bottom-scroll": [
+      "components/scroll-shadow.css",
+      "components/tabs.css"
+    ],
+    "data-top-scroll": [
+      "components/scroll-shadow.css",
+      "components/tabs.css"
+    ],
+    "data-tree-column": [
+      "components/table.css"
+    ],
+    "data-type": [
+      "components/date-input-group.css"
+    ],
+    "data-unavailable": [
+      "components/calendar.css",
+      "components/range-calendar.css"
+    ],
+    "data-vibrant-palette": [
+      "themes/default/variables.css"
+    ]
+  }
+}

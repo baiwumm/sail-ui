@@ -1,0 +1,10 @@
+node_modules
+dist
+coverage
+.turbo
+.nuxt
+.output
+.screenshots
+packages/styles/upstream
+packages/styles/generated
+pnpm-lock.yaml

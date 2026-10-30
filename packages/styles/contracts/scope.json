@@ -1,0 +1,19 @@
+{
+  "components": [
+    "button",
+    "close-button",
+    "description",
+    "field-error",
+    "input",
+    "label",
+    "list-box",
+    "list-box-item",
+    "modal",
+    "popover",
+    "select",
+    "separator",
+    "spinner",
+    "surface",
+    "textfield"
+  ]
+}

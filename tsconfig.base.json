@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "force",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "jsx": "preserve",
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@sail-ui/styles": ["packages/styles/src/index.ts"],
+      "@sail-ui/primitives": ["packages/primitives/src/index.ts"],
+      "@sail-ui/vue": ["packages/vue/src/index.ts"],
+      "@sail-ui/vue/button": ["packages/vue/src/components/button/index.ts"],
+      "@sail-ui/vue/input": ["packages/vue/src/components/input/index.ts"],
+      "@sail-ui/vue/modal": ["packages/vue/src/components/modal/index.ts"],
+      "@sail-ui/vue/select": ["packages/vue/src/components/select/index.ts"],
+      "@sail-ui/testing": ["packages/testing/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "dist", ".nuxt", "generated"]
+}

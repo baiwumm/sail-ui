@@ -1,0 +1,27 @@
+{
+  "name": "@sail-ui/playground",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5173",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --max-warnings=0",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@sail-ui/primitives": "workspace:*",
+    "@sail-ui/styles": "workspace:*",
+    "@sail-ui/vue": "workspace:*",
+    "@tailwindcss/vite": "4.3.3",
+    "tailwindcss": "4.3.3",
+    "vue": "3.5.44"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "6.0.10",
+    "typescript": "5.9.3",
+    "vite": "8.3.5",
+    "vue-tsc": "3.3.14"
+  }
+}

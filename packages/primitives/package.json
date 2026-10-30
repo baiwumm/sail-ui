@@ -1,0 +1,35 @@
+{
+  "name": "@sail-ui/primitives",
+  "version": "0.0.0",
+  "description": "Vue composables that fill interaction-state gaps left by Reka UI",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean --external vue",
+    "lint": "eslint src --max-warnings=0",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vue": "3.5.44"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

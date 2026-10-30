@@ -1,0 +1,63 @@
+{
+  "name": "@sail-ui/vue",
+  "version": "0.0.0",
+  "description": "Vue 3 components built on the HeroUI v3 DOM and CSS contract",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./button": {
+      "types": "./dist/components/button/index.d.ts",
+      "import": "./dist/components/button/index.js",
+      "default": "./dist/components/button/index.js"
+    },
+    "./input": {
+      "types": "./dist/components/input/index.d.ts",
+      "import": "./dist/components/input/index.js",
+      "default": "./dist/components/input/index.js"
+    },
+    "./modal": {
+      "types": "./dist/components/modal/index.d.ts",
+      "import": "./dist/components/modal/index.js",
+      "default": "./dist/components/modal/index.js"
+    },
+    "./select": {
+      "types": "./dist/components/select/index.d.ts",
+      "import": "./dist/components/select/index.js",
+      "default": "./dist/components/select/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint src --max-warnings=0",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@sail-ui/primitives": "workspace:*",
+    "@sail-ui/styles": "workspace:*",
+    "reka-ui": "2.11.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "6.0.10",
+    "typescript": "5.9.3",
+    "vite": "8.3.5",
+    "vite-plugin-dts": "4.5.4",
+    "vue": "3.5.44",
+    "vue-tsc": "3.3.14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

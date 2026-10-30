@@ -1,0 +1,65 @@
+{
+  "data-disabled": {
+    "owner": "compat",
+    "map": ["[data-disabled]"]
+  },
+  "data-empty": {
+    "owner": "component"
+  },
+  "data-entering": {
+    "owner": "component"
+  },
+  "data-exiting": {
+    "owner": "component"
+  },
+  "data-focus": {
+    "owner": "compat",
+    "map": ["[data-highlighted]"]
+  },
+  "data-focus-visible": {
+    "owner": "compat",
+    "map": [":focus-visible"]
+  },
+  "data-focused": {
+    "owner": "compat",
+    "map": ["[data-focused]"]
+  },
+  "data-hovered": {
+    "owner": "compat",
+    "map": [":hover"]
+  },
+  "data-invalid": {
+    "owner": "compat",
+    "map": ["[data-invalid]"]
+  },
+  "data-open": {
+    "owner": "compat",
+    "map": ["[data-state=open]"]
+  },
+  "data-orientation": {
+    "owner": "reka"
+  },
+  "data-pending": {
+    "owner": "component"
+  },
+  "data-placement": {
+    "owner": "component"
+  },
+  "data-placeholder": {
+    "owner": "component"
+  },
+  "data-pressed": {
+    "owner": "compat",
+    "map": [":active", "[data-state=pressed]"]
+  },
+  "data-required": {
+    "owner": "component"
+  },
+  "data-selected": {
+    "owner": "compat",
+    "map": ["[data-state=checked]", "[data-state=on]"]
+  },
+  "data-slot": {
+    "owner": "component"
+  }
+}
