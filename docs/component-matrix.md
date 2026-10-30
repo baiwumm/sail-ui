@@ -61,15 +61,15 @@
 
 ## 覆盖层 / 反馈（7）
 
-| 组件           | Reka 基础                     | 里程碑         | MVP | 备注                                                      |
-| -------------- | ----------------------------- | -------------- | --- | --------------------------------------------------------- |
-| `alert-dialog` | `AlertDialogRoot`             | M2             | ✅  | `alertdialog`、不可遮罩关闭                               |
-| `drawer`       | `DrawerRoot`                  | M2             | ✅  | swipe/把手/方向                                           |
-| `modal`        | `DialogRoot`                  | M2（M0 spike） | ✅  | placement/退场/滚动锁；T01 已验证；Trigger 标签差异待 T05 |
-| `popover`      | `PopoverRoot`                 | M2             | ✅  | Floating UI、碰撞、`data-placement`                       |
-| `sheet`        | `DrawerRoot`（最接近）        | M2             |     | 侧边面板、方向/尺寸                                       |
-| `toast`        | `ToastProvider` / `ToastRoot` | M2             | ✅  | 队列/暂停/Promise/每请求实例                              |
-| `tooltip`      | `TooltipRoot`                 | M2             | ✅  | 延迟、`aria-describedby`                                  |
+| 组件           | Reka 基础                       | 里程碑         | MVP | 备注                                                        |
+| -------------- | ------------------------------- | -------------- | --- | ----------------------------------------------------------- |
+| `alert-dialog` | `AlertDialogRoot`               | M2             | ✅  | `alertdialog`、不可遮罩关闭                                 |
+| `drawer`       | `DialogRoot` + 自研 motion/拖拽 | M2             | ✅  | swipe/把手/方向；T05 done                                   |
+| `modal`        | `DialogRoot`                    | M2（M0 spike） | ✅  | placement/退场/滚动锁；T01 已验证；T05 对齐 div trigger     |
+| `popover`      | `PopoverRoot`                   | M2             | ✅  | Floating UI/箭头/`data-placement` 镜像；T05 done            |
+| `sheet`        | `DialogRoot` + 自研 motion/拖拽 | M2             | ✅  | 方向/尺寸、WAAPI 进出场；snap/detached/嵌套未实现；T05 done |
+| `toast`        | `ToastProvider` / `ToastRoot`   | M2             | ✅  | 队列/暂停/Promise/每请求实例                                |
+| `tooltip`      | `TooltipRoot`                   | M2             | ✅  | 延迟/关闭延迟、`aria-describedby`、hoverable 内容；T05 done |
 
 ## 集合 / 选择（15）
 
