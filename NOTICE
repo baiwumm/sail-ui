@@ -1,0 +1,22 @@
+Sail UI
+Copyright 2026 Sail UI contributors
+
+This product includes software derived from HeroUI v3
+(https://github.com/heroui-inc/heroui), Copyright 2025 NextUI Inc.,
+licensed under the Apache License, Version 2.0.
+
+Upstream snapshot
+-----------------
+HeroUI v3.2.7
+Commit 89cd95ec17dfbbf952ef0d61af300f287aec223d
+(v3.2.6-53-g89cd95ec1, 2026-10-29)
+
+The files copied from the upstream package (including the CSS under
+packages/styles/upstream/) retain their original copyright and license
+notices. Sail UI modifications are limited to generated compatibility
+aliases (compat.css), Vue component implementations, and documentation;
+the upstream CSS is not edited.
+
+HeroUI is a trademark of its respective owner. Sail UI is an independent
+community project and is not affiliated with or endorsed by HeroUI.
+</content>
