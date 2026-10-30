@@ -20,6 +20,27 @@
 
 这张 ticket 的验收方式是**故意弄坏**：删掉 Button 的 `data-hovered`，契约测试必须红；恢复必须绿。
 
+## T01 移交的现状
+
+T01 已跑通最小生成链路，T02 在其上扩展，不要推倒重来。实测细节见 [M0 findings](../../research/m0-spike-findings.md)。
+
+| 项 | T01 现状 | T02 要补 |
+|---|---|---|
+| `attributes.json` | 18 条：compat 9 / component 8 / reka 1 | 覆盖上游 65 种属性，47 个 pending 逐个定 owner |
+| scope | 15 个组件（Button/Input/Modal/Select 及其 parts） | 扩展到全部组件，并按组件分组 |
+| 别名 | 29 个，分布在 8 个生成文件 | 评审每个别名；新增别名必须保持原位追加 |
+| `data-slots` | 4 个组件以契约列表人工核对 | 从 React 源码生成 332 值快照 |
+| 生成器 | PostCSS 原位追加、`:not()` 内跳过、同组已存在则跳过、`--check` 确定性 | 65 属性冲突检测、未知属性报错、漂移 CI |
+| manifest | 版本/commit/96 文件哈希/别名统计/pending 属性 | 与 `sync-styles` 联动校验 |
+
+### 生成器已知约束
+
+- **别名不能进 `:not()`**：例如 `[data-focus-visible]` 的反义选择器不能替换成 `:focus-visible`，否则语义反转。当前实现直接跳过。
+- **同组选择器已含别名时跳过**：`list-box-item.css` 的 `:focus-visible:not([data-focused]), [data-focus-visible="true"]` 再追加 `:focus-visible` 会扩大命中范围，曾导致 Select 弹层 1.7% 视觉差异。
+- **`data-focused` 是组件补齐属性**：React Aria 在聚焦时设置，用于抑制原生焦点环；Vue 由 `useFocusRing.isFocused` 发射 presence 形式。不要把它当作纯 compat 别名删除。
+- **`data-focus-visible` 需要键盘模态门槛**：Chromium 对弹层内的程序化焦点也返回 `:focus-visible`，只靠 `:focus-visible` 无法复刻上游行为。
+- **Reka 词汇差异**：`data-state=open/checked/on`、`data-highlighted`、`data-side` 需在 `attributes.json` 或组件层归一化；Select trigger 的 `role="combobox"` 与上游 `aria-haspopup="listbox"` 尚未对齐，T05 决策。
+
 ## Scope
 
 | 路径 | 内容 |

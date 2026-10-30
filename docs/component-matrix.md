@@ -39,12 +39,12 @@
 
 | 组件 | Reka 基础 | 里程碑 | MVP | 备注 |
 |---|---|---|---|---|
-| `button` | 自研（`Toggle` 复用 press） | M1（M0 spike） | ✅ | 变体/尺寸/loading/icon-only |
+| `button` | 自研（`Toggle` 复用 press） | M1（M0 spike） | ✅ | 变体/尺寸/loading/icon-only；T01 已验证 |
 | `button-group` | 自研 | M1 | ✅ | 组合、分隔、方向 |
 | `checkbox` | `CheckboxRoot` | M1 | ✅ | indeterminate |
 | `checkbox-group` | `CheckboxGroupRoot` | M1 | ✅ | 全选/半选、数组 `v-model` |
 | `form` | `FormRoot` / 原生 form | M1 | ✅ | 提交/校验聚合 |
-| `input` | 自研 + `FieldControl` | M1（M0 spike） | ✅ | 前后缀、清除、IME |
+| `input` | 自研 + `FieldControl` | M1（M0 spike） | ✅ | 前后缀、清除、IME；T01 已验证（label/description/error 组合） |
 | `input-group` | 自研 | M1 | | 组合输入与按钮 |
 | `number-field` | `NumberFieldRoot` | M1 | ✅ | 步进/格式/min-max |
 | `radio` | `RadioGroupItem` / `RadioGroupIndicator` | M1 | ✅ | 内部 indicator 需 useHover/usePress |
@@ -65,7 +65,7 @@
 |---|---|---|---|---|
 | `alert-dialog` | `AlertDialogRoot` | M2 | ✅ | `alertdialog`、不可遮罩关闭 |
 | `drawer` | `DrawerRoot` | M2 | ✅ | swipe/把手/方向 |
-| `modal` | `DialogRoot` | M2（M0 spike） | ✅ | placement/退场/滚动锁 |
+| `modal` | `DialogRoot` | M2（M0 spike） | ✅ | placement/退场/滚动锁；T01 已验证；Trigger 标签差异待 T05 |
 | `popover` | `PopoverRoot` | M2 | ✅ | Floating UI、碰撞、`data-placement` |
 | `sheet` | `DrawerRoot`（最接近） | M2 | | 侧边面板、方向/尺寸 |
 | `toast` | `ToastProvider` / `ToastRoot` | M2 | ✅ | 队列/暂停/Promise/每请求实例 |
@@ -86,7 +86,7 @@
 | `menu-item` | `DropdownMenuItem` | M2 | | 选择/命令 |
 | `menu-section` | `DropdownMenuGroup` | M2 | | 分组/标签 |
 | `pagination` | `PaginationRoot` | M2 | ✅ | 页码/省略/RTL |
-| `select` | `SelectRoot` | M2（M0 spike） | ✅ | `data-open`/`data-selected`/typeahead |
+| `select` | `SelectRoot` | M2（M0 spike） | ✅ | `data-open`/`data-selected`/typeahead；T01 已验证；trigger ARIA 与 SSR 选中文本待 T05 |
 | `tabs` | `TabsRoot` | M2 | ✅ | 方向/手动激活 |
 | `tag` | `TagGroupItem` | M2 | ✅ | 可选择/可删除 |
 | `tag-group` | `TagGroupRoot` | M2 | | 键盘删除/焦点回退 |
