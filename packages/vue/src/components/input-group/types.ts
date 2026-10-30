@@ -33,5 +33,4 @@ export interface InputGroupContext {
   isInvalid: Ref<boolean>;
 }
 
-export const inputGroupContextKey: InjectionKey<InputGroupContext> =
-  Symbol("sail-input-group");
+export const inputGroupContextKey: InjectionKey<InputGroupContext> = Symbol("sail-input-group");

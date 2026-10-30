@@ -13,7 +13,7 @@ const item = useSelectItemContext();
 
 const variant = computed(() => props.variant ?? item.variant.value);
 const classes = computed(() =>
-  cx(listboxItemVariants({variant: variant.value}).indicator(), attrs.class as string | undefined)
+  cx(listboxItemVariants({variant: variant.value}).indicator(), attrs.class as string | undefined),
 );
 </script>
 

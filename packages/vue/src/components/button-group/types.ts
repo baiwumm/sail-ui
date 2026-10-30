@@ -36,5 +36,4 @@ export interface ButtonGroupContext {
   fullWidth: Ref<boolean>;
 }
 
-export const buttonGroupContextKey: InjectionKey<ButtonGroupContext> =
-  Symbol("sail-button-group");
+export const buttonGroupContextKey: InjectionKey<ButtonGroupContext> = Symbol("sail-button-group");

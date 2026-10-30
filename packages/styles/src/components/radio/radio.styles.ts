@@ -7,8 +7,8 @@ export const radioVariants = tv({
     base: "radio",
     content: "radio__content",
     control: "radio__control",
-    indicator: "radio__indicator"
-  }
+    indicator: "radio__indicator",
+  },
 });
 
 export type RadioVariants = VariantProps<typeof radioVariants>;

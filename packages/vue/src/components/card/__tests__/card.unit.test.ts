@@ -17,13 +17,13 @@ function renderCard(variant: "default" | "secondary" | "tertiary" | "transparent
         h(CardHeader, null, {
           default: () => [
             h(CardTitle, null, {default: () => "Title"}),
-            h(CardDescription, null, {default: () => "Description"})
-          ]
+            h(CardDescription, null, {default: () => "Description"}),
+          ],
         }),
         h(CardContent, null, {default: () => "Body"}),
-        h(CardFooter, null, {default: () => "Footer"})
-      ]
-    }
+        h(CardFooter, null, {default: () => "Footer"}),
+      ],
+    },
   });
 }
 
@@ -32,7 +32,7 @@ describe("Card", () => {
     const wrapper = renderCard("secondary");
 
     expect(wrapper.get("[data-slot='card']").classes()).toEqual(
-      expect.arrayContaining(["card", "card--secondary"])
+      expect.arrayContaining(["card", "card--secondary"]),
     );
     expect(wrapper.get("[data-slot='card-header']").classes()).toContain("card__header");
     expect(wrapper.get("[data-slot='card-title']").element.tagName).toBe("H3");
@@ -54,7 +54,7 @@ describe("Card", () => {
     const wrapper = mount(Card, {
       attrs: {class: "extra"},
       props: {as: "article"},
-      slots: {default: () => h(CardTitle, {as: "h2"}, {default: () => "Title"})}
+      slots: {default: () => h(CardTitle, {as: "h2"}, {default: () => "Title"})},
     });
 
     expect(wrapper.element.tagName).toBe("ARTICLE");

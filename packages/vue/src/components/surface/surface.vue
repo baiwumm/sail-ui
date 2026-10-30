@@ -10,29 +10,23 @@ defineOptions({name: "SailSurface", inheritAttrs: false});
 
 const props = withDefaults(defineProps<SurfaceProps>(), {
   as: "div",
-  variant: "default"
+  variant: "default",
 });
 
 const attrs = useAttrs();
 
 provide(
   surfaceContextKey,
-  computed(() => props.variant)
+  computed(() => props.variant),
 );
 
 const classes = computed(() =>
-  cx(surfaceVariants({variant: props.variant}), attrs.class as string | undefined)
+  cx(surfaceVariants({variant: props.variant}), attrs.class as string | undefined),
 );
 </script>
 
 <template>
-  <Primitive
-    v-bind="$attrs"
-    :as="as"
-    :as-child="asChild"
-    :class="classes"
-    :data-slot="'surface'"
-  >
+  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes" :data-slot="'surface'">
     <slot />
   </Primitive>
 </template>

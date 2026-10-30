@@ -18,14 +18,14 @@ const tempDir = mkdtempSync(join(tmpdir(), "sail-ui-pack-check-"));
 try {
   for (const name of consumers) {
     run(`pnpm pack --pack-destination ${JSON.stringify(tempDir)}`, {
-      cwd: join(root, "packages", name)
+      cwd: join(root, "packages", name),
     });
   }
 
   const tarballs = Object.fromEntries(
     readdirSync(tempDir)
       .filter((file) => file.endsWith(".tgz"))
-      .map((file) => [file.replace(/-\d+\.\d+\.\d+\.tgz$/, ""), file])
+      .map((file) => [file.replace(/-\d+\.\d+\.\d+\.tgz$/, ""), file]),
   );
 
   const dependencies = {
@@ -35,13 +35,17 @@ try {
     "@vue/server-renderer": "3.5.44",
     "reka-ui": "2.11.0",
     "tailwind-variants": "3.3.1",
-    "tailwindcss": "4.3.3",
-    "vue": "3.5.44"
+    tailwindcss: "4.3.3",
+    vue: "3.5.44",
   };
 
   writeFileSync(
     join(tempDir, "package.json"),
-    JSON.stringify({name: "sail-ui-pack-check", private: true, type: "module", dependencies}, null, 2)
+    JSON.stringify(
+      {name: "sail-ui-pack-check", private: true, type: "module", dependencies},
+      null,
+      2,
+    ),
   );
 
   writeFileSync(
@@ -63,7 +67,7 @@ assert.match(html, /button--lg/);
 assert.ok(buttonVariants({variant: "danger"}).includes("button--danger"));
 assert.ok(existsSync(new URL(import.meta.resolve("@sail-ui/styles/css"))));
 console.log("pack:check render ok");
-`
+`,
   );
 
   run("npm install --no-audit --no-fund --loglevel error", {cwd: tempDir});

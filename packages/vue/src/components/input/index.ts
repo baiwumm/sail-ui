@@ -1,7 +1,7 @@
 import InputRoot from "./input.vue";
 
 const Input = Object.assign(InputRoot, {
-  Root: InputRoot
+  Root: InputRoot,
 });
 
 export {Input, InputRoot};
@@ -13,5 +13,5 @@ export {
   inputVariants,
   textFieldVariants,
   type InputVariants,
-  type TextFieldVariants
+  type TextFieldVariants,
 } from "@sail-ui/styles";

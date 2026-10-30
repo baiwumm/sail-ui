@@ -9,7 +9,7 @@ defineOptions({name: "SailButtonGroup", inheritAttrs: false});
 const props = withDefaults(defineProps<ButtonGroupRootProps>(), {
   fullWidth: false,
   isDisabled: false,
-  orientation: "horizontal"
+  orientation: "horizontal",
 });
 
 const attrs = useAttrs();
@@ -18,27 +18,22 @@ const classes = computed(() =>
   cx(
     buttonGroupVariants({
       fullWidth: props.fullWidth,
-      orientation: props.orientation
+      orientation: props.orientation,
     }).base(),
-    attrs.class as string | undefined
-  )
+    attrs.class as string | undefined,
+  ),
 );
 
 provide(buttonGroupContextKey, {
   size: computed(() => props.size),
   variant: computed(() => props.variant),
   isDisabled: computed(() => props.isDisabled),
-  fullWidth: computed(() => props.fullWidth)
+  fullWidth: computed(() => props.fullWidth),
 });
 </script>
 
 <template>
-  <div
-    v-bind="$attrs"
-    role="group"
-    :class="classes"
-    :data-slot="'button-group'"
-  >
+  <div v-bind="$attrs" role="group" :class="classes" :data-slot="'button-group'">
     <slot />
   </div>
 </template>

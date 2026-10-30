@@ -9,23 +9,16 @@ const Switch = Object.assign(SwitchRoot, {
   Content: SwitchContent,
   Control: SwitchControl,
   Thumb: SwitchThumb,
-  Icon: SwitchIcon
+  Icon: SwitchIcon,
 });
 
-export {
-  Switch,
-  SwitchRoot,
-  SwitchContent,
-  SwitchControl,
-  SwitchThumb,
-  SwitchIcon
-};
+export {Switch, SwitchRoot, SwitchContent, SwitchControl, SwitchThumb, SwitchIcon};
 export type {
   SwitchRootProps,
   SwitchRootProps as SwitchProps,
   SwitchContentProps,
   SwitchControlProps,
   SwitchThumbProps,
-  SwitchIconProps
+  SwitchIconProps,
 } from "./types";
 export {switchVariants, type SwitchVariants} from "@sail-ui/styles";

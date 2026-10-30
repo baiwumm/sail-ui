@@ -9,17 +9,17 @@
 
 ## 1. 结论总览
 
-| 项 | 结果 |
-|---|---|
-| `attributes.json` | 65 条：compat 12 / component 52 / native 0 / reka 1 |
-| 上游 CSS | 96 个，逐字节原样；生成 86 个组件文件 |
-| scope | 85 个组件，与上游组件 CSS 一一对应（`index.css` 除外） |
-| 别名 | 263 个选择器，分布在 50 个生成文件 |
-| `data-slot` | 334 个唯一值 / 81 个组件（ticket 初稿为 332，已校正） |
-| 确定性 | 连续两次生成，manifest 与 86 个生成文件哈希完全一致 |
-| 故障注入 | 3 项全部按预期红/绿 |
-| `pnpm verify` | 通过（lint 7/7、typecheck 10/10、contract 45、unit 18、SSR 2、build 7/7） |
-| 视觉 / 浏览器 | 8/8 视觉用例、18/18 浏览器用例通过 |
+| 项                | 结果                                                                      |
+| ----------------- | ------------------------------------------------------------------------- |
+| `attributes.json` | 65 条：compat 12 / component 52 / native 0 / reka 1                       |
+| 上游 CSS          | 96 个，逐字节原样；生成 86 个组件文件                                     |
+| scope             | 85 个组件，与上游组件 CSS 一一对应（`index.css` 除外）                    |
+| 别名              | 263 个选择器，分布在 50 个生成文件                                        |
+| `data-slot`       | 334 个唯一值 / 81 个组件（ticket 初稿为 332，已校正）                     |
+| 确定性            | 连续两次生成，manifest 与 86 个生成文件哈希完全一致                       |
+| 故障注入          | 3 项全部按预期红/绿                                                       |
+| `pnpm verify`     | 通过（lint 7/7、typecheck 10/10、contract 45、unit 18、SSR 2、build 7/7） |
+| 视觉 / 浏览器     | 8/8 视觉用例、18/18 浏览器用例通过                                        |
 
 ## 2. `data-slot`：332 → 334
 
@@ -41,12 +41,12 @@ ticket 初稿的 332 来自只匹配 JSX 字面量（`data-slot="button"`）的�
 
 ## 3. 属性归属
 
-| owner | 数量 | 代表属性 |
-|---|---:|---|
-| `compat` | 12 | `data-hovered`、`data-pressed`、`data-focus-visible`、`data-open`、`data-expanded`、`data-selected`、`data-disabled`、`data-invalid` |
-| `component` | 52 | `data-slot`、`data-entering`、`data-exiting`、`data-placement`、`data-focused`、`data-theme` |
-| `native` | 0 | 原生回退全部由 `compat` 追加原生伪类实现，因此没有单列条目 |
-| `reka` | 1 | `data-orientation` |
+| owner       | 数量 | 代表属性                                                                                                                             |
+| ----------- | ---: | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `compat`    |   12 | `data-hovered`、`data-pressed`、`data-focus-visible`、`data-open`、`data-expanded`、`data-selected`、`data-disabled`、`data-invalid` |
+| `component` |   52 | `data-slot`、`data-entering`、`data-exiting`、`data-placement`、`data-focused`、`data-theme`                                         |
+| `native`    |    0 | 原生回退全部由 `compat` 追加原生伪类实现，因此没有单列条目                                                                           |
+| `reka`      |    1 | `data-orientation`                                                                                                                   |
 
 评审中确认的两个关键点：
 
@@ -118,20 +118,20 @@ gen-compat check failed:
 
 ## 6. 门禁结果
 
-| 门禁 | 结果 |
-|---|---|
-| `pnpm lint` | 7/7 包，0 warning |
-| `pnpm typecheck` | 7 个包 + Nuxt fixture，0 error |
-| `pnpm typecheck:tests` | 0 error |
-| `pnpm check:styles` | 96 CSS + LICENSE + README 与 pin 一致 |
-| `pnpm check:slots` | 334 唯一值 / 81 组件 |
-| `pnpm check:compat` | 96 upstream / 85 scoped / 65 attrs / 263 aliases / 334 slots |
-| `pnpm test:contract` | 45/45（styles 30 + Vue 15） |
-| `pnpm test` | 18/18 |
-| `pnpm test:ssr` | 2/2 |
-| `pnpm test:browser` | 18/18（Chromium + WebKit） |
-| `pnpm test:visual` | 8/8，light/dark 四组件 |
-| `pnpm build` | 7/7 |
+| 门禁                   | 结果                                                         |
+| ---------------------- | ------------------------------------------------------------ |
+| `pnpm lint`            | 7/7 包，0 warning                                            |
+| `pnpm typecheck`       | 7 个包 + Nuxt fixture，0 error                               |
+| `pnpm typecheck:tests` | 0 error                                                      |
+| `pnpm check:styles`    | 96 CSS + LICENSE + README 与 pin 一致                        |
+| `pnpm check:slots`     | 334 唯一值 / 81 组件                                         |
+| `pnpm check:compat`    | 96 upstream / 85 scoped / 65 attrs / 263 aliases / 334 slots |
+| `pnpm test:contract`   | 45/45（styles 30 + Vue 15）                                  |
+| `pnpm test`            | 18/18                                                        |
+| `pnpm test:ssr`        | 2/2                                                          |
+| `pnpm test:browser`    | 18/18（Chromium + WebKit）                                   |
+| `pnpm test:visual`     | 8/8，light/dark 四组件                                       |
+| `pnpm build`           | 7/7                                                          |
 
 `pnpm verify` 首次在冷环境运行时暴露了一个流水线问题：Nuxt fixture 的 `typecheck` 依赖工作区包的 `dist/*.d.ts`，而 `typecheck` 早于 `build`。在 `turbo.json` 为 `nuxt-fixture#typecheck` 增加 `dependsOn: ["^build"]` 后，冷环境门禁可通过。
 
@@ -149,13 +149,13 @@ gen-compat check failed:
 
 ## 8. 遗留风险
 
-| 风险 | 状态 |
-|---|---|
-| 视觉基线仅 Chromium | WebKit 视觉仍待独立 ticket |
-| CI 只跑契约/SSR，不跑浏览器/视觉 | `.github/workflows/contract.yml` 的职责边界；完整矩阵留给发布门禁 |
-| `sync:styles` 依赖本地 git checkout，不下载 npm tarball | 已在 ADR 0003 记录为当前实现；tarball 同步如需要另开 ticket |
-| Select trigger 的 ARIA、SSR 选中文本、ModalTrigger 标签 | 仍归 T05，本次未改组件行为 |
-| 其余 80 个组件的契约表 | 随各自 ticket 增加，T02 只覆盖 4 个 spike 组件及其 parts |
+| 风险                                                    | 状态                                                              |
+| ------------------------------------------------------- | ----------------------------------------------------------------- |
+| 视觉基线仅 Chromium                                     | WebKit 视觉仍待独立 ticket                                        |
+| CI 只跑契约/SSR，不跑浏览器/视觉                        | `.github/workflows/contract.yml` 的职责边界；完整矩阵留给发布门禁 |
+| `sync:styles` 依赖本地 git checkout，不下载 npm tarball | 已在 ADR 0003 记录为当前实现；tarball 同步如需要另开 ticket       |
+| Select trigger 的 ARIA、SSR 选中文本、ModalTrigger 标签 | 仍归 T05，本次未改组件行为                                        |
+| 其余 80 个组件的契约表                                  | 随各自 ticket 增加，T02 只覆盖 4 个 spike 组件及其 parts          |
 
 ## 9. 复现命令
 

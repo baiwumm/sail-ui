@@ -55,7 +55,7 @@ provide(labelContextKey, {elementType: "span"});
         type="checkbox"
         :value="context?.value.value"
         @change="context?.toggle()"
-      >
+      />
     </VisuallyHidden>
     <slot />
   </label>

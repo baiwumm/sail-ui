@@ -53,37 +53,37 @@ import {
   Spinner,
   Surface,
   TextField,
-  Typography
+  Typography,
 } from "@heroui/react";
 
 const alertStatuses = ["default", "accent", "success", "warning", "danger"] as const;
 const alertCopy = {
   default: {
     title: "New version available",
-    description: "Refresh to get the latest features."
+    description: "Refresh to get the latest features.",
   },
   accent: {
     title: "Update required",
-    description: "Restart the app to continue."
+    description: "Restart the app to continue.",
   },
   success: {
     title: "Changes saved",
-    description: "Your profile has been updated."
+    description: "Your profile has been updated.",
   },
   warning: {
     title: "Storage almost full",
-    description: "Free up space to keep syncing."
+    description: "Free up space to keep syncing.",
   },
   danger: {
     title: "Upload failed",
-    description: "Check your connection and try again."
-  }
+    description: "Check your connection and try again.",
+  },
 } as const;
 
 const avatarSizes = [
   {label: "SM", size: "sm"},
   {label: "MD", size: "md"},
-  {label: "LG", size: "lg"}
+  {label: "LG", size: "lg"},
 ] as const;
 
 const avatarColors = [
@@ -91,7 +91,7 @@ const avatarColors = [
   {label: "AC", color: "accent"},
   {label: "SC", color: "success"},
   {label: "WR", color: "warning"},
-  {label: "DG", color: "danger"}
+  {label: "DG", color: "danger"},
 ] as const;
 
 const badgeColors = [
@@ -99,20 +99,20 @@ const badgeColors = [
   {color: "accent", value: "2"},
   {color: "success", value: "3"},
   {color: "warning", value: "4"},
-  {color: "danger", value: "5"}
+  {color: "danger", value: "5"},
 ] as const;
 
 const badgeSizes = [
   {size: "sm", value: "1"},
   {size: "md", value: "2"},
-  {size: "lg", value: "3"}
+  {size: "lg", value: "3"},
 ] as const;
 
 const cardVariants = [
   {variant: "default", title: "Default", description: "Standard card appearance"},
   {variant: "secondary", title: "Secondary", description: "Medium prominence"},
   {variant: "tertiary", title: "Tertiary", description: "Higher prominence"},
-  {variant: "transparent", title: "Transparent", description: "Minimal prominence"}
+  {variant: "transparent", title: "Transparent", description: "Minimal prominence"},
 ] as const;
 
 const chipVariants = ["primary", "secondary", "soft", "tertiary"] as const;
@@ -122,19 +122,19 @@ const linkItems = ["Blog", "Docs", "Source"];
 const barSizes = [
   {size: "sm", label: "Small", value: 40},
   {size: "md", label: "Medium", value: 60},
-  {size: "lg", label: "Large", value: 80}
+  {size: "lg", label: "Large", value: 80},
 ] as const;
 const barColors = [
   {color: "default", label: "Default"},
   {color: "accent", label: "Accent"},
   {color: "success", label: "Success"},
   {color: "warning", label: "Warning"},
-  {color: "danger", label: "Danger"}
+  {color: "danger", label: "Danger"},
 ] as const;
 const circleSizes = [
   {size: "sm", value: 40},
   {size: "md", value: 60},
-  {size: "lg", value: 80}
+  {size: "lg", value: 80},
 ] as const;
 const spinnerColors = ["accent", "current", "success", "warning", "danger"] as const;
 const spinnerSizes = ["sm", "md", "lg", "xl"] as const;
@@ -142,17 +142,11 @@ const spinnerSizes = ["sm", "md", "lg", "xl"] as const;
 export default function Gallery() {
   return (
     <>
-      <section
-        id="alert"
-        className="flex flex-col gap-4"
-      >
+      <section id="alert" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Alert</h2>
         <div className="grid w-full max-w-xl gap-3">
           {alertStatuses.map((status) => (
-            <Alert
-              key={status}
-              status={status}
-            >
+            <Alert key={status} status={status}>
               <AlertIndicator />
               <AlertContent>
                 <AlertTitle>{alertCopy[status].title}</AlertTitle>
@@ -163,42 +157,27 @@ export default function Gallery() {
         </div>
       </section>
 
-      <section
-        id="avatar"
-        className="flex flex-col gap-4"
-      >
+      <section id="avatar" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Avatar</h2>
         <div className="flex flex-wrap items-center gap-3">
           {avatarSizes.map((item) => (
-            <Avatar
-              key={item.size}
-              size={item.size}
-            >
+            <Avatar key={item.size} size={item.size}>
               <AvatarFallback>{item.label}</AvatarFallback>
             </Avatar>
           ))}
         </div>
         <div className="flex flex-wrap items-center gap-3">
           {avatarColors.map((item) => (
-            <Avatar
-              key={item.color}
-              color={item.color}
-            >
+            <Avatar key={item.color} color={item.color}>
               <AvatarFallback>{item.label}</AvatarFallback>
             </Avatar>
           ))}
-          <Avatar
-            color="accent"
-            variant="soft"
-          >
+          <Avatar color="accent" variant="soft">
             <AvatarFallback>SO</AvatarFallback>
           </Avatar>
         </div>
         <div className="flex flex-wrap items-center gap-6">
-          <AvatarGroup
-            max={3}
-            size="md"
-          >
+          <AvatarGroup max={3} size="md">
             <Avatar>
               <AvatarFallback>A</AvatarFallback>
             </Avatar>
@@ -212,10 +191,7 @@ export default function Gallery() {
               <AvatarFallback>D</AvatarFallback>
             </Avatar>
           </AvatarGroup>
-          <AvatarGroup
-            overlap="ring"
-            size="lg"
-          >
+          <AvatarGroup overlap="ring" size="lg">
             <Avatar>
               <AvatarFallback>E</AvatarFallback>
             </Avatar>
@@ -226,10 +202,7 @@ export default function Gallery() {
               <AvatarFallback>G</AvatarFallback>
             </Avatar>
           </AvatarGroup>
-          <AvatarGroup
-            isGrid
-            size="sm"
-          >
+          <AvatarGroup isGrid size="sm">
             <Avatar>
               <AvatarFallback>H</AvatarFallback>
             </Avatar>
@@ -246,10 +219,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      <section
-        id="badge"
-        className="flex flex-col gap-4"
-      >
+      <section id="badge" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Badge</h2>
         <div className="flex flex-wrap items-center gap-6">
           {badgeColors.map((item) => (
@@ -267,10 +237,7 @@ export default function Gallery() {
               <Avatar size={item.size}>
                 <AvatarFallback>AB</AvatarFallback>
               </Avatar>
-              <Badge
-                size={item.size}
-                color="danger"
-              >
+              <Badge size={item.size} color="danger">
                 {item.value}
               </Badge>
             </BadgeAnchor>
@@ -301,10 +268,7 @@ export default function Gallery() {
             <Avatar>
               <AvatarFallback>TL</AvatarFallback>
             </Avatar>
-            <Badge
-              placement="top-left"
-              size="sm"
-            >
+            <Badge placement="top-left" size="sm">
               1
             </Badge>
           </BadgeAnchor>
@@ -312,10 +276,7 @@ export default function Gallery() {
             <Avatar>
               <AvatarFallback>TR</AvatarFallback>
             </Avatar>
-            <Badge
-              placement="top-right"
-              size="sm"
-            >
+            <Badge placement="top-right" size="sm">
               2
             </Badge>
           </BadgeAnchor>
@@ -323,10 +284,7 @@ export default function Gallery() {
             <Avatar>
               <AvatarFallback>BL</AvatarFallback>
             </Avatar>
-            <Badge
-              placement="bottom-left"
-              size="sm"
-            >
+            <Badge placement="bottom-left" size="sm">
               3
             </Badge>
           </BadgeAnchor>
@@ -334,20 +292,14 @@ export default function Gallery() {
             <Avatar>
               <AvatarFallback>BR</AvatarFallback>
             </Avatar>
-            <Badge
-              placement="bottom-right"
-              size="sm"
-            >
+            <Badge placement="bottom-right" size="sm">
               4
             </Badge>
           </BadgeAnchor>
         </div>
       </section>
 
-      <section
-        id="breadcrumbs"
-        className="flex flex-col gap-4"
-      >
+      <section id="breadcrumbs" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Breadcrumbs</h2>
         <Breadcrumbs>
           <BreadcrumbsItem href="#">Home</BreadcrumbsItem>
@@ -363,18 +315,11 @@ export default function Gallery() {
         </Breadcrumbs>
       </section>
 
-      <section
-        id="card"
-        className="flex flex-col gap-4"
-      >
+      <section id="card" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Card</h2>
         <div className="flex flex-wrap items-stretch gap-4">
           {cardVariants.map((item) => (
-            <Card
-              key={item.variant}
-              variant={item.variant}
-              className="w-[240px]"
-            >
+            <Card key={item.variant} variant={item.variant} className="w-[240px]">
               <CardHeader>
                 <CardTitle>{item.title}</CardTitle>
                 <CardDescription>{item.description}</CardDescription>
@@ -386,49 +331,32 @@ export default function Gallery() {
         </div>
       </section>
 
-      <section
-        id="chip"
-        className="flex flex-col gap-4"
-      >
+      <section id="chip" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Chip</h2>
         <div className="flex flex-wrap items-center gap-3">
           {chipVariants.map((variant) => (
-            <Chip
-              key={variant}
-              variant={variant}
-              color="accent"
-            >
+            <Chip key={variant} variant={variant} color="accent">
               {variant}
             </Chip>
           ))}
         </div>
         <div className="flex flex-wrap items-center gap-3">
           {chipColors.map((color) => (
-            <Chip
-              key={color}
-              color={color}
-            >
+            <Chip key={color} color={color}>
               {color}
             </Chip>
           ))}
         </div>
         <div className="flex flex-wrap items-center gap-3">
           {chipSizes.map((size) => (
-            <Chip
-              key={size}
-              size={size}
-              color="success"
-            >
+            <Chip key={size} size={size} color="success">
               {size}
             </Chip>
           ))}
         </div>
       </section>
 
-      <section
-        id="close-button"
-        className="flex flex-col gap-4"
-      >
+      <section id="close-button" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">CloseButton</h2>
         <div className="flex flex-wrap items-center gap-4">
           <CloseButton />
@@ -437,10 +365,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      <section
-        id="fieldset"
-        className="flex flex-col gap-4"
-      >
+      <section id="fieldset" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Fieldset</h2>
         <div className="flex flex-wrap items-start gap-6">
           <Fieldset className="w-80">
@@ -459,19 +384,13 @@ export default function Gallery() {
               </TextField>
             </FieldGroup>
             <FieldsetActions>
-              <Button
-                type="button"
-                variant="secondary"
-              >
+              <Button type="button" variant="secondary">
                 Cancel
               </Button>
               <Button type="button">Save</Button>
             </FieldsetActions>
           </Fieldset>
-          <Fieldset
-            disabled
-            className="w-80"
-          >
+          <Fieldset disabled className="w-80">
             <FieldsetLegend>Billing</FieldsetLegend>
             <Description>Managed by your workspace.</Description>
             <FieldGroup>
@@ -486,10 +405,7 @@ export default function Gallery() {
               </TextField>
             </FieldGroup>
             <FieldsetActions>
-              <Button
-                type="button"
-                variant="secondary"
-              >
+              <Button type="button" variant="secondary">
                 Cancel
               </Button>
               <Button type="button">Save</Button>
@@ -498,18 +414,12 @@ export default function Gallery() {
         </div>
       </section>
 
-      <section
-        id="header"
-        className="flex flex-col gap-4"
-      >
+      <section id="header" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Header</h2>
         <Header>Team members</Header>
       </section>
 
-      <section
-        id="kbd"
-        className="flex flex-col gap-4"
-      >
+      <section id="kbd" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Kbd</h2>
         <div className="flex flex-wrap items-center gap-3">
           <Kbd>
@@ -540,45 +450,29 @@ export default function Gallery() {
         </div>
       </section>
 
-      <section
-        id="link"
-        className="flex flex-col gap-4"
-      >
+      <section id="link" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Link</h2>
         <div className="flex flex-wrap items-center gap-6">
           <Link href="#">
             Read the documentation
             <LinkIcon />
           </Link>
-          <Link
-            isDisabled
-            href="#"
-          >
+          <Link isDisabled href="#">
             Disabled link
             <LinkIcon />
           </Link>
-          <Link
-            aria-current="page"
-            href="#"
-          >
+          <Link aria-current="page" href="#">
             Current page
             <LinkIcon />
           </Link>
         </div>
       </section>
 
-      <section
-        id="progress"
-        className="flex flex-col gap-4"
-      >
+      <section id="progress" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Progress</h2>
         <div className="flex w-full max-w-xl flex-col gap-4">
           {barSizes.map((item) => (
-            <ProgressBar
-              key={item.size}
-              size={item.size}
-              value={item.value}
-            >
+            <ProgressBar key={item.size} size={item.size} value={item.value}>
               <Label>{item.label}</Label>
               <ProgressBarOutput />
               <ProgressBarTrack>
@@ -589,11 +483,7 @@ export default function Gallery() {
         </div>
         <div className="flex w-full max-w-xl flex-col gap-4">
           {barColors.map((item) => (
-            <ProgressBar
-              key={item.color}
-              color={item.color}
-              value={50}
-            >
+            <ProgressBar key={item.color} color={item.color} value={50}>
               <Label>{item.label}</Label>
               <ProgressBarOutput />
               <ProgressBarTrack>
@@ -609,10 +499,7 @@ export default function Gallery() {
               <ProgressBarFill />
             </ProgressBarTrack>
           </ProgressBar>
-          <ProgressBar
-            aria-disabled="true"
-            value={60}
-          >
+          <ProgressBar aria-disabled="true" value={60}>
             <Label>Disabled</Label>
             <ProgressBarOutput />
             <ProgressBarTrack>
@@ -637,12 +524,7 @@ export default function Gallery() {
         </div>
         <div className="flex flex-wrap items-center gap-6">
           {barColors.map((item) => (
-            <ProgressCircle
-              key={item.color}
-              color={item.color}
-              value={60}
-              aria-label="Loading"
-            >
+            <ProgressCircle key={item.color} color={item.color} value={60} aria-label="Loading">
               <ProgressCircleTrack>
                 <ProgressCircleTrackCircle />
                 <ProgressCircleFillCircle />
@@ -651,20 +533,13 @@ export default function Gallery() {
           ))}
         </div>
         <div className="flex flex-wrap items-center gap-6">
-          <ProgressCircle
-            isIndeterminate
-            aria-label="Loading"
-          >
+          <ProgressCircle isIndeterminate aria-label="Loading">
             <ProgressCircleTrack>
               <ProgressCircleTrackCircle />
               <ProgressCircleFillCircle />
             </ProgressCircleTrack>
           </ProgressCircle>
-          <ProgressCircle
-            aria-disabled="true"
-            value={60}
-            aria-label="Loading"
-          >
+          <ProgressCircle aria-disabled="true" value={60} aria-label="Loading">
             <ProgressCircleTrack>
               <ProgressCircleTrackCircle />
               <ProgressCircleFillCircle />
@@ -673,10 +548,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      <section
-        id="separator"
-        className="flex flex-col gap-4"
-      >
+      <section id="separator" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Separator</h2>
         <div className="flex w-full max-w-md flex-col gap-3">
           <Separator variant="default" />
@@ -685,26 +557,17 @@ export default function Gallery() {
         </div>
         <div className="flex h-10 items-center gap-4">
           {linkItems.map((item, index) => (
-            <span
-              key={item}
-              className="text-sm"
-            >
+            <span key={item} className="text-sm">
               {item}
               {index < linkItems.length - 1 && (
-                <Separator
-                  className="mx-2 inline-flex"
-                  orientation="vertical"
-                />
+                <Separator className="mx-2 inline-flex" orientation="vertical" />
               )}
             </span>
           ))}
         </div>
       </section>
 
-      <section
-        id="skeleton"
-        className="flex flex-col gap-4"
-      >
+      <section id="skeleton" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Skeleton</h2>
         <div className="flex flex-wrap items-center gap-6">
           <Skeleton className="h-24 w-64 rounded-xl" />
@@ -716,81 +579,48 @@ export default function Gallery() {
           <Skeleton className="size-12 rounded-full" />
         </div>
         <div className="flex flex-wrap items-center gap-4">
-          <Skeleton
-            animationType="pulse"
-            className="h-6 w-48 rounded-md"
-          />
-          <Skeleton
-            animationType="none"
-            className="h-6 w-48 rounded-md"
-          />
+          <Skeleton animationType="pulse" className="h-6 w-48 rounded-md" />
+          <Skeleton animationType="none" className="h-6 w-48 rounded-md" />
         </div>
       </section>
 
-      <section
-        id="spinner"
-        className="flex flex-col gap-4"
-      >
+      <section id="spinner" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Spinner</h2>
         <div className="flex flex-wrap items-center gap-6">
           {spinnerColors.map((color) => (
-            <Spinner
-              key={color}
-              color={color}
-            />
+            <Spinner key={color} color={color} />
           ))}
         </div>
         <div className="flex flex-wrap items-center gap-6">
           {spinnerSizes.map((size) => (
-            <Spinner
-              key={size}
-              size={size}
-            />
+            <Spinner key={size} size={size} />
           ))}
         </div>
       </section>
 
-      <section
-        id="surface"
-        className="flex flex-col gap-4"
-      >
+      <section id="surface" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Surface</h2>
         <div className="flex flex-wrap items-stretch gap-4">
-          <Surface
-            variant="default"
-            className="flex w-56 flex-col gap-1 rounded-2xl p-4"
-          >
+          <Surface variant="default" className="flex w-56 flex-col gap-1 rounded-2xl p-4">
             <span className="text-sm font-semibold">Default</span>
             <span className="text-xs text-muted">Standard surface</span>
           </Surface>
-          <Surface
-            variant="secondary"
-            className="flex w-56 flex-col gap-1 rounded-2xl p-4"
-          >
+          <Surface variant="secondary" className="flex w-56 flex-col gap-1 rounded-2xl p-4">
             <span className="text-sm font-semibold">Secondary</span>
             <span className="text-xs text-muted">Medium prominence</span>
           </Surface>
-          <Surface
-            variant="tertiary"
-            className="flex w-56 flex-col gap-1 rounded-2xl p-4"
-          >
+          <Surface variant="tertiary" className="flex w-56 flex-col gap-1 rounded-2xl p-4">
             <span className="text-sm font-semibold">Tertiary</span>
             <span className="text-xs text-muted">Higher prominence</span>
           </Surface>
-          <Surface
-            variant="transparent"
-            className="flex w-56 flex-col gap-1 rounded-2xl p-4"
-          >
+          <Surface variant="transparent" className="flex w-56 flex-col gap-1 rounded-2xl p-4">
             <span className="text-sm font-semibold">Transparent</span>
             <span className="text-xs text-muted">Minimal prominence</span>
           </Surface>
         </div>
       </section>
 
-      <section
-        id="text"
-        className="flex flex-col gap-4"
-      >
+      <section id="text" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Text</h2>
         <div className="flex flex-col gap-2">
           <Label>Email</Label>
@@ -799,10 +629,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      <section
-        id="typography"
-        className="flex flex-col gap-4"
-      >
+      <section id="typography" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Typography</h2>
         <div className="flex flex-col gap-2">
           <Heading level={1}>Heading level 1</Heading>
@@ -817,22 +644,13 @@ export default function Gallery() {
           <Typography weight="medium">Medium weight</Typography>
           <Typography weight="semibold">Semibold weight</Typography>
           <Typography weight="bold">Bold weight</Typography>
-          <Typography
-            color="muted"
-            type="body-sm"
-          >
+          <Typography color="muted" type="body-sm">
             Muted secondary text
           </Typography>
-          <Typography
-            className="w-64"
-            align="center"
-          >
+          <Typography className="w-64" align="center">
             Centered text
           </Typography>
-          <Typography
-            className="w-48"
-            truncate
-          >
+          <Typography className="w-48" truncate>
             Truncated text that should not wrap onto a second line
           </Typography>
           <Prose>
@@ -845,10 +663,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      <section
-        id="empty-state"
-        className="flex flex-col gap-4"
-      >
+      <section id="empty-state" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">EmptyState</h2>
         <div className="flex flex-wrap items-start gap-4">
           <EmptyState />

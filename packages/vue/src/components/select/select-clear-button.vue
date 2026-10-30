@@ -21,7 +21,7 @@ const {isPressed} = usePress(elementRef, {isDisabled});
 const {isFocusVisible} = useFocusRing(elementRef, {isDisabled});
 
 const classes = computed(() =>
-  cx(context.slots.value.clearButton(), attrs.class as string | undefined)
+  cx(context.slots.value.clearButton(), attrs.class as string | undefined),
 );
 
 let unregister: (() => void) | undefined;

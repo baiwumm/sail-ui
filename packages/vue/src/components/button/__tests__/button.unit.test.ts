@@ -7,7 +7,7 @@ describe("Button", () => {
   it("renders the upstream data-slot and variant classes", () => {
     const wrapper = mount(Button, {
       props: {size: "lg", variant: "danger"},
-      slots: {default: "Delete"}
+      slots: {default: "Delete"},
     });
     const button = wrapper.get("button");
 
@@ -23,8 +23,8 @@ describe("Button", () => {
       attrs: {
         class: "custom-button",
         "data-testid": "attrs-button",
-        style: "letter-spacing: 0.04em"
-      }
+        style: "letter-spacing: 0.04em",
+      },
     });
     const button = wrapper.get("button");
 
@@ -38,14 +38,21 @@ describe("Button", () => {
     const wrapper = mount(Button);
 
     wrapper.get("button").element.dispatchEvent(
-      new PointerEvent("pointerdown", {bubbles: true, button: 0, pointerId: 1, pointerType: "mouse"})
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        button: 0,
+        pointerId: 1,
+        pointerType: "mouse",
+      }),
     );
     await wrapper.vm.$nextTick();
     expect(wrapper.get("button").attributes("data-pressed")).toBe("true");
 
-    wrapper.get("button").element.dispatchEvent(
-      new PointerEvent("pointerup", {bubbles: true, pointerId: 1, pointerType: "mouse"})
-    );
+    wrapper
+      .get("button")
+      .element.dispatchEvent(
+        new PointerEvent("pointerup", {bubbles: true, pointerId: 1, pointerType: "mouse"}),
+      );
     await wrapper.vm.$nextTick();
     expect(wrapper.get("button").attributes("data-pressed")).toBeUndefined();
     expect(wrapper.emitted("press")).toHaveLength(1);
@@ -69,12 +76,16 @@ describe("Button", () => {
 
     expect(disabled.get("button").attributes("disabled")).toBeDefined();
 
-    disabled.get("button").element.dispatchEvent(
-      new PointerEvent("pointerdown", {bubbles: true, button: 0, pointerId: 1})
-    );
-    disabled.get("button").element.dispatchEvent(
-      new PointerEvent("pointerup", {bubbles: true, pointerId: 1, pointerType: "mouse"})
-    );
+    disabled
+      .get("button")
+      .element.dispatchEvent(
+        new PointerEvent("pointerdown", {bubbles: true, button: 0, pointerId: 1}),
+      );
+    disabled
+      .get("button")
+      .element.dispatchEvent(
+        new PointerEvent("pointerup", {bubbles: true, pointerId: 1, pointerType: "mouse"}),
+      );
     expect(disabled.emitted("press")).toBeUndefined();
 
     const loading = mount(Button, {props: {isLoading: true}});
@@ -126,7 +137,7 @@ describe("Button", () => {
   it("merges the props into the child with asChild", () => {
     const wrapper = mount(Button, {
       props: {asChild: true},
-      slots: {default: '<a href="/docs">Docs</a>'}
+      slots: {default: '<a href="/docs">Docs</a>'},
     });
 
     expect(wrapper.get("a").attributes("data-slot")).toBe("button");
@@ -140,7 +151,7 @@ describe("Button", () => {
     const event = new KeyboardEvent("keydown", {
       key: " ",
       bubbles: true,
-      cancelable: true
+      cancelable: true,
     });
 
     wrapper.get("button").element.dispatchEvent(event);

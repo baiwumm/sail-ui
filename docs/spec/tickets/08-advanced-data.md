@@ -16,12 +16,12 @@ Table 是最大的一块：必须同时满足数据模型、2D 键盘导航、AR
 
 ## Scope
 
-| 组件 | 基础 | 必须交付 |
-|---|---|---|
-| Table | TanStack Vue Table + 自研 DOM/ARIA | Root/ScrollContainer/Content/Header/Column/Body/Row/Cell/Footer/Empty；排序、单选/多选、键盘、列宽、虚拟化、LoadMore、粘性表头 |
-| Meter | 自研 | `role="meter"`、`aria-valuemin/max/now/valuetext`、`showValueLabel`、格式化 |
-| ScrollShadow | 自研 `useScrollShadow` | 上/下/左/右阴影、`visibility`、`offset`、`size`、`orientation`、`hideScrollBar` |
-| InputOtp | Reka PinInput | 长度、分组、粘贴、键盘、完成态、`data-complete`、受控/非受控 |
+| 组件         | 基础                               | 必须交付                                                                                                                       |
+| ------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Table        | TanStack Vue Table + 自研 DOM/ARIA | Root/ScrollContainer/Content/Header/Column/Body/Row/Cell/Footer/Empty；排序、单选/多选、键盘、列宽、虚拟化、LoadMore、粘性表头 |
+| Meter        | 自研                               | `role="meter"`、`aria-valuemin/max/now/valuetext`、`showValueLabel`、格式化                                                    |
+| ScrollShadow | 自研 `useScrollShadow`             | 上/下/左/右阴影、`visibility`、`offset`、`size`、`orientation`、`hideScrollBar`                                                |
+| InputOtp     | Reka PinInput                      | 长度、分组、粘贴、键盘、完成态、`data-complete`、受控/非受控                                                                   |
 
 ## 关键实现点
 
@@ -92,12 +92,13 @@ Table 是最大的一块：必须同时满足数据模型、2D 键盘导航、AR
 
 ## Risks
 
-| 风险 | 处理 |
-|---|---|
-| Table 键盘/ARIA 复杂度被低估 | 单独评审；键盘矩阵先写测试；必要时缩窄列宽/虚拟化范围 |
-| TanStack 与 RAC 的集合模型差异 | 只借数据模型，DOM/ARIA 自建；不强行对齐内部 |
-| 虚拟化 + 粘性表头 + 列宽组合 | 分阶段：基础 → 列宽 → 虚拟化 → 组合 |
-| ScrollShadow 的 ResizeObserver 性能 | rAF 节流；只观察容器与内容尺寸 |
-| OTP 粘贴在移动端差异 | 浏览器测试；保留逐格输入兜底 |
-| Meter role 兼容性 | 保留 `aria-valuetext`；文档说明 AT 支持差异 |
+| 风险                                | 处理                                                  |
+| ----------------------------------- | ----------------------------------------------------- |
+| Table 键盘/ARIA 复杂度被低估        | 单独评审；键盘矩阵先写测试；必要时缩窄列宽/虚拟化范围 |
+| TanStack 与 RAC 的集合模型差异      | 只借数据模型，DOM/ARIA 自建；不强行对齐内部           |
+| 虚拟化 + 粘性表头 + 列宽组合        | 分阶段：基础 → 列宽 → 虚拟化 → 组合                   |
+| ScrollShadow 的 ResizeObserver 性能 | rAF 节流；只观察容器与内容尺寸                        |
+| OTP 粘贴在移动端差异                | 浏览器测试；保留逐格输入兜底                          |
+| Meter role 兼容性                   | 保留 `aria-valuetext`；文档说明 AT 支持差异           |
+
 </content>

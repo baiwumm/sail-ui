@@ -15,12 +15,7 @@ const classes = computed(() => cx("radio__indicator", className.value));
 </script>
 
 <template>
-  <span
-    v-bind="forwarded"
-    aria-hidden="true"
-    :class="classes"
-    :data-slot="'radio-indicator'"
-  >
+  <span v-bind="forwarded" aria-hidden="true" :class="classes" :data-slot="'radio-indicator'">
     <slot />
   </span>
 </template>

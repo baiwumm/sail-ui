@@ -9,7 +9,7 @@ import type {ChipLabelProps} from "./types";
 defineOptions({name: "SailChipLabel", inheritAttrs: false});
 
 withDefaults(defineProps<ChipLabelProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();

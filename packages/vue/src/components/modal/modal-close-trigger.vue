@@ -11,7 +11,7 @@ defineOptions({name: "SailModalCloseTrigger", inheritAttrs: false});
 
 const props = withDefaults(defineProps<ModalCloseTriggerProps>(), {
   isDisabled: false,
-  type: "button"
+  type: "button",
 });
 
 const attrs = useAttrs();
@@ -26,8 +26,8 @@ const classes = computed(() =>
   cx(
     closeButtonVariants({variant: "default"}),
     slots.value.closeTrigger(),
-    attrs.class as string | undefined
-  )
+    attrs.class as string | undefined,
+  ),
 );
 </script>
 

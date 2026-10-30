@@ -9,7 +9,7 @@ const InputGroup = Object.assign(InputGroupRoot, {
   Input: InputGroupInput,
   TextArea: InputGroupTextArea,
   Prefix: InputGroupPrefix,
-  Suffix: InputGroupSuffix
+  Suffix: InputGroupSuffix,
 });
 
 export {
@@ -18,7 +18,7 @@ export {
   InputGroupInput,
   InputGroupTextArea,
   InputGroupPrefix,
-  InputGroupSuffix
+  InputGroupSuffix,
 };
 export type {
   InputGroupRootProps,
@@ -26,6 +26,6 @@ export type {
   InputGroupInputProps,
   InputGroupTextAreaProps,
   InputGroupPrefixProps,
-  InputGroupSuffixProps
+  InputGroupSuffixProps,
 } from "./types";
 export {inputGroupVariants, type InputGroupVariants} from "@sail-ui/styles";

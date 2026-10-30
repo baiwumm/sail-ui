@@ -16,7 +16,7 @@ describe("Form", () => {
 
   it("emits submit with the native event", async () => {
     const wrapper = mount(Form, {
-      slots: {default: () => h(Input, {name: "email"})}
+      slots: {default: () => h(Input, {name: "email"})},
     });
 
     await wrapper.get("form").trigger("submit");
@@ -31,8 +31,8 @@ describe("Form", () => {
     const wrapper = mount(Form, {
       attachTo: document.body,
       slots: {
-        default: () => h(Input, {name: "email", required: true, value: ""})
-      }
+        default: () => h(Input, {name: "email", required: true, value: ""}),
+      },
     });
 
     const input = wrapper.get("input");
@@ -47,7 +47,7 @@ describe("Form", () => {
 
   it("does not submit while an IME composition is active", async () => {
     const wrapper = mount(Form, {
-      slots: {default: () => h(Input, {name: "email"})}
+      slots: {default: () => h(Input, {name: "email"})},
     });
 
     await wrapper.get("form").trigger("keydown", {key: "Enter", isComposing: true});
@@ -59,7 +59,7 @@ describe("Form", () => {
   it("passes the native attributes through", () => {
     const wrapper = mount(Form, {
       props: {method: "post", action: "/subscribe", name: "newsletter"},
-      slots: {default: () => "content"}
+      slots: {default: () => "content"},
     });
     const form = wrapper.get("form");
 

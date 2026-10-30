@@ -3,7 +3,7 @@ import LinkRoot from "./link-root.vue";
 
 const Link = Object.assign(LinkRoot, {
   Root: LinkRoot,
-  Icon: LinkIcon
+  Icon: LinkIcon,
 });
 
 export {Link, LinkRoot, LinkIcon};

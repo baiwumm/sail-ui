@@ -10,7 +10,7 @@ import type {AvatarRootProps} from "./types";
 defineOptions({name: "SailAvatar", inheritAttrs: false});
 
 const props = withDefaults(defineProps<AvatarRootProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();
@@ -27,8 +27,8 @@ const slots = computed(() =>
   avatarVariants({
     color: finalColor.value,
     size: finalSize.value,
-    variant: finalVariant.value
-  })
+    variant: finalVariant.value,
+  }),
 );
 const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
 
@@ -36,12 +36,7 @@ provide(avatarContextKey, {slots});
 </script>
 
 <template>
-  <AvatarRootPrimitive
-    v-bind="forwardedAttrs"
-    :as="as"
-    :as-child="asChild"
-    :class="classes"
-  >
+  <AvatarRootPrimitive v-bind="forwardedAttrs" :as="as" :as-child="asChild" :class="classes">
     <slot />
   </AvatarRootPrimitive>
 </template>

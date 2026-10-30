@@ -3,7 +3,7 @@ import ChipRoot from "./chip-root.vue";
 
 const Chip = Object.assign(ChipRoot, {
   Root: ChipRoot,
-  Label: ChipLabel
+  Label: ChipLabel,
 });
 
 export {Chip, ChipRoot, ChipLabel};

@@ -13,8 +13,7 @@ const sourceArg =
   sourceArgIndex >= 0 ? args[sourceArgIndex + 1] : process.env.HEROUI_COMPONENTS_DIR;
 const pin = JSON.parse(readFileSync(pinPath, "utf8"));
 
-const SLOT_PATTERN =
-  /["']?data-slot["']?\s*[=:]\s*(["'`])([^"'`$]+)\1/g;
+const SLOT_PATTERN = /["']?data-slot["']?\s*[=:]\s*(["'`])([^"'`$]+)\1/g;
 const EXCLUDED_DIRECTORIES = new Set(["rac"]);
 const EXCLUDED_FILES = /(?:^icons\.tsx$|\.(?:stories|test|spec)\.tsx?$|\.d\.ts$)/;
 
@@ -22,15 +21,15 @@ function resolveComponentsDir(input) {
   const candidates = [
     resolve(input, "packages", "react", "src", "components"),
     resolve(input, "src", "components"),
-    resolve(input)
+    resolve(input),
   ];
   const found = candidates.find(
-    (candidate) => existsSync(candidate) && readdirSync(candidate).length > 0
+    (candidate) => existsSync(candidate) && readdirSync(candidate).length > 0,
   );
 
   if (!found) {
     throw new Error(
-      `Cannot find HeroUI components at ${input}. Pass --source <path-to-heroui-repo-or-components-dir>.`
+      `Cannot find HeroUI components at ${input}. Pass --source <path-to-heroui-repo-or-components-dir>.`,
     );
   }
 
@@ -67,7 +66,7 @@ function verifySourceCommit(componentsDir) {
   try {
     head = execFileSync("git", ["-C", gitRoot, "rev-parse", "HEAD"], {
       encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"]
+      stdio: ["ignore", "pipe", "ignore"],
     }).trim();
   } catch {
     return;
@@ -76,7 +75,7 @@ function verifySourceCommit(componentsDir) {
   if (head && head !== pin.commit) {
     throw new Error(
       `Source commit ${head} does not match the pinned ${pin.commit}. ` +
-        "Use the pinned HeroUI checkout before regenerating the data-slot snapshot."
+        "Use the pinned HeroUI checkout before regenerating the data-slot snapshot.",
     );
   }
 }
@@ -100,7 +99,10 @@ function extractSlots(componentsDir) {
   const owners = new Map();
 
   for (const file of listSourceFiles(componentsDir)) {
-    const relative = file.slice(componentsDir.length + 1).split("\\").join("/");
+    const relative = file
+      .slice(componentsDir.length + 1)
+      .split("\\")
+      .join("/");
     const component = relative.split("/")[0];
     const source = readFileSync(file, "utf8");
 
@@ -114,7 +116,7 @@ function extractSlots(componentsDir) {
       if (owners.has(slot) && owners.get(slot) !== component) {
         throw new Error(
           `data-slot "${slot}" is defined in both ${owners.get(slot)} and ${component}; ` +
-            "the snapshot groups slots by a single component."
+            "the snapshot groups slots by a single component.",
         );
       }
 
@@ -130,20 +132,18 @@ function extractSlots(componentsDir) {
 
   const components = {};
 
-  for (const [component, slots] of [...byComponent].sort(([a], [b]) =>
-    a.localeCompare(b)
-  )) {
+  for (const [component, slots] of [...byComponent].sort(([a], [b]) => a.localeCompare(b))) {
     components[component] = [...slots].sort((a, b) => a.localeCompare(b));
   }
 
   return {
     upstream: {
       version: pin.version,
-      commit: pin.commit
+      commit: pin.commit,
     },
     source: "packages/react/src/components",
     total: Object.values(components).reduce((total, slots) => total + slots.length, 0),
-    components
+    components,
   };
 }
 
@@ -209,7 +209,7 @@ if (!sourceArg) {
   const total = validateSnapshot(snapshot);
 
   console.log(
-    `data-slots snapshot is valid: ${total} unique values across ${Object.keys(snapshot.components).length} components`
+    `data-slots snapshot is valid: ${total} unique values across ${Object.keys(snapshot.components).length} components`,
   );
   process.exit(0);
 }
@@ -229,17 +229,17 @@ if (checkMode) {
 
   if (readFileSync(snapshotPath, "utf8") !== expected) {
     throw new Error(
-      `data-slots.json is stale. Run pnpm --filter @sail-ui/styles gen:slots -- --source ${sourceArg}.`
+      `data-slots.json is stale. Run pnpm --filter @sail-ui/styles gen:slots -- --source ${sourceArg}.`,
     );
   }
 
   console.log(
-    `data-slots snapshot matches the source: ${total} unique values across ${Object.keys(extracted.components).length} components`
+    `data-slots snapshot matches the source: ${total} unique values across ${Object.keys(extracted.components).length} components`,
   );
   process.exit(0);
 }
 
 writeFileSync(snapshotPath, expected);
 console.log(
-  `data-slots wrote ${total} unique values across ${Object.keys(extracted.components).length} components`
+  `data-slots wrote ${total} unique values across ${Object.keys(extracted.components).length} components`,
 );

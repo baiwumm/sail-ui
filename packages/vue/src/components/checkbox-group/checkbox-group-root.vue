@@ -11,17 +11,14 @@ const props = withDefaults(defineProps<CheckboxGroupRootProps>(), {
   variant: "primary",
   isDisabled: false,
   isInvalid: false,
-  isRequired: false
+  isRequired: false,
 });
 
 const model = defineModel<string[]>({default: () => []});
 const {className, forwarded} = useForwardedAttrs();
 
 const classes = computed(() =>
-  cx(
-    checkboxGroupVariants({variant: props.variant}),
-    className.value
-  )
+  cx(checkboxGroupVariants({variant: props.variant}), className.value),
 );
 
 function isSelected(value: string) {
@@ -44,7 +41,7 @@ provide(checkboxGroupContextKey, {
   isInvalid: computed(() => props.isInvalid),
   isRequired: computed(() => props.isRequired),
   name: computed(() => props.name),
-  toggle
+  toggle,
 });
 </script>
 

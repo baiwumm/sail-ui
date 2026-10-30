@@ -8,7 +8,7 @@ import type {SwitchGroupRootProps} from "./types";
 defineOptions({name: "SailSwitchGroup", inheritAttrs: false});
 
 const props = withDefaults(defineProps<SwitchGroupRootProps>(), {
-  orientation: "vertical"
+  orientation: "vertical",
 });
 
 const {className, forwarded} = useForwardedAttrs();
@@ -18,15 +18,8 @@ const classes = computed(() => cx(slots.value.base(), className.value));
 </script>
 
 <template>
-  <div
-    v-bind="forwarded"
-    :class="classes"
-    :data-slot="'switch-group'"
-  >
-    <div
-      :class="slots.items()"
-      :data-slot="'switch-group-items'"
-    >
+  <div v-bind="forwarded" :class="classes" :data-slot="'switch-group'">
+    <div :class="slots.items()" :data-slot="'switch-group-items'">
       <slot />
     </div>
   </div>

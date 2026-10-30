@@ -13,9 +13,7 @@ const model = defineModel<string>();
 const context = inject(inputGroupContextKey, null);
 const {className, forwarded} = useForwardedAttrs();
 
-const classes = computed(() =>
-  cx(inputGroupVariants().input(), className.value)
-);
+const classes = computed(() => cx(inputGroupVariants().input(), className.value));
 </script>
 
 <template>
@@ -26,5 +24,5 @@ const classes = computed(() =>
     :disabled="context?.isDisabled.value"
     :value="model"
     @input="model = ($event.target as HTMLInputElement).value"
-  >
+  />
 </template>

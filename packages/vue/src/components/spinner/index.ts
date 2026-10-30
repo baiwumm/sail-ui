@@ -1,7 +1,7 @@
 import SpinnerRoot from "./spinner.vue";
 
 const Spinner = Object.assign(SpinnerRoot, {
-  Root: SpinnerRoot
+  Root: SpinnerRoot,
 });
 
 export {Spinner, SpinnerRoot};

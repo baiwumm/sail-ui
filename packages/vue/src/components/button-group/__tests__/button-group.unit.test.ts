@@ -12,15 +12,19 @@ describe("ButtonGroup", () => {
       defineComponent({
         setup() {
           return () =>
-            h(ButtonGroup, {orientation: "vertical"}, {
-              default: () => [
-                h(Button, null, {default: () => "A"}),
-                h(ButtonGroupSeparator),
-                h(Button, null, {default: () => "B"})
-              ]
-            });
-        }
-      })
+            h(
+              ButtonGroup,
+              {orientation: "vertical"},
+              {
+                default: () => [
+                  h(Button, null, {default: () => "A"}),
+                  h(ButtonGroupSeparator),
+                  h(Button, null, {default: () => "B"}),
+                ],
+              },
+            );
+        },
+      }),
     );
 
     const group = wrapper.get('[data-slot="button-group"]');
@@ -28,7 +32,7 @@ describe("ButtonGroup", () => {
     expect(group.attributes("role")).toBe("group");
     expect(group.classes()).toContain("button-group--vertical");
     expect(wrapper.get('[data-slot="button-group-separator"]').attributes("aria-hidden")).toBe(
-      "true"
+      "true",
     );
   });
 
@@ -37,11 +41,15 @@ describe("ButtonGroup", () => {
       defineComponent({
         setup() {
           return () =>
-            h(ButtonGroup, {size: "lg", variant: "outline"}, {
-              default: () => [h(Button, null, {default: () => "A"})]
-            });
-        }
-      })
+            h(
+              ButtonGroup,
+              {size: "lg", variant: "outline"},
+              {
+                default: () => [h(Button, null, {default: () => "A"})],
+              },
+            );
+        },
+      }),
     );
 
     const button = wrapper.get("button");
@@ -55,11 +63,15 @@ describe("ButtonGroup", () => {
       defineComponent({
         setup() {
           return () =>
-            h(ButtonGroup, {size: "lg"}, {
-              default: () => [h(Button, {size: "sm"}, {default: () => "A"})]
-            });
-        }
-      })
+            h(
+              ButtonGroup,
+              {size: "lg"},
+              {
+                default: () => [h(Button, {size: "sm"}, {default: () => "A"})],
+              },
+            );
+        },
+      }),
     );
 
     expect(wrapper.get("button").classes()).toContain("button--sm");
@@ -70,11 +82,15 @@ describe("ButtonGroup", () => {
       defineComponent({
         setup() {
           return () =>
-            h(ButtonGroup, {isDisabled: true}, {
-              default: () => [h(Button, null, {default: () => "A"})]
-            });
-        }
-      })
+            h(
+              ButtonGroup,
+              {isDisabled: true},
+              {
+                default: () => [h(Button, null, {default: () => "A"})],
+              },
+            );
+        },
+      }),
     );
 
     expect(wrapper.get("button").attributes("disabled")).toBeDefined();

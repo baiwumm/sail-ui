@@ -15,8 +15,8 @@ const pointer = (element: Element, type: string, init: PointerEventInit = {}) =>
       bubbles: true,
       pointerId: 1,
       pointerType: "mouse",
-      ...init
-    })
+      ...init,
+    }),
   );
 };
 
@@ -28,10 +28,10 @@ describe("Switch", () => {
         default: () =>
           h(SwitchContent, null, {
             default: () => [
-              h(SwitchControl, null, {default: () => [h(SwitchThumb), h(SwitchIcon)]})
-            ]
-          })
-      }
+              h(SwitchControl, null, {default: () => [h(SwitchThumb), h(SwitchIcon)]}),
+            ],
+          }),
+      },
     });
 
     expect(wrapper.get('[data-slot="switch"]').classes()).toContain("switch--lg");
@@ -43,7 +43,7 @@ describe("Switch", () => {
 
   it("exposes the switch role on the native control", () => {
     const wrapper = mount(Switch, {
-      slots: {default: () => h(SwitchContent, null, {default: () => "Enable"})}
+      slots: {default: () => h(SwitchContent, null, {default: () => "Enable"})},
     });
 
     expect(wrapper.findAll('input[role="switch"]')).toHaveLength(1);
@@ -60,13 +60,13 @@ describe("Switch", () => {
               Switch,
               {
                 modelValue: selected.value,
-                "onUpdate:modelValue": (value: boolean) => (selected.value = value)
+                "onUpdate:modelValue": (value: boolean) => (selected.value = value),
               },
-              {default: () => h(SwitchContent, null, {default: () => "Enable"})}
+              {default: () => h(SwitchContent, null, {default: () => "Enable"})},
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     await wrapper.get('input[role="switch"]').setValue(true);
@@ -82,7 +82,7 @@ describe("Switch", () => {
   it("reports hover and press on the content", async () => {
     const wrapper = mount(Switch, {
       attachTo: document.body,
-      slots: {default: () => h(SwitchContent, null, {default: () => "Enable"})}
+      slots: {default: () => h(SwitchContent, null, {default: () => "Enable"})},
     });
     const content = wrapper.get('[data-slot="switch-content"]');
 
@@ -100,11 +100,11 @@ describe("Switch", () => {
   it("renders the switch group items", () => {
     const wrapper = mount(SwitchGroup, {
       props: {orientation: "horizontal"},
-      slots: {default: () => h(Switch)}
+      slots: {default: () => h(Switch)},
     });
 
     expect(wrapper.get('[data-slot="switch-group"]').classes()).toContain(
-      "switch-group--horizontal"
+      "switch-group--horizontal",
     );
     expect(wrapper.findAll('[data-slot="switch-group-items"]')).toHaveLength(1);
   });

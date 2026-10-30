@@ -3,7 +3,7 @@ import {cx} from "@sail-ui/styles";
 import {
   injectSelectRootContext,
   SelectContent as SelectContentPrimitive,
-  SelectPortal
+  SelectPortal,
 } from "reka-ui";
 import {computed, nextTick, onBeforeUnmount, onMounted, useAttrs, watch} from "vue";
 
@@ -13,7 +13,7 @@ import type {SelectPopoverProps} from "./types";
 defineOptions({name: "SailSelectPopover", inheritAttrs: false});
 
 const props = withDefaults(defineProps<SelectPopoverProps>(), {
-  placement: "bottom"
+  placement: "bottom",
 });
 
 const attrs = useAttrs();
@@ -21,7 +21,7 @@ const context = useSelectContext();
 const rootContext = injectSelectRootContext();
 
 const classes = computed(() =>
-  cx(context.slots.value.popover(), attrs.class as string | undefined)
+  cx(context.slots.value.popover(), attrs.class as string | undefined),
 );
 
 const forwardedAttrs = computed(() => {
@@ -37,8 +37,8 @@ const contentStyle = computed(() => [
   attrs.style,
   {
     "--trigger-width": "var(--reka-select-trigger-width)",
-    "--trigger-anchor-point": "var(--reka-select-content-transform-origin)"
-  }
+    "--trigger-anchor-point": "var(--reka-select-content-transform-origin)",
+  },
 ]);
 
 let observedElement: HTMLElement | null = null;
@@ -67,7 +67,7 @@ function observePlacement(element: HTMLElement) {
   placementObserver = new MutationObserver(applyPlacement);
   placementObserver.observe(element, {
     attributeFilter: ["data-side"],
-    attributes: true
+    attributes: true,
   });
 }
 

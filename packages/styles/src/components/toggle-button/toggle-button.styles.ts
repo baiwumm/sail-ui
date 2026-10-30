@@ -7,22 +7,22 @@ export const toggleButtonVariants = tv({
   defaultVariants: {
     isIconOnly: false,
     size: "md",
-    variant: "default"
+    variant: "default",
   },
   variants: {
     isIconOnly: {
-      true: "toggle-button--icon-only"
+      true: "toggle-button--icon-only",
     },
     size: {
       lg: "toggle-button--lg",
       md: "toggle-button--md",
-      sm: "toggle-button--sm"
+      sm: "toggle-button--sm",
     },
     variant: {
       default: "toggle-button--default",
-      ghost: "toggle-button--ghost"
-    }
-  }
+      ghost: "toggle-button--ghost",
+    },
+  },
 });
 
 export type ToggleButtonVariants = VariantProps<typeof toggleButtonVariants>;

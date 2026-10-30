@@ -9,7 +9,7 @@ import type {KbdContentProps} from "./types";
 defineOptions({name: "SailKbdContent", inheritAttrs: false});
 
 withDefaults(defineProps<KbdContentProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();
@@ -18,12 +18,7 @@ const classes = computed(() => cx(slots?.value.content(), attrs.class as string 
 </script>
 
 <template>
-  <Primitive
-    v-bind="$attrs"
-    :as="as"
-    :as-child="asChild"
-    :class="classes"
-  >
+  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes">
     <slot />
   </Primitive>
 </template>

@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: ["reka-ui", "tailwind-variants"]
-    }
-  }
+      include: ["reka-ui", "tailwind-variants"],
+    },
+  },
 });

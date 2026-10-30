@@ -10,7 +10,7 @@ import type {SelectTriggerProps} from "./types";
 defineOptions({name: "SailSelectTrigger", inheritAttrs: false});
 
 const props = withDefaults(defineProps<SelectTriggerProps>(), {
-  isDisabled: false
+  isDisabled: false,
 });
 
 const attrs = useAttrs();
@@ -24,7 +24,7 @@ const {isHovered} = useHover(buttonRef, {isDisabled});
 const {isFocusVisible} = useFocusRing(buttonRef, {isDisabled});
 
 const classes = computed(() =>
-  cx(context.slots.value.trigger(), attrs.class as string | undefined)
+  cx(context.slots.value.trigger(), attrs.class as string | undefined),
 );
 
 function handleKeyDown(event: KeyboardEvent) {
@@ -32,11 +32,7 @@ function handleKeyDown(event: KeyboardEvent) {
     return;
   }
 
-  if (
-    !context.hasClearButton() ||
-    context.isOpen.value ||
-    rootContext.isEmptyModelValue.value
-  ) {
+  if (!context.hasClearButton() || context.isOpen.value || rootContext.isEmptyModelValue.value) {
     return;
   }
 
@@ -46,10 +42,7 @@ function handleKeyDown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <SelectTriggerPrimitive
-    as-child
-    :disabled="isDisabled"
-  >
+  <SelectTriggerPrimitive as-child :disabled="isDisabled">
     <button
       ref="buttonRef"
       v-bind="$attrs"

@@ -11,8 +11,8 @@ if (!window.matchMedia) {
       removeListener: vi.fn(),
       addEventListener: vi.fn(),
       removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(() => false)
-    }))
+      dispatchEvent: vi.fn(() => false),
+    })),
   });
 }
 
@@ -65,6 +65,6 @@ if (!window.PointerEvent) {
 
   Object.defineProperty(window, "PointerEvent", {
     writable: true,
-    value: PointerEventPolyfill
+    value: PointerEventPolyfill,
   });
 }

@@ -36,5 +36,6 @@ export interface ToggleButtonGroupContext {
   toggle: (value: unknown) => void;
 }
 
-export const toggleButtonGroupContextKey: InjectionKey<ToggleButtonGroupContext> =
-  Symbol("sail-toggle-button-group");
+export const toggleButtonGroupContextKey: InjectionKey<ToggleButtonGroupContext> = Symbol(
+  "sail-toggle-button-group",
+);

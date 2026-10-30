@@ -19,7 +19,7 @@ import {
   TextField,
   ToggleButton,
   ToggleButtonGroup,
-  Toolbar
+  Toolbar,
 } from "@heroui/react";
 import {useState} from "react";
 
@@ -38,16 +38,10 @@ export default function Forms() {
   const [clickCount, setClickCount] = useState(0);
 
   return (
-    <section
-      id="forms"
-      className="flex flex-col gap-8"
-    >
+    <section id="forms" className="flex flex-col gap-8">
       <h2 className="text-lg font-semibold">Forms</h2>
 
-      <div
-        id="forms-login"
-        className="flex flex-col gap-3"
-      >
+      <div id="forms-login" className="flex flex-col gap-3">
         <h3 className="text-sm font-medium">Sign in</h3>
         <Form
           className="flex w-full max-w-sm flex-col gap-3"
@@ -63,10 +57,7 @@ export default function Forms() {
               onChange={(event) => setEmail(event.target.value)}
             />
           </TextField>
-          <TextField
-            fullWidth
-            isInvalid
-          >
+          <TextField fullWidth isInvalid>
             <Label>Password</Label>
             <Input
               name="password"
@@ -89,16 +80,10 @@ export default function Forms() {
         </Form>
       </div>
 
-      <div
-        id="forms-settings"
-        className="flex flex-col gap-4"
-      >
+      <div id="forms-settings" className="flex flex-col gap-4">
         <h3 className="text-sm font-medium">Settings</h3>
         <SwitchGroup className="max-w-sm">
-          <Switch
-            isSelected={notifications}
-            onChange={setNotifications}
-          >
+          <Switch isSelected={notifications} onChange={setNotifications}>
             <Switch.Content>
               <Switch.Control>
                 <Switch.Thumb />
@@ -106,10 +91,7 @@ export default function Forms() {
               Notifications
             </Switch.Content>
           </Switch>
-          <Switch
-            isSelected={analytics}
-            onChange={setAnalytics}
-          >
+          <Switch isSelected={analytics} onChange={setAnalytics}>
             <Switch.Content>
               <Switch.Control>
                 <Switch.Thumb />
@@ -118,11 +100,7 @@ export default function Forms() {
             </Switch.Content>
           </Switch>
         </SwitchGroup>
-        <RadioGroup
-          className="max-w-sm"
-          value={plan}
-          onChange={setPlan}
-        >
+        <RadioGroup className="max-w-sm" value={plan} onChange={setPlan}>
           <Radio value="free">
             <Radio.Content>
               <Radio.Control>
@@ -141,10 +119,7 @@ export default function Forms() {
           </Radio>
         </RadioGroup>
         <div className="flex w-full max-w-sm flex-col gap-2">
-          <Slider
-            value={volume}
-            onChange={(value) => setVolume(value as number)}
-          >
+          <Slider value={volume} onChange={(value) => setVolume(value as number)}>
             <Label>Volume</Label>
             <Slider.Output />
             <Slider.Track>
@@ -169,16 +144,9 @@ export default function Forms() {
         </NumberField>
       </div>
 
-      <div
-        id="forms-search"
-        className="flex flex-col gap-3"
-      >
+      <div id="forms-search" className="flex flex-col gap-3">
         <h3 className="text-sm font-medium">Search</h3>
-        <SearchField
-          className="max-w-sm"
-          value={query}
-          onChange={setQuery}
-        >
+        <SearchField className="max-w-sm" value={query} onChange={setQuery}>
           <SearchField.Group>
             <SearchField.SearchIcon />
             <SearchField.Input placeholder="Search components" />
@@ -192,10 +160,7 @@ export default function Forms() {
         </InputGroup>
       </div>
 
-      <div
-        id="forms-toolbar"
-        className="flex flex-col gap-3"
-      >
+      <div id="forms-toolbar" className="flex flex-col gap-3">
         <h3 className="text-sm font-medium">Toolbar</h3>
         <Toolbar>
           <ToggleButtonGroup
@@ -217,16 +182,9 @@ export default function Forms() {
         </Toolbar>
       </div>
 
-      <div
-        id="forms-states"
-        className="flex flex-col gap-3"
-      >
+      <div id="forms-states" className="flex flex-col gap-3">
         <h3 className="text-sm font-medium">States</h3>
-        <CheckboxGroup
-          className="max-w-sm"
-          value={terms}
-          onChange={setTerms}
-        >
+        <CheckboxGroup className="max-w-sm" value={terms} onChange={setTerms}>
           <Checkbox value="newsletter">
             <Checkbox.Content>
               <Checkbox.Control>
@@ -236,10 +194,7 @@ export default function Forms() {
             </Checkbox.Content>
             <Description>Weekly product updates.</Description>
           </Checkbox>
-          <Checkbox
-            isDisabled
-            value="beta"
-          >
+          <Checkbox isDisabled value="beta">
             <Checkbox.Content>
               <Checkbox.Control>
                 <Checkbox.Indicator />
@@ -248,19 +203,11 @@ export default function Forms() {
             </Checkbox.Content>
           </Checkbox>
         </CheckboxGroup>
-        <TextField
-          className="max-w-sm"
-          fullWidth
-          isDisabled
-        >
+        <TextField className="max-w-sm" fullWidth isDisabled>
           <Label>Disabled field</Label>
           <Input placeholder="Unavailable" />
         </TextField>
-        <TextField
-          className="max-w-sm"
-          fullWidth
-          isInvalid
-        >
+        <TextField className="max-w-sm" fullWidth isInvalid>
           <Label>Invalid field</Label>
           <Input placeholder="Broken" />
           <FieldError>This field is required.</FieldError>

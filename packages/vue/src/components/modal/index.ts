@@ -21,7 +21,7 @@ const Modal = Object.assign(ModalRoot, {
   Heading: ModalHeading,
   Body: ModalBody,
   Footer: ModalFooter,
-  CloseTrigger: ModalCloseTrigger
+  CloseTrigger: ModalCloseTrigger,
 });
 
 export {
@@ -36,7 +36,7 @@ export {
   ModalHeading,
   ModalBody,
   ModalFooter,
-  ModalCloseTrigger
+  ModalCloseTrigger,
 };
 
 export type {
@@ -45,7 +45,7 @@ export type {
   ModalTriggerProps,
   ModalBackdropProps,
   ModalContainerProps,
-  ModalCloseTriggerProps
+  ModalCloseTriggerProps,
 } from "./types";
 
 export {modalVariants, type ModalVariants} from "@sail-ui/styles";

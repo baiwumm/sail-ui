@@ -16,15 +16,15 @@
 
 ## Scope
 
-| 组件 | 基础 | 关键行为 |
-|---|---|---|
-| Modal | Reka Dialog | 焦点陷阱、Esc、遮罩关闭、`data-placement`、退场动画、滚动锁 |
-| AlertDialog | Reka AlertDialog | `role="alertdialog"`、默认不可遮罩关闭、确认/取消 |
-| Drawer | Reka Drawer | 方向、swipe、拖拽把手、滚动锁 |
-| Sheet | Reka Dialog/Drawer | 侧边面板、`data-placement` left/right、尺寸 |
-| Popover | Reka Popover | Floating UI 定位、`data-side` vs `data-placement`、箭头、碰撞、嵌套 |
-| Tooltip | Reka Tooltip | 延迟、`aria-describedby`、不可交互内容、触摸策略 |
-| Toast | Reka Toast | 队列、位置、超时、hover 暂停、Promise、关闭、`data-frontmost`/`data-stack-index` |
+| 组件        | 基础               | 关键行为                                                                         |
+| ----------- | ------------------ | -------------------------------------------------------------------------------- |
+| Modal       | Reka Dialog        | 焦点陷阱、Esc、遮罩关闭、`data-placement`、退场动画、滚动锁                      |
+| AlertDialog | Reka AlertDialog   | `role="alertdialog"`、默认不可遮罩关闭、确认/取消                                |
+| Drawer      | Reka Drawer        | 方向、swipe、拖拽把手、滚动锁                                                    |
+| Sheet       | Reka Dialog/Drawer | 侧边面板、`data-placement` left/right、尺寸                                      |
+| Popover     | Reka Popover       | Floating UI 定位、`data-side` vs `data-placement`、箭头、碰撞、嵌套              |
+| Tooltip     | Reka Tooltip       | 延迟、`aria-describedby`、不可交互内容、触摸策略                                 |
+| Toast       | Reka Toast         | 队列、位置、超时、hover 暂停、Promise、关闭、`data-frontmost`/`data-stack-index` |
 
 ## 关键实现点
 
@@ -103,12 +103,13 @@
 
 ## Risks
 
-| 风险 | 处理 |
-|---|---|
-| 退场时序在 WebKit/Safari 与 Chromium 不同 | 浏览器双项目；复刻 exit hold；慢速动画回放 |
-| Reka Presence 卸载与我们的 `data-exiting` 冲突 | 自己控制 presence，禁用 Reka 的自动 unmount 或包一层 |
-| 嵌套覆盖层的滚动锁计数错误 | 引用计数 + 浏览器测试 |
-| Toast 模块级单例导致 SSR 串数据 | 每请求 manager；SSR fixture 并发测试 |
-| 定位词 `data-side` 与 `data-placement` 混淆 | 组件层统一映射；文档明确 |
-| 焦点陷阱在 Teleport 后失效 | 以 Reka FocusScope 为准；打开后手动聚焦首个可聚焦元素 |
+| 风险                                           | 处理                                                  |
+| ---------------------------------------------- | ----------------------------------------------------- |
+| 退场时序在 WebKit/Safari 与 Chromium 不同      | 浏览器双项目；复刻 exit hold；慢速动画回放            |
+| Reka Presence 卸载与我们的 `data-exiting` 冲突 | 自己控制 presence，禁用 Reka 的自动 unmount 或包一层  |
+| 嵌套覆盖层的滚动锁计数错误                     | 引用计数 + 浏览器测试                                 |
+| Toast 模块级单例导致 SSR 串数据                | 每请求 manager；SSR fixture 并发测试                  |
+| 定位词 `data-side` 与 `data-placement` 混淆    | 组件层统一映射；文档明确                              |
+| 焦点陷阱在 Teleport 后失效                     | 以 Reka FocusScope 为准；打开后手动聚焦首个可聚焦元素 |
+
 </content>

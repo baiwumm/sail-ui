@@ -4,18 +4,18 @@
 
 ## 文件地图
 
-| 路径 | 角色 | 能否手改 |
-|---|---|---|
-| `upstream/**` | 上游 `@heroui/styles` 快照（96 个 CSS + LICENSE + README） | **永不** |
-| `contracts/upstream.json` | 上游包名、版本、commit | 仅通过 `sync:styles --allow-upstream-change` |
-| `contracts/scope.json` | 需要生成兼容层的组件清单 | 是；上游新增组件时同步追加 |
-| `contracts/attributes.json` | 65 个 `data-*` 属性的唯一 owner | 是 |
-| `contracts/data-slots.json` | 上游 React 源码的 `data-slot` 快照（334 值 / 81 组件） | 仅通过 `gen:slots` |
-| `generated/**` | 生成后的组件 CSS | 仅通过 `gen:compat` |
-| `manifest.json` | 版本、哈希、别名与 owner 统计 | 仅通过 `gen:compat` |
-| `scripts/gen-compat.mjs` | 属性扫描 + 原位别名扩展 + `--check` | 是 |
-| `scripts/gen-data-slots.mjs` | `data-slot` 提取 + `--check` | 是 |
-| `scripts/sync-styles.mjs` | 上游快照同步 + 版本/哈希拒绝 | 是 |
+| 路径                         | 角色                                                       | 能否手改                                     |
+| ---------------------------- | ---------------------------------------------------------- | -------------------------------------------- |
+| `upstream/**`                | 上游 `@heroui/styles` 快照（96 个 CSS + LICENSE + README） | **永不**                                     |
+| `contracts/upstream.json`    | 上游包名、版本、commit                                     | 仅通过 `sync:styles --allow-upstream-change` |
+| `contracts/scope.json`       | 需要生成兼容层的组件清单                                   | 是；上游新增组件时同步追加                   |
+| `contracts/attributes.json`  | 65 个 `data-*` 属性的唯一 owner                            | 是                                           |
+| `contracts/data-slots.json`  | 上游 React 源码的 `data-slot` 快照（334 值 / 81 组件）     | 仅通过 `gen:slots`                           |
+| `generated/**`               | 生成后的组件 CSS                                           | 仅通过 `gen:compat`                          |
+| `manifest.json`              | 版本、哈希、别名与 owner 统计                              | 仅通过 `gen:compat`                          |
+| `scripts/gen-compat.mjs`     | 属性扫描 + 原位别名扩展 + `--check`                        | 是                                           |
+| `scripts/gen-data-slots.mjs` | `data-slot` 提取 + `--check`                               | 是                                           |
+| `scripts/sync-styles.mjs`    | 上游快照同步 + 版本/哈希拒绝                               | 是                                           |
 
 ## 新增一个上游 `data-*` 属性
 
@@ -28,12 +28,12 @@ Choose an owner in packages/styles/contracts/attributes.json
 
 在 `contracts/attributes.json` 中为它选择**唯一** owner：
 
-| owner | 含义 | 生成器行为 |
-|---|---|---|
-| `compat` | 需要把上游选择器扩展为 Reka/原生词汇 | 必须提供 `map` |
-| `component` | Vue 组件显式发射（如 `data-slot`、`data-entering`） | 不生成别名 |
-| `reka` | Reka 原样发射 | 不生成别名 |
-| `native` | 上游已有 `:hover` / `:focus-visible` 等原生回退 | 不生成别名 |
+| owner       | 含义                                                | 生成器行为     |
+| ----------- | --------------------------------------------------- | -------------- |
+| `compat`    | 需要把上游选择器扩展为 Reka/原生词汇                | 必须提供 `map` |
+| `component` | Vue 组件显式发射（如 `data-slot`、`data-entering`） | 不生成别名     |
+| `reka`      | Reka 原样发射                                       | 不生成别名     |
+| `native`    | 上游已有 `:hover` / `:focus-visible` 等原生回退     | 不生成别名     |
 
 `native` 与 `component` 在生成阶段等价，区别只在评审时的理由。不要为了“看起来完整”随便选。
 

@@ -37,5 +37,4 @@ export interface RadioGroupContext {
   hasSelection: Ref<boolean>;
 }
 
-export const radioGroupContextKey: InjectionKey<RadioGroupContext> =
-  Symbol("sail-radio-group");
+export const radioGroupContextKey: InjectionKey<RadioGroupContext> = Symbol("sail-radio-group");

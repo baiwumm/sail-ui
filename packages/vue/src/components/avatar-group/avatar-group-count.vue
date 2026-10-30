@@ -10,7 +10,7 @@ import type {AvatarGroupCountProps} from "./types";
 defineOptions({name: "SailAvatarGroupCount", inheritAttrs: false});
 
 const props = withDefaults(defineProps<AvatarGroupCountProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();

@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<SearchFieldRootProps>(), {
   variant: "primary",
   fullWidth: false,
   isDisabled: false,
-  isInvalid: false
+  isInvalid: false,
 });
 
 const emit = defineEmits<{
@@ -24,8 +24,8 @@ const {className, forwarded} = useForwardedAttrs();
 const slots = computed(() =>
   searchFieldVariants({
     fullWidth: props.fullWidth,
-    variant: props.variant
-  })
+    variant: props.variant,
+  }),
 );
 
 const classes = computed(() => cx(slots.value.base(), className.value));
@@ -44,7 +44,7 @@ provide(searchFieldContextKey, {
   },
   submit: (value: string) => {
     emit("submit", value);
-  }
+  },
 });
 </script>
 

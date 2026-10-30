@@ -10,7 +10,7 @@ defineOptions({name: "SailSeparator", inheritAttrs: false});
 const props = withDefaults(defineProps<SeparatorRootProps>(), {
   isDecorative: false,
   orientation: "horizontal",
-  variant: "default"
+  variant: "default",
 });
 
 const attrs = useAttrs();
@@ -28,8 +28,8 @@ const element = computed(() => {
 const classes = computed(() =>
   cx(
     separatorVariants({orientation: props.orientation, variant: props.variant}),
-    attrs.class as string | undefined
-  )
+    attrs.class as string | undefined,
+  ),
 );
 
 const isNativeHr = computed(() => element.value === "hr");
@@ -44,7 +44,9 @@ const isNativeHr = computed(() => element.value === "hr");
     :data-orientation="orientation"
     :data-slot="'separator'"
     :aria-hidden="isDecorative ? 'true' : undefined"
-    :aria-orientation="!isDecorative && !isNativeHr && orientation === 'vertical' ? 'vertical' : undefined"
+    :aria-orientation="
+      !isDecorative && !isNativeHr && orientation === 'vertical' ? 'vertical' : undefined
+    "
     :role="isDecorative ? 'presentation' : isNativeHr ? undefined : 'separator'"
   >
     <slot />

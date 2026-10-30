@@ -36,10 +36,10 @@ Project rules win over generic agent skills or model memory. If a skill recommen
 
 ## 3. Reference repositories (read-only)
 
-| Repo | Local sibling | Use for |
-|---|---|---|
-| HeroUI v3 | `../heroui` | CSS, React components, variants, docs, tests — the contract source |
-| Nuxt UI | `../nuxtui` | Vue/Nuxt API and module patterns — reference only |
+| Repo      | Local sibling | Use for                                                            |
+| --------- | ------------- | ------------------------------------------------------------------ |
+| HeroUI v3 | `../heroui`   | CSS, React components, variants, docs, tests — the contract source |
+| Nuxt UI   | `../nuxtui`   | Vue/Nuxt API and module patterns — reference only                  |
 
 Pinned upstream: HeroUI `3.2.7`, commit `89cd95ec1` (`v3.2.6-53-g89cd95ec1`).
 
@@ -54,22 +54,22 @@ Rules:
 
 Exact versions are pinned in the lockfile once T01 lands. The target baseline:
 
-| Technology | Target | Notes |
-|---|---|---|
-| Node.js | 22.22.x / 24.15.x | Match HeroUI's engine range |
-| pnpm | 10.x | Workspace + `catalog:` versions if useful |
-| Vue | 3.5.x | `useId` for SSR-stable ids; Reka requires >= 3.4 |
-| TypeScript | 5.9.x | `strict` |
-| Tailwind CSS | 4.3.3 | Same as upstream |
-| tailwind-variants | 3.3.1 | `tv()`; keep `twMerge: false` like upstream |
-| Reka UI | 2.11.0 | Pin exactly; attribute behavior is part of the contract |
-| @internationalized/date | 3.12.4 | Date/calendar components |
-| @tanstack/vue-table | 8.x | Table behavior; resolve exact at T08 |
-| @tanstack/vue-virtual | 3.x | Collection virtualization |
-| Vitest | latest compatible | jsdom + browser projects |
-| Storybook | latest `vue3-vite` | Component workshop |
-| Nuxt | 4.x | Docs site, module, SSR fixtures |
-| Nuxt Content | 3.x | Docs site |
+| Technology              | Target             | Notes                                                   |
+| ----------------------- | ------------------ | ------------------------------------------------------- |
+| Node.js                 | 22.22.x / 24.15.x  | Match HeroUI's engine range                             |
+| pnpm                    | 10.x               | Workspace + `catalog:` versions if useful               |
+| Vue                     | 3.5.x              | `useId` for SSR-stable ids; Reka requires >= 3.4        |
+| TypeScript              | 5.9.x              | `strict`                                                |
+| Tailwind CSS            | 4.3.3              | Same as upstream                                        |
+| tailwind-variants       | 3.3.1              | `tv()`; keep `twMerge: false` like upstream             |
+| Reka UI                 | 2.11.0             | Pin exactly; attribute behavior is part of the contract |
+| @internationalized/date | 3.12.4             | Date/calendar components                                |
+| @tanstack/vue-table     | 8.x                | Table behavior; resolve exact at T08                    |
+| @tanstack/vue-virtual   | 3.x                | Collection virtualization                               |
+| Vitest                  | latest compatible  | jsdom + browser projects                                |
+| Storybook               | latest `vue3-vite` | Component workshop                                      |
+| Nuxt                    | 4.x                | Docs site, module, SSR fixtures                         |
+| Nuxt Content            | 3.x                | Docs site                                               |
 
 Do not upgrade Reka UI, Tailwind CSS, or tailwind-variants in a feature PR. Upgrades are separate tickets with contract/visual re-runs.
 
@@ -106,24 +106,24 @@ button/
 
 These commands are implemented. T01 wired the scaffold; T02 added the contract gates. Do not lower a threshold or delete a test to make a gate green.
 
-| Action | Command |
-|---|---|
-| Install | `pnpm install` |
-| Build libraries | `pnpm build` |
-| Dev playground | `pnpm dev` |
-| Dev Nuxt fixture | `pnpm dev:nuxt` |
-| Dev docs | `pnpm dev:docs` |
-| Lint / typecheck | `pnpm lint` · `pnpm typecheck` |
-| Unit tests (jsdom) | `pnpm test` |
-| SSR smoke | `pnpm test:ssr` |
-| Browser tests | `pnpm test:browser` |
-| Contract tests | `pnpm test:contract` |
-| Visual regression | `pnpm test:visual` |
-| Full gate | `pnpm verify` (lint + typecheck + contract + unit + SSR + build) |
-| Regenerate compat CSS | `pnpm gen:compat` |
-| Sync upstream styles | `pnpm sync:styles` |
-| Scaffold component | `pnpm add:component <Name>` |
-| Pack dry-run | `pnpm pack:check` |
+| Action                | Command                                                          |
+| --------------------- | ---------------------------------------------------------------- |
+| Install               | `pnpm install`                                                   |
+| Build libraries       | `pnpm build`                                                     |
+| Dev playground        | `pnpm dev`                                                       |
+| Dev Nuxt fixture      | `pnpm dev:nuxt`                                                  |
+| Dev docs              | `pnpm dev:docs`                                                  |
+| Lint / typecheck      | `pnpm lint` · `pnpm typecheck`                                   |
+| Unit tests (jsdom)    | `pnpm test`                                                      |
+| SSR smoke             | `pnpm test:ssr`                                                  |
+| Browser tests         | `pnpm test:browser`                                              |
+| Contract tests        | `pnpm test:contract`                                             |
+| Visual regression     | `pnpm test:visual`                                               |
+| Full gate             | `pnpm verify` (lint + typecheck + contract + unit + SSR + build) |
+| Regenerate compat CSS | `pnpm gen:compat`                                                |
+| Sync upstream styles  | `pnpm sync:styles`                                               |
+| Scaffold component    | `pnpm add:component <Name>`                                      |
+| Pack dry-run          | `pnpm pack:check`                                                |
 
 If a command fails, read the error and fix the cause. Never lower a threshold or delete a test to make a gate green.
 
@@ -230,14 +230,14 @@ Do not ship a component with only a render test. "Renders without crashing" is n
 
 ### Layers
 
-| Layer | Tool | Required when |
-|---|---|---|
-| Unit/behavior | Vitest + `@vue/test-utils` (jsdom) | Every component: roles, names, callbacks, focus, state attributes |
-| Contract | SSR render + CSS/data-slot snapshot | Every component; gate for aliases and slots |
-| SSR | `@vue/server-renderer` / Nuxt fixture | Exported components that render server-side, generate ids, or read browser APIs |
-| Browser | Vitest browser mode / Playwright | Layout/measurement, pointer capture, portals/focus traps, real animations |
-| Visual | Playwright screenshots + `pixelmatch` | Every component in the acceptance matrix; states x themes |
-| A11y | axe-core (browser) + manual keyboard checklist | Overlays, collections, forms; no critical/serious violations |
+| Layer         | Tool                                           | Required when                                                                   |
+| ------------- | ---------------------------------------------- | ------------------------------------------------------------------------------- |
+| Unit/behavior | Vitest + `@vue/test-utils` (jsdom)             | Every component: roles, names, callbacks, focus, state attributes               |
+| Contract      | SSR render + CSS/data-slot snapshot            | Every component; gate for aliases and slots                                     |
+| SSR           | `@vue/server-renderer` / Nuxt fixture          | Exported components that render server-side, generate ids, or read browser APIs |
+| Browser       | Vitest browser mode / Playwright               | Layout/measurement, pointer capture, portals/focus traps, real animations       |
+| Visual        | Playwright screenshots + `pixelmatch`          | Every component in the acceptance matrix; states x themes                       |
+| A11y          | axe-core (browser) + manual keyboard checklist | Overlays, collections, forms; no critical/serious violations                    |
 
 ### Conventions
 

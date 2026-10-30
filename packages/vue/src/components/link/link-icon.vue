@@ -11,7 +11,7 @@ import type {LinkIconProps} from "./types";
 defineOptions({name: "SailLinkIcon", inheritAttrs: false});
 
 withDefaults(defineProps<LinkIconProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();
@@ -31,9 +31,6 @@ const hasIcon = computed(() => hasSlotContent(componentSlots.default));
     :data-slot="'link-icon'"
   >
     <slot v-if="hasIcon" />
-    <ExternalLinkIcon
-      v-else
-      data-slot="link-default-icon"
-    />
+    <ExternalLinkIcon v-else data-slot="link-default-icon" />
   </Primitive>
 </template>

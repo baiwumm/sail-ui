@@ -3,16 +3,13 @@ import ToggleButtonGroupSeparator from "./toggle-button-group-separator.vue";
 
 const ToggleButtonGroup = Object.assign(ToggleButtonGroupRoot, {
   Root: ToggleButtonGroupRoot,
-  Separator: ToggleButtonGroupSeparator
+  Separator: ToggleButtonGroupSeparator,
 });
 
 export {ToggleButtonGroup, ToggleButtonGroupRoot, ToggleButtonGroupSeparator};
 export type {
   ToggleButtonGroupRootProps,
   ToggleButtonGroupRootProps as ToggleButtonGroupProps,
-  ToggleButtonGroupSeparatorProps
+  ToggleButtonGroupSeparatorProps,
 } from "./types";
-export {
-  toggleButtonGroupVariants,
-  type ToggleButtonGroupVariants
-} from "@sail-ui/styles";
+export {toggleButtonGroupVariants, type ToggleButtonGroupVariants} from "@sail-ui/styles";

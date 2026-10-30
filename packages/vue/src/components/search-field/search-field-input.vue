@@ -13,9 +13,7 @@ defineProps<SearchFieldInputProps>();
 const context = inject(searchFieldContextKey, null);
 const {className, forwarded} = useForwardedAttrs();
 
-const classes = computed(() =>
-  cx(searchFieldVariants().input(), className.value)
-);
+const classes = computed(() => cx(searchFieldVariants().input(), className.value));
 
 function handleKeydown(event: KeyboardEvent) {
   if (event.key !== "Enter" || isComposing(event)) {
@@ -37,5 +35,5 @@ function handleKeydown(event: KeyboardEvent) {
     :value="context?.value.value"
     @input="context?.setValue(($event.target as HTMLInputElement).value)"
     @keydown="handleKeydown"
-  >
+  />
 </template>

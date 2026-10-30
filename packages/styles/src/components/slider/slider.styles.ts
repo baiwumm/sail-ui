@@ -12,8 +12,8 @@ export const sliderVariants = tv({
     step: "slider__step",
     steps: "slider__steps",
     thumb: "slider__thumb",
-    track: "slider__track"
-  }
+    track: "slider__track",
+  },
 });
 
 export type SliderVariants = VariantProps<typeof sliderVariants>;

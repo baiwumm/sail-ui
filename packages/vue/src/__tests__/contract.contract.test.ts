@@ -10,7 +10,7 @@ import {
   dataSlots,
   dataSlotsOfTag,
   hasDataAttribute,
-  renderSSR
+  renderSSR,
 } from "@sail-ui/testing";
 
 import Button from "../components/button/button.vue";
@@ -41,7 +41,7 @@ import SelectValue from "../components/select/select-value.vue";
 
 const stylesRoot = join(process.cwd(), "packages", "styles");
 const slotSnapshot = JSON.parse(
-  readFileSync(join(stylesRoot, "contracts", "data-slots.json"), "utf8")
+  readFileSync(join(stylesRoot, "contracts", "data-slots.json"), "utf8"),
 ) as {components: Record<string, string[]>};
 const upstreamSlots = new Set(Object.values(slotSnapshot.components).flat());
 
@@ -51,8 +51,8 @@ const pointer = (element: Element, type: string, init: PointerEventInit = {}) =>
       bubbles: true,
       pointerType: "mouse",
       pointerId: 1,
-      ...init
-    })
+      ...init,
+    }),
   );
 };
 
@@ -68,30 +68,34 @@ function createModalHost(open: boolean) {
       const isOpen = ref(open);
 
       return () =>
-        h(Modal, {open: isOpen.value}, {
-          default: () => [
-            h(ModalTrigger, null, {default: () => "Open Modal"}),
-            h(ModalBackdrop, null, {
-              default: () => [
-                h(ModalContainer, null, {
-                  default: () => [
-                    h(ModalDialog, null, {
-                      default: () => [
-                        h(ModalCloseTrigger),
-                        h(ModalHeader, null, {
-                          default: () => [h(ModalHeading, null, {default: () => "Title"})]
-                        }),
-                        h(ModalBody, null, {default: () => "Body"}),
-                        h(ModalFooter, null, {default: () => "Footer"})
-                      ]
-                    })
-                  ]
-                })
-              ]
-            })
-          ]
-        });
-    }
+        h(
+          Modal,
+          {open: isOpen.value},
+          {
+            default: () => [
+              h(ModalTrigger, null, {default: () => "Open Modal"}),
+              h(ModalBackdrop, null, {
+                default: () => [
+                  h(ModalContainer, null, {
+                    default: () => [
+                      h(ModalDialog, null, {
+                        default: () => [
+                          h(ModalCloseTrigger),
+                          h(ModalHeader, null, {
+                            default: () => [h(ModalHeading, null, {default: () => "Title"})],
+                          }),
+                          h(ModalBody, null, {default: () => "Body"}),
+                          h(ModalFooter, null, {default: () => "Footer"}),
+                        ],
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          },
+        );
+    },
   });
 }
 
@@ -104,7 +108,7 @@ function createSelectHost(options: SelectHostOptions = {}) {
   const states = [
     {id: "california", label: "California"},
     {id: "texas", label: "Texas"},
-    {id: "florida", label: "Florida", disabled: true}
+    {id: "florida", label: "Florida", disabled: true},
   ];
 
   return defineComponent({
@@ -112,39 +116,47 @@ function createSelectHost(options: SelectHostOptions = {}) {
       const value = ref<string | undefined>(options.value);
 
       return () =>
-        h(Select, {
-          isInvalid: options.invalid,
-          modelValue: value.value,
-          placeholder: "Select one"
-        }, {
-          default: () => [
-            h(SelectTrigger, {"aria-label": "State"}, {
-              default: () => [
-                h(SelectValue),
-                h(SelectClearButton),
-                h(SelectIndicator)
-              ]
-            }),
-            h(SelectPopover, null, {
-              default: () => [
-                h(SelectListBox, null, {
-                  default: () =>
-                    states.map((item) =>
-                      h(SelectItem, {
-                        key: item.id,
-                        isDisabled: item.disabled,
-                        textValue: item.label,
-                        value: item.id
-                      }, {
-                        default: () => [item.label, h(SelectItemIndicator)]
-                      })
-                    )
-                })
-              ]
-            })
-          ]
-        });
-    }
+        h(
+          Select,
+          {
+            isInvalid: options.invalid,
+            modelValue: value.value,
+            placeholder: "Select one",
+          },
+          {
+            default: () => [
+              h(
+                SelectTrigger,
+                {"aria-label": "State"},
+                {
+                  default: () => [h(SelectValue), h(SelectClearButton), h(SelectIndicator)],
+                },
+              ),
+              h(SelectPopover, null, {
+                default: () => [
+                  h(SelectListBox, null, {
+                    default: () =>
+                      states.map((item) =>
+                        h(
+                          SelectItem,
+                          {
+                            key: item.id,
+                            isDisabled: item.disabled,
+                            textValue: item.label,
+                            value: item.id,
+                          },
+                          {
+                            default: () => [item.label, h(SelectItemIndicator)],
+                          },
+                        ),
+                      ),
+                  }),
+                ],
+              }),
+            ],
+          },
+        );
+    },
   });
 }
 
@@ -162,7 +174,7 @@ describe("contract snapshots", () => {
   it("Button exposes the upstream data-slot and variant classes", async () => {
     const html = await renderSSR(Button, {
       props: {size: "lg", variant: "danger"},
-      slots: {default: () => "Delete"}
+      slots: {default: () => "Delete"},
     });
 
     expect(dataSlots(html)).toEqual(["button"]);
@@ -175,7 +187,7 @@ describe("contract snapshots", () => {
   it("Button renders spinner parts through the upstream vocabulary while loading", async () => {
     const html = await renderSSR(Button, {
       props: {isLoading: true},
-      slots: {default: () => "Saving"}
+      slots: {default: () => "Saving"},
     });
 
     expect(dataSlots(html)).toEqual(["button", "spinner", "spinner-icon"]);
@@ -188,25 +200,23 @@ describe("contract snapshots", () => {
     const host = defineComponent({
       setup() {
         return () =>
-          h(TextField, {isInvalid: true}, {
-            default: () => [
-              h(Label, null, {default: () => "Email"}),
-              h(Input, {placeholder: "you@example.com"}),
-              h(Description, null, {default: () => "We never share it."}),
-              h(FieldError, null, {default: () => "Enter a valid email."})
-            ]
-          });
-      }
+          h(
+            TextField,
+            {isInvalid: true},
+            {
+              default: () => [
+                h(Label, null, {default: () => "Email"}),
+                h(Input, {placeholder: "you@example.com"}),
+                h(Description, null, {default: () => "We never share it."}),
+                h(FieldError, null, {default: () => "Enter a valid email."}),
+              ],
+            },
+          );
+      },
     });
     const html = await renderSSR(host);
 
-    expect(dataSlots(html)).toEqual([
-      "textfield",
-      "label",
-      "input",
-      "description",
-      "field-error"
-    ]);
+    expect(dataSlots(html)).toEqual(["textfield", "label", "input", "description", "field-error"]);
     expectKnownSlots(html);
     expect(html).toContain('type="text"');
     expect(html).toContain('data-visible="true"');
@@ -223,10 +233,14 @@ describe("contract snapshots", () => {
     const host = defineComponent({
       setup() {
         return () =>
-          h(TextField, {isDisabled: true}, {
-            default: () => [h(Label, null, {default: () => "Email"}), h(Input)]
-          });
-      }
+          h(
+            TextField,
+            {isDisabled: true},
+            {
+              default: () => [h(Label, null, {default: () => "Email"}), h(Input)],
+            },
+          );
+      },
     });
     const html = await renderSSR(host);
 
@@ -267,7 +281,7 @@ describe("contract snapshots", () => {
       "select-value",
       "select-clear-button",
       "select-clear-button-icon",
-      "select-default-indicator"
+      "select-default-indicator",
     ]);
     expectKnownSlots(html);
     expect(html).toContain('role="combobox"');
@@ -316,10 +330,14 @@ describe("interactive state contract", () => {
     const host = defineComponent({
       setup() {
         return () =>
-          h(TextField, {isInvalid: true}, {
-            default: () => [h(Label, null, {default: () => "Email"}), h(Input)]
-          });
-      }
+          h(
+            TextField,
+            {isInvalid: true},
+            {
+              default: () => [h(Label, null, {default: () => "Email"}), h(Input)],
+            },
+          );
+      },
     });
     const wrapper = mount(host, {attachTo: document.body});
     const textfield = wrapper.get('[data-slot="textfield"]');
@@ -353,26 +371,22 @@ describe("interactive state contract", () => {
       "modal-footer",
       "modal-header",
       "modal-heading",
-      "modal-trigger"
+      "modal-trigger",
     ]);
     expectKnownSlots(html);
 
     const backdrop = dataAttributesOfSlot(html, "modal-backdrop")[0]!;
     const container = dataAttributesOfSlot(html, "modal-container")[0]!;
     const dialog = dataAttributesOfSlot(html, "modal-dialog")[0]!;
-    const closeTrigger = document.querySelector<HTMLElement>(
-      '[data-slot="modal-close-trigger"]'
-    )!;
+    const closeTrigger = document.querySelector<HTMLElement>('[data-slot="modal-close-trigger"]')!;
 
     expect(backdrop["data-entering"]).toBe("true");
     expect(container["data-entering"]).toBe("true");
     expect(container["data-placement"]).toBe("auto");
     expect(dialog["data-placement"]).toBe("auto");
-    expect(
-      document
-        .querySelector('[data-slot="modal-dialog"]')
-        ?.getAttribute("aria-modal")
-    ).toBe("true");
+    expect(document.querySelector('[data-slot="modal-dialog"]')?.getAttribute("aria-modal")).toBe(
+      "true",
+    );
 
     pointer(closeTrigger, "pointerenter");
     await nextTick();
@@ -384,14 +398,12 @@ describe("interactive state contract", () => {
 
   it("open Select emits open, placement, entering, selected, hover, and focus states", async () => {
     const wrapper = mount(createSelectHost({value: "california"}), {
-      attachTo: document.body
+      attachTo: document.body,
     });
 
     await flushPromises();
 
-    const trigger = document.querySelector<HTMLElement>(
-      '[data-slot="select-trigger"]'
-    )!;
+    const trigger = document.querySelector<HTMLElement>('[data-slot="select-trigger"]')!;
 
     pointer(trigger, "pointerenter");
     await nextTick();
@@ -403,9 +415,7 @@ describe("interactive state contract", () => {
     pointer(trigger, "pointerdown", {button: 0});
     await nextTick();
 
-    const enteringPopover = document.querySelector<HTMLElement>(
-      '[data-slot="select-popover"]'
-    );
+    const enteringPopover = document.querySelector<HTMLElement>('[data-slot="select-popover"]');
 
     expect(enteringPopover?.getAttribute("data-entering")).toBe("true");
 
@@ -414,18 +424,10 @@ describe("interactive state contract", () => {
     expect(trigger.getAttribute("data-open")).toBe("true");
 
     const html = document.body.innerHTML;
-    const popover = document.querySelector<HTMLElement>(
-      '[data-slot="select-popover"]'
-    )!;
-    const clearButton = document.querySelector<HTMLElement>(
-      '[data-slot="select-clear-button"]'
-    )!;
-    const items = [
-      ...document.querySelectorAll<HTMLElement>('[data-slot="list-box-item"]')
-    ];
-    const california = items.find((item) =>
-      item.textContent?.includes("California")
-    )!;
+    const popover = document.querySelector<HTMLElement>('[data-slot="select-popover"]')!;
+    const clearButton = document.querySelector<HTMLElement>('[data-slot="select-clear-button"]')!;
+    const items = [...document.querySelectorAll<HTMLElement>('[data-slot="list-box-item"]')];
+    const california = items.find((item) => item.textContent?.includes("California"))!;
     const florida = items.find((item) => item.textContent?.includes("Florida"))!;
 
     expectKnownSlots(html);
@@ -457,9 +459,7 @@ describe("interactive state contract", () => {
     await flushPromises();
 
     const value = document.querySelector<HTMLElement>('[data-slot="select-value"]')!;
-    const clearButton = document.querySelector<HTMLElement>(
-      '[data-slot="select-clear-button"]'
-    )!;
+    const clearButton = document.querySelector<HTMLElement>('[data-slot="select-clear-button"]')!;
 
     expect(value.getAttribute("data-placeholder")).toBe("true");
     expect(clearButton.getAttribute("data-empty")).toBe("true");
@@ -479,11 +479,11 @@ interface StateCoverage {
 const STATE_COVERAGE: Record<string, StateCoverage> = {
   alert: {
     asserted: ["data-slot"],
-    gaps: {}
+    gaps: {},
   },
   breadcrumbs: {
     asserted: ["data-current", "data-hovered"],
-    gaps: {}
+    gaps: {},
   },
   button: {
     asserted: [
@@ -492,44 +492,46 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-hovered",
       "data-pending",
       "data-pressed",
-      "data-slot"
+      "data-slot",
     ],
-    gaps: {}
+    gaps: {},
   },
   input: {
     asserted: ["data-disabled", "data-invalid"],
     gaps: {
       "data-focus-visible": "Negative guard in the hover rule; focus uses native :focus.",
       "data-focused": "Presence lives on the FieldRoot wrapper; .input relies on native :focus.",
-      "data-hovered": "Native :hover fallback; Input does not run useHover."
-    }
+      "data-hovered": "Native :hover fallback; Input does not run useHover.",
+    },
   },
   textfield: {
     asserted: ["data-invalid", "data-slot"],
-    gaps: {}
+    gaps: {},
   },
   label: {
     asserted: ["data-disabled", "data-invalid", "data-slot"],
     gaps: {
-      "data-required": "Label uses the label--required variant class; group roots own data-required."
-    }
+      "data-required":
+        "Label uses the label--required variant class; group roots own data-required.",
+    },
   },
   description: {
     asserted: [],
-    gaps: {}
+    gaps: {},
   },
   "field-error": {
     asserted: ["data-slot"],
-    gaps: {}
+    gaps: {},
   },
   modal: {
     asserted: ["data-entering", "data-placement"],
     gaps: {
       "data-exiting": "Transient exit flag; covered by the browser visual suite.",
-      "data-focus-visible": "Focus-trap managed; jsdom does not report :focus-visible for it (browser suite).",
+      "data-focus-visible":
+        "Focus-trap managed; jsdom does not report :focus-visible for it (browser suite).",
       "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
-      "data-pressed": "Native :active fallback; ModalCloseTrigger does not run usePress."
-    }
+      "data-pressed": "Native :active fallback; ModalCloseTrigger does not run usePress.",
+    },
   },
   "close-button": {
     asserted: [
@@ -537,9 +539,9 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-focused",
       "data-hovered",
       "data-pending",
-      "data-pressed"
+      "data-pressed",
     ],
-    gaps: {}
+    gaps: {},
   },
   select: {
     asserted: [
@@ -552,34 +554,29 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-placeholder",
       "data-placement",
       "data-pressed",
-      "data-slot"
+      "data-slot",
     ],
     gaps: {
       "data-disabled": "Native :disabled fallback on the trigger.",
       "data-exiting": "Transient exit flag; covered by the browser visual suite.",
       "data-focus": "Reka emits data-highlighted for the active item; compat aliases it.",
-      "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused])."
-    }
+      "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
+    },
   },
   "list-box": {
     asserted: ["data-slot"],
     gaps: {
-      "data-orientation": "Applied to separator children; the contract fixture has no separator."
-    }
+      "data-orientation": "Applied to separator children; the contract fixture has no separator.",
+    },
   },
   "list-box-item": {
-    asserted: [
-      "data-disabled",
-      "data-focused",
-      "data-hovered",
-      "data-selected",
-      "data-slot"
-    ],
+    asserted: ["data-disabled", "data-focused", "data-hovered", "data-selected", "data-slot"],
     gaps: {
       "data-focus": "Reka emits data-highlighted for the active item; compat aliases it.",
-      "data-focus-visible": "jsdom does not report :focus-visible for role=option divs (browser suite).",
-      "data-pressed": "Native :active fallback; SelectItem does not run usePress."
-    }
+      "data-focus-visible":
+        "jsdom does not report :focus-visible for role=option divs (browser suite).",
+      "data-pressed": "Native :active fallback; SelectItem does not run usePress.",
+    },
   },
   link: {
     asserted: [
@@ -587,25 +584,26 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-focus-visible",
       "data-focused",
       "data-hovered",
-      "data-pressed"
+      "data-pressed",
     ],
-    gaps: {}
+    gaps: {},
   },
   "progress-bar": {
     asserted: ["data-disabled", "data-slot"],
-    gaps: {}
+    gaps: {},
   },
   "progress-circle": {
     asserted: ["data-disabled"],
-    gaps: {}
+    gaps: {},
   },
   "button-group": {
     asserted: [],
     gaps: {
-      "data-focus-visible": "Descendant selector: the group only raises the z-index of a focused button.",
+      "data-focus-visible":
+        "Descendant selector: the group only raises the z-index of a focused button.",
       "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
-      "data-pressed": "Descendant selector: the pressed state belongs to the buttons of the group."
-    }
+      "data-pressed": "Descendant selector: the pressed state belongs to the buttons of the group.",
+    },
   },
   checkbox: {
     asserted: [
@@ -616,15 +614,15 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-invalid",
       "data-pressed",
       "data-selected",
-      "data-slot"
+      "data-slot",
     ],
     gaps: {
-      "data-focused": "The upstream CSS does not read the focus state of a checkbox."
-    }
+      "data-focused": "The upstream CSS does not read the focus state of a checkbox.",
+    },
   },
   "checkbox-group": {
     asserted: ["data-slot"],
-    gaps: {}
+    gaps: {},
   },
   radio: {
     asserted: [
@@ -633,18 +631,18 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-hovered",
       "data-pressed",
       "data-selected",
-      "data-slot"
+      "data-slot",
     ],
     gaps: {
       "data-focused": "The upstream CSS does not read the focus state of a radio.",
-      "data-invalid": "The invalid state is inherited from the radio group and asserted there."
-    }
+      "data-invalid": "The invalid state is inherited from the radio group and asserted there.",
+    },
   },
   "radio-group": {
     asserted: ["data-orientation", "data-selected", "data-slot"],
     gaps: {
-      "data-hovered": "Descendant selector: the hover state belongs to the radio content."
-    }
+      "data-hovered": "Descendant selector: the hover state belongs to the radio content.",
+    },
   },
   switch: {
     asserted: [
@@ -653,26 +651,20 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-hovered",
       "data-pressed",
       "data-selected",
-      "data-slot"
+      "data-slot",
     ],
     gaps: {
       "data-focused": "The upstream CSS does not read the focus state of a switch.",
-      "data-invalid": "The invalid state is only rendered by the field context of the switch."
-    }
+      "data-invalid": "The invalid state is only rendered by the field context of the switch.",
+    },
   },
   "switch-group": {
     asserted: [],
-    gaps: {}
+    gaps: {},
   },
   "input-group": {
-    asserted: [
-      "data-disabled",
-      "data-focus-within",
-      "data-hovered",
-      "data-invalid",
-      "data-slot"
-    ],
-    gaps: {}
+    asserted: ["data-disabled", "data-focus-within", "data-hovered", "data-invalid", "data-slot"],
+    gaps: {},
   },
   "search-field": {
     asserted: [
@@ -681,21 +673,16 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-focus-within",
       "data-hovered",
       "data-invalid",
-      "data-slot"
+      "data-slot",
     ],
-    gaps: {}
+    gaps: {},
   },
   "number-field": {
-    asserted: [
-      "data-disabled",
-      "data-focus-within",
-      "data-hovered",
-      "data-pressed",
-      "data-slot"
-    ],
+    asserted: ["data-disabled", "data-focus-within", "data-hovered", "data-pressed", "data-slot"],
     gaps: {
-      "data-invalid": "The upstream component never marks the group invalid; the root carries the state."
-    }
+      "data-invalid":
+        "The upstream component never marks the group invalid; the root carries the state.",
+    },
   },
   slider: {
     asserted: [
@@ -704,13 +691,13 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-fill-end",
       "data-fill-start",
       "data-orientation",
-      "data-slot"
+      "data-slot",
     ],
     gaps: {
       "data-disabled": "Disabled sliders mark the thumb and the root, not the track.",
       "data-filled": "Only the decorative step and mark indicators use it.",
-      "data-focus-visible": "The focus ring of the thumb is asserted by the browser suite."
-    }
+      "data-focus-visible": "The focus ring of the thumb is asserted by the browser suite.",
+    },
   },
   textarea: {
     asserted: [
@@ -718,9 +705,9 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-focus-visible",
       "data-focused",
       "data-hovered",
-      "data-invalid"
+      "data-invalid",
     ],
-    gaps: {}
+    gaps: {},
   },
   "toggle-button": {
     asserted: [
@@ -728,22 +715,23 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-focused",
       "data-hovered",
       "data-pressed",
-      "data-selected"
+      "data-selected",
     ],
-    gaps: {}
+    gaps: {},
   },
   "toggle-button-group": {
     asserted: [],
     gaps: {
-      "data-focus-visible": "Descendant selector: the group only changes the ring inset of a focused button.",
+      "data-focus-visible":
+        "Descendant selector: the group only changes the ring inset of a focused button.",
       "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
-      "data-pressed": "Descendant selector: the pressed state belongs to the buttons of the group."
-    }
+      "data-pressed": "Descendant selector: the pressed state belongs to the buttons of the group.",
+    },
   },
   toolbar: {
     asserted: [],
-    gaps: {}
-  }
+    gaps: {},
+  },
 };
 
 describe("CSS state attribute coverage", () => {
@@ -751,21 +739,18 @@ describe("CSS state attribute coverage", () => {
     for (const [component, coverage] of Object.entries(STATE_COVERAGE)) {
       const css = readFileSync(
         join(stylesRoot, "upstream", "components", `${component}.css`),
-        "utf8"
+        "utf8",
       );
       const used = dataAttributesInCss(css);
-      const documented = new Set([
-        ...coverage.asserted,
-        ...Object.keys(coverage.gaps)
-      ]);
+      const documented = new Set([...coverage.asserted, ...Object.keys(coverage.gaps)]);
 
       expect(
         used.filter((attribute) => !documented.has(attribute)),
-        `${component} has an unclassified state attribute`
+        `${component} has an unclassified state attribute`,
       ).toEqual([]);
       expect(
         coverage.asserted.filter((attribute) => !used.includes(attribute)),
-        `${component} asserts an attribute the CSS does not use`
+        `${component} asserts an attribute the CSS does not use`,
       ).toEqual([]);
 
       for (const reason of Object.values(coverage.gaps)) {
@@ -775,13 +760,10 @@ describe("CSS state attribute coverage", () => {
   });
 
   it("keeps the compat alias that turns Reka highlighting into data-focus", () => {
-    const select = readFileSync(
-      join(stylesRoot, "generated", "components", "select.css"),
-      "utf8"
-    );
+    const select = readFileSync(join(stylesRoot, "generated", "components", "select.css"), "utf8");
     const listBoxItem = readFileSync(
       join(stylesRoot, "generated", "components", "list-box-item.css"),
-      "utf8"
+      "utf8",
     );
 
     expect(select).toContain("[data-highlighted]");

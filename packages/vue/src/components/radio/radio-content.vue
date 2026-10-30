@@ -55,7 +55,7 @@ provide(labelContextKey, {elementType: "span"});
         type="radio"
         :value="context?.value.value"
         @change="context?.select()"
-      >
+      />
     </VisuallyHidden>
     <slot />
   </label>

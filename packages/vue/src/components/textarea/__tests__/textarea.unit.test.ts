@@ -20,16 +20,13 @@ describe("Textarea", () => {
       defineComponent({
         setup() {
           return () =>
-            h(
-              Textarea,
-              {
-                modelValue: value.value,
-                "onUpdate:modelValue": (next: string | undefined) => (value.value = next ?? "")
-              }
-            );
-        }
+            h(Textarea, {
+              modelValue: value.value,
+              "onUpdate:modelValue": (next: string | undefined) => (value.value = next ?? ""),
+            });
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     await wrapper.get("textarea").setValue("Hello");
@@ -43,7 +40,7 @@ describe("Textarea", () => {
   it("grows with the content when auto resize is enabled", async () => {
     const wrapper = mount(Textarea, {
       attachTo: document.body,
-      props: {autoResize: true}
+      props: {autoResize: true},
     });
     const textarea = wrapper.get("textarea").element as HTMLTextAreaElement;
 

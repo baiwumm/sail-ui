@@ -14,9 +14,9 @@ function renderFieldset(props: Record<string, unknown> = {}) {
       default: () => [
         h(FieldsetLegend, null, {default: () => "Address"}),
         h(FieldGroup, null, {default: () => "Fields"}),
-        h(FieldsetActions, null, {default: () => "Save"})
-      ]
-    }
+        h(FieldsetActions, null, {default: () => "Save"}),
+      ],
+    },
   });
 }
 
@@ -27,15 +27,11 @@ describe("Fieldset", () => {
     expect(wrapper.element.tagName).toBe("FIELDSET");
     expect(wrapper.classes()).toContain("fieldset");
     expect(wrapper.get("[data-slot='fieldset-legend']").element.tagName).toBe("LEGEND");
-    expect(wrapper.get("[data-slot='fieldset-legend']").classes()).toContain(
-      "fieldset__legend"
-    );
+    expect(wrapper.get("[data-slot='fieldset-legend']").classes()).toContain("fieldset__legend");
     expect(wrapper.get("[data-slot='fieldset-field-group']").classes()).toContain(
-      "fieldset__field-group"
+      "fieldset__field-group",
     );
-    expect(wrapper.get("[data-slot='fieldset-actions']").classes()).toContain(
-      "fieldset__actions"
-    );
+    expect(wrapper.get("[data-slot='fieldset-actions']").classes()).toContain("fieldset__actions");
   });
 
   it("disables the native fieldset and emits the state attribute", () => {

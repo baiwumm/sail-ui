@@ -7,7 +7,7 @@ import {
   ListBox,
   Modal,
   Select,
-  TextField
+  TextField,
 } from "@heroui/react";
 import {useEffect, useState} from "react";
 
@@ -20,7 +20,7 @@ const states = [
   {id: "california", label: "California"},
   {id: "texas", label: "Texas"},
   {id: "new-york", label: "New York"},
-  {id: "washington", label: "Washington"}
+  {id: "washington", label: "Washington"},
 ];
 
 export default function App() {
@@ -51,19 +51,12 @@ export default function App() {
             Button · Input · Modal · Select · Forms · Display & feedback
           </p>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onPress={toggleTheme}
-        >
+        <Button variant="outline" size="sm" onPress={toggleTheme}>
           {isDark ? "Light" : "Dark"}
         </Button>
       </header>
 
-      <section
-        id="buttons"
-        className="flex flex-col gap-4"
-      >
+      <section id="buttons" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Button</h2>
         <div className="flex flex-wrap items-center gap-3">
           <Button variant="primary">Primary</Button>
@@ -86,12 +79,7 @@ export default function App() {
               className="spinner spinner--current spinner--sm"
               role="status"
             >
-              <svg
-                aria-hidden="true"
-                className="spinner__icon"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
+              <svg aria-hidden="true" className="spinner__icon" fill="none" viewBox="0 0 24 24">
                 <circle
                   cx="12"
                   cy="12"
@@ -105,17 +93,8 @@ export default function App() {
             </span>
             Loading
           </Button>
-          <Button
-            isIconOnly
-            aria-label="Add item"
-            variant="secondary"
-          >
-            <svg
-              aria-hidden="true"
-              className="size-4"
-              fill="none"
-              viewBox="0 0 16 16"
-            >
+          <Button isIconOnly aria-label="Add item" variant="secondary">
+            <svg aria-hidden="true" className="size-4" fill="none" viewBox="0 0 16 16">
               <path
                 d="M8 2v12M2 8h12"
                 stroke="currentColor"
@@ -134,16 +113,10 @@ export default function App() {
         </div>
       </section>
 
-      <section
-        id="input"
-        className="flex flex-col gap-4"
-      >
+      <section id="input" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Input</h2>
         <div className="flex flex-wrap items-start gap-6">
-          <TextField
-            className="max-w-sm"
-            fullWidth
-          >
+          <TextField className="max-w-sm" fullWidth>
             <Label>Domain</Label>
             <Input
               placeholder="domain"
@@ -152,20 +125,12 @@ export default function App() {
             />
             <Description>Use a domain you own.</Description>
           </TextField>
-          <TextField
-            className="max-w-sm"
-            fullWidth
-            isInvalid
-          >
+          <TextField className="max-w-sm" fullWidth isInvalid>
             <Label>Email</Label>
             <Input placeholder="you@example.com" />
             <FieldError>Enter a valid email address.</FieldError>
           </TextField>
-          <TextField
-            className="max-w-sm"
-            fullWidth
-            isDisabled
-          >
+          <TextField className="max-w-sm" fullWidth isDisabled>
             <Label>API key</Label>
             <Input defaultValue="sk_live_***" />
             <Description>Managed by your workspace.</Description>
@@ -176,10 +141,7 @@ export default function App() {
         </p>
       </section>
 
-      <section
-        id="modal"
-        className="flex flex-col gap-4"
-      >
+      <section id="modal" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Modal</h2>
         <div className="flex flex-wrap items-center gap-3">
           <Modal>
@@ -190,12 +152,7 @@ export default function App() {
                   <Modal.CloseTrigger />
                   <Modal.Header>
                     <Modal.Icon className="bg-default text-foreground">
-                      <svg
-                        aria-hidden="true"
-                        className="size-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
+                      <svg aria-hidden="true" className="size-5" fill="none" viewBox="0 0 24 24">
                         <path
                           d="M5 15c6 0 9-3 9-9 3 3 4 6 4 9a5 5 0 0 1-10 0 8 8 0 0 1-3-0Z"
                           stroke="currentColor"
@@ -207,15 +164,10 @@ export default function App() {
                     <Modal.Heading>Welcome to Sail UI</Modal.Heading>
                   </Modal.Header>
                   <Modal.Body>
-                    <p>
-                      A Vue 3 port of the HeroUI v3 CSS and DOM contract, built on Reka UI.
-                    </p>
+                    <p>A Vue 3 port of the HeroUI v3 CSS and DOM contract, built on Reka UI.</p>
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button
-                      slot="close"
-                      variant="secondary"
-                    >
+                    <Button slot="close" variant="secondary">
                       Cancel
                     </Button>
                     <Button slot="close">Continue</Button>
@@ -227,10 +179,7 @@ export default function App() {
         </div>
       </section>
 
-      <section
-        id="select"
-        className="flex flex-col gap-4"
-      >
+      <section id="select" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Select</h2>
         <div className="flex flex-wrap items-start gap-6">
           <Select
@@ -248,11 +197,7 @@ export default function App() {
             <Select.Popover>
               <ListBox>
                 {states.map((item) => (
-                  <ListBox.Item
-                    key={item.id}
-                    id={item.id}
-                    textValue={item.label}
-                  >
+                  <ListBox.Item key={item.id} id={item.id} textValue={item.label}>
                     {item.label}
                     <ListBox.ItemIndicator />
                   </ListBox.Item>

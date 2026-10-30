@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<ToggleButtonGroupRootProps>(), {
   type: "single",
   isDisabled: false,
   fullWidth: false,
-  isDetached: false
+  isDetached: false,
 });
 
 const model = defineModel<string | string[]>();
@@ -26,22 +26,20 @@ const resolvedDir = computed(() => props.dir ?? documentDirection.value);
 
 const isSingle = computed(() => props.type !== "multiple");
 
-const orientation = computed(
-  () => props.orientation ?? toolbar?.orientation.value ?? "horizontal"
-);
+const orientation = computed(() => props.orientation ?? toolbar?.orientation.value ?? "horizontal");
 
 const singleModel = computed({
   get: () => (typeof model.value === "string" ? model.value : undefined),
   set: (value: string | undefined) => {
     model.value = value;
-  }
+  },
 });
 
 const multipleModel = computed({
   get: () => (Array.isArray(model.value) ? model.value : []),
   set: (value: string[]) => {
     model.value = value;
-  }
+  },
 });
 
 const selected = computed<unknown[]>(() =>
@@ -49,7 +47,7 @@ const selected = computed<unknown[]>(() =>
     ? singleModel.value === undefined
       ? []
       : [singleModel.value]
-    : multipleModel.value
+    : multipleModel.value,
 );
 
 const classes = computed(() =>
@@ -57,10 +55,10 @@ const classes = computed(() =>
     toggleButtonGroupVariants({
       fullWidth: props.fullWidth,
       isDetached: props.isDetached,
-      orientation: orientation.value
+      orientation: orientation.value,
     }).base(),
-    className.value
-  )
+    className.value,
+  ),
 );
 
 function isSelected(value: unknown) {
@@ -89,7 +87,7 @@ provide(toggleButtonGroupContextKey, {
   size: computed(() => props.size),
   selected,
   isSelected,
-  toggle
+  toggle,
 });
 </script>
 
@@ -105,7 +103,8 @@ provide(toggleButtonGroupContextKey, {
     :orientation="orientation"
   >
     <slot />
-  </RadioGroupRoot>  <ToggleGroupRoot
+  </RadioGroupRoot>
+  <ToggleGroupRoot
     v-else
     v-model="multipleModel"
     v-bind="forwarded"

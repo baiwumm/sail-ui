@@ -10,7 +10,7 @@ defineOptions({name: "SailToolbar", inheritAttrs: false});
 
 const props = withDefaults(defineProps<ToolbarRootProps>(), {
   orientation: "horizontal",
-  isAttached: false
+  isAttached: false,
 });
 
 const {className, forwarded} = useForwardedAttrs();
@@ -20,14 +20,14 @@ const classes = computed(() =>
   cx(
     toolbarVariants({
       isAttached: props.isAttached,
-      orientation: props.orientation
+      orientation: props.orientation,
     }),
-    className.value
-  )
+    className.value,
+  ),
 );
 
 provide(toolbarContextKey, {
-  orientation: computed(() => props.orientation)
+  orientation: computed(() => props.orientation),
 });
 
 const FOCUSABLE_SELECTOR = [
@@ -36,7 +36,7 @@ const FOCUSABLE_SELECTOR = [
   "input:not([disabled])",
   "select:not([disabled])",
   "textarea:not([disabled])",
-  '[tabindex]:not([tabindex="-1"])'
+  '[tabindex]:not([tabindex="-1"])',
 ].join(",");
 
 const documentDirection = useDocumentDirection();
@@ -73,7 +73,7 @@ function handleKeydown(event: KeyboardEvent) {
   }
 
   const items = [...toolbar.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)].filter(
-    (item) => !item.hasAttribute("hidden") && item.getAttribute("aria-hidden") !== "true"
+    (item) => !item.hasAttribute("hidden") && item.getAttribute("aria-hidden") !== "true",
   );
 
   if (items.length === 0) {

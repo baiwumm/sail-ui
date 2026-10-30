@@ -20,12 +20,7 @@ const classes = computed(() => cx(descriptionVariants(), attrs.class as string |
   >
     <slot />
   </FieldDescription>
-  <span
-    v-else
-    v-bind="$attrs"
-    :class="classes"
-    :data-slot="'description'"
-  >
+  <span v-else v-bind="$attrs" :class="classes" :data-slot="'description'">
     <slot />
   </span>
 </template>

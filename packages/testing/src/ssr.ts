@@ -8,10 +8,7 @@ export interface RenderSSROptions {
   slots?: Record<string, () => unknown>;
 }
 
-export function renderSSR(
-  root: Component,
-  options: RenderSSROptions = {},
-): Promise<string> {
+export function renderSSR(root: Component, options: RenderSSROptions = {}): Promise<string> {
   const app = createSSRApp({
     render: () => h(root, options.props ?? {}, options.slots),
   });

@@ -12,15 +12,11 @@ defineProps<SliderFillProps>();
 const context = inject(sliderContextKey)!;
 const {className, forwarded} = useForwardedAttrs();
 
-const percents = computed(() =>
-  context.values.value.map((value) => context.percentOf(value))
-);
+const percents = computed(() => context.values.value.map((value) => context.percentOf(value)));
 
 const sorted = computed(() => [...percents.value].sort((a, b) => a - b));
 
-const startOffset = computed(() =>
-  context.values.value.length > 1 ? sorted.value[0]! : 0
-);
+const startOffset = computed(() => (context.values.value.length > 1 ? sorted.value[0]! : 0));
 
 const endOffset = computed(() => sorted.value[sorted.value.length - 1] ?? 0);
 
@@ -30,9 +26,8 @@ const style = computed(() => {
   const isVertical = context.orientation.value === "vertical";
 
   return {
-    [isVertical ? "bottom" : context.isRTL.value ? "right" : "left"]:
-      `${startOffset.value * 100}%`,
-    [isVertical ? "height" : "width"]: `${(endOffset.value - startOffset.value) * 100}%`
+    [isVertical ? "bottom" : context.isRTL.value ? "right" : "left"]: `${startOffset.value * 100}%`,
+    [isVertical ? "height" : "width"]: `${(endOffset.value - startOffset.value) * 100}%`,
   };
 });
 </script>

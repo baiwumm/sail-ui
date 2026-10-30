@@ -1,7 +1,7 @@
 import SeparatorRoot from "./separator.vue";
 
 const Separator = Object.assign(SeparatorRoot, {
-  Root: SeparatorRoot
+  Root: SeparatorRoot,
 });
 
 export {Separator, SeparatorRoot};

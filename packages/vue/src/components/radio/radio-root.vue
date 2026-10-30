@@ -11,7 +11,7 @@ defineOptions({name: "SailRadio", inheritAttrs: false});
 const props = withDefaults(defineProps<RadioRootProps>(), {
   isDisabled: false,
   isInvalid: false,
-  isRequired: false
+  isRequired: false,
 });
 
 const model = defineModel<string>();
@@ -19,7 +19,7 @@ const group = inject(radioGroupContextKey, null);
 const {className, forwarded} = useForwardedAttrs();
 
 const isSelected = computed(() =>
-  group ? group.selectedValue.value === props.value : model.value === props.value
+  group ? group.selectedValue.value === props.value : model.value === props.value,
 );
 const isDisabled = computed(() => group?.isDisabled.value || props.isDisabled);
 const isInvalid = computed(() => group?.isInvalid.value || props.isInvalid);
@@ -62,7 +62,7 @@ provide(radioContextKey, {
     }
 
     model.value = props.value;
-  }
+  },
 });
 </script>
 

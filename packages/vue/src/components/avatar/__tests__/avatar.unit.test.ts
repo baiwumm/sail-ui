@@ -10,7 +10,7 @@ describe("Avatar", () => {
   it("renders the fallback with the upstream slot and variant classes", () => {
     const wrapper = mount(Avatar, {
       props: {color: "success", size: "lg"},
-      slots: {default: () => h(AvatarFallback, null, {default: () => "AD"})}
+      slots: {default: () => h(AvatarFallback, null, {default: () => "AD"})},
     });
 
     const fallback = wrapper.get("[data-slot='avatar-fallback']");
@@ -27,9 +27,9 @@ describe("Avatar", () => {
       slots: {
         default: () => [
           h(AvatarImage, {alt: "Ada", src: "https://example.com/ada.png"}),
-          h(AvatarFallback, null, {default: () => "AD"})
-        ]
-      }
+          h(AvatarFallback, null, {default: () => "AD"}),
+        ],
+      },
     });
     const image = wrapper.get("img");
 
@@ -41,7 +41,7 @@ describe("Avatar", () => {
     const wrapper = mount(Avatar, {
       attrs: {class: "extra"},
       props: {as: "div"},
-      slots: {default: () => h(AvatarFallback, null, {default: () => "AD"})}
+      slots: {default: () => h(AvatarFallback, null, {default: () => "AD"})},
     });
 
     expect(wrapper.element.tagName).toBe("DIV");

@@ -13,25 +13,21 @@ const props = withDefaults(defineProps<CheckboxRootProps>(), {
   variant: "primary",
   isDisabled: false,
   isInvalid: false,
-  isRequired: false
+  isRequired: false,
 });
 
 const model = defineModel<boolean | "indeterminate">({default: false});
 const group = inject(checkboxGroupContextKey, null);
 const {className, forwarded} = useForwardedAttrs();
 
-const isSelected = computed(() =>
-  group ? group.isSelected(props.value) : model.value === true
-);
-const isIndeterminate = computed(() =>
-  group ? false : model.value === "indeterminate"
-);
+const isSelected = computed(() => (group ? group.isSelected(props.value) : model.value === true));
+const isIndeterminate = computed(() => (group ? false : model.value === "indeterminate"));
 const isDisabled = computed(() => group?.isDisabled.value || props.isDisabled);
 const isInvalid = computed(() => group?.isInvalid.value || props.isInvalid);
 const isRequired = computed(() => group?.isRequired.value || props.isRequired);
 
 const classes = computed(() =>
-  cx(checkboxVariants({variant: props.variant}).base(), className.value)
+  cx(checkboxVariants({variant: props.variant}).base(), className.value),
 );
 
 function toggle() {
@@ -62,7 +58,7 @@ provide(checkboxContextKey, {
   isRequired,
   name: computed(() => props.name ?? group?.name.value),
   value: computed(() => props.value),
-  toggle
+  toggle,
 });
 </script>
 

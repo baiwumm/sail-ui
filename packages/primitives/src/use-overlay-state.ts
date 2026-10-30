@@ -128,7 +128,7 @@ export function useOverlayState(props: UseOverlayStateProps = {}): UseOverlaySta
 
   const exitingElements = (root: HTMLElement) => [
     root,
-    ...Array.from(root.querySelectorAll<HTMLElement>('[data-exiting="true"]'))
+    ...Array.from(root.querySelectorAll<HTMLElement>('[data-exiting="true"]')),
   ];
 
   const pinOpacity = () => {
@@ -187,10 +187,7 @@ export function useOverlayState(props: UseOverlayStateProps = {}): UseOverlaySta
     for (const animation of getSubtreeAnimations(root)) {
       const target = animationTarget(animation);
 
-      if (
-        !target ||
-        !targets.some((element) => element === target || element.contains(target))
-      ) {
+      if (!target || !targets.some((element) => element === target || element.contains(target))) {
         continue;
       }
 
@@ -221,9 +218,7 @@ export function useOverlayState(props: UseOverlayStateProps = {}): UseOverlaySta
     }
 
     const animations = collectExitAnimations(root);
-    const pending = animations.filter(
-      (animation) => (animation.playState as string) === "pending",
-    );
+    const pending = animations.filter((animation) => (animation.playState as string) === "pending");
 
     if (pending.length > 0 && attempt < 10) {
       exitFrame = scheduleFrame(() => {
@@ -275,9 +270,7 @@ export function useOverlayState(props: UseOverlayStateProps = {}): UseOverlaySta
     };
 
     void Promise.allSettled(
-      animations.map((animation) =>
-        animation.finished.catch(() => undefined),
-      ),
+      animations.map((animation) => animation.finished.catch(() => undefined)),
     ).then(() => {
       if (token === exitToken) {
         finishExit();
@@ -447,6 +440,6 @@ export function useOverlayState(props: UseOverlayStateProps = {}): UseOverlaySta
     open,
     close,
     toggle,
-    setOpen
+    setOpen,
   };
 }

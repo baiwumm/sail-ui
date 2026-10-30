@@ -17,17 +17,11 @@ const rootContext = injectSelectRootContext();
 const placeholder = computed(() => props.placeholder ?? context.placeholder.value ?? "");
 const isEmpty = computed(() => rootContext.isEmptyModelValue.value);
 
-const classes = computed(() =>
-  cx(context.slots.value.value(), attrs.class as string | undefined)
-);
+const classes = computed(() => cx(context.slots.value.value(), attrs.class as string | undefined));
 </script>
 
 <template>
-  <SelectValuePrimitive
-    v-slot="{ selectedLabel }"
-    as-child
-    :placeholder="placeholder"
-  >
+  <SelectValuePrimitive v-slot="{selectedLabel}" as-child :placeholder="placeholder">
     <span
       v-bind="$attrs"
       :class="classes"

@@ -9,13 +9,13 @@ import type {AvatarFallbackProps} from "./types";
 defineOptions({name: "SailAvatarFallback", inheritAttrs: false});
 
 const props = withDefaults(defineProps<AvatarFallbackProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();
 const slots = inject(avatarContextKey, null)?.slots;
 const classes = computed(() =>
-  cx(slots?.value.fallback({color: props.color}), attrs.class as string | undefined)
+  cx(slots?.value.fallback({color: props.color}), attrs.class as string | undefined),
 );
 </script>
 

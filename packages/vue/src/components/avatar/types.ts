@@ -1,5 +1,8 @@
 import type {AvatarVariants} from "@sail-ui/styles";
-import type {AvatarFallbackProps as RekaAvatarFallbackProps, AvatarImageProps as RekaAvatarImageProps} from "reka-ui";
+import type {
+  AvatarFallbackProps as RekaAvatarFallbackProps,
+  AvatarImageProps as RekaAvatarImageProps,
+} from "reka-ui";
 
 import type {PolymorphicProps} from "../../shared/types";
 

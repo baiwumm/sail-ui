@@ -6,17 +6,17 @@ export const toolbarVariants = tv({
   base: "toolbar",
   defaultVariants: {
     isAttached: false,
-    orientation: "horizontal"
+    orientation: "horizontal",
   },
   variants: {
     isAttached: {
-      true: "toolbar--attached"
+      true: "toolbar--attached",
     },
     orientation: {
       horizontal: "toolbar--horizontal",
-      vertical: "toolbar--vertical"
-    }
-  }
+      vertical: "toolbar--vertical",
+    },
+  },
 });
 
 export type ToolbarVariants = VariantProps<typeof toolbarVariants>;

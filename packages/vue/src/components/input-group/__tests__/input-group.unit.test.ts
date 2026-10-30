@@ -19,25 +19,25 @@ describe("InputGroup", () => {
                 h(InputGroupPrefix, null, {default: () => "@"}),
                 h(InputGroupInput),
                 h(InputGroupTextArea),
-                h(InputGroupSuffix, null, {default: () => ".com"})
-              ]
+                h(InputGroupSuffix, null, {default: () => ".com"}),
+              ],
             });
-        }
-      })
+        },
+      }),
     );
 
     expect(wrapper.get('[data-slot="input-group"]').classes()).toContain("input-group--primary");
     expect(wrapper.get('[data-slot="input-group-input"]').classes()).toContain(
-      "input-group__input"
+      "input-group__input",
     );
     expect(wrapper.get('[data-slot="input-group-textarea"]').classes()).toContain(
-      "input-group__input"
+      "input-group__input",
     );
     expect(wrapper.get('[data-slot="input-group-prefix"]').classes()).toContain(
-      "input-group__prefix"
+      "input-group__prefix",
     );
     expect(wrapper.get('[data-slot="input-group-suffix"]').classes()).toContain(
-      "input-group__suffix"
+      "input-group__suffix",
     );
   });
 
@@ -47,14 +47,11 @@ describe("InputGroup", () => {
         setup() {
           return () =>
             h(InputGroup, null, {
-              default: () => [
-                h(InputGroupPrefix, null, {default: () => "@"}),
-                h(InputGroupInput)
-              ]
+              default: () => [h(InputGroupPrefix, null, {default: () => "@"}), h(InputGroupInput)],
             });
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     await wrapper.get('[data-slot="input-group-prefix"]').trigger("click");
@@ -69,11 +66,10 @@ describe("InputGroup", () => {
     const wrapper = mount(
       defineComponent({
         setup() {
-          return () =>
-            h(InputGroup, null, {default: () => [h(InputGroupInput)]});
-        }
+          return () => h(InputGroup, null, {default: () => [h(InputGroupInput)]});
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
     const group = wrapper.get('[data-slot="input-group"]');
 
@@ -89,10 +85,9 @@ describe("InputGroup", () => {
     const wrapper = mount(
       defineComponent({
         setup() {
-          return () =>
-            h(InputGroup, {isDisabled: true}, {default: () => [h(InputGroupInput)]});
-        }
-      })
+          return () => h(InputGroup, {isDisabled: true}, {default: () => [h(InputGroupInput)]});
+        },
+      }),
     );
 
     expect(wrapper.get('[data-slot="input-group"]').attributes("data-disabled")).toBe("true");

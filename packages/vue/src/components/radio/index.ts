@@ -7,7 +7,7 @@ const Radio = Object.assign(RadioRoot, {
   Root: RadioRoot,
   Content: RadioContent,
   Control: RadioControl,
-  Indicator: RadioIndicator
+  Indicator: RadioIndicator,
 });
 
 export {Radio, RadioRoot, RadioContent, RadioControl, RadioIndicator};
@@ -16,6 +16,6 @@ export type {
   RadioRootProps as RadioProps,
   RadioContentProps,
   RadioControlProps,
-  RadioIndicatorProps
+  RadioIndicatorProps,
 } from "./types";
 export {radioVariants, type RadioVariants} from "@sail-ui/styles";

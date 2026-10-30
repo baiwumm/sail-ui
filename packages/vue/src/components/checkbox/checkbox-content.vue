@@ -33,7 +33,7 @@ watch(
       inputRef.value.indeterminate = Boolean(indeterminate);
     }
   },
-  {immediate: true}
+  {immediate: true},
 );
 
 // The label renders a `<span>` so the clickable row stays a plain label
@@ -67,7 +67,7 @@ provide(labelContextKey, {elementType: "span"});
         type="checkbox"
         :value="context?.value.value"
         @change="context?.toggle()"
-      >
+      />
     </VisuallyHidden>
     <slot />
   </label>

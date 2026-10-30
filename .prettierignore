@@ -7,4 +7,6 @@ coverage
 .screenshots
 packages/styles/upstream
 packages/styles/generated
+packages/styles/contracts
+packages/styles/manifest.json
 pnpm-lock.yaml

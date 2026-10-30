@@ -17,7 +17,7 @@ const Slider = Object.assign(SliderRoot, {
   Step: SliderStep,
   Steps: SliderSteps,
   Mark: SliderMark,
-  Marks: SliderMarks
+  Marks: SliderMarks,
 });
 
 export {
@@ -30,7 +30,7 @@ export {
   SliderStep,
   SliderSteps,
   SliderMark,
-  SliderMarks
+  SliderMarks,
 };
 export type {
   SliderRootProps,
@@ -42,6 +42,6 @@ export type {
   SliderStepProps,
   SliderStepsProps,
   SliderMarkProps,
-  SliderMarksProps
+  SliderMarksProps,
 } from "./types";
 export {sliderVariants, type SliderVariants} from "@sail-ui/styles";

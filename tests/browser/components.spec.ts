@@ -39,9 +39,7 @@ test.describe("Button", () => {
   });
 
   test("renders disabled and pending states", async ({page}) => {
-    const disabled = page
-      .locator("#buttons")
-      .getByRole("button", {name: "Disabled", exact: true});
+    const disabled = page.locator("#buttons").getByRole("button", {name: "Disabled", exact: true});
     const pending = page.locator('#buttons button[data-pending="true"]');
 
     await expect(disabled).toBeDisabled();
@@ -50,7 +48,7 @@ test.describe("Button", () => {
     expect(disabledBox).not.toBeNull();
     await page.mouse.move(
       disabledBox!.x + disabledBox!.width / 2,
-      disabledBox!.y + disabledBox!.height / 2
+      disabledBox!.y + disabledBox!.height / 2,
     );
     await expect(disabled).not.toHaveAttribute("data-hovered", "true");
 
@@ -75,7 +73,7 @@ test.describe("Modal", () => {
     for (let index = 0; index < 8; index += 1) {
       await page.keyboard.press("Tab");
       const contained = await dialog.evaluate((element) =>
-        element.contains(document.activeElement)
+        element.contains(document.activeElement),
       );
 
       expect(contained).toBe(true);

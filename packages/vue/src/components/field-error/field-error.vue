@@ -36,13 +36,7 @@ onBeforeUnmount(() => unregister?.());
 </script>
 
 <template>
-  <span
-    v-if="show"
-    :id="errorId"
-    :class="classes"
-    :data-slot="'field-error'"
-    data-visible="true"
-  >
+  <span v-if="show" :id="errorId" :class="classes" :data-slot="'field-error'" data-visible="true">
     <slot :errors="errors">
       {{ errors.join(" ") }}
     </slot>

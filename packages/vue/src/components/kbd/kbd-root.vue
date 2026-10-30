@@ -9,7 +9,7 @@ import type {KbdRootProps} from "./types";
 defineOptions({name: "SailKbd", inheritAttrs: false});
 
 const props = withDefaults(defineProps<KbdRootProps>(), {
-  as: "kbd"
+  as: "kbd",
 });
 
 const attrs = useAttrs();
@@ -20,12 +20,7 @@ provide(kbdContextKey, {slots});
 </script>
 
 <template>
-  <Primitive
-    v-bind="$attrs"
-    :as="as"
-    :as-child="asChild"
-    :class="classes"
-  >
+  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes">
     <slot />
   </Primitive>
 </template>

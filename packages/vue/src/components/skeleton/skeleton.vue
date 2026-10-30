@@ -10,13 +10,13 @@ import type {SkeletonRootProps} from "./types";
 defineOptions({name: "SailSkeleton", inheritAttrs: false});
 
 const props = withDefaults(defineProps<SkeletonRootProps>(), {
-  as: "div"
+  as: "div",
 });
 
 const ANIMATION_VALUES: NonNullable<SkeletonVariants["animationType"]>[] = [
   "none",
   "pulse",
-  "shimmer"
+  "shimmer",
 ];
 
 let cachedAnimation: string | undefined;
@@ -49,18 +49,13 @@ onMounted(() => {
 const classes = computed(() =>
   cx(
     skeletonVariants({animationType: props.animationType ?? cssAnimation.value}).base(),
-    attrs.class as string | undefined
-  )
+    attrs.class as string | undefined,
+  ),
 );
 </script>
 
 <template>
-  <Primitive
-    v-bind="$attrs"
-    :as="as"
-    :as-child="asChild"
-    :class="classes"
-  >
+  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes">
     <slot />
   </Primitive>
 </template>

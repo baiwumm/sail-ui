@@ -107,13 +107,14 @@
 
 ## Risks
 
-| 风险 | 处理 |
-|---|---|
-| Nuxt 自动导入与用户组件冲突 | 默认 `S` 前缀；文档说明 |
-| Tailwind 扫描/样式注入顺序错误 | 用上游入口顺序；fixture 截图对比 |
-| 类型导出在 NodeNext/bundler 下失败 | 双 tsconfig fixture；`pack:check` |
-| 文档 demo 与代码不同步 | demo 直接 import 源码；CI 构建文档站 |
-| 视觉基线体积/噪音 | 只存关键状态；压缩；按组件分目录 |
+| 风险                               | 处理                                                                |
+| ---------------------------------- | ------------------------------------------------------------------- |
+| Nuxt 自动导入与用户组件冲突        | 默认 `S` 前缀；文档说明                                             |
+| Tailwind 扫描/样式注入顺序错误     | 用上游入口顺序；fixture 截图对比                                    |
+| 类型导出在 NodeNext/bundler 下失败 | 双 tsconfig fixture；`pack:check`                                   |
+| 文档 demo 与代码不同步             | demo 直接 import 源码；CI 构建文档站                                |
+| 视觉基线体积/噪音                  | 只存关键状态；压缩；按组件分目录                                    |
 | canary 安装发现 workspace 依赖泄漏 | `pnpm pack:check` 检查 dependencies，禁止 workspace: 协议进入发布物 |
-| 发布前 scope/商标未确认 | 作为发布阻塞项，未确认不发 |
+| 发布前 scope/商标未确认            | 作为发布阻塞项，未确认不发                                          |
+
 </content>

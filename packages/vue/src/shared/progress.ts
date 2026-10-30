@@ -17,7 +17,7 @@ function clamp(value: number, min: number, max: number) {
 
 export function useProgressState(options: ProgressStateOptions) {
   const formatter = computed(
-    () => new Intl.NumberFormat(undefined, toValue(options.formatOptions) ?? {style: "percent"})
+    () => new Intl.NumberFormat(undefined, toValue(options.formatOptions) ?? {style: "percent"}),
   );
   const isIndeterminate = computed(() => Boolean(toValue(options.isIndeterminate)));
   const minValue = computed(() => toValue(options.minValue));
@@ -29,10 +29,10 @@ export function useProgressState(options: ProgressStateOptions) {
   });
   const range = computed(() => maxValue.value - minValue.value);
   const ratio = computed(() =>
-    range.value === 0 ? 0 : (currentValue.value - minValue.value) / range.value
+    range.value === 0 ? 0 : (currentValue.value - minValue.value) / range.value,
   );
   const percentage = computed(() =>
-    isIndeterminate.value ? undefined : range.value === 0 ? 0 : ratio.value * 100
+    isIndeterminate.value ? undefined : range.value === 0 ? 0 : ratio.value * 100,
   );
   const valueText = computed(() => {
     if (isIndeterminate.value) {
@@ -57,6 +57,6 @@ export function useProgressState(options: ProgressStateOptions) {
     maxValue,
     minValue,
     percentage,
-    valueText
+    valueText,
   };
 }

@@ -17,7 +17,7 @@ import SelectValue from "../select-value.vue";
 const states = [
   {id: "california", label: "California"},
   {id: "texas", label: "Texas"},
-  {id: "florida", label: "Florida"}
+  {id: "florida", label: "Florida"},
 ];
 
 function createHost(initial: AcceptableValue = "california") {
@@ -31,7 +31,7 @@ function createHost(initial: AcceptableValue = "california") {
       SelectListBox,
       SelectPopover,
       SelectTrigger,
-      SelectValue
+      SelectValue,
     },
     setup() {
       const value = ref<AcceptableValue | undefined>(initial);
@@ -60,7 +60,7 @@ function createHost(initial: AcceptableValue = "california") {
         </SelectPopover>
       </Select>
       <output data-testid="value">{{ value ?? "none" }}</output>
-    `
+    `,
   });
 }
 
@@ -101,7 +101,12 @@ describe("Select", () => {
     await flushPromises();
 
     wrapper.get('[data-slot="select-trigger"]').element.dispatchEvent(
-      new PointerEvent("pointerdown", {bubbles: true, button: 0, pointerId: 1, pointerType: "mouse"})
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        button: 0,
+        pointerId: 1,
+        pointerType: "mouse",
+      }),
     );
     await flushPromises();
 

@@ -10,7 +10,7 @@ defineOptions({name: "SailFieldset", inheritAttrs: false});
 
 const props = withDefaults(defineProps<FieldsetRootProps>(), {
   as: "fieldset",
-  isDisabled: false
+  isDisabled: false,
 });
 
 const attrs = useAttrs();
@@ -19,7 +19,7 @@ const classes = computed(() => cx(slots.value.base(), attrs.class as string | un
 
 provide(fieldsetContextKey, {
   slots,
-  isDisabled: computed(() => props.isDisabled)
+  isDisabled: computed(() => props.isDisabled),
 });
 </script>
 

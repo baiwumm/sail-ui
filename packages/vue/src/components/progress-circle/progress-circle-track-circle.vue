@@ -9,13 +9,13 @@ import type {ProgressCircleTrackCircleProps} from "./types";
 defineOptions({name: "SailProgressCircleTrackCircle", inheritAttrs: false});
 
 withDefaults(defineProps<ProgressCircleTrackCircleProps>(), {
-  as: "circle"
+  as: "circle",
 });
 
 const attrs = useAttrs();
 const context = inject(progressCircleContextKey, null);
 const classes = computed(() =>
-  cx(context?.slots.value.trackCircle(), attrs.class as string | undefined)
+  cx(context?.slots.value.trackCircle(), attrs.class as string | undefined),
 );
 </script>
 

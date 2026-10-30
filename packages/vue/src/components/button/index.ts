@@ -1,7 +1,7 @@
 import ButtonRoot from "./button.vue";
 
 const Button = Object.assign(ButtonRoot, {
-  Root: ButtonRoot
+  Root: ButtonRoot,
 });
 
 export {Button, ButtonRoot};

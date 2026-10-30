@@ -12,7 +12,7 @@ describe("Input", () => {
   it("renders as a standalone input with the upstream data-slot", () => {
     const wrapper = mount(Input, {
       attrs: {placeholder: "Type here"},
-      props: {modelValue: "hello"}
+      props: {modelValue: "hello"},
     });
     const input = wrapper.get("input");
 
@@ -29,7 +29,7 @@ describe("Input", () => {
 
         return {value};
       },
-      template: `<Input v-model="value" full-width />`
+      template: `<Input v-model="value" full-width />`,
     });
     const wrapper = mount(Host);
 
@@ -47,9 +47,9 @@ describe("Input", () => {
           h(Label, null, {default: () => "Email"}),
           h(Input, {placeholder: "you@example.com"}),
           h(Description, null, {default: () => "We never share it."}),
-          h(FieldError, null, {default: () => "Enter a valid email."})
-        ]
-      }
+          h(FieldError, null, {default: () => "Enter a valid email."}),
+        ],
+      },
     });
     const label = wrapper.get("label");
     const input = wrapper.get("input");
@@ -68,11 +68,8 @@ describe("Input", () => {
     const wrapper = mount(TextField, {
       props: {isDisabled: true},
       slots: {
-        default: () => [
-          h(Label, null, {default: () => "Name"}),
-          h(Input)
-        ]
-      }
+        default: () => [h(Label, null, {default: () => "Name"}), h(Input)],
+      },
     });
 
     expect(wrapper.get("input").attributes("disabled")).toBeDefined();

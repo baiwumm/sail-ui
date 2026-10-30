@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import {useFocusRing, useHover} from "@sail-ui/primitives";
 import {cx, listboxItemVariants} from "@sail-ui/styles";
-import {
-  injectSelectRootContext,
-  SelectItem as SelectItemPrimitive,
-  SelectItemText
-} from "reka-ui";
+import {injectSelectRootContext, SelectItem as SelectItemPrimitive, SelectItemText} from "reka-ui";
 import {computed, provide, ref, useAttrs} from "vue";
 
 import {selectItemContextKey, type SelectItemContext} from "./context";
@@ -15,16 +11,14 @@ defineOptions({name: "SailSelectItem", inheritAttrs: false});
 
 const props = withDefaults(defineProps<SelectItemProps>(), {
   isDisabled: false,
-  variant: "default"
+  variant: "default",
 });
 
 const attrs = useAttrs();
 const rootContext = injectSelectRootContext();
 const itemRef = ref<HTMLDivElement | null>(null);
 
-const isDisabled = computed(
-  () => props.isDisabled || Boolean(rootContext.disabled?.value)
-);
+const isDisabled = computed(() => props.isDisabled || Boolean(rootContext.disabled?.value));
 
 function matchesValue(value: unknown, currentValue: unknown, by: typeof rootContext.by) {
   if (value === undefined || currentValue === undefined) {
@@ -40,32 +34,34 @@ function matchesValue(value: unknown, currentValue: unknown, by: typeof rootCont
   }
 
   if (typeof by === "string") {
-    return (value as Record<string, unknown>)?.[by] === (currentValue as Record<string, unknown>)?.[by];
+    return (
+      (value as Record<string, unknown>)?.[by] === (currentValue as Record<string, unknown>)?.[by]
+    );
   }
 
   return JSON.stringify(value) === JSON.stringify(currentValue);
 }
 
 const isSelected = computed(() =>
-  matchesValue(rootContext.modelValue.value, props.value, rootContext.by)
+  matchesValue(rootContext.modelValue.value, props.value, rootContext.by),
 );
 
 provide<SelectItemContext>(selectItemContextKey, {
   isSelected,
-  variant: computed(() => props.variant)
+  variant: computed(() => props.variant),
 });
 
 const {isHovered} = useHover(itemRef, {isDisabled});
 const {isFocused, isFocusVisible} = useFocusRing(itemRef, {isDisabled});
 
 const classes = computed(() =>
-  cx(listboxItemVariants({variant: props.variant}).item(), attrs.class as string | undefined)
+  cx(listboxItemVariants({variant: props.variant}).item(), attrs.class as string | undefined),
 );
 </script>
 
 <template>
   <SelectItemPrimitive
-    v-slot="{ selected }"
+    v-slot="{selected}"
     as-child
     :disabled="isDisabled"
     :text-value="textValue"

@@ -11,13 +11,13 @@ import type {ChipRootProps} from "./types";
 defineOptions({name: "SailChip", inheritAttrs: false});
 
 const props = withDefaults(defineProps<ChipRootProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();
 const componentSlots = useSlots() as Slots;
 const slots = computed(() =>
-  chipVariants({color: props.color, size: props.size, variant: props.variant})
+  chipVariants({color: props.color, size: props.size, variant: props.variant}),
 );
 const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
 
@@ -35,13 +35,7 @@ function renderChildren(): VNode[] {
 </script>
 
 <template>
-  <Primitive
-    v-bind="$attrs"
-    :as="as"
-    :as-child="asChild"
-    :class="classes"
-    :data-slot="'chip'"
-  >
+  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes" :data-slot="'chip'">
     <RenderNodes :render="renderChildren" />
   </Primitive>
 </template>

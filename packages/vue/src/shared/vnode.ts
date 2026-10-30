@@ -17,11 +17,7 @@ export function isRenderableVNode(node: VNode): boolean {
     return false;
   }
 
-  return !(
-    node.type === Text &&
-    typeof node.children === "string" &&
-    node.children.trim() === ""
-  );
+  return !(node.type === Text && typeof node.children === "string" && node.children.trim() === "");
 }
 
 export function hasSlotContent(slot?: Slot): boolean {
@@ -57,10 +53,10 @@ export const RenderNodes = defineComponent({
   props: {
     render: {
       type: Function as PropType<() => VNode | VNode[]>,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
     return () => props.render();
-  }
+  },
 });

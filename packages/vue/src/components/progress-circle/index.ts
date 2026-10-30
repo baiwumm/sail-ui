@@ -7,7 +7,7 @@ const ProgressCircle = Object.assign(ProgressCircleRoot, {
   Root: ProgressCircleRoot,
   Track: ProgressCircleTrack,
   TrackCircle: ProgressCircleTrackCircle,
-  FillCircle: ProgressCircleFillCircle
+  FillCircle: ProgressCircleFillCircle,
 });
 
 export {
@@ -15,13 +15,13 @@ export {
   ProgressCircleRoot,
   ProgressCircleTrack,
   ProgressCircleTrackCircle,
-  ProgressCircleFillCircle
+  ProgressCircleFillCircle,
 };
 export type {
   ProgressCircleRootProps,
   ProgressCircleRootProps as ProgressCircleProps,
   ProgressCircleTrackProps,
   ProgressCircleTrackCircleProps,
-  ProgressCircleFillCircleProps
+  ProgressCircleFillCircleProps,
 } from "./types";
 export {progressCircleVariants, type ProgressCircleVariants} from "@sail-ui/styles";

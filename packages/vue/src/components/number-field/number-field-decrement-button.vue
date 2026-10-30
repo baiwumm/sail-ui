@@ -13,9 +13,7 @@ defineProps<NumberFieldButtonProps>();
 
 const {className, forwarded} = useForwardedAttrs();
 
-const classes = computed(() =>
-  cx(numberFieldVariants().decrementButton(), className.value)
-);
+const classes = computed(() => cx(numberFieldVariants().decrementButton(), className.value));
 </script>
 
 <template>

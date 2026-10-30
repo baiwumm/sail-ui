@@ -29,35 +29,35 @@ HeroUI 的视觉一致性建立在 9,959 行 CSS 上。CSS 依赖 `data-*` 属�
 
 ### 实际别名表（生成器输出）
 
-| 上游需要 | owner | 生成策略 |
-|---|---|---|
-| `data-hovered="true"` | `compat` | 追加 `:hover`；组件另用 `useHover` 补齐 |
-| `data-pressed="true"` | `compat` | 追加 `:active`、`[data-state="pressed"]`；组件另用 `usePress` |
-| `data-focus="true"` | `compat` | 追加 `[data-highlighted]`（Reka 的活动集合项） |
-| `data-focused="true"` | `component` | 不生成别名；`useFocusRing` / Reka FieldRoot 发射 presence |
-| `data-focus-visible="true"` | `compat` | 追加 `:focus-visible`；跳过 `:not()` 内和同组已含该伪类的选择器 |
-| `data-focus-within="true"` | `compat` | 追加 `:focus-within` |
-| `data-selected="true"` | `compat` | 追加 `[data-state="checked"]`、`[data-state="on"]` |
-| `data-open="true"` | `compat` | 追加 `[data-state="open"]`；trigger 同时补 `data-open` |
-| `data-expanded="true"` | `compat` | 追加 `[data-state="open"]`；`except: ["sheet", "toast"]`，这两个自绘表面自己设置 |
-| `data-disabled="true"` | `compat` | 追加 `[data-disabled]`（presence） |
-| `data-invalid="true"` | `compat` | 追加 `[data-invalid]`；字段发射 presence 形式 |
-| `data-indeterminate="true"` | `compat` | 追加 `[data-state="indeterminate"]` |
-| `data-outside-month="true"` | `compat` | 追加 `[data-outside-view]` |
-| `data-entering` / `data-exiting` | `component` | 自研覆盖层状态机直接设置 |
-| `data-placement` | `component` | 组件根据 props 直接设置；不是 Floating UI 的 `data-side` |
-| `data-slot` | `component` | 组件硬编码 |
+| 上游需要                         | owner       | 生成策略                                                                         |
+| -------------------------------- | ----------- | -------------------------------------------------------------------------------- |
+| `data-hovered="true"`            | `compat`    | 追加 `:hover`；组件另用 `useHover` 补齐                                          |
+| `data-pressed="true"`            | `compat`    | 追加 `:active`、`[data-state="pressed"]`；组件另用 `usePress`                    |
+| `data-focus="true"`              | `compat`    | 追加 `[data-highlighted]`（Reka 的活动集合项）                                   |
+| `data-focused="true"`            | `component` | 不生成别名；`useFocusRing` / Reka FieldRoot 发射 presence                        |
+| `data-focus-visible="true"`      | `compat`    | 追加 `:focus-visible`；跳过 `:not()` 内和同组已含该伪类的选择器                  |
+| `data-focus-within="true"`       | `compat`    | 追加 `:focus-within`                                                             |
+| `data-selected="true"`           | `compat`    | 追加 `[data-state="checked"]`、`[data-state="on"]`                               |
+| `data-open="true"`               | `compat`    | 追加 `[data-state="open"]`；trigger 同时补 `data-open`                           |
+| `data-expanded="true"`           | `compat`    | 追加 `[data-state="open"]`；`except: ["sheet", "toast"]`，这两个自绘表面自己设置 |
+| `data-disabled="true"`           | `compat`    | 追加 `[data-disabled]`（presence）                                               |
+| `data-invalid="true"`            | `compat`    | 追加 `[data-invalid]`；字段发射 presence 形式                                    |
+| `data-indeterminate="true"`      | `compat`    | 追加 `[data-state="indeterminate"]`                                              |
+| `data-outside-month="true"`      | `compat`    | 追加 `[data-outside-view]`                                                       |
+| `data-entering` / `data-exiting` | `component` | 自研覆盖层状态机直接设置                                                         |
+| `data-placement`                 | `component` | 组件根据 props 直接设置；不是 Floating UI 的 `data-side`                         |
+| `data-slot`                      | `component` | 组件硬编码                                                                       |
 
 ### 属性归属清单（防回归）
 
 上游 CSS 目前出现 65 种 `data-*` 选择器。每个属性必须在 `packages/styles/contracts/attributes.json` 中声明**恰好一个** owner，`manifest.json` 记录实际分布：
 
-| owner | 数量 | 含义 |
-|---|---|---|
-| `compat` | 12 | 生成选择器别名 |
-| `component` | 52 | Vue 组件显式发射（`data-slot`、`data-*` 状态、`data-theme` 等） |
-| `native` | 0 | 上游已有原生回退，无需额外处理；当前所有回退都通过 `compat` 追加原生伪类实现，因此计数为 0 |
-| `reka` | 1 | `data-orientation`，Reka 原样发射 |
+| owner       | 数量 | 含义                                                                                       |
+| ----------- | ---- | ------------------------------------------------------------------------------------------ |
+| `compat`    | 12   | 生成选择器别名                                                                             |
+| `component` | 52   | Vue 组件显式发射（`data-slot`、`data-*` 状态、`data-theme` 等）                            |
+| `native`    | 0    | 上游已有原生回退，无需额外处理；当前所有回退都通过 `compat` 追加原生伪类实现，因此计数为 0 |
+| `reka`      | 1    | `data-orientation`，Reka 原样发射                                                          |
 
 条目格式：
 
@@ -66,7 +66,11 @@ HeroUI 的视觉一致性建立在 9,959 行 CSS 上。CSS 依赖 `data-*` 属�
   "data-hovered": {"owner": "compat", "map": [":hover"]},
   "data-focus-visible": {"owner": "compat", "map": [":focus-visible"]},
   "data-selected": {"owner": "compat", "map": ["[data-state=\"checked\"]", "[data-state=\"on\"]"]},
-  "data-expanded": {"owner": "compat", "map": ["[data-state=\"open\"]"], "except": ["sheet", "toast"]},
+  "data-expanded": {
+    "owner": "compat",
+    "map": ["[data-state=\"open\"]"],
+    "except": ["sheet", "toast"]
+  },
   "data-slot": {"owner": "component"},
   "data-entering": {"owner": "component"},
   "data-placement": {"owner": "component"}

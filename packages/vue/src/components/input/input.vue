@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   type: "text",
   fullWidth: false,
   isDisabled: false,
-  isInvalid: false
+  isInvalid: false,
 });
 
 const model = defineModel<string | number | undefined>();
@@ -29,10 +29,7 @@ if (model.value === undefined && props.defaultValue !== undefined) {
 const variant = computed(() => props.variant ?? textField?.variant.value);
 
 const classes = computed(() =>
-  cx(
-    inputVariants({fullWidth: props.fullWidth, variant: variant.value}),
-    className.value
-  )
+  cx(inputVariants({fullWidth: props.fullWidth, variant: variant.value}), className.value),
 );
 
 const isInvalid = computed(() => Boolean(field?.invalid.value) || props.isInvalid);
@@ -100,5 +97,5 @@ function handleInput(event: Event) {
     :type="type"
     :value="model"
     @input="handleInput"
-  >
+  />
 </template>

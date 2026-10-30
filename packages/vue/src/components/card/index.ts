@@ -11,7 +11,7 @@ const Card = Object.assign(CardRoot, {
   Title: CardTitle,
   Description: CardDescription,
   Content: CardContent,
-  Footer: CardFooter
+  Footer: CardFooter,
 });
 
 export {Card, CardRoot, CardHeader, CardTitle, CardDescription, CardContent, CardFooter};
@@ -22,6 +22,6 @@ export type {
   CardTitleProps,
   CardDescriptionProps,
   CardContentProps,
-  CardFooterProps
+  CardFooterProps,
 } from "./types";
 export {cardVariants, type CardVariants} from "@sail-ui/styles";

@@ -7,7 +7,7 @@ const Fieldset = Object.assign(FieldsetRoot, {
   Root: FieldsetRoot,
   Legend: FieldsetLegend,
   Group: FieldGroup,
-  Actions: FieldsetActions
+  Actions: FieldsetActions,
 });
 
 export {Fieldset, FieldsetRoot, FieldsetLegend, FieldGroup, FieldsetActions};
@@ -16,6 +16,6 @@ export type {
   FieldsetRootProps as FieldsetProps,
   FieldsetLegendProps,
   FieldGroupProps,
-  FieldsetActionsProps
+  FieldsetActionsProps,
 } from "./types";
 export {fieldsetVariants, type FieldsetVariants} from "@sail-ui/styles";

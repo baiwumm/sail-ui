@@ -11,7 +11,7 @@ import type {BadgeRootProps} from "./types";
 defineOptions({name: "SailBadge", inheritAttrs: false});
 
 const props = withDefaults(defineProps<BadgeRootProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();
@@ -21,8 +21,8 @@ const slots = computed(() =>
     color: props.color,
     placement: props.placement,
     size: props.size,
-    variant: props.variant
-  })
+    variant: props.variant,
+  }),
 );
 const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
 
@@ -41,13 +41,7 @@ function renderChildren(): VNode[] {
 </script>
 
 <template>
-  <Primitive
-    v-bind="$attrs"
-    :as="as"
-    :as-child="asChild"
-    :class="classes"
-    :data-slot="'badge'"
-  >
+  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes" :data-slot="'badge'">
     <RenderNodes :render="renderChildren" />
   </Primitive>
 </template>

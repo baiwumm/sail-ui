@@ -30,51 +30,75 @@ const Page = defineComponent({
     return () =>
       h("main", [
         h(Button, {variant: "primary"}, {default: () => "SSR Button"}),
-        h(TextField, {fullWidth: true}, {
-          default: () => [
-            h(Label, null, {default: () => "Name"}),
-            h(Input, {modelValue: name.value, placeholder: "Your name"}),
-            h(Description, null, {default: () => "Displayed on your profile."})
-          ]
-        }),
-        h(Modal, {open: open.value}, {
-          default: () => [
-            h(ModalTrigger, null, {default: () => "Open Modal"}),
-            h(ModalBackdrop, null, {
-              default: () => [
-                h(ModalDialog, null, {
-                  default: () => [
-                    h(ModalHeading, null, {default: () => "SSR modal"}),
-                    h(ModalBody, null, {default: () => "Body"})
-                  ]
-                })
-              ]
-            })
-          ]
-        }),
-        h(Select, {modelValue: state.value, placeholder: "Select one"}, {
-          default: () => [
-            h(SelectTrigger, {"aria-label": "State"}, {
-              default: () => [h(SelectValue), h(SelectIndicator)]
-            }),
-            h(SelectPopover, null, {
-              default: () => [
-                h(SelectListBox, null, {
-                  default: () => [
-                    h(SelectItem, {textValue: "California", value: "california"}, {
-                      default: () => "California"
-                    }),
-                    h(SelectItem, {textValue: "Texas", value: "texas"}, {
-                      default: () => "Texas"
-                    })
-                  ]
-                })
-              ]
-            })
-          ]
-        })
+        h(
+          TextField,
+          {fullWidth: true},
+          {
+            default: () => [
+              h(Label, null, {default: () => "Name"}),
+              h(Input, {modelValue: name.value, placeholder: "Your name"}),
+              h(Description, null, {default: () => "Displayed on your profile."}),
+            ],
+          },
+        ),
+        h(
+          Modal,
+          {open: open.value},
+          {
+            default: () => [
+              h(ModalTrigger, null, {default: () => "Open Modal"}),
+              h(ModalBackdrop, null, {
+                default: () => [
+                  h(ModalDialog, null, {
+                    default: () => [
+                      h(ModalHeading, null, {default: () => "SSR modal"}),
+                      h(ModalBody, null, {default: () => "Body"}),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          },
+        ),
+        h(
+          Select,
+          {modelValue: state.value, placeholder: "Select one"},
+          {
+            default: () => [
+              h(
+                SelectTrigger,
+                {"aria-label": "State"},
+                {
+                  default: () => [h(SelectValue), h(SelectIndicator)],
+                },
+              ),
+              h(SelectPopover, null, {
+                default: () => [
+                  h(SelectListBox, null, {
+                    default: () => [
+                      h(
+                        SelectItem,
+                        {textValue: "California", value: "california"},
+                        {
+                          default: () => "California",
+                        },
+                      ),
+                      h(
+                        SelectItem,
+                        {textValue: "Texas", value: "texas"},
+                        {
+                          default: () => "Texas",
+                        },
+                      ),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          },
+        ),
       ]);
-  }
+  },
 });
 
 describe("SSR", () => {

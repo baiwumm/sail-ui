@@ -8,7 +8,7 @@ import type {HeaderRootProps} from "./types";
 defineOptions({name: "SailHeader", inheritAttrs: false});
 
 withDefaults(defineProps<HeaderRootProps>(), {
-  as: "header"
+  as: "header",
 });
 
 const attrs = useAttrs();
@@ -16,13 +16,7 @@ const classes = computed(() => cx(headerVariants(), attrs.class as string | unde
 </script>
 
 <template>
-  <Primitive
-    v-bind="$attrs"
-    :as="as"
-    :as-child="asChild"
-    :class="classes"
-    :data-slot="'header'"
-  >
+  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes" :data-slot="'header'">
     <slot />
   </Primitive>
 </template>

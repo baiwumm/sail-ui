@@ -9,7 +9,7 @@ import type {AlertDescriptionProps} from "./types";
 defineOptions({name: "SailAlertDescription", inheritAttrs: false});
 
 withDefaults(defineProps<AlertDescriptionProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();

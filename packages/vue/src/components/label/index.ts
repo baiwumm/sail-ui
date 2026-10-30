@@ -1,7 +1,7 @@
 import LabelRoot from "./label.vue";
 
 const Label = Object.assign(LabelRoot, {
-  Root: LabelRoot
+  Root: LabelRoot,
 });
 
 export {Label, LabelRoot};

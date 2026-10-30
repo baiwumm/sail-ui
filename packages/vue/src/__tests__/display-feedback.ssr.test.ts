@@ -2,7 +2,13 @@ import {renderSSR} from "@sail-ui/testing";
 import {describe, expect, it} from "vitest";
 import {defineComponent, h} from "vue";
 
-import {Alert, AlertContent, AlertDescription, AlertIndicator, AlertTitle} from "../components/alert";
+import {
+  Alert,
+  AlertContent,
+  AlertDescription,
+  AlertIndicator,
+  AlertTitle,
+} from "../components/alert";
 import {Avatar, AvatarFallback, AvatarImage} from "../components/avatar";
 import {AvatarGroup, AvatarGroupCount} from "../components/avatar-group";
 import {Badge, BadgeAnchor} from "../components/badge";
@@ -13,7 +19,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "../components/card";
 import {Chip} from "../components/chip";
 import {CloseButton} from "../components/close-button";
@@ -27,12 +33,17 @@ import {Input, TextField} from "../components/input";
 import {Kbd, KbdAbbr, KbdContent} from "../components/kbd";
 import {Label} from "../components/label";
 import {Link, LinkIcon} from "../components/link";
-import {ProgressBar, ProgressBarFill, ProgressBarOutput, ProgressBarTrack} from "../components/progress-bar";
+import {
+  ProgressBar,
+  ProgressBarFill,
+  ProgressBarOutput,
+  ProgressBarTrack,
+} from "../components/progress-bar";
 import {
   ProgressCircle,
   ProgressCircleFillCircle,
   ProgressCircleTrack,
-  ProgressCircleTrackCircle
+  ProgressCircleTrackCircle,
 } from "../components/progress-circle";
 import {Separator} from "../components/separator";
 import {Skeleton} from "../components/skeleton";
@@ -44,49 +55,57 @@ const Page = defineComponent({
   setup() {
     return () =>
       h("main", [
-        h(Alert, {status: "danger"}, {
-          default: () => [
-            h(AlertIndicator),
-            h(AlertContent, null, {
-              default: () => [
-                h(AlertTitle, null, {default: () => "Error"}),
-                h(AlertDescription, null, {default: () => "Retry later."})
-              ]
-            })
-          ]
-        }),
-        h(AvatarGroup, {max: 1}, {
-          default: () => [
-            h(Avatar, null, {
-              default: () => [
-                h(AvatarImage, {alt: "Ada", src: "https://example.com/ada.png"}),
-                h(AvatarFallback, null, {default: () => "AD"})
-              ]
-            }),
-            h(Avatar, null, {default: () => h(AvatarFallback, null, {default: () => "BE"})}),
-            h(AvatarGroupCount, null, {default: () => "9+"})
-          ]
-        }),
+        h(
+          Alert,
+          {status: "danger"},
+          {
+            default: () => [
+              h(AlertIndicator),
+              h(AlertContent, null, {
+                default: () => [
+                  h(AlertTitle, null, {default: () => "Error"}),
+                  h(AlertDescription, null, {default: () => "Retry later."}),
+                ],
+              }),
+            ],
+          },
+        ),
+        h(
+          AvatarGroup,
+          {max: 1},
+          {
+            default: () => [
+              h(Avatar, null, {
+                default: () => [
+                  h(AvatarImage, {alt: "Ada", src: "https://example.com/ada.png"}),
+                  h(AvatarFallback, null, {default: () => "AD"}),
+                ],
+              }),
+              h(Avatar, null, {default: () => h(AvatarFallback, null, {default: () => "BE"})}),
+              h(AvatarGroupCount, null, {default: () => "9+"}),
+            ],
+          },
+        ),
         h(BadgeAnchor, null, {
-          default: () => ["Inbox", h(Badge, null, {default: () => "3"})]
+          default: () => ["Inbox", h(Badge, null, {default: () => "3"})],
         }),
         h(Breadcrumbs, null, {
           default: () => [
             h(BreadcrumbsItem, {href: "/"}, {default: () => "Home"}),
-            h(BreadcrumbsItem, {href: "/docs"}, {default: () => "Docs"})
-          ]
+            h(BreadcrumbsItem, {href: "/docs"}, {default: () => "Docs"}),
+          ],
         }),
         h(Card, null, {
           default: () => [
             h(CardHeader, null, {
               default: () => [
                 h(CardTitle, null, {default: () => "Title"}),
-                h(CardDescription, null, {default: () => "Description"})
-              ]
+                h(CardDescription, null, {default: () => "Description"}),
+              ],
             }),
             h(CardContent, null, {default: () => "Body"}),
-            h(CardFooter, null, {default: () => "Footer"})
-          ]
+            h(CardFooter, null, {default: () => "Footer"}),
+          ],
         }),
         h(Chip, null, {default: () => "Active"}),
         h(CloseButton),
@@ -98,42 +117,59 @@ const Page = defineComponent({
             h(FieldsetLegend, null, {default: () => "Address"}),
             h(FieldGroup, null, {
               default: () => [
-                h(TextField, {isInvalid: true}, {
-                  default: () => [
-                    h(Label, null, {default: () => "Email"}),
-                    h(Input),
-                    h(FieldError, null, {default: () => "Invalid email."})
-                  ]
-                })
-              ]
+                h(
+                  TextField,
+                  {isInvalid: true},
+                  {
+                    default: () => [
+                      h(Label, null, {default: () => "Email"}),
+                      h(Input),
+                      h(FieldError, null, {default: () => "Invalid email."}),
+                    ],
+                  },
+                ),
+              ],
             }),
-            h(FieldsetActions, null, {default: () => "Save"})
-          ]
+            h(FieldsetActions, null, {default: () => "Save"}),
+          ],
         }),
         h(Header, null, {default: () => "Header"}),
-        h(Kbd, null, {default: () => [h(KbdContent, null, {default: () => "K"}), h(KbdAbbr, {keyValue: "command"})]}),
-        h(Link, {href: "https://example.com"}, {default: () => ["Docs", h(LinkIcon)]}),
-        h(ProgressBar, {value: 40}, {
+        h(Kbd, null, {
           default: () => [
-            h(Label, null, {default: () => "Upload"}),
-            h(ProgressBarOutput),
-            h(ProgressBarTrack, null, {default: () => h(ProgressBarFill)})
-          ]
+            h(KbdContent, null, {default: () => "K"}),
+            h(KbdAbbr, {keyValue: "command"}),
+          ],
         }),
-        h(ProgressCircle, {value: 70}, {
-          default: () =>
-            h(ProgressCircleTrack, null, {
-              default: () => [h(ProgressCircleTrackCircle), h(ProgressCircleFillCircle)]
-            })
-        }),
+        h(Link, {href: "https://example.com"}, {default: () => ["Docs", h(LinkIcon)]}),
+        h(
+          ProgressBar,
+          {value: 40},
+          {
+            default: () => [
+              h(Label, null, {default: () => "Upload"}),
+              h(ProgressBarOutput),
+              h(ProgressBarTrack, null, {default: () => h(ProgressBarFill)}),
+            ],
+          },
+        ),
+        h(
+          ProgressCircle,
+          {value: 70},
+          {
+            default: () =>
+              h(ProgressCircleTrack, null, {
+                default: () => [h(ProgressCircleTrackCircle), h(ProgressCircleFillCircle)],
+              }),
+          },
+        ),
         h(Separator),
         h(Skeleton),
         h(Spinner),
         h(Surface, null, {default: () => "Surface"}),
         h(Typography, {type: "h2"}, {default: () => "Heading"}),
-        h(TypographyProse, null, {default: () => "Prose"})
+        h(TypographyProse, null, {default: () => "Prose"}),
       ]);
-  }
+  },
 });
 
 describe("T03 SSR", () => {
@@ -194,7 +230,7 @@ describe("T03 SSR", () => {
       "spinner-icon",
       "surface",
       "typography",
-      "prose"
+      "prose",
     ]) {
       expect(html, slot).toContain(`data-slot="${slot}"`);
     }

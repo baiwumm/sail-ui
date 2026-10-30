@@ -47,13 +47,13 @@ Read the full design in the [spec](./docs/spec/0001-heroui-v3-vue-port.spec.md) 
 
 ## Packages
 
-| Package | Purpose | Status |
-|---|---|---|
-| `@sail-ui/vue` | Vue 3 components, subpath exports (`@sail-ui/vue/button`) | Planned |
-| `@sail-ui/styles` | HeroUI CSS fork + generated `compat.css` | Planned |
-| `@sail-ui/primitives` | Shared composables for DOM-contract states | Planned |
-| `@sail-ui/nuxt` | Nuxt 4 module | Planned |
-| `@sail-ui/testing` | Contract checks, SSR smoke, visual-test helpers | Planned |
+| Package               | Purpose                                                   | Status  |
+| --------------------- | --------------------------------------------------------- | ------- |
+| `@sail-ui/vue`        | Vue 3 components, subpath exports (`@sail-ui/vue/button`) | Planned |
+| `@sail-ui/styles`     | HeroUI CSS fork + generated `compat.css`                  | Planned |
+| `@sail-ui/primitives` | Shared composables for DOM-contract states                | Planned |
+| `@sail-ui/nuxt`       | Nuxt 4 module                                             | Planned |
+| `@sail-ui/testing`    | Contract checks, SSR smoke, visual-test helpers           | Planned |
 
 Package names are not yet published on npm. Do not install these names until a release is announced.
 
@@ -92,9 +92,7 @@ const open = () => {
       <CardTitle>Sail with HeroUI styles</CardTitle>
       <CardDescription>The CSS and DOM contract stay identical.</CardDescription>
     </CardHeader>
-    <CardContent>
-      Vue 3 components, Reka UI behavior, Tailwind CSS v4.
-    </CardContent>
+    <CardContent> Vue 3 components, Reka UI behavior, Tailwind CSS v4. </CardContent>
     <CardFooter>
       <Button @press="open">Get started</Button>
     </CardFooter>
@@ -137,15 +135,15 @@ Sail UI targets all **84 public HeroUI v3 components** (86 stylesheets including
 
 ## Documentation
 
-| Document | Contents |
-|---|---|
-| [docs/README.md](./docs/README.md) | Documentation index |
-| [Spec](./docs/spec/0001-heroui-v3-vue-port.spec.md) | Scope, decisions, acceptance, risks |
-| [Tickets](./docs/spec/tickets/README.md) | Vertical slices + blocking edges |
-| [AGENTS.md](./AGENTS.md) | Rules for AI agents and contributors |
-| [GLOSSARY.md](./GLOSSARY.md) | Shared terminology |
-| [Migration guide](./docs/migration-from-heroui.md) | HeroUI React → Sail UI Vue |
-| [Upstream audit](./docs/research/heroui-v3-audit.md) | Measured evidence behind the design |
+| Document                                             | Contents                             |
+| ---------------------------------------------------- | ------------------------------------ |
+| [docs/README.md](./docs/README.md)                   | Documentation index                  |
+| [Spec](./docs/spec/0001-heroui-v3-vue-port.spec.md)  | Scope, decisions, acceptance, risks  |
+| [Tickets](./docs/spec/tickets/README.md)             | Vertical slices + blocking edges     |
+| [AGENTS.md](./AGENTS.md)                             | Rules for AI agents and contributors |
+| [GLOSSARY.md](./GLOSSARY.md)                         | Shared terminology                   |
+| [Migration guide](./docs/migration-from-heroui.md)   | HeroUI React → Sail UI Vue           |
+| [Upstream audit](./docs/research/heroui-v3-audit.md) | Measured evidence behind the design  |
 
 中文读者可从 [docs/README.md](./docs/README.md) 开始；核心设计与验收文档以中文为主，公开 README 以英文为主。
 

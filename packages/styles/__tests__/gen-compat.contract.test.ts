@@ -45,25 +45,23 @@ interface Manifest {
   upstreamFiles: {path: string; hash: string}[];
 }
 
-const manifest = JSON.parse(
-  readFileSync(join(packageRoot, "manifest.json"), "utf8")
-) as Manifest;
+const manifest = JSON.parse(readFileSync(join(packageRoot, "manifest.json"), "utf8")) as Manifest;
 const attributes = JSON.parse(
-  readFileSync(join(contractsRoot, "attributes.json"), "utf8")
+  readFileSync(join(contractsRoot, "attributes.json"), "utf8"),
 ) as Record<string, ManifestAttribute>;
-const scope = JSON.parse(
-  readFileSync(join(contractsRoot, "scope.json"), "utf8")
-) as {components: string[]};
-const pin = JSON.parse(
-  readFileSync(join(contractsRoot, "upstream.json"), "utf8")
-) as {version: string; commit: string};
+const scope = JSON.parse(readFileSync(join(contractsRoot, "scope.json"), "utf8")) as {
+  components: string[];
+};
+const pin = JSON.parse(readFileSync(join(contractsRoot, "upstream.json"), "utf8")) as {
+  version: string;
+  commit: string;
+};
 
 const normalizeNewlines = (value: string) => value.replace(/\r\n/g, "\n");
 const sha256 = (value: string) =>
   createHash("sha256").update(normalizeNewlines(value)).digest("hex");
 
-const ATTRIBUTE_PATTERN =
-  /\[(data-[a-z0-9-]+)(?:\s*[~|^$*]?=\s*(?:"[^"]*"|'[^']*'|[^\]]+))?\]/g;
+const ATTRIBUTE_PATTERN = /\[(data-[a-z0-9-]+)(?:\s*[~|^$*]?=\s*(?:"[^"]*"|'[^']*'|[^\]]+))?\]/g;
 
 function atRuleChain(rule: Rule) {
   const chain: string[] = [];
@@ -107,7 +105,7 @@ describe("compat generation contract", () => {
     const output = execFileSync(
       process.execPath,
       [join(packageRoot, "scripts", "gen-compat.mjs"), "--check"],
-      {cwd: packageRoot, encoding: "utf8", stdio: "pipe"}
+      {cwd: packageRoot, encoding: "utf8", stdio: "pipe"},
     );
 
     expect(output).toContain("gen-compat check passed");
@@ -140,11 +138,11 @@ describe("compat generation contract", () => {
       package: "@heroui/styles",
       version: "3.2.7",
       commit: "89cd95ec17dfbbf952ef0d61af300f287aec223d",
-      repository: "https://github.com/heroui-inc/heroui"
+      repository: "https://github.com/heroui-inc/heroui",
     });
     expect(manifest.upstream).toEqual({
       version: pin.version,
-      commit: pin.commit
+      commit: pin.commit,
     });
   });
 
@@ -156,7 +154,10 @@ describe("compat generation contract", () => {
     expect(manifest.upstreamFiles).toHaveLength(96);
 
     for (const file of files) {
-      const path = file.slice(upstreamRoot.length + 1).split("\\").join("/");
+      const path = file
+        .slice(upstreamRoot.length + 1)
+        .split("\\")
+        .join("/");
 
       expect(sha256(readFileSync(file, "utf8")), path).toBe(recorded.get(path));
     }
@@ -178,10 +179,10 @@ describe("compat generation contract", () => {
   it("appends aliases in place without reordering rules or declarations", () => {
     for (const file of manifest.files.filter((entry) => entry.scoped)) {
       const source = postcss.parse(
-        normalizeNewlines(readFileSync(join(upstreamRoot, file.path), "utf8"))
+        normalizeNewlines(readFileSync(join(upstreamRoot, file.path), "utf8")),
       );
       const generated = postcss.parse(
-        normalizeNewlines(readFileSync(join(generatedRoot, file.path), "utf8"))
+        normalizeNewlines(readFileSync(join(generatedRoot, file.path), "utf8")),
       );
       const sourceRules: Rule[] = [];
       const generatedRules: Rule[] = [];
@@ -196,10 +197,10 @@ describe("compat generation contract", () => {
 
         expect(generatedRule, `${file.path} rule ${index}`).toBeDefined();
         expect(atRuleChain(generatedRule!), `${file.path} rule ${index} at-rules`).toBe(
-          atRuleChain(sourceRule)
+          atRuleChain(sourceRule),
         );
         expect(declarationText(generatedRule!), `${file.path} rule ${index} declarations`).toBe(
-          declarationText(sourceRule)
+          declarationText(sourceRule),
         );
 
         const sourceSelectors = sourceRule.selectors;
@@ -207,7 +208,7 @@ describe("compat generation contract", () => {
 
         expect(
           generatedSelectors.slice(0, sourceSelectors.length),
-          `${file.path} rule ${index} selector order`
+          `${file.path} rule ${index} selector order`,
         ).toEqual(sourceSelectors);
       });
     }
@@ -215,10 +216,7 @@ describe("compat generation contract", () => {
 
   it("reports alias and owner totals that match the manifest", () => {
     const perFile = manifest.files.reduce((total, file) => total + file.aliases, 0);
-    const ownerTotal = Object.values(manifest.owners).reduce(
-      (total, count) => total + count,
-      0
-    );
+    const ownerTotal = Object.values(manifest.owners).reduce((total, count) => total + count, 0);
 
     expect(perFile).toBe(manifest.counts.aliases);
     expect(perFile).toBeGreaterThan(0);
@@ -226,13 +224,13 @@ describe("compat generation contract", () => {
       upstreamCssFiles: 96,
       componentCssFiles: 86,
       scopedComponents: 85,
-      attributes: 65
+      attributes: 65,
     });
     expect(manifest.owners).toEqual({
       compat: 12,
       component: 52,
       native: 0,
-      reka: 1
+      reka: 1,
     });
     expect(ownerTotal).toBe(manifest.counts.attributes);
   });
@@ -288,7 +286,7 @@ describe("compat generation contract", () => {
     expect(manifest.dataSlots).toEqual({
       total: 334,
       components: 81,
-      hash: sha256(text)
+      hash: sha256(text),
     });
   });
 });
@@ -300,17 +298,15 @@ describe("compat generation fault injection", () => {
     try {
       appendFileSync(
         join(fixture.root, "upstream", "components", "button.css"),
-        "\n.button[data-foo] { color: red; }\n"
+        "\n.button[data-foo] { color: red; }\n",
       );
 
       const result = fixture.run("gen-compat.mjs", ["--check"]);
 
       expect(result.status).toBe(1);
+      expect(result.stderr).toContain("Unknown data attribute: data-foo (components/button.css)");
       expect(result.stderr).toContain(
-        "Unknown data attribute: data-foo (components/button.css)"
-      );
-      expect(result.stderr).toContain(
-        "Choose an owner in packages/styles/contracts/attributes.json"
+        "Choose an owner in packages/styles/contracts/attributes.json",
       );
     } finally {
       fixture.dispose();
@@ -323,7 +319,7 @@ describe("compat generation fault injection", () => {
     try {
       appendFileSync(
         join(fixture.root, "generated", "components", "button.css"),
-        "\n/* hand edit */\n"
+        "\n/* hand edit */\n",
       );
 
       const result = fixture.run("gen-compat.mjs", ["--check"]);
@@ -344,9 +340,7 @@ describe("compat generation fault injection", () => {
       const result = fixture.run("gen-compat.mjs", ["--check"]);
 
       expect(result.status).toBe(1);
-      expect(result.stderr).toContain(
-        "manifest.json does not match the upstream snapshot"
-      );
+      expect(result.stderr).toContain("manifest.json does not match the upstream snapshot");
     } finally {
       fixture.dispose();
     }
@@ -363,7 +357,7 @@ describe("compat generation fault injection", () => {
 
       expect(result.status).toBe(1);
       expect(result.stderr).toContain(
-        "generated/components/orphan.css is not generated by the current snapshot"
+        "generated/components/orphan.css is not generated by the current snapshot",
       );
     } finally {
       fixture.dispose();

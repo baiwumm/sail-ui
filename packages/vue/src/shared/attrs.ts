@@ -21,6 +21,6 @@ export function useForwardedAttrs() {
   return {
     attrs,
     forwarded,
-    className: computed(() => attrs.class as string | undefined)
+    className: computed(() => attrs.class as string | undefined),
   };
 }

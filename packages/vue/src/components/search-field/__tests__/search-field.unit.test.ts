@@ -20,24 +20,24 @@ describe("SearchField", () => {
                   default: () => [
                     h(SearchFieldSearchIcon),
                     h(SearchFieldInput),
-                    h(SearchFieldClearButton)
-                  ]
-                })
-              ]
+                    h(SearchFieldClearButton),
+                  ],
+                }),
+              ],
             });
-        }
-      })
+        },
+      }),
     );
 
     expect(wrapper.get('[data-slot="search-field"]').classes()).toContain("search-field--primary");
     expect(wrapper.get('[data-slot="search-field-group"]').classes()).toContain(
-      "search-field__group"
+      "search-field__group",
     );
     expect(wrapper.get('[data-slot="search-field-input"]').classes()).toContain(
-      "search-field__input"
+      "search-field__input",
     );
     expect(wrapper.get('[data-slot="search-field-search-icon"]').classes()).toContain(
-      "search-field__search-icon"
+      "search-field__search-icon",
     );
     expect(wrapper.get('[data-slot="search-field-clear-button"]').attributes("slot")).toBe("clear");
   });
@@ -53,19 +53,19 @@ describe("SearchField", () => {
               SearchField,
               {
                 modelValue: value.value,
-                "onUpdate:modelValue": (next: string) => (value.value = next)
+                "onUpdate:modelValue": (next: string) => (value.value = next),
               },
               {
                 default: () => [
                   h(SearchFieldGroup, null, {
-                    default: () => [h(SearchFieldInput), h(SearchFieldClearButton)]
-                  })
-                ]
-              }
+                    default: () => [h(SearchFieldInput), h(SearchFieldClearButton)],
+                  }),
+                ],
+              },
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     await wrapper.get('[data-slot="search-field-clear-button"]').trigger("click");
@@ -82,8 +82,8 @@ describe("SearchField", () => {
       attachTo: document.body,
       props: {modelValue: "sail"},
       slots: {
-        default: () => h(SearchFieldGroup, null, {default: () => [h(SearchFieldInput)]})
-      }
+        default: () => h(SearchFieldGroup, null, {default: () => [h(SearchFieldInput)]}),
+      },
     });
 
     await wrapper.get('[data-slot="search-field-input"]').trigger("keydown", {key: "Enter"});
@@ -100,8 +100,8 @@ describe("SearchField", () => {
       attachTo: document.body,
       props: {modelValue: "sail"},
       slots: {
-        default: () => h(SearchFieldGroup, null, {default: () => [h(SearchFieldInput)]})
-      }
+        default: () => h(SearchFieldGroup, null, {default: () => [h(SearchFieldInput)]}),
+      },
     });
 
     const input = wrapper.get('[data-slot="search-field-input"]');
@@ -120,18 +120,16 @@ describe("SearchField", () => {
         setup() {
           return () =>
             h(SearchField, null, {
-              default: () => [
-                h(SearchFieldGroup, null, {default: () => [h(SearchFieldInput)]})
-              ]
+              default: () => [h(SearchFieldGroup, null, {default: () => [h(SearchFieldInput)]})],
             });
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
     const group = wrapper.get('[data-slot="search-field-group"]');
 
     group.element.dispatchEvent(
-      new PointerEvent("pointerenter", {bubbles: true, pointerType: "mouse", pointerId: 1})
+      new PointerEvent("pointerenter", {bubbles: true, pointerType: "mouse", pointerId: 1}),
     );
     await nextTick();
 

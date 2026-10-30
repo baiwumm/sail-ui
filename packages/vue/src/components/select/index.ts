@@ -14,7 +14,7 @@ const Select = Object.assign(SelectRoot, {
   Value: SelectValue,
   Indicator: SelectIndicator,
   ClearButton: SelectClearButton,
-  Popover: SelectPopover
+  Popover: SelectPopover,
 });
 
 export {
@@ -27,7 +27,7 @@ export {
   SelectPopover,
   SelectListBox,
   SelectItem,
-  SelectItemIndicator
+  SelectItemIndicator,
 };
 
 export type {
@@ -38,7 +38,7 @@ export type {
   SelectPopoverProps,
   SelectListBoxProps,
   SelectItemProps,
-  SelectItemIndicatorProps
+  SelectItemIndicatorProps,
 } from "./types";
 
 export {
@@ -47,5 +47,5 @@ export {
   selectVariants,
   type ListBoxItemVariants,
   type ListBoxVariants,
-  type SelectVariants
+  type SelectVariants,
 } from "@sail-ui/styles";

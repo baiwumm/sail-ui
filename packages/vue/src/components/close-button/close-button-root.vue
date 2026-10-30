@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<CloseButtonRootProps>(), {
   isDisabled: false,
   isPending: false,
   type: "button",
-  variant: "default"
+  variant: "default",
 });
 
 const attrs = useAttrs();
@@ -22,7 +22,7 @@ const buttonRef = ref<HTMLButtonElement | null>(null);
 const isDisabled = computed(() => props.isDisabled);
 const isInteractiveDisabled = computed(() => props.isDisabled || props.isPending);
 const classes = computed(() =>
-  cx(closeButtonVariants({variant: props.variant}), attrs.class as string | undefined)
+  cx(closeButtonVariants({variant: props.variant}), attrs.class as string | undefined),
 );
 const ariaLabel = computed(() => {
   const label = attrs["aria-label"] as string | undefined;
@@ -59,9 +59,6 @@ const {isFocused, isFocusVisible} = useFocusRing(buttonRef, {isDisabled: isInter
     :type="type"
   >
     <slot v-if="hasCustomContent" />
-    <CloseIcon
-      v-else
-      data-slot="close-button-icon"
-    />
+    <CloseIcon v-else data-slot="close-button-icon" />
   </button>
 </template>

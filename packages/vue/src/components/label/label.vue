@@ -19,25 +19,18 @@ const classes = computed(() =>
     labelVariants({
       isDisabled: props.isDisabled || field?.disabled.value || false,
       isInvalid: props.isInvalid || field?.invalid.value || false,
-      isRequired: props.isRequired || field?.required.value || false
+      isRequired: props.isRequired || field?.required.value || false,
     }),
-    attrs.class as string | undefined
-  )
+    attrs.class as string | undefined,
+  ),
 );
 
 const resolvedId = computed(() => (attrs.id as string | undefined) ?? labelContext?.id);
-const renderAsSpan = computed(
-  () => !field && labelContext?.elementType === "span"
-);
+const renderAsSpan = computed(() => !field && labelContext?.elementType === "span");
 </script>
 
 <template>
-  <FieldLabel
-    v-if="field"
-    v-bind="$attrs"
-    :class="classes"
-    :data-slot="'label'"
-  >
+  <FieldLabel v-if="field" v-bind="$attrs" :class="classes" :data-slot="'label'">
     <slot />
   </FieldLabel>
   <span
@@ -49,13 +42,7 @@ const renderAsSpan = computed(
   >
     <slot />
   </span>
-  <label
-    v-else
-    v-bind="$attrs"
-    :id="resolvedId"
-    :class="classes"
-    :data-slot="'label'"
-  >
+  <label v-else v-bind="$attrs" :id="resolvedId" :class="classes" :data-slot="'label'">
     <slot />
   </label>
 </template>

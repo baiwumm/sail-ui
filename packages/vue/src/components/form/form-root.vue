@@ -8,7 +8,7 @@ import type {FormRootProps} from "./types";
 defineOptions({name: "SailForm", inheritAttrs: false});
 
 withDefaults(defineProps<FormRootProps>(), {
-  noValidate: false
+  noValidate: false,
 });
 
 const emit = defineEmits<{

@@ -26,16 +26,16 @@ HeroUI React 的 API 建立在 RAC 之上：`isDisabled`、`isRequired`、`isInv
 
 ### Events
 
-| HeroUI React | Sail UI Vue | 说明 |
-|---|---|---|
-| `onPress` | `@press` | 指针 + 键盘激活的统一事件，payload `PressEvent` |
-| `onClick` | `@click` | 原生点击继续透传 |
-| `onSelectionChange` | `@update:model-value` | `v-model` 的标准事件；另发 `@selection-change` 便于语义化监听 |
-| `onOpenChange` | `@update:open` | `v-model:open` |
-| `onValueChange` | `@update:model-value` | 输入类组件 |
-| `onExpandedChange` | `@update:expanded-keys` | Accordion / DisclosureGroup |
-| `onSortChange` | `@update:sort-descriptor` | Table |
-| `onLoadMore` | `@load-more` | Table |
+| HeroUI React        | Sail UI Vue               | 说明                                                          |
+| ------------------- | ------------------------- | ------------------------------------------------------------- |
+| `onPress`           | `@press`                  | 指针 + 键盘激活的统一事件，payload `PressEvent`               |
+| `onClick`           | `@click`                  | 原生点击继续透传                                              |
+| `onSelectionChange` | `@update:model-value`     | `v-model` 的标准事件；另发 `@selection-change` 便于语义化监听 |
+| `onOpenChange`      | `@update:open`            | `v-model:open`                                                |
+| `onValueChange`     | `@update:model-value`     | 输入类组件                                                    |
+| `onExpandedChange`  | `@update:expanded-keys`   | Accordion / DisclosureGroup                                   |
+| `onSortChange`      | `@update:sort-descriptor` | Table                                                         |
+| `onLoadMore`        | `@load-more`              | Table                                                         |
 
 事件名在模板中可用 kebab-case（`@update:model-value`）或 camelCase（`@update:modelValue`）；**文档统一使用 kebab-case**。事件 payload 一律使用普通对象/原始值，不传 React 合成事件。
 

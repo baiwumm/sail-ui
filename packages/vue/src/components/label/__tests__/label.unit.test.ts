@@ -18,11 +18,11 @@ describe("Label", () => {
 
   it("maps state props to variant classes", () => {
     const wrapper = mount(Label, {
-      props: {isDisabled: true, isInvalid: true, isRequired: true}
+      props: {isDisabled: true, isInvalid: true, isRequired: true},
     });
 
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(["label--disabled", "label--invalid", "label--required"])
+      expect.arrayContaining(["label--disabled", "label--invalid", "label--required"]),
     );
   });
 
@@ -31,9 +31,9 @@ describe("Label", () => {
       setup() {
         return () =>
           h(TextField, null, {
-            default: () => [h(Label, null, {default: () => "Email"}), h(Input)]
+            default: () => [h(Label, null, {default: () => "Email"}), h(Input)],
           });
-      }
+      },
     });
     const wrapper = mount(host, {attachTo: document.body});
 
@@ -45,14 +45,14 @@ describe("Label", () => {
     const host = defineComponent({
       setup() {
         return () => h(Label, {id: "progress-label"}, {default: () => "Loading"});
-      }
+      },
     });
     const wrapper = mount(host, {
       global: {
         provide: {
-          [labelContextKey]: {id: "progress-label", elementType: "span"}
-        }
-      }
+          [labelContextKey]: {id: "progress-label", elementType: "span"},
+        },
+      },
     });
 
     expect(wrapper.element.tagName).toBe("SPAN");

@@ -15,7 +15,7 @@ defineOptions({name: "SailProgressCircle", inheritAttrs: false});
 const props = withDefaults(defineProps<ProgressCircleRootProps>(), {
   as: "div",
   minValue: 0,
-  maxValue: 100
+  maxValue: 100,
 });
 
 const attrs = useAttrs();
@@ -31,11 +31,11 @@ const state = useProgressState({
   maxValue: () => props.maxValue,
   isIndeterminate: () => props.isIndeterminate,
   valueLabel: () => props.valueLabel,
-  formatOptions: () => props.formatOptions
+  formatOptions: () => props.formatOptions,
 });
 
 const hasLabel = computed(() =>
-  flattenVNodes(componentSlots.default?.() ?? []).some((node) => node.type === LabelRoot)
+  flattenVNodes(componentSlots.default?.() ?? []).some((node) => node.type === LabelRoot),
 );
 
 const ariaLabelledBy = computed(() => {
@@ -51,16 +51,16 @@ const ariaLabelledBy = computed(() => {
 });
 
 const dataDisabled = computed(
-  () => (props.isDisabled ? "true" : (attrs["data-disabled"] as string | undefined)) || undefined
+  () => (props.isDisabled ? "true" : (attrs["data-disabled"] as string | undefined)) || undefined,
 );
 const ariaDisabled = computed(
-  () => (props.isDisabled ? "true" : (attrs["aria-disabled"] as string | undefined)) || undefined
+  () => (props.isDisabled ? "true" : (attrs["aria-disabled"] as string | undefined)) || undefined,
 );
 
 provide(progressCircleContextKey, {
   slots,
   percentage: state.percentage,
-  isIndeterminate: state.isIndeterminate
+  isIndeterminate: state.isIndeterminate,
 });
 
 provide(labelContextKey, {id: labelId, elementType: "span"});

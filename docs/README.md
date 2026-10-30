@@ -4,14 +4,14 @@
 
 ## 阅读路径
 
-| 你想做什么 | 先读 | 再读 |
-|---|---|---|
-| 了解项目是否值得做 | [Spec](./spec/0001-heroui-v3-vue-port.spec.md) §1–§2 | [上游审计](./research/heroui-v3-audit.md) |
-| 评审架构决策 | [Spec](./spec/0001-heroui-v3-vue-port.spec.md) §5 | [ADRs](./decisions/README.md) |
-| 开始实现 | [Ticket 01](./spec/tickets/01-m0-foundation-spike.md) | [AGENTS.md](../AGENTS.md) · [验收矩阵](./acceptance-matrix.md) |
-| 查组件归哪个阶段 | [组件矩阵](./component-matrix.md) | [路线图](./roadmap.md) |
-| 从 HeroUI React 迁移 | [迁移指南](./migration-from-heroui.md) | [GLOSSARY](../GLOSSARY.md) |
-| 接手维护上游同步 | [ADR 0003](./decisions/0003-style-fork-and-compat-layer.md) | [ADR 0006](./decisions/0006-licensing-and-attribution.md) |
+| 你想做什么           | 先读                                                        | 再读                                                           |
+| -------------------- | ----------------------------------------------------------- | -------------------------------------------------------------- |
+| 了解项目是否值得做   | [Spec](./spec/0001-heroui-v3-vue-port.spec.md) §1–§2        | [上游审计](./research/heroui-v3-audit.md)                      |
+| 评审架构决策         | [Spec](./spec/0001-heroui-v3-vue-port.spec.md) §5           | [ADRs](./decisions/README.md)                                  |
+| 开始实现             | [Ticket 01](./spec/tickets/01-m0-foundation-spike.md)       | [AGENTS.md](../AGENTS.md) · [验收矩阵](./acceptance-matrix.md) |
+| 查组件归哪个阶段     | [组件矩阵](./component-matrix.md)                           | [路线图](./roadmap.md)                                         |
+| 从 HeroUI React 迁移 | [迁移指南](./migration-from-heroui.md)                      | [GLOSSARY](../GLOSSARY.md)                                     |
+| 接手维护上游同步     | [ADR 0003](./decisions/0003-style-fork-and-compat-layer.md) | [ADR 0006](./decisions/0006-licensing-and-attribution.md)      |
 
 ## 文档地图
 

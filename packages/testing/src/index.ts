@@ -6,7 +6,7 @@ export {
   dataSlotsOfTag,
   hasDataAttribute,
   hasDataSlot,
-  type DataElement
+  type DataElement,
 } from "./contract";
 export {renderSSR, type RenderSSROptions} from "./ssr";
 export {compareScreenshots, type ComparisonResult} from "./visual";

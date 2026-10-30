@@ -44,29 +44,20 @@ export function dataElements(html: string): DataElement[] {
 
 export function dataAttributesOfSlot(
   html: string,
-  slot: string
+  slot: string,
 ): Array<Record<string, string | null>> {
   return dataElements(html)
     .filter((element) => element.attributes["data-slot"] === slot)
     .map((element) => element.attributes);
 }
 
-export function hasDataAttribute(
-  html: string,
-  name: string,
-  value?: string
-): boolean {
+export function hasDataAttribute(html: string, name: string, value?: string): boolean {
   return dataElements(html).some(
     (element) =>
-      name in element.attributes &&
-      (value === undefined || element.attributes[name] === value)
+      name in element.attributes && (value === undefined || element.attributes[name] === value),
   );
 }
 
 export function dataAttributesInCss(css: string): string[] {
-  return [
-    ...new Set(
-      [...css.matchAll(/\[(data-[a-z0-9-]+)/g)].map((match) => match[1]!)
-    )
-  ].sort();
+  return [...new Set([...css.matchAll(/\[(data-[a-z0-9-]+)/g)].map((match) => match[1]!))].sort();
 }

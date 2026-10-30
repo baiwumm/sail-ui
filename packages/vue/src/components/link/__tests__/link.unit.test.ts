@@ -9,7 +9,7 @@ describe("Link", () => {
   it("renders an anchor with the upstream slot when href is present", () => {
     const wrapper = mount(Link, {
       props: {href: "https://example.com"},
-      slots: {default: () => "Docs"}
+      slots: {default: () => "Docs"},
     });
 
     expect(wrapper.element.tagName).toBe("A");
@@ -31,7 +31,7 @@ describe("Link", () => {
       const wrapper = mount(Link, {
         attrs: {"aria-current": value},
         props: {href: "/"},
-        slots: {default: () => "Docs"}
+        slots: {default: () => "Docs"},
       });
 
       expect(wrapper.attributes("data-current")).toBe("true");
@@ -45,21 +45,21 @@ describe("Link", () => {
   it("renders the default icon and lets a custom icon win", () => {
     const defaultIcon = mount(Link, {
       props: {href: "/"},
-      slots: {default: () => [h("span", "Docs"), h(LinkIcon)]}
+      slots: {default: () => [h("span", "Docs"), h(LinkIcon)]},
     });
 
     expect(defaultIcon.find("[data-slot='link-default-icon']").exists()).toBe(true);
-    expect(defaultIcon.get("[data-slot='link-icon']").attributes("data-default-icon")).toBe(
-      "true"
-    );
+    expect(defaultIcon.get("[data-slot='link-icon']").attributes("data-default-icon")).toBe("true");
 
     const customIcon = mount(Link, {
       props: {href: "/"},
-      slots: {default: () => [h("span", "Docs"), h(LinkIcon, null, {default: () => "->"})]}
+      slots: {default: () => [h("span", "Docs"), h(LinkIcon, null, {default: () => "->"})]},
     });
 
     expect(customIcon.find("[data-slot='link-default-icon']").exists()).toBe(false);
-    expect(customIcon.get("[data-slot='link-icon']").attributes("data-default-icon")).toBeUndefined();
+    expect(
+      customIcon.get("[data-slot='link-icon']").attributes("data-default-icon"),
+    ).toBeUndefined();
   });
 
   it("emits press on pointer activation", async () => {
@@ -67,16 +67,21 @@ describe("Link", () => {
     const wrapper = mount(Link, {
       attachTo: document.body,
       props: {href: "/", onPress},
-      slots: {default: () => "Docs"}
+      slots: {default: () => "Docs"},
     });
     const link = wrapper.get("a");
 
     link.element.dispatchEvent(
-      new PointerEvent("pointerdown", {bubbles: true, button: 0, pointerId: 1, pointerType: "mouse"})
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        button: 0,
+        pointerId: 1,
+        pointerType: "mouse",
+      }),
     );
     await nextTick();
     link.element.dispatchEvent(
-      new PointerEvent("pointerup", {bubbles: true, pointerId: 1, pointerType: "mouse"})
+      new PointerEvent("pointerup", {bubbles: true, pointerId: 1, pointerType: "mouse"}),
     );
     await nextTick();
 

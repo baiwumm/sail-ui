@@ -17,8 +17,7 @@ const classes = computed(() => cx(sliderVariants().mark(), className.value));
 const percent = computed(() => context.percentOf(props.value));
 
 const isVisible = computed(
-  () =>
-    props.value >= context.min.value && props.value <= context.max.value
+  () => props.value >= context.min.value && props.value <= context.max.value,
 );
 
 const isFilled = computed(() => {
@@ -35,11 +34,8 @@ const isFilled = computed(() => {
 });
 
 const style = computed(() => ({
-  [context.orientation.value === "vertical"
-    ? "bottom"
-    : context.isRTL.value
-      ? "right"
-      : "left"]: `${percent.value * 100}%`
+  [context.orientation.value === "vertical" ? "bottom" : context.isRTL.value ? "right" : "left"]:
+    `${percent.value * 100}%`,
 }));
 </script>
 

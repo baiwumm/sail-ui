@@ -15,27 +15,28 @@ interface Snapshot {
 
 const snapshotPath = join(packageRoot, "contracts", "data-slots.json");
 const snapshot = JSON.parse(readFileSync(snapshotPath, "utf8")) as Snapshot;
-const pin = JSON.parse(
-  readFileSync(join(packageRoot, "contracts", "upstream.json"), "utf8")
-) as {version: string; commit: string};
+const pin = JSON.parse(readFileSync(join(packageRoot, "contracts", "upstream.json"), "utf8")) as {
+  version: string;
+  commit: string;
+};
 
 describe("data-slot snapshot contract", () => {
   it("validates the committed snapshot without a source checkout", () => {
     const output = execFileSync(
       process.execPath,
       [join(packageRoot, "scripts", "gen-data-slots.mjs"), "--check"],
-      {cwd: packageRoot, encoding: "utf8", stdio: "pipe"}
+      {cwd: packageRoot, encoding: "utf8", stdio: "pipe"},
     );
 
     expect(output).toContain(
-      "data-slots snapshot is valid: 334 unique values across 81 components"
+      "data-slots snapshot is valid: 334 unique values across 81 components",
     );
   });
 
   it("pins the snapshot to the upstream commit", () => {
     expect(snapshot.upstream).toEqual({
       version: pin.version,
-      commit: pin.commit
+      commit: pin.commit,
     });
     expect(snapshot.source).toBe("packages/react/src/components");
   });
@@ -72,23 +73,21 @@ describe("data-slot snapshot contract", () => {
 
     try {
       const tampered = JSON.parse(
-        readFileSync(join(fixture.root, "contracts", "data-slots.json"), "utf8")
+        readFileSync(join(fixture.root, "contracts", "data-slots.json"), "utf8"),
       ) as Snapshot;
 
       tampered.components.select = tampered.components.select.filter(
-        (slot) => slot !== "select-indicator"
+        (slot) => slot !== "select-indicator",
       );
       writeFileSync(
         join(fixture.root, "contracts", "data-slots.json"),
-        `${JSON.stringify(tampered, null, 2)}\n`
+        `${JSON.stringify(tampered, null, 2)}\n`,
       );
 
       const result = fixture.run("gen-data-slots.mjs", ["--check"]);
 
       expect(result.status).toBe(1);
-      expect(result.stderr).toContain(
-        "total is 334, but the grouped values add up to 333"
-      );
+      expect(result.stderr).toContain("total is 334, but the grouped values add up to 333");
     } finally {
       fixture.dispose();
     }
@@ -99,7 +98,7 @@ describe("data-slot snapshot contract", () => {
 
     try {
       const tampered = JSON.parse(
-        readFileSync(join(fixture.root, "contracts", "data-slots.json"), "utf8")
+        readFileSync(join(fixture.root, "contracts", "data-slots.json"), "utf8"),
       ) as Snapshot;
 
       tampered.components.input.push("button");
@@ -107,7 +106,7 @@ describe("data-slot snapshot contract", () => {
       tampered.total += 1;
       writeFileSync(
         join(fixture.root, "contracts", "data-slots.json"),
-        `${JSON.stringify(tampered, null, 2)}\n`
+        `${JSON.stringify(tampered, null, 2)}\n`,
       );
 
       const result = fixture.run("gen-data-slots.mjs", ["--check"]);
@@ -124,20 +123,20 @@ describe("data-slot snapshot contract", () => {
 
     try {
       const tampered = JSON.parse(
-        readFileSync(join(fixture.root, "contracts", "data-slots.json"), "utf8")
+        readFileSync(join(fixture.root, "contracts", "data-slots.json"), "utf8"),
       ) as Snapshot;
 
       tampered.upstream.commit = "0".repeat(40);
       writeFileSync(
         join(fixture.root, "contracts", "data-slots.json"),
-        `${JSON.stringify(tampered, null, 2)}\n`
+        `${JSON.stringify(tampered, null, 2)}\n`,
       );
 
       const result = fixture.run("gen-data-slots.mjs", ["--check"]);
 
       expect(result.status).toBe(1);
       expect(result.stderr).toContain(
-        "upstream version/commit does not match contracts/upstream.json"
+        "upstream version/commit does not match contracts/upstream.json",
       );
     } finally {
       fixture.dispose();
@@ -152,7 +151,7 @@ describe("data-slot snapshot contract", () => {
 
       expect(result.status).toBe(1);
       expect(result.stderr).toContain(
-        "gen-data-slots needs --source <heroui repo or components dir>"
+        "gen-data-slots needs --source <heroui repo or components dir>",
       );
     } finally {
       fixture.dispose();

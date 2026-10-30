@@ -10,10 +10,17 @@ function fieldHost(invalid: boolean, error?: string) {
   return defineComponent({
     setup() {
       return () =>
-        h(TextField, {isInvalid: invalid}, {
-          default: () => [h(Input), error ? h(FieldError, null, {default: () => error}) : h(FieldError)]
-        });
-    }
+        h(
+          TextField,
+          {isInvalid: invalid},
+          {
+            default: () => [
+              h(Input),
+              error ? h(FieldError, null, {default: () => error}) : h(FieldError),
+            ],
+          },
+        );
+    },
   });
 }
 
@@ -30,7 +37,7 @@ describe("FieldError", () => {
     valid.unmount();
 
     const invalid = mount(fieldHost(true, "Enter a valid email."), {
-      attachTo: document.body
+      attachTo: document.body,
     });
     const error = invalid.get("[data-slot='field-error']");
 

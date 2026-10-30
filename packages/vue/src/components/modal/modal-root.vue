@@ -17,7 +17,7 @@ const overlay = useOverlayState({
   defaultOpen: props.defaultOpen,
   onOpenChange: (isOpen) => {
     openModel.value = isOpen;
-  }
+  },
 });
 
 const slots = computed(() => modalVariants());
@@ -28,7 +28,7 @@ provide<ModalContext>(modalContextKey, {
   ...overlay,
   isDismissable,
   placement,
-  slots
+  slots,
 });
 
 function handleOpenChange(isOpen: boolean) {
@@ -42,15 +42,12 @@ function handleOpenChange(isOpen: boolean) {
 defineExpose({
   open: overlay.open,
   close: overlay.close,
-  isOpen: overlay.isOpen
+  isOpen: overlay.isOpen,
 });
 </script>
 
 <template>
-  <DialogRoot
-    :open="overlay.isMounted.value"
-    @update:open="handleOpenChange"
-  >
+  <DialogRoot :open="overlay.isMounted.value" @update:open="handleOpenChange">
     <slot />
   </DialogRoot>
 </template>

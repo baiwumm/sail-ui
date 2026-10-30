@@ -46,5 +46,4 @@ export interface SearchFieldContext {
   submit: (value: string) => void;
 }
 
-export const searchFieldContextKey: InjectionKey<SearchFieldContext> =
-  Symbol("sail-search-field");
+export const searchFieldContextKey: InjectionKey<SearchFieldContext> = Symbol("sail-search-field");

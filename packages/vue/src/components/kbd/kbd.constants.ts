@@ -44,7 +44,7 @@ export const kbdKeysMap: Record<KbdKey, string> = {
   space: "␣",
   fn: "Fn",
   win: "⌘",
-  alt: "⌥"
+  alt: "⌥",
 };
 
 export const kbdKeysLabelMap: Record<KbdKey, string> = {
@@ -69,5 +69,5 @@ export const kbdKeysLabelMap: Record<KbdKey, string> = {
   space: "Space",
   fn: "Fn",
   win: "Win",
-  alt: "Alt"
+  alt: "Alt",
 };

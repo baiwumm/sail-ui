@@ -8,7 +8,7 @@ import type {BadgeAnchorProps} from "./types";
 defineOptions({name: "SailBadgeAnchor", inheritAttrs: false});
 
 withDefaults(defineProps<BadgeAnchorProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();

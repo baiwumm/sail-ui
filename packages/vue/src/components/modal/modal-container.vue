@@ -8,7 +8,7 @@ import type {ModalContainerProps} from "./types";
 defineOptions({name: "SailModalContainer", inheritAttrs: false});
 
 const props = withDefaults(defineProps<ModalContainerProps>(), {
-  placement: "auto"
+  placement: "auto",
 });
 
 const attrs = useAttrs();
@@ -16,18 +16,18 @@ const context = useModalContext();
 
 const mergedSlots = computed(() => ({
   ...context.slots.value,
-  ...modalVariants({scroll: props.scroll, size: props.size})
+  ...modalVariants({scroll: props.scroll, size: props.size}),
 }));
 const placement = computed<ModalPlacement>(() => props.placement);
 
 provide(modalContextKey, {
   ...context,
   placement,
-  slots: mergedSlots
+  slots: mergedSlots,
 });
 
 const classes = computed(() =>
-  cx(mergedSlots.value.container(), attrs.class as string | undefined)
+  cx(mergedSlots.value.container(), attrs.class as string | undefined),
 );
 </script>
 

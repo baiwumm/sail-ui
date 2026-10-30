@@ -24,7 +24,7 @@ const Host = {
     ModalFooter,
     ModalHeader,
     ModalHeading,
-    ModalTrigger
+    ModalTrigger,
   },
   template: `
     <Modal>
@@ -42,7 +42,7 @@ const Host = {
         </ModalContainer>
       </ModalBackdrop>
     </Modal>
-  `
+  `,
 };
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -113,7 +113,7 @@ describe("Modal", () => {
     await flushPromises();
 
     const closeTrigger = document.querySelector<HTMLButtonElement>(
-      '[data-slot="modal-close-trigger"]'
+      '[data-slot="modal-close-trigger"]',
     );
 
     closeTrigger?.click();

@@ -29,7 +29,7 @@ const classes = computed(() => cx(slots.value.base(), attrs.class as string | un
 const {isHovered} = useHover(element, {isDisabled});
 const {isPressed} = usePress(element, {
   isDisabled,
-  onPress: (event) => emit("press", event)
+  onPress: (event) => emit("press", event),
 });
 const {isFocused, isFocusVisible} = useFocusRing(element, {isDisabled});
 

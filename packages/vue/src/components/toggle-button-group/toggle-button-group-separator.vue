@@ -11,9 +11,7 @@ defineProps<ToggleButtonGroupSeparatorProps>();
 
 const {className, forwarded} = useForwardedAttrs();
 
-const classes = computed(() =>
-  cx(toggleButtonGroupVariants().separator(), className.value)
-);
+const classes = computed(() => cx(toggleButtonGroupVariants().separator(), className.value));
 </script>
 
 <template>

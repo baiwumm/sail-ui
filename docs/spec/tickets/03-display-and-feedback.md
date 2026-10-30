@@ -16,13 +16,13 @@
 
 ## Scope
 
-| 类型 | 组件 | 要点 |
-|---|---|---|
-| 容器/布局 | card、surface、header、separator、fieldset | 复合结构、`data-slot`、polymorphic `as` |
-| 标识 | avatar、avatar-group、badge、chip | 尺寸、颜色、fallback、堆叠 |
-| 导航 | breadcrumbs、link | `as`/`asChild`、当前项、禁用 |
-| 反馈 | alert、empty-state、error-message、progress-bar、progress-circle、skeleton、spinner | 语义角色、`aria-*`、值/不确定态 |
-| 文本/辅助 | label、description、field-error、kbd、typography、close-button | 表单关联、`aria-describedby`、关闭按钮 |
+| 类型      | 组件                                                                                | 要点                                    |
+| --------- | ----------------------------------------------------------------------------------- | --------------------------------------- |
+| 容器/布局 | card、surface、header、separator、fieldset                                          | 复合结构、`data-slot`、polymorphic `as` |
+| 标识      | avatar、avatar-group、badge、chip                                                   | 尺寸、颜色、fallback、堆叠              |
+| 导航      | breadcrumbs、link                                                                   | `as`/`asChild`、当前项、禁用            |
+| 反馈      | alert、empty-state、error-message、progress-bar、progress-circle、skeleton、spinner | 语义角色、`aria-*`、值/不确定态         |
+| 文本/辅助 | label、description、field-error、kbd、typography、close-button                      | 表单关联、`aria-describedby`、关闭按钮  |
 
 ## 关键实现点
 
@@ -83,10 +83,11 @@
 
 ## Risks
 
-| 风险 | 处理 |
-|---|---|
+| 风险                                                         | 处理                                          |
+| ------------------------------------------------------------ | --------------------------------------------- |
 | 展示类组件看似简单，但 `as`/`asChild` 与 `$attrs` 透传容易错 | 统一 `cn` + `$attrs` 工具；每个多态组件加测试 |
-| Avatar 的图片加载/尺寸在 SSR 下不稳定 | 固定尺寸 + 本地 fixture；浏览器测试覆盖 |
-| ProgressCircle 的 SVG 几何与上游有细微差异 | 直接复用上游 CSS 变量；截图为验收 |
-| Field id 在 SSR/客户端不一致 | 统一 `useId()`；禁止 `Math.random()` |
+| Avatar 的图片加载/尺寸在 SSR 下不稳定                        | 固定尺寸 + 本地 fixture；浏览器测试覆盖       |
+| ProgressCircle 的 SVG 几何与上游有细微差异                   | 直接复用上游 CSS 变量；截图为验收             |
+| Field id 在 SSR/客户端不一致                                 | 统一 `useId()`；禁止 `Math.random()`          |
+
 </content>

@@ -10,7 +10,7 @@ import {sliderContextKey, type SliderThumbProps} from "./types";
 defineOptions({name: "SailSliderThumb", inheritAttrs: false});
 
 const props = withDefaults(defineProps<SliderThumbProps>(), {
-  index: 0
+  index: 0,
 });
 
 const context = inject(sliderContextKey)!;
@@ -31,19 +31,17 @@ const position = computed(() => {
 const style = computed(() => ({
   position: "absolute" as const,
   [context.orientation.value === "vertical" ? "top" : "left"]: position.value,
-  transform: "translate(-50%, -50%)"
+  transform: "translate(-50%, -50%)",
 }));
 
 const classes = computed(() => cx(sliderVariants().thumb(), className.value));
 
 const isDragging = computed(
-  () =>
-    context.isDragging.value &&
-    rootContext.valueIndexToChangeRef.value === props.index
+  () => context.isDragging.value && rootContext.valueIndexToChangeRef.value === props.index,
 );
 
 const {isFocused, isFocusVisible} = useFocusRing(thumbRef, {
-  isDisabled: context.isDisabled
+  isDisabled: context.isDisabled,
 });
 
 function handleFocus() {

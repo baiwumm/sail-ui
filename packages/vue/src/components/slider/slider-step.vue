@@ -15,11 +15,7 @@ const classes = computed(() => cx(sliderVariants().step(), className.value));
 </script>
 
 <template>
-  <span
-    v-bind="forwarded"
-    :class="classes"
-    :data-slot="'slider-step'"
-  >
+  <span v-bind="forwarded" :class="classes" :data-slot="'slider-step'">
     <slot />
   </span>
 </template>

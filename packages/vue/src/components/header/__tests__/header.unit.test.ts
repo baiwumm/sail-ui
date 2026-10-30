@@ -16,7 +16,7 @@ describe("Header", () => {
   it("supports polymorphic rendering and class merging", () => {
     const wrapper = mount(Header, {
       attrs: {class: "extra"},
-      props: {as: "div"}
+      props: {as: "div"},
     });
 
     expect(wrapper.element.tagName).toBe("DIV");

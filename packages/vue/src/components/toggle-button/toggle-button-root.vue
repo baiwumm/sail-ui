@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<ToggleButtonRootProps>(), {
   variant: "default",
   size: undefined,
   isIconOnly: false,
-  isDisabled: false
+  isDisabled: false,
 });
 
 const emit = defineEmits<{
@@ -30,16 +30,12 @@ const element = computed(() => (toggleRef.value?.$el as Element | null | undefin
 
 const size = computed(() => props.size ?? group?.size.value);
 const isDisabled = computed(() => group?.isDisabled.value || props.isDisabled);
-const isSelected = computed(() =>
-  group
-    ? group.isSelected(props.value)
-    : model.value === true
-);
+const isSelected = computed(() => (group ? group.isSelected(props.value) : model.value === true));
 
 const {isHovered} = useHover(element, {isDisabled});
 const {isPressed} = usePress(element, {
   isDisabled,
-  onPress: (event) => emit("press", event)
+  onPress: (event) => emit("press", event),
 });
 const {isFocused, isFocusVisible} = useFocusRing(element, {isDisabled});
 
@@ -48,10 +44,10 @@ const classes = computed(() =>
     toggleButtonVariants({
       isIconOnly: props.isIconOnly,
       size: size.value,
-      variant: props.variant
+      variant: props.variant,
     }),
-    className.value
-  )
+    className.value,
+  ),
 );
 
 const stateAttrs = computed(() => ({
@@ -61,7 +57,7 @@ const stateAttrs = computed(() => ({
   "data-hovered": isHovered.value ? "true" : undefined,
   "data-pressed": isPressed.value ? "true" : undefined,
   "data-selected": isSelected.value ? "true" : undefined,
-  "data-slot": "toggle-button"
+  "data-slot": "toggle-button",
 }));
 </script>
 

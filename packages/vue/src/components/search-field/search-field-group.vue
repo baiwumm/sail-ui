@@ -19,9 +19,7 @@ const isDisabled = computed(() => context?.isDisabled.value ?? false);
 
 const {isHovered} = useHover(groupRef, {isDisabled});
 
-const classes = computed(() =>
-  cx(searchFieldVariants().group(), className.value)
-);
+const classes = computed(() => cx(searchFieldVariants().group(), className.value));
 
 function handleFocusIn() {
   isFocusWithin.value = true;

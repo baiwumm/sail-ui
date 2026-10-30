@@ -10,7 +10,7 @@ import type {AlertRootProps} from "./types";
 defineOptions({name: "SailAlert", inheritAttrs: false});
 
 const props = withDefaults(defineProps<AlertRootProps>(), {
-  as: "div"
+  as: "div",
 });
 
 const attrs = useAttrs();
@@ -19,11 +19,11 @@ const classes = computed(() => cx(slots.value.base(), attrs.class as string | un
 
 provide(alertContextKey, {
   slots,
-  status: computed(() => props.status)
+  status: computed(() => props.status),
 });
 provide(
   surfaceContextKey,
-  computed(() => "default" as const)
+  computed(() => "default" as const),
 );
 </script>
 

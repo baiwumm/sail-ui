@@ -10,9 +10,7 @@ defineOptions({name: "SailModalDialog", inheritAttrs: false});
 const attrs = useAttrs();
 const {placement, slots, isDismissable} = useModalContext();
 
-const classes = computed(() =>
-  cx(slots.value.dialog(), attrs.class as string | undefined)
-);
+const classes = computed(() => cx(slots.value.dialog(), attrs.class as string | undefined));
 
 function handlePointerDownOutside(event: Event) {
   if (!isDismissable.value) {

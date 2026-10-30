@@ -11,13 +11,13 @@
 
 ## 里程碑总览
 
-| 里程碑 | 主题 | 组件数 | 估算 | 关键出口 |
-|---|---|---:|---|---|
-| M0 | 架构 spike | 4 | 1–2 周 | 视觉/SSR/打包三条链路跑通 |
-| M1 | 展示 + 表单 | 43 | 3–4 周 | 契约/视觉/主题矩阵；playground |
-| M2 | 覆盖层 + 集合（MVP） | 65（核心 40） | 3–4 周 | MVP API 稳定；迁移指南初稿 |
-| M3 | 日期/颜色/高级数据 | 84 | 4–6 周 | 全量组件；Table/Calendar/Color |
-| M4 | Nuxt + 文档 + 发布 | 84 | 2–3 周 | canary；文档站；发布门禁 |
+| 里程碑 | 主题                 |        组件数 | 估算   | 关键出口                       |
+| ------ | -------------------- | ------------: | ------ | ------------------------------ |
+| M0     | 架构 spike           |             4 | 1–2 周 | 视觉/SSR/打包三条链路跑通      |
+| M1     | 展示 + 表单          |            43 | 3–4 周 | 契约/视觉/主题矩阵；playground |
+| M2     | 覆盖层 + 集合（MVP） | 65（核心 40） | 3–4 周 | MVP API 稳定；迁移指南初稿     |
+| M3     | 日期/颜色/高级数据   |            84 | 4–6 周 | 全量组件；Table/Calendar/Color |
+| M4     | Nuxt + 文档 + 发布   |            84 | 2–3 周 | canary；文档站；发布门禁       |
 
 累计：MVP 约 7–10 周；全量约 3–4 个月。高风险项（Table、覆盖层动画、SSR Toast）已在 ticket 中单独标注。
 
@@ -59,12 +59,12 @@
 
 这 40 个组件是对外承诺的第一版能力；其余 44 个在 M3/M4 交付。与 [组件矩阵](./component-matrix.md) 的 ✅ 行完全一致。
 
-| 类别 | 数量 | 组件 |
-|---|---:|---|
-| 展示/反馈 | 13 | `alert`、`avatar`、`avatar-group`、`badge`、`card`、`chip`、`link`、`separator`、`skeleton`、`spinner`、`label`、`description`、`field-error` |
-| 表单/操作 | 13 | `button`、`button-group`、`input`、`textarea`、`search-field`、`checkbox`、`checkbox-group`、`radio`、`radio-group`、`switch`、`form`、`number-field`、`slider` |
-| 覆盖层 | 6 | `modal`、`alert-dialog`、`popover`、`tooltip`、`toast`、`drawer` |
-| 集合 | 8 | `accordion`、`dropdown`、`list-box`、`menu`、`pagination`、`select`、`tabs`、`tag` |
+| 类别      | 数量 | 组件                                                                                                                                                            |
+| --------- | ---: | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 展示/反馈 |   13 | `alert`、`avatar`、`avatar-group`、`badge`、`card`、`chip`、`link`、`separator`、`skeleton`、`spinner`、`label`、`description`、`field-error`                   |
+| 表单/操作 |   13 | `button`、`button-group`、`input`、`textarea`、`search-field`、`checkbox`、`checkbox-group`、`radio`、`radio-group`、`switch`、`form`、`number-field`、`slider` |
+| 覆盖层    |    6 | `modal`、`alert-dialog`、`popover`、`tooltip`、`toast`、`drawer`                                                                                                |
+| 集合      |    8 | `accordion`、`dropdown`、`list-box`、`menu`、`pagination`、`select`、`tabs`、`tag`                                                                              |
 
 合计：13 + 13 + 6 + 8 = **40**。分类与 [T05](./spec/tickets/05-overlays.md) / [T06](./spec/tickets/06-collections-and-pickers.md) 及组件矩阵一致；若本表与组件矩阵冲突，以矩阵为准。
 

@@ -17,11 +17,11 @@ function renderAlert(status: "default" | "accent" | "success" | "warning" | "dan
         h(AlertContent, null, {
           default: () => [
             h(AlertTitle, null, {default: () => "Title"}),
-            h(AlertDescription, null, {default: () => "Description"})
-          ]
-        })
-      ]
-    }
+            h(AlertDescription, null, {default: () => "Description"}),
+          ],
+        }),
+      ],
+    },
   });
 }
 
@@ -51,8 +51,8 @@ describe("Alert", () => {
 
     const custom = mount(Alert, {
       slots: {
-        default: () => h(AlertIndicator, null, {default: () => h("span", {class: "custom"}, "!")})
-      }
+        default: () => h(AlertIndicator, null, {default: () => h("span", {class: "custom"}, "!")}),
+      },
     });
 
     expect(custom.find("[data-slot='alert-default-icon']").exists()).toBe(false);
@@ -63,8 +63,8 @@ describe("Alert", () => {
     const wrapper = mount(Alert, {
       props: {as: "section"},
       slots: {
-        default: () => h(AlertContent, {as: "article"}, {default: () => "Body"})
-      }
+        default: () => h(AlertContent, {as: "article"}, {default: () => "Body"}),
+      },
     });
 
     expect(wrapper.element.tagName).toBe("SECTION");

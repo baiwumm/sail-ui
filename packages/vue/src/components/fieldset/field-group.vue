@@ -9,7 +9,7 @@ import type {FieldGroupProps} from "./types";
 defineOptions({name: "SailFieldGroup", inheritAttrs: false});
 
 withDefaults(defineProps<FieldGroupProps>(), {
-  as: "div"
+  as: "div",
 });
 
 const attrs = useAttrs();

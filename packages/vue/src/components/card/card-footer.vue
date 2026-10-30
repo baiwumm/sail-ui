@@ -9,7 +9,7 @@ import type {CardFooterProps} from "./types";
 defineOptions({name: "SailCardFooter", inheritAttrs: false});
 
 withDefaults(defineProps<CardFooterProps>(), {
-  as: "div"
+  as: "div",
 });
 
 const attrs = useAttrs();

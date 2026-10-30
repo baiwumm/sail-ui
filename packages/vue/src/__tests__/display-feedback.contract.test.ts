@@ -6,7 +6,13 @@ import {defineComponent, h, nextTick} from "vue";
 
 import {dataAttributesOfSlot, dataSlots, renderSSR} from "@sail-ui/testing";
 
-import {Alert, AlertContent, AlertDescription, AlertIndicator, AlertTitle} from "../components/alert";
+import {
+  Alert,
+  AlertContent,
+  AlertDescription,
+  AlertIndicator,
+  AlertTitle,
+} from "../components/alert";
 import {Avatar, AvatarFallback, AvatarImage} from "../components/avatar";
 import {AvatarGroup} from "../components/avatar-group";
 import {Badge, BadgeAnchor} from "../components/badge";
@@ -17,7 +23,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "../components/card";
 import {Chip} from "../components/chip";
 import {CloseButton} from "../components/close-button";
@@ -35,13 +41,13 @@ import {
   ProgressBar,
   ProgressBarFill,
   ProgressBarOutput,
-  ProgressBarTrack
+  ProgressBarTrack,
 } from "../components/progress-bar";
 import {
   ProgressCircle,
   ProgressCircleFillCircle,
   ProgressCircleTrack,
-  ProgressCircleTrackCircle
+  ProgressCircleTrackCircle,
 } from "../components/progress-circle";
 import {Separator} from "../components/separator";
 import {Skeleton} from "../components/skeleton";
@@ -51,7 +57,7 @@ import {Typography, TypographyProse} from "../components/typography";
 
 const stylesRoot = join(process.cwd(), "packages", "styles");
 const slotSnapshot = JSON.parse(
-  readFileSync(join(stylesRoot, "contracts", "data-slots.json"), "utf8")
+  readFileSync(join(stylesRoot, "contracts", "data-slots.json"), "utf8"),
 ) as {components: Record<string, string[]>};
 
 const uniqueSorted = (slots: string[]) => [...new Set(slots)].sort();
@@ -60,7 +66,7 @@ function expectUpstreamSlots(html: string, component: string, extras: string[] =
   const expected = [...(slotSnapshot.components[component] ?? []), ...extras];
 
   expect(uniqueSorted(dataSlots(html)), `${component} data-slot parity`).toEqual(
-    uniqueSorted(expected)
+    uniqueSorted(expected),
   );
 }
 
@@ -70,8 +76,8 @@ const pointer = (element: Element, type: string, init: PointerEventInit = {}) =>
       bubbles: true,
       pointerId: 1,
       pointerType: "mouse",
-      ...init
-    })
+      ...init,
+    }),
   );
 };
 
@@ -90,18 +96,22 @@ describe("T03 data-slot parity", () => {
     const host = defineComponent({
       setup() {
         return () =>
-          h(Alert, {status: "warning"}, {
-            default: () => [
-              h(AlertIndicator),
-              h(AlertContent, null, {
-                default: () => [
-                  h(AlertTitle, null, {default: () => "Heads up"}),
-                  h(AlertDescription, null, {default: () => "Check the details."})
-                ]
-              })
-            ]
-          });
-      }
+          h(
+            Alert,
+            {status: "warning"},
+            {
+              default: () => [
+                h(AlertIndicator),
+                h(AlertContent, null, {
+                  default: () => [
+                    h(AlertTitle, null, {default: () => "Heads up"}),
+                    h(AlertDescription, null, {default: () => "Check the details."}),
+                  ],
+                }),
+              ],
+            },
+          );
+      },
     });
     const html = await renderSSR(host);
 
@@ -117,22 +127,38 @@ describe("T03 data-slot parity", () => {
           h(Avatar, null, {
             default: () => [
               h(AvatarImage, {alt: "Ada", src: "https://example.com/ada.png"}),
-              h(AvatarFallback, null, {default: () => "AD"})
-            ]
+              h(AvatarFallback, null, {default: () => "AD"}),
+            ],
           });
-      }
+      },
     });
     const groupHost = defineComponent({
       setup() {
         return () =>
-          h(AvatarGroup, {max: 2}, {
-            default: () => [
-              h(Avatar, {key: "a"}, {default: () => h(AvatarFallback, null, {default: () => "A"})}),
-              h(Avatar, {key: "b"}, {default: () => h(AvatarFallback, null, {default: () => "B"})}),
-              h(Avatar, {key: "c"}, {default: () => h(AvatarFallback, null, {default: () => "C"})})
-            ]
-          });
-      }
+          h(
+            AvatarGroup,
+            {max: 2},
+            {
+              default: () => [
+                h(
+                  Avatar,
+                  {key: "a"},
+                  {default: () => h(AvatarFallback, null, {default: () => "A"})},
+                ),
+                h(
+                  Avatar,
+                  {key: "b"},
+                  {default: () => h(AvatarFallback, null, {default: () => "B"})},
+                ),
+                h(
+                  Avatar,
+                  {key: "c"},
+                  {default: () => h(AvatarFallback, null, {default: () => "C"})},
+                ),
+              ],
+            },
+          );
+      },
     });
 
     expectUpstreamSlots(await renderSSR(avatarHost), "avatar");
@@ -145,12 +171,9 @@ describe("T03 data-slot parity", () => {
       setup() {
         return () =>
           h(BadgeAnchor, null, {
-            default: () => [
-              h("span", "Inbox"),
-              h(Badge, {color: "danger"}, {default: () => "3"})
-            ]
+            default: () => [h("span", "Inbox"), h(Badge, {color: "danger"}, {default: () => "3"})],
           });
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -165,10 +188,10 @@ describe("T03 data-slot parity", () => {
           h(Breadcrumbs, null, {
             default: () => [
               h(BreadcrumbsItem, {href: "/"}, {default: () => "Home"}),
-              h(BreadcrumbsItem, {href: "/docs"}, {default: () => "Docs"})
-            ]
+              h(BreadcrumbsItem, {href: "/docs"}, {default: () => "Docs"}),
+            ],
           });
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -181,19 +204,23 @@ describe("T03 data-slot parity", () => {
     const host = defineComponent({
       setup() {
         return () =>
-          h(Card, {variant: "secondary"}, {
-            default: () => [
-              h(CardHeader, null, {
-                default: () => [
-                  h(CardTitle, null, {default: () => "Title"}),
-                  h(CardDescription, null, {default: () => "Description"})
-                ]
-              }),
-              h(CardContent, null, {default: () => "Body"}),
-              h(CardFooter, null, {default: () => "Footer"})
-            ]
-          });
-      }
+          h(
+            Card,
+            {variant: "secondary"},
+            {
+              default: () => [
+                h(CardHeader, null, {
+                  default: () => [
+                    h(CardTitle, null, {default: () => "Title"}),
+                    h(CardDescription, null, {default: () => "Description"}),
+                  ],
+                }),
+                h(CardContent, null, {default: () => "Body"}),
+                h(CardFooter, null, {default: () => "Footer"}),
+              ],
+            },
+          );
+      },
     });
     const html = await renderSSR(host);
 
@@ -204,9 +231,8 @@ describe("T03 data-slot parity", () => {
   it("Chip renders its upstream slots", async () => {
     const host = defineComponent({
       setup() {
-        return () =>
-          h(Chip, {color: "success"}, {default: () => "Active"});
-      }
+        return () => h(Chip, {color: "success"}, {default: () => "Active"});
+      },
     });
     const html = await renderSSR(host);
 
@@ -229,7 +255,7 @@ describe("T03 data-slot parity", () => {
       [Header, "header", {default: () => "Header"}],
       [Label, "label", {default: () => "Label"}],
       [Separator, "separator", {}],
-      [Surface, "surface", {default: () => "Surface"}]
+      [Surface, "surface", {default: () => "Surface"}],
     ] as const;
 
     for (const [component, slot, slots] of cases) {
@@ -245,30 +271,31 @@ describe("T03 data-slot parity", () => {
     const invalidHost = defineComponent({
       setup() {
         return () =>
-          h(TextField, {isInvalid: true}, {
-            default: () => [
-              h(Label, null, {default: () => "Email"}),
-              h(Input, {placeholder: "you@example.com"}),
-              h(FieldError, null, {default: () => "Enter a valid email."})
-            ]
-          });
-      }
+          h(
+            TextField,
+            {isInvalid: true},
+            {
+              default: () => [
+                h(Label, null, {default: () => "Email"}),
+                h(Input, {placeholder: "you@example.com"}),
+                h(FieldError, null, {default: () => "Enter a valid email."}),
+              ],
+            },
+          );
+      },
     });
     const validHost = defineComponent({
       setup() {
         return () =>
           h(TextField, null, {
-            default: () => [h(Label, null, {default: () => "Email"}), h(Input), h(FieldError)]
+            default: () => [h(Label, null, {default: () => "Email"}), h(Input), h(FieldError)],
           });
-      }
+      },
     });
 
     const html = await renderSSR(invalidHost);
     expectUpstreamSlots(html, "field-error", ["textfield", "label", "input"]);
-    expect(dataAttributesOfSlot(html, "field-error")[0]).toHaveProperty(
-      "data-visible",
-      "true"
-    );
+    expect(dataAttributesOfSlot(html, "field-error")[0]).toHaveProperty("data-visible", "true");
     expect(await renderSSR(validHost)).not.toContain('data-slot="field-error"');
   });
 
@@ -282,14 +309,14 @@ describe("T03 data-slot parity", () => {
               h(FieldGroup, null, {
                 default: () => [
                   h(TextField, null, {
-                    default: () => [h(Label, null, {default: () => "Street"}), h(Input)]
-                  })
-                ]
+                    default: () => [h(Label, null, {default: () => "Street"}), h(Input)],
+                  }),
+                ],
               }),
-              h(FieldsetActions, null, {default: () => "Save"})
-            ]
+              h(FieldsetActions, null, {default: () => "Save"}),
+            ],
           });
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -305,10 +332,10 @@ describe("T03 data-slot parity", () => {
           h(Kbd, null, {
             default: () => [
               h(KbdContent, null, {default: () => "Save"}),
-              h(KbdAbbr, {keyValue: "command"})
-            ]
+              h(KbdAbbr, {keyValue: "command"}),
+            ],
           });
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -321,10 +348,14 @@ describe("T03 data-slot parity", () => {
     const host = defineComponent({
       setup() {
         return () =>
-          h(Link, {href: "https://example.com"}, {
-            default: () => ["Docs", h(LinkIcon)]
-          });
-      }
+          h(
+            Link,
+            {href: "https://example.com"},
+            {
+              default: () => ["Docs", h(LinkIcon)],
+            },
+          );
+      },
     });
     const html = await renderSSR(host);
 
@@ -337,15 +368,19 @@ describe("T03 data-slot parity", () => {
     const host = defineComponent({
       setup() {
         return () =>
-          h(ProgressBar, {value: 40}, {
-            default: () => [
-              h(ProgressBarOutput),
-              h(ProgressBarTrack, null, {
-                default: () => h(ProgressBarFill)
-              })
-            ]
-          });
-      }
+          h(
+            ProgressBar,
+            {value: 40},
+            {
+              default: () => [
+                h(ProgressBarOutput),
+                h(ProgressBarTrack, null, {
+                  default: () => h(ProgressBarFill),
+                }),
+              ],
+            },
+          );
+      },
     });
     const html = await renderSSR(host);
 
@@ -359,16 +394,17 @@ describe("T03 data-slot parity", () => {
     const host = defineComponent({
       setup() {
         return () =>
-          h(ProgressCircle, {value: 75}, {
-            default: () =>
-              h(ProgressCircleTrack, null, {
-                default: () => [
-                  h(ProgressCircleTrackCircle),
-                  h(ProgressCircleFillCircle)
-                ]
-              })
-          });
-      }
+          h(
+            ProgressCircle,
+            {value: 75},
+            {
+              default: () =>
+                h(ProgressCircleTrack, null, {
+                  default: () => [h(ProgressCircleTrackCircle), h(ProgressCircleFillCircle)],
+                }),
+            },
+          );
+      },
     });
     const html = await renderSSR(host);
 
@@ -398,9 +434,9 @@ describe("T03 data-slot parity", () => {
       setup() {
         return () => [
           h(Typography, {type: "h2"}, {default: () => "Title"}),
-          h(TypographyProse, null, {default: () => h("p", "Copy")})
+          h(TypographyProse, null, {default: () => h("p", "Copy")}),
         ];
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -449,7 +485,7 @@ describe("T03 interactive state contract", () => {
       attachTo: document.body,
       props: {href: "https://example.com"},
       attrs: {"aria-current": "page"},
-      slots: {default: () => "Docs"}
+      slots: {default: () => "Docs"},
     });
     const link = wrapper.get("a");
 
@@ -485,10 +521,10 @@ describe("T03 interactive state contract", () => {
           h(Breadcrumbs, null, {
             default: () => [
               h(BreadcrumbsItem, {href: "/"}, {default: () => "Home"}),
-              h(BreadcrumbsItem, {href: "/docs"}, {default: () => "Docs"})
-            ]
+              h(BreadcrumbsItem, {href: "/docs"}, {default: () => "Docs"}),
+            ],
           });
-      }
+      },
     });
     const wrapper = mount(host, {attachTo: document.body});
     const items = wrapper.findAll('[data-slot="breadcrumbs-item"]');
@@ -518,9 +554,9 @@ describe("T03 interactive state contract", () => {
       slots: {
         default: () => [
           h(ProgressBarOutput),
-          h(ProgressBarTrack, null, {default: () => h(ProgressBarFill)})
-        ]
-      }
+          h(ProgressBarTrack, null, {default: () => h(ProgressBarFill)}),
+        ],
+      },
     });
     const root = wrapper.get('[data-slot="progress-bar"]');
 
@@ -542,9 +578,9 @@ describe("T03 interactive state contract", () => {
       slots: {
         default: () =>
           h(ProgressCircleTrack, null, {
-            default: () => [h(ProgressCircleTrackCircle), h(ProgressCircleFillCircle)]
-          })
-      }
+            default: () => [h(ProgressCircleTrackCircle), h(ProgressCircleFillCircle)],
+          }),
+      },
     });
     const root = wrapper.get('[data-slot="progress-circle"]');
 
@@ -558,7 +594,7 @@ describe("T03 interactive state contract", () => {
     const wrapper = mount(Fieldset, {
       attachTo: document.body,
       props: {isDisabled: true},
-      slots: {default: () => h(FieldsetLegend, null, {default: () => "Title"})}
+      slots: {default: () => h(FieldsetLegend, null, {default: () => "Title"})},
     });
     const fieldset = wrapper.get("fieldset");
 

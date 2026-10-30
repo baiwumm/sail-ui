@@ -19,8 +19,8 @@ describe("Typography", () => {
         "typography",
         "typography--body",
         "typography--align-start",
-        "typography--color-default"
-      ])
+        "typography--color-default",
+      ]),
     );
   });
 
@@ -39,7 +39,7 @@ describe("Typography", () => {
 
   it("supports truncate, weight, align, and color classes", () => {
     const wrapper = mount(Typography, {
-      props: {align: "center", color: "muted", truncate: true, weight: "semibold"}
+      props: {align: "center", color: "muted", truncate: true, weight: "semibold"},
     });
 
     expect(wrapper.classes()).toEqual(
@@ -47,15 +47,15 @@ describe("Typography", () => {
         "typography--align-center",
         "typography--color-muted",
         "typography--truncate",
-        "typography--weight-semibold"
-      ])
+        "typography--weight-semibold",
+      ]),
     );
   });
 
   it("renders headings by level", () => {
     const wrapper = mount(TypographyHeading, {
       props: {level: 3},
-      slots: {default: () => "Heading"}
+      slots: {default: () => "Heading"},
     });
 
     expect(wrapper.element.tagName).toBe("H3");
@@ -69,7 +69,7 @@ describe("Typography", () => {
 
     const small = mount(TypographyParagraph, {
       props: {size: "sm"},
-      slots: {default: () => "Text"}
+      slots: {default: () => "Text"},
     });
     expect(small.attributes("data-type")).toBe("body-sm");
     expect(small.classes()).toContain("typography--body-sm");
@@ -90,7 +90,10 @@ describe("Typography", () => {
   });
 
   it("supports the as override on root and prose", () => {
-    const root = mount(Typography, {props: {as: "span", type: "h1"}, slots: {default: () => "Title"}});
+    const root = mount(Typography, {
+      props: {as: "span", type: "h1"},
+      slots: {default: () => "Title"},
+    });
 
     expect(root.element.tagName).toBe("SPAN");
     root.unmount();

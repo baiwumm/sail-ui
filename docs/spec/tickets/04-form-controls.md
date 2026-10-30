@@ -16,16 +16,16 @@
 
 ## Scope
 
-| 组件 | 关键行为 |
-|---|---|
-| Button / ButtonGroup / ToggleButton / ToggleButtonGroup / Toolbar | press、focus-visible、disabled、loading、form 提交类型、方向键 roving tabindex |
-| Input / Textarea / Textfield / SearchField / InputGroup | 受控/非受控、清除、前后缀、组合输入法、`aria-describedby` |
-| Checkbox / CheckboxGroup | indeterminate、全选、`v-model` 数组、错误 |
-| Radio / RadioGroup | 方向键、roving tabindex、`data-selected`、错误 |
-| Switch / SwitchGroup | `data-selected`、`data-hovered`、`data-pressed`、`data-focus-visible`（内部 slot 无伪类回退） |
-| NumberField | 步进、长按、格式、min/max、无效输入、spinbutton 语义 |
-| Slider | 单值/范围、键盘、`data-dragging`、RTL |
-| Form | 提交、校验聚合、错误聚焦顺序、`aria-live` |
+| 组件                                                              | 关键行为                                                                                      |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Button / ButtonGroup / ToggleButton / ToggleButtonGroup / Toolbar | press、focus-visible、disabled、loading、form 提交类型、方向键 roving tabindex                |
+| Input / Textarea / Textfield / SearchField / InputGroup           | 受控/非受控、清除、前后缀、组合输入法、`aria-describedby`                                     |
+| Checkbox / CheckboxGroup                                          | indeterminate、全选、`v-model` 数组、错误                                                     |
+| Radio / RadioGroup                                                | 方向键、roving tabindex、`data-selected`、错误                                                |
+| Switch / SwitchGroup                                              | `data-selected`、`data-hovered`、`data-pressed`、`data-focus-visible`（内部 slot 无伪类回退） |
+| NumberField                                                       | 步进、长按、格式、min/max、无效输入、spinbutton 语义                                          |
+| Slider                                                            | 单值/范围、键盘、`data-dragging`、RTL                                                         |
+| Form                                                              | 提交、校验聚合、错误聚焦顺序、`aria-live`                                                     |
 
 ## 关键实现点
 
@@ -95,12 +95,13 @@
 
 ## Risks
 
-| 风险 | 处理 |
-|---|---|
-| `useHover` 在触屏上误触发 | 只在 `(hover: hover)` 且非 touch 时启用；浏览器测试覆盖 |
-| `usePress` 与原生 click 双触发 | 统一 press 语义；文档说明 `@press` vs `@click` |
-| IME 组合期间 Enter 误提交 | 检查 `isComposing`；测试覆盖中文/日文输入 |
-| CheckboxGroup 的 indeterminate 级联 | 明确“全选/半选”规则；单测覆盖 |
-| Reka NumberField 与上游格式化差异 | 用 `@internationalized/number`；固定 locale fixture |
-| 表单错误 id 在 SSR 下重复 | `useId()` + field context；禁止手写随机 id |
+| 风险                                | 处理                                                    |
+| ----------------------------------- | ------------------------------------------------------- |
+| `useHover` 在触屏上误触发           | 只在 `(hover: hover)` 且非 touch 时启用；浏览器测试覆盖 |
+| `usePress` 与原生 click 双触发      | 统一 press 语义；文档说明 `@press` vs `@click`          |
+| IME 组合期间 Enter 误提交           | 检查 `isComposing`；测试覆盖中文/日文输入               |
+| CheckboxGroup 的 indeterminate 级联 | 明确“全选/半选”规则；单测覆盖                           |
+| Reka NumberField 与上游格式化差异   | 用 `@internationalized/number`；固定 locale fixture     |
+| 表单错误 id 在 SSR 下重复           | `useId()` + field context；禁止手写随机 id              |
+
 </content>

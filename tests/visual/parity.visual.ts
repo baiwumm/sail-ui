@@ -26,7 +26,7 @@ const GALLERY_SECTIONS = [
   "text",
   "typography",
   "empty-state",
-  "forms"
+  "forms",
 ] as const;
 
 type Theme = "light" | "dark";
@@ -42,12 +42,7 @@ async function openApp(page: Page, baseUrl: string, theme: Theme) {
   await page.waitForLoadState("networkidle");
 }
 
-async function expectParity(
-  vuePage: Page,
-  reactPage: Page,
-  selector: string,
-  label: string
-) {
+async function expectParity(vuePage: Page, reactPage: Page, selector: string, label: string) {
   const vueLocator = vuePage.locator(selector).first();
   const reactLocator = reactPage.locator(selector).first();
 
@@ -56,18 +51,18 @@ async function expectParity(
 
   const [vueShot, reactShot] = await Promise.all([
     vueLocator.screenshot({animations: "disabled", caret: "hide", scale: "css"}),
-    reactLocator.screenshot({animations: "disabled", caret: "hide", scale: "css"})
+    reactLocator.screenshot({animations: "disabled", caret: "hide", scale: "css"}),
   ]);
   const result = compareScreenshots(vueShot, reactShot, 0.1);
 
   test.info().annotations.push({
     type: label,
-    description: `diff=${result.diffPixels} ratio=${result.ratio.toFixed(5)}`
+    description: `diff=${result.diffPixels} ratio=${result.ratio.toFixed(5)}`,
   });
 
   expect(
     result.ratio,
-    `${label} differs from the React reference (${result.diffPixels} px)`
+    `${label} differs from the React reference (${result.diffPixels} px)`,
   ).toBeLessThanOrEqual(MAX_DIFF_RATIO);
 }
 
@@ -87,17 +82,14 @@ for (const theme of ["light", "dark"] as const) {
       }
 
       for (const page of [vuePage, reactPage]) {
-        await page
-          .locator("#buttons")
-          .getByRole("button", {name: "Primary", exact: true})
-          .hover();
+        await page.locator("#buttons").getByRole("button", {name: "Primary", exact: true}).hover();
       }
 
       await expectParity(
         vuePage,
         reactPage,
         "#buttons > div:nth-of-type(1)",
-        `button-hover-${theme}`
+        `button-hover-${theme}`,
       );
 
       for (const page of [vuePage, reactPage]) {
@@ -110,7 +102,7 @@ for (const theme of ["light", "dark"] as const) {
         vuePage,
         reactPage,
         "#buttons > div:nth-of-type(1)",
-        `button-focus-${theme}`
+        `button-focus-${theme}`,
       );
 
       await vuePage.close();
@@ -138,7 +130,7 @@ for (const theme of ["light", "dark"] as const) {
         vuePage,
         reactPage,
         '#input [data-slot="textfield"]:nth-of-type(1)',
-        `input-focus-${theme}`
+        `input-focus-${theme}`,
       );
 
       await vuePage.close();
@@ -160,12 +152,7 @@ for (const theme of ["light", "dark"] as const) {
         await page.locator(selectTrigger).hover();
       }
 
-      await expectParity(
-        vuePage,
-        reactPage,
-        selectTrigger,
-        `select-trigger-hover-${theme}`
-      );
+      await expectParity(vuePage, reactPage, selectTrigger, `select-trigger-hover-${theme}`);
 
       await vuePage.locator(selectTrigger).click();
       await reactPage.locator(selectTrigger).click();
@@ -173,7 +160,7 @@ for (const theme of ["light", "dark"] as const) {
         vuePage,
         reactPage,
         '[data-slot="select-popover"]',
-        `select-popover-${theme}`
+        `select-popover-${theme}`,
       );
 
       await vuePage.close();
@@ -195,21 +182,11 @@ for (const theme of ["light", "dark"] as const) {
         await page.locator(selector).hover();
       }
 
-      await expectParity(
-        vuePage,
-        reactPage,
-        selector,
-        `modal-trigger-hover-${theme}`
-      );
+      await expectParity(vuePage, reactPage, selector, `modal-trigger-hover-${theme}`);
 
       await vuePage.locator(selector).click();
       await reactPage.locator(selector).click();
-      await expectParity(
-        vuePage,
-        reactPage,
-        '[data-slot="modal-dialog"]',
-        `modal-dialog-${theme}`
-      );
+      await expectParity(vuePage, reactPage, '[data-slot="modal-dialog"]', `modal-dialog-${theme}`);
 
       await vuePage.close();
       await reactPage.close();

@@ -12,7 +12,7 @@ const context = useSelectContext();
 
 const hasCustomIndicator = computed(() => Boolean(slots.default));
 const classes = computed(() =>
-  cx(context.slots.value.indicator(), attrs.class as string | undefined)
+  cx(context.slots.value.indicator(), attrs.class as string | undefined),
 );
 </script>
 

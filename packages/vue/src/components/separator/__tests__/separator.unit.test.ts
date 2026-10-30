@@ -39,7 +39,7 @@ describe("Separator", () => {
 
   it("falls back to a div for decorative vertical hr", () => {
     const wrapper = mount(Separator, {
-      props: {elementType: "hr", isDecorative: true, orientation: "vertical"}
+      props: {elementType: "hr", isDecorative: true, orientation: "vertical"},
     });
 
     expect(wrapper.element.tagName).toBe("DIV");
@@ -51,7 +51,7 @@ describe("Separator", () => {
 
     expect(wrapper.element.tagName).toBe("SPAN");
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(["separator", "separator--horizontal", "separator--tertiary"])
+      expect.arrayContaining(["separator", "separator--horizontal", "separator--tertiary"]),
     );
   });
 });

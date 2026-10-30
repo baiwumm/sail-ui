@@ -26,24 +26,24 @@ HeroUI v3 的结构让移植变得可行：
 
 实测证据见 [上游审计](../research/heroui-v3-audit.md)。核心数字：
 
-| 指标 | 数值 |
-|---|---:|
-| CSS 文件 / 行数 | 96 / 9,959 |
-| 组件样式表 / 变体模块 | 86 / 85 |
-| 公共组件导出 | 84（含 1 个上游开发中组件；另有 2 个内部组合） |
-| React 源码唯一 `data-slot` | 334（完整提取；早期统计 332 漏掉两个对象键值） |
-| 上游 CSS `data-*` 选择器种类 | 65 |
-| Reka 导出 | 521 |
+| 指标                         |                                           数值 |
+| ---------------------------- | ---------------------------------------------: |
+| CSS 文件 / 行数              |                                     96 / 9,959 |
+| 组件样式表 / 变体模块        |                                        86 / 85 |
+| 公共组件导出                 | 84（含 1 个上游开发中组件；另有 2 个内部组合） |
+| React 源码唯一 `data-slot`   | 334（完整提取；早期统计 332 漏掉两个对象键值） |
+| 上游 CSS `data-*` 选择器种类 |                                             65 |
+| Reka 导出                    |                                            521 |
 
 ### 1.1 用户与场景
 
-| 用户 | 场景 | 关键诉求 |
-|---|---|---|
-| Vue 3 + Vite 产品团队 | 想要 HeroUI 的视觉与交互，但不想引入 React | 按需导入、类型完整、主题可控 |
-| Nuxt 4 团队 | 内容站/后台，需要 SSR 与自动导入 | 无 hydration mismatch、模块化接入、覆盖层 SSR 安全 |
-| 从 HeroUI React 迁移的团队 | 已有设计语言与页面，想换技术栈 | API 可映射、样式一致、迁移路径清晰 |
-| 组件库维护者/AI Agent | 跟随上游迭代，批量移植 | 契约可验证、上游同步可重复、失败可定位 |
-| 设计与 QA | 验收视觉与可访问性 | 截图对比、键盘清单、axe 结果可追溯 |
+| 用户                       | 场景                                       | 关键诉求                                           |
+| -------------------------- | ------------------------------------------ | -------------------------------------------------- |
+| Vue 3 + Vite 产品团队      | 想要 HeroUI 的视觉与交互，但不想引入 React | 按需导入、类型完整、主题可控                       |
+| Nuxt 4 团队                | 内容站/后台，需要 SSR 与自动导入           | 无 hydration mismatch、模块化接入、覆盖层 SSR 安全 |
+| 从 HeroUI React 迁移的团队 | 已有设计语言与页面，想换技术栈             | API 可映射、样式一致、迁移路径清晰                 |
+| 组件库维护者/AI Agent      | 跟随上游迭代，批量移植                     | 契约可验证、上游同步可重复、失败可定位             |
+| 设计与 QA                  | 验收视觉与可访问性                         | 截图对比、键盘清单、axe 结果可追溯                 |
 
 核心用户故事：
 
@@ -56,16 +56,16 @@ HeroUI v3 的结构让移植变得可行：
 
 ### 2.1 Goals
 
-| ID | 目标 | 成功标准 |
-|---|---|---|
-| G1 | **视觉一致** | 相同 fixture、主题、尺寸、状态下，与上游 React 参考的截图差异在阈值内；关键区域 0 像素差 |
-| G2 | **DOM/ARIA 契约一致** | `data-slot` 完全一致；CSS 依赖的 `data-*` 状态存在且值正确；角色/可访问名一致 |
-| G3 | **行为与可访问性一致** | 键盘路径、焦点管理、选择、关闭、类型筛选（typeahead）与上游一致；axe 无 critical/serious |
-| G4 | **SSR 可用** | Vue SSR 与 Nuxt 4 渲染无 hydration mismatch；关闭的覆盖层不产出 DOM；单请求状态隔离 |
-| G5 | **Vue/Nuxt DX** | 子路径导入、类型完整、Nuxt 自动导入、Tailwind v4 接入、主题可用 |
-| G6 | **可迁移** | HeroUI React 示例能通过迁移表映射到 Vue；API 差异有文档 |
-| G7 | **可维护** | 上游同步可在 1 人日内完成；新增/变化的属性会让 CI 红，而不是静默漂移 |
-| G8 | **可发布** | 包可打包、可安装、有 LICENSE/NOTICE、无未声明依赖、有 changesets 版本策略 |
+| ID  | 目标                   | 成功标准                                                                                 |
+| --- | ---------------------- | ---------------------------------------------------------------------------------------- |
+| G1  | **视觉一致**           | 相同 fixture、主题、尺寸、状态下，与上游 React 参考的截图差异在阈值内；关键区域 0 像素差 |
+| G2  | **DOM/ARIA 契约一致**  | `data-slot` 完全一致；CSS 依赖的 `data-*` 状态存在且值正确；角色/可访问名一致            |
+| G3  | **行为与可访问性一致** | 键盘路径、焦点管理、选择、关闭、类型筛选（typeahead）与上游一致；axe 无 critical/serious |
+| G4  | **SSR 可用**           | Vue SSR 与 Nuxt 4 渲染无 hydration mismatch；关闭的覆盖层不产出 DOM；单请求状态隔离      |
+| G5  | **Vue/Nuxt DX**        | 子路径导入、类型完整、Nuxt 自动导入、Tailwind v4 接入、主题可用                          |
+| G6  | **可迁移**             | HeroUI React 示例能通过迁移表映射到 Vue；API 差异有文档                                  |
+| G7  | **可维护**             | 上游同步可在 1 人日内完成；新增/变化的属性会让 CI 红，而不是静默漂移                     |
+| G8  | **可发布**             | 包可打包、可安装、有 LICENSE/NOTICE、无未声明依赖、有 changesets 版本策略                |
 
 ### 2.2 非目标
 
@@ -75,13 +75,13 @@ HeroUI v3 的结构让移植变得可行：
 
 ### 2.3 里程碑指标
 
-| 里程碑 | 组件数 | 必须证明 |
-|---|---:|---|
-| M0 | 4（Button / Input / Modal / Select） | 架构可行、视觉可对齐、SSR 干净、打包可安装 |
-| M1 | 43 | 展示类 + 表单类完整；主题/尺寸/状态矩阵；契约与视觉门禁 |
-| M2（MVP） | 65（其中 40 个为“核心 40”） | 覆盖层、集合、Toast；MVP 组件 API 稳定 |
-| M3 | 84 | 日期/颜色/高级 Table/ScrollShadow/Meter/OTP |
-| M4 | 84 | a11y/视觉/发布门禁；npm canary；迁移指南完成 |
+| 里程碑    |                               组件数 | 必须证明                                                |
+| --------- | -----------------------------------: | ------------------------------------------------------- |
+| M0        | 4（Button / Input / Modal / Select） | 架构可行、视觉可对齐、SSR 干净、打包可安装              |
+| M1        |                                   43 | 展示类 + 表单类完整；主题/尺寸/状态矩阵；契约与视觉门禁 |
+| M2（MVP） |          65（其中 40 个为“核心 40”） | 覆盖层、集合、Toast；MVP 组件 API 稳定                  |
+| M3        |                                   84 | 日期/颜色/高级 Table/ScrollShadow/Meter/OTP             |
+| M4        |                                   84 | a11y/视觉/发布门禁；npm canary；迁移指南完成            |
 
 > “核心 40”清单见 [Roadmap §MVP](../roadmap.md#mvp-40-components)。M2 会实现 65 个，但对外承诺的 MVP 是 40 个；Nuxt module 与文档站在 M4 收口。
 
@@ -191,12 +191,12 @@ Reka UI 2.11.0
 
 ### 5.5 四个行为原语
 
-| Composable | 用途 | 典型场景 |
-|---|---|---|
-| `useHover` | 指针 hover（排除触屏），输出 `data-hovered` | switch、radio-group、无 `:hover` 回退的 slot |
-| `usePress` | 指针 + 键盘激活，输出 `data-pressed` | accordion、radio、combobox、switch |
-| `useFocusRing` | `:focus-visible` + 程序化焦点，输出 `data-focus-visible` | 无原生回退的 3 处 |
-| `useOverlayState` | open/entering/exiting + exit hold | modal、drawer、popover、tooltip、toast |
+| Composable        | 用途                                                     | 典型场景                                     |
+| ----------------- | -------------------------------------------------------- | -------------------------------------------- |
+| `useHover`        | 指针 hover（排除触屏），输出 `data-hovered`              | switch、radio-group、无 `:hover` 回退的 slot |
+| `usePress`        | 指针 + 键盘激活，输出 `data-pressed`                     | accordion、radio、combobox、switch           |
+| `useFocusRing`    | `:focus-visible` + 程序化焦点，输出 `data-focus-visible` | 无原生回退的 3 处                            |
+| `useOverlayState` | open/entering/exiting + exit hold                        | modal、drawer、popover、tooltip、toast       |
 
 每个 composable 必须 SSR 安全、可销毁、无模块级全局状态。
 
@@ -261,18 +261,18 @@ Reka UI 2.11.0
 
 ### 6.1 全局门禁
 
-| ID | 门禁 | 通过标准 |
-|---|---|---|
-| A0 | Build & exports | `pnpm build` 通过；ESM 入口、子路径、类型声明可解析；`pnpm pack:check` 可在干净 fixture 安装 |
-| A1 | Contract | `data-slot` 与 CSS 期望完全一致；`data-*` 按 `attributes.json` 的面/值正确；无未知属性 |
-| A2 | Unit/behavior | 角色、可访问名、事件、焦点、受控/非受控、状态属性通过 |
-| A3 | SSR | 无 hydration mismatch；关闭覆盖层无 DOM；id 稳定；Toast 每请求隔离 |
-| A4 | Browser | 风险组件通过：指针、焦点陷阱、动画、几何、虚拟化 |
-| A5 | Visual | 状态 × 主题 × 尺寸对比上游；关键区域 0 像素差，整体 ≤ 0.1% |
-| A6 | A11y | axe 无 critical/serious；键盘清单逐项通过 |
-| A7 | Docs | 每个公共组件有 demo + props/events/slots 表 + 迁移差异 |
-| A8 | API | 导出、类型、事件 payload 与 ADR 0007 一致；无意外泄漏 Reka 类型 |
-| A9 | Sync | `gen:compat` 确定性；`manifest.json` 与上游快照一致 |
+| ID  | 门禁            | 通过标准                                                                                     |
+| --- | --------------- | -------------------------------------------------------------------------------------------- |
+| A0  | Build & exports | `pnpm build` 通过；ESM 入口、子路径、类型声明可解析；`pnpm pack:check` 可在干净 fixture 安装 |
+| A1  | Contract        | `data-slot` 与 CSS 期望完全一致；`data-*` 按 `attributes.json` 的面/值正确；无未知属性       |
+| A2  | Unit/behavior   | 角色、可访问名、事件、焦点、受控/非受控、状态属性通过                                        |
+| A3  | SSR             | 无 hydration mismatch；关闭覆盖层无 DOM；id 稳定；Toast 每请求隔离                           |
+| A4  | Browser         | 风险组件通过：指针、焦点陷阱、动画、几何、虚拟化                                             |
+| A5  | Visual          | 状态 × 主题 × 尺寸对比上游；关键区域 0 像素差，整体 ≤ 0.1%                                   |
+| A6  | A11y            | axe 无 critical/serious；键盘清单逐项通过                                                    |
+| A7  | Docs            | 每个公共组件有 demo + props/events/slots 表 + 迁移差异                                       |
+| A8  | API             | 导出、类型、事件 payload 与 ADR 0007 一致；无意外泄漏 Reka 类型                              |
+| A9  | Sync            | `gen:compat` 确定性；`manifest.json` 与上游快照一致                                          |
 
 ### 6.2 组件级验收
 
@@ -301,50 +301,50 @@ Reka UI 2.11.0
 
 ### 6.4 里程碑出口
 
-| 里程碑 | 出口条件 |
-|---|---|
-| M0 | 4 个 spike 组件在 Vite + Nuxt SSR 中运行；视觉对比通过；tarball 安装通过；dot-notation 结论已验证 |
-| M1 | 43 个组件 + 契约/视觉门禁 + 主题/尺寸矩阵；playground 可浏览 |
-| M2 | 65 个组件（含 40 核心）+ 覆盖层/Toast + 迁移指南初稿；Nuxt module/文档站留到 M4 |
-| M3 | 84 个组件 + 日期/颜色/高级 Table/ScrollShadow/Meter/OTP |
-| M4 | axe/视觉/发布门禁全绿；npm canary；NOTICE/LICENSE/依赖审计完成 |
+| 里程碑 | 出口条件                                                                                          |
+| ------ | ------------------------------------------------------------------------------------------------- |
+| M0     | 4 个 spike 组件在 Vite + Nuxt SSR 中运行；视觉对比通过；tarball 安装通过；dot-notation 结论已验证 |
+| M1     | 43 个组件 + 契约/视觉门禁 + 主题/尺寸矩阵；playground 可浏览                                      |
+| M2     | 65 个组件（含 40 核心）+ 覆盖层/Toast + 迁移指南初稿；Nuxt module/文档站留到 M4                   |
+| M3     | 84 个组件 + 日期/颜色/高级 Table/ScrollShadow/Meter/OTP                                           |
+| M4     | axe/视觉/发布门禁全绿；npm canary；NOTICE/LICENSE/依赖审计完成                                    |
 
 ## 7. Risks & Open Questions
 
 ### 7.1 Risks
 
-| 风险 | 影响 | 缓解 |
-|---|---|---|
-| 上游 CSS 静默变更 | 视觉漂移 | 版本固定 + 哈希清单 + 契约 CI + 视觉回归 |
-| Reka 升级改变属性 | 大面积回归 | 精确锁版本；升级单独 ticket；属性归属清单 |
-| 覆盖层退场时序 | 闪烁/卡住 | 复刻 exit hold；真动画浏览器测试；减少 `setTimeout` |
-| Table 被低估 | M3 延期 | TanStack 管数据；先做基础网格，列宽/虚拟化分阶段；T08 单独评审 |
-| 复合 API 误用 | 用户写 `<Select.Trigger>` 失败 | 文档/迁移表/运行时开发警告 |
-| SSR Toast 串请求 | 数据泄漏 | 每请求实例；Nuxt plugin；SSR fixture |
-| 子路径导出/类型 | 发布后不可用 | `pack:check` + 干净 fixture + `arethetypeswrong` 类检查 |
-| npm scope 未确认 | 发布阻塞 | M1 前完成 scope/org/商标确认 |
-| 上游许可不一致 | 法律风险 | Apache-2.0 + NOTICE；发布前法务确认 |
-| AI 生成量大但质量低 | 返工 | ticket 验收 + 契约/视觉门禁；小步提交 |
-| 单维护者带宽 | 延期 | MVP 40；批次交付；文档自动化 |
-| RTL / 浏览器差异 | 视觉/交互问题 | RTL 冒烟 + evergreen 浏览器矩阵 |
+| 风险                | 影响                           | 缓解                                                           |
+| ------------------- | ------------------------------ | -------------------------------------------------------------- |
+| 上游 CSS 静默变更   | 视觉漂移                       | 版本固定 + 哈希清单 + 契约 CI + 视觉回归                       |
+| Reka 升级改变属性   | 大面积回归                     | 精确锁版本；升级单独 ticket；属性归属清单                      |
+| 覆盖层退场时序      | 闪烁/卡住                      | 复刻 exit hold；真动画浏览器测试；减少 `setTimeout`            |
+| Table 被低估        | M3 延期                        | TanStack 管数据；先做基础网格，列宽/虚拟化分阶段；T08 单独评审 |
+| 复合 API 误用       | 用户写 `<Select.Trigger>` 失败 | 文档/迁移表/运行时开发警告                                     |
+| SSR Toast 串请求    | 数据泄漏                       | 每请求实例；Nuxt plugin；SSR fixture                           |
+| 子路径导出/类型     | 发布后不可用                   | `pack:check` + 干净 fixture + `arethetypeswrong` 类检查        |
+| npm scope 未确认    | 发布阻塞                       | M1 前完成 scope/org/商标确认                                   |
+| 上游许可不一致      | 法律风险                       | Apache-2.0 + NOTICE；发布前法务确认                            |
+| AI 生成量大但质量低 | 返工                           | ticket 验收 + 契约/视觉门禁；小步提交                          |
+| 单维护者带宽        | 延期                           | MVP 40；批次交付；文档自动化                                   |
+| RTL / 浏览器差异    | 视觉/交互问题                  | RTL 冒烟 + evergreen 浏览器矩阵                                |
 
 ### 7.2 Open Questions
 
-| # | 问题 | 建议 | 截止 |
-|---|---|---|---|
-| Q1 | 最低 Vue 版本 3.4 还是 3.5？ | 3.5（`useId` 稳定、生态一致） | M0 |
-| Q2 | npm scope / GitHub org / 域名 / 商标是否可用？ | 发布前重新核查并保留证据 | M1 |
-| Q3 | 是否联系 HeroUI 寻求社区背书？ | M0 后在 issue 中礼貌说明，不阻塞开发 | M0 |
-| Q4 | 文档语言？ | README 英文；核心 spec/AGENTS 中文；M2 后加英文文档 | M1 |
-| Q5 | MVP 是否包含 Table？ | 不包含；M3 交付基础 Table，虚拟化/列宽随后 | M1 |
-| Q6 | 日期/颜色是否进 MVP？ | 不进 MVP，M3 交付 | M0 |
-| Q7 | 浏览器矩阵？ | 最近两个大版本 evergreen + Safari 15.4+ | M1 |
-| Q8 | Toast API 命名？ | `useToast()` + `toast()` 方法；与 Reka manager 解耦 | T05 |
-| Q9 | Nuxt 默认前缀？ | `S`（`<SButton>`），可配置为空 | T09 |
-| Q10 | 是否提供迁移 codemod？ | 不提供；先完善映射表与文档 | 1.0 |
-| Q11 | 是否支持 RTL 全量？ | 冒烟 + 关键组件（Modal/Drawer/Select/Table） | M3 |
-| Q12 | 版本与发布节奏？ | changesets；MVP 前 `0.x`；MVP 后两周一次 | M2 |
-| Q13 | 是否提供 `disabled` 别名？ | 不提供；保持 `isDisabled` | 1.0 |
+| #   | 问题                                           | 建议                                                | 截止 |
+| --- | ---------------------------------------------- | --------------------------------------------------- | ---- |
+| Q1  | 最低 Vue 版本 3.4 还是 3.5？                   | 3.5（`useId` 稳定、生态一致）                       | M0   |
+| Q2  | npm scope / GitHub org / 域名 / 商标是否可用？ | 发布前重新核查并保留证据                            | M1   |
+| Q3  | 是否联系 HeroUI 寻求社区背书？                 | M0 后在 issue 中礼貌说明，不阻塞开发                | M0   |
+| Q4  | 文档语言？                                     | README 英文；核心 spec/AGENTS 中文；M2 后加英文文档 | M1   |
+| Q5  | MVP 是否包含 Table？                           | 不包含；M3 交付基础 Table，虚拟化/列宽随后          | M1   |
+| Q6  | 日期/颜色是否进 MVP？                          | 不进 MVP，M3 交付                                   | M0   |
+| Q7  | 浏览器矩阵？                                   | 最近两个大版本 evergreen + Safari 15.4+             | M1   |
+| Q8  | Toast API 命名？                               | `useToast()` + `toast()` 方法；与 Reka manager 解耦 | T05  |
+| Q9  | Nuxt 默认前缀？                                | `S`（`<SButton>`），可配置为空                      | T09  |
+| Q10 | 是否提供迁移 codemod？                         | 不提供；先完善映射表与文档                          | 1.0  |
+| Q11 | 是否支持 RTL 全量？                            | 冒烟 + 关键组件（Modal/Drawer/Select/Table）        | M3   |
+| Q12 | 版本与发布节奏？                               | changesets；MVP 前 `0.x`；MVP 后两周一次            | M2   |
+| Q13 | 是否提供 `disabled` 别名？                     | 不提供；保持 `isDisabled`                           | 1.0  |
 
 ### 7.3 待验证假设
 

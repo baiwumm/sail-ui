@@ -14,22 +14,23 @@ const pointer = (element: Element, type: string, init: PointerEventInit = {}) =>
       bubbles: true,
       pointerId: 1,
       pointerType: "mouse",
-      ...init
-    })
+      ...init,
+    }),
   );
 };
 
 const radio = (value: string, label: string) =>
-  h(Radio, {value}, {
-    default: () => [
-      h(RadioContent, null, {
-        default: () => [
-          h(RadioControl, null, {default: () => [h(RadioIndicator)]}),
-          label
-        ]
-      })
-    ]
-  });
+  h(
+    Radio,
+    {value},
+    {
+      default: () => [
+        h(RadioContent, null, {
+          default: () => [h(RadioControl, null, {default: () => [h(RadioIndicator)]}), label],
+        }),
+      ],
+    },
+  );
 
 describe("Radio", () => {
   it("renders the upstream slots", () => {
@@ -38,12 +39,9 @@ describe("Radio", () => {
       slots: {
         default: () =>
           h(RadioContent, null, {
-            default: () => [
-              h(RadioControl, null, {default: () => [h(RadioIndicator)]}),
-              "A"
-            ]
-          })
-      }
+            default: () => [h(RadioControl, null, {default: () => [h(RadioIndicator)]}), "A"],
+          }),
+      },
     });
 
     expect(wrapper.get('[data-slot="radio"]').classes()).toContain("radio");
@@ -56,10 +54,11 @@ describe("Radio", () => {
     const wrapper = mount(
       defineComponent({
         setup() {
-          return () => h(RadioGroup, {modelValue: "b"}, {default: () => [radio("a", "A"), radio("b", "B")]});
-        }
+          return () =>
+            h(RadioGroup, {modelValue: "b"}, {default: () => [radio("a", "A"), radio("b", "B")]});
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const inputs = wrapper.findAll('input[type="radio"]');
@@ -80,10 +79,11 @@ describe("Radio", () => {
     const wrapper = mount(
       defineComponent({
         setup() {
-          return () => h(RadioGroup, {modelValue: "b"}, {default: () => [radio("a", "A"), radio("b", "B")]});
-        }
+          return () =>
+            h(RadioGroup, {modelValue: "b"}, {default: () => [radio("a", "A"), radio("b", "B")]});
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const inputs = wrapper.findAll('input[type="radio"]');
@@ -98,7 +98,7 @@ describe("Radio", () => {
     const wrapper = mount(Radio, {
       attachTo: document.body,
       props: {value: "a"},
-      slots: {default: () => h(RadioContent, null, {default: () => "A"})}
+      slots: {default: () => h(RadioContent, null, {default: () => "A"})},
     });
     const content = wrapper.get('[data-slot="radio-content"]');
 
@@ -124,13 +124,13 @@ describe("Radio", () => {
               RadioGroup,
               {
                 modelValue: value.value,
-                "onUpdate:modelValue": (next: string | undefined) => (value.value = next)
+                "onUpdate:modelValue": (next: string | undefined) => (value.value = next),
               },
-              {default: () => [radio("a", "A"), radio("b", "B")]}
+              {default: () => [radio("a", "A"), radio("b", "B")]},
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const inputs = wrapper.findAll('input[type="radio"]');

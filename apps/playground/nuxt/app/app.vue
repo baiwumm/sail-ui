@@ -10,7 +10,7 @@ import {
   ModalContainer,
   ModalDialog,
   ModalHeading,
-  ModalTrigger
+  ModalTrigger,
 } from "@sail-ui/vue/modal";
 import {
   Select,
@@ -20,7 +20,7 @@ import {
   SelectListBox,
   SelectPopover,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "@sail-ui/vue/select";
 import {ref} from "vue";
 
@@ -34,39 +34,23 @@ const modalOpen = ref(false);
 const states = [
   {id: "california", label: "California"},
   {id: "texas", label: "Texas"},
-  {id: "new-york", label: "New York"}
+  {id: "new-york", label: "New York"},
 ];
 </script>
 
 <template>
   <main class="mx-auto flex max-w-3xl flex-col gap-8 p-8">
-    <h1 class="text-2xl font-semibold">
-      Sail UI Nuxt fixture
-    </h1>
+    <h1 class="text-2xl font-semibold">Sail UI Nuxt fixture</h1>
 
-    <Button
-      id="ssr-button"
-      variant="primary"
-    >
-      SSR Button
-    </Button>
+    <Button id="ssr-button" variant="primary"> SSR Button </Button>
 
-    <TextField
-      class="max-w-sm"
-      full-width
-    >
+    <TextField class="max-w-sm" full-width>
       <Label>Name</Label>
-      <Input
-        id="ssr-input"
-        v-model="name"
-        placeholder="Your name"
-      />
+      <Input id="ssr-input" v-model="name" placeholder="Your name" />
     </TextField>
 
     <Modal v-model:open="modalOpen">
-      <ModalTrigger class="button button--secondary button--md">
-        Open Modal
-      </ModalTrigger>
+      <ModalTrigger class="button button--secondary button--md"> Open Modal </ModalTrigger>
       <ModalBackdrop>
         <ModalContainer>
           <ModalDialog>
@@ -78,12 +62,7 @@ const states = [
       </ModalBackdrop>
     </Modal>
 
-    <Select
-      id="ssr-select"
-      v-model="state"
-      class="w-64"
-      placeholder="Select one"
-    >
+    <Select id="ssr-select" v-model="state" class="w-64" placeholder="Select one">
       <Label>State</Label>
       <SelectTrigger aria-label="State">
         <SelectValue />

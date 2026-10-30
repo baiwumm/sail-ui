@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<SliderRootProps>(), {
   isDisabled: false,
   min: 0,
   max: 100,
-  step: 1
+  step: 1,
 });
 
 const model = defineModel<number | number[]>();
@@ -42,17 +42,13 @@ const sliderModel = computed<number[]>({
   get: () => values.value,
   set: (next) => {
     model.value = Array.isArray(model.value) ? next : next[0];
-  }
+  },
 });
 
 const classes = computed(() => cx(sliderVariants().base(), className.value));
 
 const formatter = computed(
-  () =>
-    new Intl.NumberFormat(
-      props.locale,
-      props.formatOptions ?? {maximumFractionDigits: 2}
-    )
+  () => new Intl.NumberFormat(props.locale, props.formatOptions ?? {maximumFractionDigits: 2}),
 );
 
 function percentOf(value: number) {
@@ -84,7 +80,7 @@ provide(sliderContextKey, {
   isDragging,
   labelId,
   format: (value: number) => formatter.value.format(value),
-  percentOf
+  percentOf,
 });
 
 // The label of a slider labels the thumb, so it renders as a span instead of

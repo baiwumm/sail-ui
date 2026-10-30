@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<InputGroupRootProps>(), {
   variant: "primary",
   fullWidth: false,
   isDisabled: false,
-  isInvalid: false
+  isInvalid: false,
 });
 
 const {className, forwarded} = useForwardedAttrs();
@@ -24,15 +24,15 @@ const {isHovered} = useHover(groupRef, {isDisabled: computed(() => props.isDisab
 const slots = computed(() =>
   inputGroupVariants({
     fullWidth: props.fullWidth,
-    variant: props.variant
-  })
+    variant: props.variant,
+  }),
 );
 
 const classes = computed(() => cx(slots.value.base(), className.value));
 
 provide(inputGroupContextKey, {
   isDisabled: computed(() => props.isDisabled),
-  isInvalid: computed(() => props.isInvalid)
+  isInvalid: computed(() => props.isInvalid),
 });
 
 /**
@@ -48,7 +48,7 @@ function handleClick(event: MouseEvent) {
 
   const target = event.target as HTMLElement | null;
   const control = group.querySelector<HTMLElement>(
-    '[data-slot="input-group-input"], [data-slot="input-group-textarea"]'
+    '[data-slot="input-group-input"], [data-slot="input-group-textarea"]',
   );
 
   if (control && target !== control && !control.contains(target)) {

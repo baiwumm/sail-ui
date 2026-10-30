@@ -27,11 +27,11 @@ Reka 不发射 `data-hovered`、`data-focus-visible`、`data-open`、`data-enter
 
 三层职责：
 
-| 层 | 职责 |
-|---|---|
-| `@sail-ui/vue` | SFC、`tv()` 变体、`data-slot`、状态属性、组合 API |
+| 层                    | 职责                                              |
+| --------------------- | ------------------------------------------------- |
+| `@sail-ui/vue`        | SFC、`tv()` 变体、`data-slot`、状态属性、组合 API |
 | `@sail-ui/primitives` | Reka 空白处的 4 个 composable + overlay exit hold |
-| `@sail-ui/styles` | 上游 CSS + 生成的 `compat.css` |
+| `@sail-ui/styles`     | 上游 CSS + 生成的 `compat.css`                    |
 
 不移植 RAC，不做 React 兼容运行时，不手写另一套全量无头组件。
 

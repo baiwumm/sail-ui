@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<RadioGroupRootProps>(), {
   orientation: "vertical",
   isDisabled: false,
   isInvalid: false,
-  isRequired: false
+  isRequired: false,
 });
 
 const model = defineModel<string>();
@@ -20,9 +20,7 @@ const {className, forwarded} = useForwardedAttrs();
 const generatedName = useId();
 
 const name = computed(() => props.name ?? generatedName);
-const classes = computed(() =>
-  cx(radioGroupVariants({variant: props.variant}), className.value)
-);
+const classes = computed(() => cx(radioGroupVariants({variant: props.variant}), className.value));
 
 provide(radioGroupContextKey, {
   name,
@@ -37,7 +35,7 @@ provide(radioGroupContextKey, {
     }
 
     model.value = value;
-  }
+  },
 });
 </script>
 

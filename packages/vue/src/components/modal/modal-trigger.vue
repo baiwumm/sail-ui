@@ -11,7 +11,7 @@ defineOptions({name: "SailModalTrigger", inheritAttrs: false});
 
 const props = withDefaults(defineProps<ModalTriggerProps>(), {
   isDisabled: false,
-  type: "button"
+  type: "button",
 });
 
 const attrs = useAttrs();
@@ -22,9 +22,7 @@ const isDisabled = computed(() => props.isDisabled);
 const {isHovered} = useHover(buttonRef, {isDisabled});
 const {isFocusVisible} = useFocusRing(buttonRef, {isDisabled});
 
-const classes = computed(() =>
-  cx(slots.value.trigger(), attrs.class as string | undefined)
-);
+const classes = computed(() => cx(slots.value.trigger(), attrs.class as string | undefined));
 </script>
 
 <template>

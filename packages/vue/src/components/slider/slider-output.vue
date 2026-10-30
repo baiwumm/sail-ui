@@ -15,7 +15,7 @@ const {className, forwarded} = useForwardedAttrs();
 const classes = computed(() => cx(sliderVariants().output(), className.value));
 
 const label = computed(() =>
-  context.values.value.map((value) => context.format(value)).join(" – ")
+  context.values.value.map((value) => context.format(value)).join(" – "),
 );
 </script>
 

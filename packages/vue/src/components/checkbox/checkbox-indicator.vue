@@ -19,12 +19,7 @@ const classes = computed(() => cx("checkbox__indicator", className.value));
 </script>
 
 <template>
-  <span
-    v-bind="forwarded"
-    aria-hidden="true"
-    :class="classes"
-    :data-slot="'checkbox-indicator'"
-  >
+  <span v-bind="forwarded" aria-hidden="true" :class="classes" :data-slot="'checkbox-indicator'">
     <slot>
       <svg
         aria-hidden="true"
@@ -52,12 +47,7 @@ const classes = computed(() => cx("checkbox__indicator", className.value));
         stroke-width="3"
         viewBox="0 0 24 24"
       >
-        <line
-          x1="21"
-          x2="3"
-          y1="12"
-          y2="12"
-        />
+        <line x1="21" x2="3" y1="12" y2="12" />
       </svg>
     </slot>
   </span>

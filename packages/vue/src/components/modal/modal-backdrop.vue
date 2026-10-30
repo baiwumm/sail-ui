@@ -9,7 +9,7 @@ import type {ModalBackdropProps} from "./types";
 defineOptions({name: "SailModalBackdrop", inheritAttrs: false});
 
 const props = withDefaults(defineProps<ModalBackdropProps>(), {
-  isDismissable: true
+  isDismissable: true,
 });
 
 const attrs = useAttrs();
@@ -17,19 +17,17 @@ const context = useModalContext();
 
 const mergedSlots = computed(() => ({
   ...context.slots.value,
-  ...modalVariants({variant: props.variant})
+  ...modalVariants({variant: props.variant}),
 }));
 const isDismissable = computed(() => props.isDismissable);
 
 provide(modalContextKey, {
   ...context,
   isDismissable,
-  slots: mergedSlots
+  slots: mergedSlots,
 });
 
-const classes = computed(() =>
-  cx(mergedSlots.value.backdrop(), attrs.class as string | undefined)
-);
+const classes = computed(() => cx(mergedSlots.value.backdrop(), attrs.class as string | undefined));
 
 // Function refs also run on unmount, so a closed overlay never keeps a stale element.
 function setBackdropRef(element: unknown) {

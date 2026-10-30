@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<SelectRootProps>(), {
   isDisabled: false,
   isInvalid: false,
   isRequired: false,
-  variant: "primary"
+  variant: "primary",
 });
 
 const attrs = useAttrs();
@@ -27,12 +27,10 @@ const overlay = useOverlayState({
   defaultOpen: props.defaultOpen,
   onOpenChange: (isOpen) => {
     openModel.value = isOpen;
-  }
+  },
 });
 
-const slots = computed(() =>
-  selectVariants({fullWidth: props.fullWidth, variant: props.variant})
-);
+const slots = computed(() => selectVariants({fullWidth: props.fullWidth, variant: props.variant}));
 const isDisabled = computed(() => props.isDisabled);
 
 let clearButtonCount = 0;
@@ -62,12 +60,10 @@ provide<SelectContext>(selectContextKey, {
   modelValue: model,
   placeholder: computed(() => props.placeholder),
   registerClearButton,
-  slots
+  slots,
 });
 
-const classes = computed(() =>
-  cx(slots.value.base(), attrs.class as string | undefined)
-);
+const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
 
 function handleOpenChange(isOpen: boolean) {
   if (isOpen) {
@@ -80,7 +76,7 @@ function handleOpenChange(isOpen: boolean) {
 defineExpose({
   open: overlay.open,
   close: overlay.close,
-  isOpen: overlay.isOpen
+  isOpen: overlay.isOpen,
 });
 </script>
 

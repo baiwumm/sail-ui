@@ -9,14 +9,12 @@ import type {ProgressBarTrackProps} from "./types";
 defineOptions({name: "SailProgressBarTrack", inheritAttrs: false});
 
 withDefaults(defineProps<ProgressBarTrackProps>(), {
-  as: "div"
+  as: "div",
 });
 
 const attrs = useAttrs();
 const context = inject(progressBarContextKey, null);
-const classes = computed(() =>
-  cx(context?.slots.value.track(), attrs.class as string | undefined)
-);
+const classes = computed(() => cx(context?.slots.value.track(), attrs.class as string | undefined));
 </script>
 
 <template>

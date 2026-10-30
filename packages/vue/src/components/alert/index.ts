@@ -9,7 +9,7 @@ const Alert = Object.assign(AlertRoot, {
   Indicator: AlertIndicator,
   Content: AlertContent,
   Title: AlertTitle,
-  Description: AlertDescription
+  Description: AlertDescription,
 });
 
 export {Alert, AlertRoot, AlertIndicator, AlertContent, AlertTitle, AlertDescription};
@@ -18,6 +18,6 @@ export type {
   AlertIndicatorProps,
   AlertContentProps,
   AlertTitleProps,
-  AlertDescriptionProps
+  AlertDescriptionProps,
 } from "./types";
 export {alertVariants, type AlertVariants} from "@sail-ui/styles";

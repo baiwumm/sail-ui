@@ -3,13 +3,13 @@ import BreadcrumbsRoot from "./breadcrumbs-root.vue";
 
 const Breadcrumbs = Object.assign(BreadcrumbsRoot, {
   Root: BreadcrumbsRoot,
-  Item: BreadcrumbsItem
+  Item: BreadcrumbsItem,
 });
 
 export {Breadcrumbs, BreadcrumbsRoot, BreadcrumbsItem};
 export type {
   BreadcrumbsRootProps,
   BreadcrumbsRootProps as BreadcrumbsProps,
-  BreadcrumbsItemProps
+  BreadcrumbsItemProps,
 } from "./types";
 export {breadcrumbsVariants, type BreadcrumbsVariants} from "@sail-ui/styles";

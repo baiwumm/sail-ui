@@ -15,11 +15,7 @@ const classes = computed(() => cx("switch__control", className.value));
 </script>
 
 <template>
-  <span
-    v-bind="forwarded"
-    :class="classes"
-    :data-slot="'switch-control'"
-  >
+  <span v-bind="forwarded" :class="classes" :data-slot="'switch-control'">
     <slot />
   </span>
 </template>

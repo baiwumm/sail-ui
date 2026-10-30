@@ -24,15 +24,15 @@
 
 ## Scope
 
-| 包 | 内容 |
-|---|---|
-| `packages/styles` | `upstream/` 快照、`scripts/gen-compat.mjs`、`attributes.json`、`generated/`、入口 `index.css` |
-| `packages/primitives` | `useHover`、`usePress`、`useFocusRing`、`useOverlayState`（含 exit hold） |
-| `packages/vue` | `button`、`input`、`modal`、`select`；`cn`/`tv` 工具；子路径 exports |
-| `packages/testing` | SSR render helper、契约快照 helper、视觉 helper |
-| `apps/playground` | Vite + Vue fixture；并排 React 参考（或静态基线截图） |
-| `apps/playground/nuxt` | Nuxt 4 SSR fixture |
-| 根 | `pnpm-workspace.yaml`、`tsconfig`、eslint/prettier、vitest、turbo、changesets stub |
+| 包                     | 内容                                                                                          |
+| ---------------------- | --------------------------------------------------------------------------------------------- |
+| `packages/styles`      | `upstream/` 快照、`scripts/gen-compat.mjs`、`attributes.json`、`generated/`、入口 `index.css` |
+| `packages/primitives`  | `useHover`、`usePress`、`useFocusRing`、`useOverlayState`（含 exit hold）                     |
+| `packages/vue`         | `button`、`input`、`modal`、`select`；`cn`/`tv` 工具；子路径 exports                          |
+| `packages/testing`     | SSR render helper、契约快照 helper、视觉 helper                                               |
+| `apps/playground`      | Vite + Vue fixture；并排 React 参考（或静态基线截图）                                         |
+| `apps/playground/nuxt` | Nuxt 4 SSR fixture                                                                            |
+| 根                     | `pnpm-workspace.yaml`、`tsconfig`、eslint/prettier、vitest、turbo、changesets stub            |
 
 ## Decisions to validate
 
@@ -112,11 +112,12 @@ pnpm pack:check         # tarball 安装
 
 ## Risks
 
-| 风险 | 处理 |
-|---|---|
-| Tailwind v4 对上游 `@apply`/layer 的兼容问题 | 先只编译 Button/Input 的 CSS，逐步扩大；记录失败规则 |
-| Reka 的 `data-state` 与上游 `data-open` 时序不一致 | 在组件层归一化；契约测试锁定 |
-| WebKit 退场动画 pending | 复刻 exit hold；浏览器测试留 WebKit 项目 |
-| 子路径导出类型解析 | `pack:check` + `moduleResolution: bundler` fixture |
-| scope 未确认 | 不阻塞 T01；在 T09 前完成 |
+| 风险                                               | 处理                                                 |
+| -------------------------------------------------- | ---------------------------------------------------- |
+| Tailwind v4 对上游 `@apply`/layer 的兼容问题       | 先只编译 Button/Input 的 CSS，逐步扩大；记录失败规则 |
+| Reka 的 `data-state` 与上游 `data-open` 时序不一致 | 在组件层归一化；契约测试锁定                         |
+| WebKit 退场动画 pending                            | 复刻 exit hold；浏览器测试留 WebKit 项目             |
+| 子路径导出类型解析                                 | `pack:check` + `moduleResolution: bundler` fixture   |
+| scope 未确认                                       | 不阻塞 T01；在 T09 前完成                            |
+
 </content>

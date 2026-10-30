@@ -12,8 +12,8 @@ const pointer = (element: Element, type: string, init: PointerEventInit = {}) =>
       bubbles: true,
       pointerId: 1,
       pointerType: "mouse",
-      ...init
-    })
+      ...init,
+    }),
   );
 };
 
@@ -21,7 +21,7 @@ describe("ToggleButton", () => {
   it("renders the upstream slot and variant classes", () => {
     const wrapper = mount(ToggleButton, {
       props: {variant: "ghost", size: "sm", isIconOnly: true},
-      slots: {default: "Bold"}
+      slots: {default: "Bold"},
     });
     const button = wrapper.get('[data-slot="toggle-button"]');
 
@@ -44,13 +44,13 @@ describe("ToggleButton", () => {
               {
                 modelValue: pressed.value,
                 "onUpdate:modelValue": (value: boolean | undefined) =>
-                  (pressed.value = Boolean(value))
+                  (pressed.value = Boolean(value)),
               },
-              {default: () => "Bold"}
+              {default: () => "Bold"},
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     await wrapper.get("button").trigger("click");
@@ -65,7 +65,7 @@ describe("ToggleButton", () => {
   it("reports hover, press, and focus states", async () => {
     const wrapper = mount(ToggleButton, {
       attachTo: document.body,
-      slots: {default: "Bold"}
+      slots: {default: "Bold"},
     });
     const button = wrapper.get('[data-slot="toggle-button"]');
 
@@ -109,19 +109,23 @@ describe("ToggleButtonGroup", () => {
       defineComponent({
         setup() {
           return () =>
-            h(ToggleButtonGroup, {type: "multiple"}, {
-              default: () => [
-                h(ToggleButton, {value: "bold"}, {default: () => "Bold"}),
-                h(ToggleButtonGroupSeparator),
-                h(ToggleButton, {value: "italic"}, {default: () => "Italic"})
-              ]
-            });
-        }
-      })
+            h(
+              ToggleButtonGroup,
+              {type: "multiple"},
+              {
+                default: () => [
+                  h(ToggleButton, {value: "bold"}, {default: () => "Bold"}),
+                  h(ToggleButtonGroupSeparator),
+                  h(ToggleButton, {value: "italic"}, {default: () => "Italic"}),
+                ],
+              },
+            );
+        },
+      }),
     );
 
     expect(wrapper.get('[data-slot="toggle-button-group"]').classes()).toContain(
-      "toggle-button-group--horizontal"
+      "toggle-button-group--horizontal",
     );
     expect(wrapper.findAll('[data-slot="toggle-button-group-separator"]')).toHaveLength(1);
   });
@@ -139,18 +143,18 @@ describe("ToggleButtonGroup", () => {
                 type: "multiple",
                 modelValue: values.value,
                 "onUpdate:modelValue": (next: string | string[] | undefined) =>
-                  (values.value = Array.isArray(next) ? next : next ? [next] : [])
+                  (values.value = Array.isArray(next) ? next : next ? [next] : []),
               },
               {
                 default: () => [
                   h(ToggleButton, {value: "bold"}, {default: () => "Bold"}),
-                  h(ToggleButton, {value: "italic"}, {default: () => "Italic"})
-                ]
-              }
+                  h(ToggleButton, {value: "italic"}, {default: () => "Italic"}),
+                ],
+              },
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const buttons = wrapper.findAll('[data-slot="toggle-button"]');
@@ -179,18 +183,18 @@ describe("ToggleButtonGroup", () => {
                 type: "single",
                 modelValue: values.value,
                 "onUpdate:modelValue": (next: string | string[] | undefined) =>
-                  (values.value = Array.isArray(next) ? next[0] : next)
+                  (values.value = Array.isArray(next) ? next[0] : next),
               },
               {
                 default: () => [
                   h(ToggleButton, {value: "bold"}, {default: () => "Bold"}),
-                  h(ToggleButton, {value: "italic"}, {default: () => "Italic"})
-                ]
-              }
+                  h(ToggleButton, {value: "italic"}, {default: () => "Italic"}),
+                ],
+              },
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const buttons = wrapper.findAll('[data-slot="toggle-button"]');
@@ -211,11 +215,15 @@ describe("ToggleButtonGroup", () => {
       defineComponent({
         setup() {
           return () =>
-            h(ToggleButtonGroup, {type: "multiple", size: "lg", isDisabled: true}, {
-              default: () => [h(ToggleButton, {value: "bold"}, {default: () => "Bold"})]
-            });
-        }
-      })
+            h(
+              ToggleButtonGroup,
+              {type: "multiple", size: "lg", isDisabled: true},
+              {
+                default: () => [h(ToggleButton, {value: "bold"}, {default: () => "Bold"})],
+              },
+            );
+        },
+      }),
     );
 
     const button = wrapper.get('[data-slot="toggle-button"]');

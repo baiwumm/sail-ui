@@ -20,7 +20,7 @@ export function useDocumentDirection(): Ref<"ltr" | "rtl"> {
     observer = new MutationObserver(update);
     observer.observe(document.documentElement, {
       attributeFilter: ["dir"],
-      attributes: true
+      attributes: true,
     });
   });
 

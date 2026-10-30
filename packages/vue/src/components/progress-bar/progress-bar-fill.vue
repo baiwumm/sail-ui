@@ -9,7 +9,7 @@ import type {ProgressBarFillProps} from "./types";
 defineOptions({name: "SailProgressBarFill", inheritAttrs: false});
 
 withDefaults(defineProps<ProgressBarFillProps>(), {
-  as: "div"
+  as: "div",
 });
 
 const attrs = useAttrs();
@@ -21,9 +21,7 @@ const classes = computed(() => {
   return cx(fill?.(), attrs.class as string | undefined);
 });
 const style = computed(() =>
-  context?.isIndeterminate.value
-    ? undefined
-    : {width: `${context?.percentage.value ?? 0}%`}
+  context?.isIndeterminate.value ? undefined : {width: `${context?.percentage.value ?? 0}%`},
 );
 </script>
 

@@ -15,15 +15,19 @@ describe("Slider", () => {
       defineComponent({
         setup() {
           return () =>
-            h(Slider, {modelValue: 30}, {
-              default: () => [
-                h(Label, null, {default: () => "Volume"}),
-                h(SliderOutput),
-                h(SliderTrack, null, {default: () => [h(SliderFill), h(SliderThumb)]})
-              ]
-            });
-        }
-      })
+            h(
+              Slider,
+              {modelValue: 30},
+              {
+                default: () => [
+                  h(Label, null, {default: () => "Volume"}),
+                  h(SliderOutput),
+                  h(SliderTrack, null, {default: () => [h(SliderFill), h(SliderThumb)]}),
+                ],
+              },
+            );
+        },
+      }),
     );
 
     expect(wrapper.get('[data-slot="slider"]').classes()).toContain("slider");
@@ -38,13 +42,17 @@ describe("Slider", () => {
       defineComponent({
         setup() {
           return () =>
-            h(Slider, {modelValue: 25, max: 100}, {
-              default: () => [
-                h(SliderTrack, null, {default: () => [h(SliderFill), h(SliderThumb)]})
-              ]
-            });
-        }
-      })
+            h(
+              Slider,
+              {modelValue: 25, max: 100},
+              {
+                default: () => [
+                  h(SliderTrack, null, {default: () => [h(SliderFill), h(SliderThumb)]}),
+                ],
+              },
+            );
+        },
+      }),
     );
 
     expect(wrapper.get('[data-slot="slider-fill"]').attributes("style")).toContain("width: 25%");
@@ -57,13 +65,17 @@ describe("Slider", () => {
       defineComponent({
         setup() {
           return () =>
-            h(Slider, {modelValue: 25, dir: "rtl"}, {
-              default: () => [
-                h(SliderTrack, null, {default: () => [h(SliderFill), h(SliderThumb)]})
-              ]
-            });
-        }
-      })
+            h(
+              Slider,
+              {modelValue: 25, dir: "rtl"},
+              {
+                default: () => [
+                  h(SliderTrack, null, {default: () => [h(SliderFill), h(SliderThumb)]}),
+                ],
+              },
+            );
+        },
+      }),
     );
 
     expect(wrapper.get('[data-slot="slider-thumb"]').attributes("style")).toContain("left: 75%");
@@ -82,17 +94,17 @@ describe("Slider", () => {
               {
                 modelValue: value.value,
                 "onUpdate:modelValue": (next: number | number[] | undefined) =>
-                  (value.value = Array.isArray(next) ? (next[0] ?? 0) : (next ?? 0))
+                  (value.value = Array.isArray(next) ? (next[0] ?? 0) : (next ?? 0)),
               },
               {
                 default: () => [
-                  h(SliderTrack, null, {default: () => [h(SliderFill), h(SliderThumb)]})
-                ]
-              }
+                  h(SliderTrack, null, {default: () => [h(SliderFill), h(SliderThumb)]}),
+                ],
+              },
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const thumb = wrapper.get('[data-slot="slider-thumb"]');
@@ -113,13 +125,17 @@ describe("Slider", () => {
       defineComponent({
         setup() {
           return () =>
-            h(Slider, {modelValue: [20, 60]}, {
-              default: () => [
-                h(SliderTrack, null, {default: () => [h(SliderFill), h(SliderThumb)]})
-              ]
-            });
-        }
-      })
+            h(
+              Slider,
+              {modelValue: [20, 60]},
+              {
+                default: () => [
+                  h(SliderTrack, null, {default: () => [h(SliderFill), h(SliderThumb)]}),
+                ],
+              },
+            );
+        },
+      }),
     );
 
     const track = wrapper.get('[data-slot="slider-track"]');

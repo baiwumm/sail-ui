@@ -10,14 +10,14 @@ import type {ProgressBarOutputProps} from "./types";
 defineOptions({name: "SailProgressBarOutput", inheritAttrs: false});
 
 withDefaults(defineProps<ProgressBarOutputProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();
 const componentSlots = useSlots() as Slots;
 const context = inject(progressBarContextKey, null);
 const classes = computed(() =>
-  cx(context?.slots.value.output(), attrs.class as string | undefined)
+  cx(context?.slots.value.output(), attrs.class as string | undefined),
 );
 const hasContent = computed(() => hasSlotContent(componentSlots.default));
 </script>

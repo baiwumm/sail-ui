@@ -9,7 +9,7 @@ import type {CardHeaderProps} from "./types";
 defineOptions({name: "SailCardHeader", inheritAttrs: false});
 
 withDefaults(defineProps<CardHeaderProps>(), {
-  as: "div"
+  as: "div",
 });
 
 const attrs = useAttrs();

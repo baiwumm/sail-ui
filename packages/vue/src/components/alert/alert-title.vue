@@ -9,7 +9,7 @@ import type {AlertTitleProps} from "./types";
 defineOptions({name: "SailAlertTitle", inheritAttrs: false});
 
 withDefaults(defineProps<AlertTitleProps>(), {
-  as: "p"
+  as: "p",
 });
 
 const attrs = useAttrs();

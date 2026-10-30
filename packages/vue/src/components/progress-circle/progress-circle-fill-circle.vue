@@ -3,25 +3,19 @@ import {cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
 import {computed, inject, useAttrs} from "vue";
 
-import {
-  CENTER,
-  CIRCUMFERENCE,
-  RADIUS,
-  STROKE_WIDTH,
-  progressCircleContextKey
-} from "./context";
+import {CENTER, CIRCUMFERENCE, RADIUS, STROKE_WIDTH, progressCircleContextKey} from "./context";
 import type {ProgressCircleFillCircleProps} from "./types";
 
 defineOptions({name: "SailProgressCircleFillCircle", inheritAttrs: false});
 
 withDefaults(defineProps<ProgressCircleFillCircleProps>(), {
-  as: "circle"
+  as: "circle",
 });
 
 const attrs = useAttrs();
 const context = inject(progressCircleContextKey, null);
 const classes = computed(() =>
-  cx(context?.slots.value.fillCircle(), attrs.class as string | undefined)
+  cx(context?.slots.value.fillCircle(), attrs.class as string | undefined),
 );
 
 const strokeDashoffset = computed(() => {

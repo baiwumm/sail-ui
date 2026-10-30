@@ -8,9 +8,7 @@ describe("Surface", () => {
     const wrapper = mount(Surface, {slots: {default: () => "Content"}});
 
     expect(wrapper.attributes("data-slot")).toBe("surface");
-    expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(["surface", "surface--default"])
-    );
+    expect(wrapper.classes()).toEqual(expect.arrayContaining(["surface", "surface--default"]));
     expect(wrapper.text()).toBe("Content");
   });
 
@@ -26,7 +24,7 @@ describe("Surface", () => {
   it("supports polymorphic rendering and class merging", () => {
     const wrapper = mount(Surface, {
       attrs: {class: "extra"},
-      props: {as: "section"}
+      props: {as: "section"},
     });
 
     expect(wrapper.element.tagName).toBe("SECTION");

@@ -24,14 +24,14 @@
 
 T01 已跑通最小生成链路，T02 在其上扩展，不要推倒重来。实测细节见 [M0 findings](../../research/m0-spike-findings.md)。
 
-| 项 | T01 现状 | T02 要补 |
-|---|---|---|
-| `attributes.json` | 18 条：compat 9 / component 8 / reka 1 | 覆盖上游 65 种属性，47 个 pending 逐个定 owner |
-| scope | 15 个组件（Button/Input/Modal/Select 及其 parts） | 扩展到全部组件，并按组件分组 |
-| 别名 | 29 个，分布在 8 个生成文件 | 评审每个别名；新增别名必须保持原位追加 |
-| `data-slots` | 4 个组件以契约列表人工核对 | 从 React 源码生成快照（完整提取 334 值） |
-| 生成器 | PostCSS 原位追加、`:not()` 内跳过、同组已存在则跳过、`--check` 确定性 | 65 属性冲突检测、未知属性报错、漂移 CI |
-| manifest | 版本/commit/96 文件哈希/别名统计/pending 属性 | 与 `sync-styles` 联动校验 |
+| 项                | T01 现状                                                              | T02 要补                                       |
+| ----------------- | --------------------------------------------------------------------- | ---------------------------------------------- |
+| `attributes.json` | 18 条：compat 9 / component 8 / reka 1                                | 覆盖上游 65 种属性，47 个 pending 逐个定 owner |
+| scope             | 15 个组件（Button/Input/Modal/Select 及其 parts）                     | 扩展到全部组件，并按组件分组                   |
+| 别名              | 29 个，分布在 8 个生成文件                                            | 评审每个别名；新增别名必须保持原位追加         |
+| `data-slots`      | 4 个组件以契约列表人工核对                                            | 从 React 源码生成快照（完整提取 334 值）       |
+| 生成器            | PostCSS 原位追加、`:not()` 内跳过、同组已存在则跳过、`--check` 确定性 | 65 属性冲突检测、未知属性报错、漂移 CI         |
+| manifest          | 版本/commit/96 文件哈希/别名统计/pending 属性                         | 与 `sync-styles` 联动校验                      |
 
 ### 生成器已知约束
 
@@ -43,16 +43,16 @@ T01 已跑通最小生成链路，T02 在其上扩展，不要推倒重来。实
 
 ## Scope
 
-| 路径 | 内容 |
-|---|---|
-| `packages/styles/contracts/attributes.json` | 65 个属性的 owner/map/notes |
-| `packages/styles/scripts/gen-compat.mjs` | PostCSS 扫描 + 原位扩展 + 生成 |
-| `packages/styles/scripts/sync-styles.mjs` | 版本/哈希校验 + 覆盖 + 重生成 |
-| `packages/styles/generated/**` | 生成产物 + manifest |
-| `packages/testing/src/contract/*` | SSR 渲染、选择器需求提取、diff 断言 |
-| `packages/styles/contracts/data-slots.json` | 上游 `data-slot` 快照 |
-| `.github/workflows/contract.yml` | 生成/漂移/契约 CI |
-| `docs/decisions/0003` 更新 | 记录实际 owner 分布与例外 |
+| 路径                                        | 内容                                |
+| ------------------------------------------- | ----------------------------------- |
+| `packages/styles/contracts/attributes.json` | 65 个属性的 owner/map/notes         |
+| `packages/styles/scripts/gen-compat.mjs`    | PostCSS 扫描 + 原位扩展 + 生成      |
+| `packages/styles/scripts/sync-styles.mjs`   | 版本/哈希校验 + 覆盖 + 重生成       |
+| `packages/styles/generated/**`              | 生成产物 + manifest                 |
+| `packages/testing/src/contract/*`           | SSR 渲染、选择器需求提取、diff 断言 |
+| `packages/styles/contracts/data-slots.json` | 上游 `data-slot` 快照               |
+| `.github/workflows/contract.yml`            | 生成/漂移/契约 CI                   |
+| `docs/decisions/0003` 更新                  | 记录实际 owner 分布与例外           |
 
 ## 设计要点
 
@@ -141,10 +141,11 @@ pnpm test:contract   # 预期通过
 
 ## Risks
 
-| 风险 | 处理 |
-|---|---|
+| 风险                                              | 处理                                                               |
+| ------------------------------------------------- | ------------------------------------------------------------------ |
 | 65 个属性中相当一部分是组件特有，owner 判断成本高 | 先按 CSS 文件分组，批量评审；不确定的标 `component` 并在实现时校正 |
-| 选择器扩展破坏 `:not()` / `:has()` 等复杂选择器 | PostCSS AST 级别处理，不字符串替换；加针对性 fixture |
-| `data-slots.json` 从 React 源码提取误伤内部组件 | 只取公共导出组件的文件；对 `rac/`、`icons/` 排除 |
-| 生成产物提交造成 review 噪音 | 生成文件与源文件分开目录；PR 附 `--stat` 摘要 |
+| 选择器扩展破坏 `:not()` / `:has()` 等复杂选择器   | PostCSS AST 级别处理，不字符串替换；加针对性 fixture               |
+| `data-slots.json` 从 React 源码提取误伤内部组件   | 只取公共导出组件的文件；对 `rac/`、`icons/` 排除                   |
+| 生成产物提交造成 review 噪音                      | 生成文件与源文件分开目录；PR 附 `--stat` 摘要                      |
+
 </content>

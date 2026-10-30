@@ -7,14 +7,19 @@ import {Description} from "@sail-ui/vue/description";
 import {FieldError} from "@sail-ui/vue/field-error";
 import {Form} from "@sail-ui/vue/form";
 import {Input, TextField} from "@sail-ui/vue/input";
-import {InputGroup, InputGroupInput, InputGroupPrefix, InputGroupSuffix} from "@sail-ui/vue/input-group";
+import {
+  InputGroup,
+  InputGroupInput,
+  InputGroupPrefix,
+  InputGroupSuffix,
+} from "@sail-ui/vue/input-group";
 import {Label} from "@sail-ui/vue/label";
 import {
   NumberField,
   NumberFieldDecrementButton,
   NumberFieldGroup,
   NumberFieldIncrementButton,
-  NumberFieldInput
+  NumberFieldInput,
 } from "@sail-ui/vue/number-field";
 import {Radio, RadioContent, RadioControl, RadioIndicator} from "@sail-ui/vue/radio";
 import {RadioGroup} from "@sail-ui/vue/radio-group";
@@ -23,15 +28,9 @@ import {
   SearchFieldClearButton,
   SearchFieldGroup,
   SearchFieldInput,
-  SearchFieldSearchIcon
+  SearchFieldSearchIcon,
 } from "@sail-ui/vue/search-field";
-import {
-  Slider,
-  SliderFill,
-  SliderOutput,
-  SliderThumb,
-  SliderTrack
-} from "@sail-ui/vue/slider";
+import {Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack} from "@sail-ui/vue/slider";
 import {Switch, SwitchContent, SwitchControl, SwitchThumb} from "@sail-ui/vue/switch";
 import {SwitchGroup} from "@sail-ui/vue/switch-group";
 import {ToggleButton} from "@sail-ui/vue/toggle-button";
@@ -60,45 +59,19 @@ function handleSubmit(event: SubmitEvent) {
 </script>
 
 <template>
-  <section
-    id="forms"
-    class="flex flex-col gap-8"
-  >
-    <h2 class="text-lg font-semibold">
-      Forms
-    </h2>
+  <section id="forms" class="flex flex-col gap-8">
+    <h2 class="text-lg font-semibold">Forms</h2>
 
-    <div
-      id="forms-login"
-      class="flex flex-col gap-3"
-    >
-      <h3 class="text-sm font-medium">
-        Sign in
-      </h3>
-      <Form
-        class="flex w-full max-w-sm flex-col gap-3"
-        @submit="handleSubmit"
-      >
+    <div id="forms-login" class="flex flex-col gap-3">
+      <h3 class="text-sm font-medium">Sign in</h3>
+      <Form class="flex w-full max-w-sm flex-col gap-3" @submit="handleSubmit">
         <TextField full-width>
           <Label>Email</Label>
-          <Input
-            v-model="email"
-            name="email"
-            placeholder="you@example.com"
-            type="email"
-          />
+          <Input v-model="email" name="email" placeholder="you@example.com" type="email" />
         </TextField>
-        <TextField
-          is-invalid
-          full-width
-        >
+        <TextField is-invalid full-width>
           <Label>Password</Label>
-          <Input
-            v-model="password"
-            name="password"
-            placeholder="••••••••"
-            type="password"
-          />
+          <Input v-model="password" name="password" placeholder="••••••••" type="password" />
           <FieldError>Password must be at least 8 characters.</FieldError>
         </TextField>
         <Button
@@ -113,13 +86,8 @@ function handleSubmit(event: SubmitEvent) {
       </Form>
     </div>
 
-    <div
-      id="forms-settings"
-      class="flex flex-col gap-4"
-    >
-      <h3 class="text-sm font-medium">
-        Settings
-      </h3>
+    <div id="forms-settings" class="flex flex-col gap-4">
+      <h3 class="text-sm font-medium">Settings</h3>
       <SwitchGroup class="max-w-sm">
         <Switch v-model="notifications">
           <SwitchContent>
@@ -138,10 +106,7 @@ function handleSubmit(event: SubmitEvent) {
           </SwitchContent>
         </Switch>
       </SwitchGroup>
-      <RadioGroup
-        v-model="plan"
-        class="max-w-sm"
-      >
+      <RadioGroup v-model="plan" class="max-w-sm">
         <Radio value="free">
           <RadioContent>
             <RadioControl>
@@ -169,12 +134,7 @@ function handleSubmit(event: SubmitEvent) {
           </SliderTrack>
         </Slider>
       </div>
-      <NumberField
-        v-model="quantity"
-        class="max-w-sm"
-        :max="10"
-        :min="0"
-      >
+      <NumberField v-model="quantity" class="max-w-sm" :max="10" :min="0">
         <Label>Quantity</Label>
         <NumberFieldGroup>
           <NumberFieldDecrementButton />
@@ -184,17 +144,9 @@ function handleSubmit(event: SubmitEvent) {
       </NumberField>
     </div>
 
-    <div
-      id="forms-search"
-      class="flex flex-col gap-3"
-    >
-      <h3 class="text-sm font-medium">
-        Search
-      </h3>
-      <SearchField
-        v-model="query"
-        class="max-w-sm"
-      >
+    <div id="forms-search" class="flex flex-col gap-3">
+      <h3 class="text-sm font-medium">Search</h3>
+      <SearchField v-model="query" class="max-w-sm">
         <SearchFieldGroup>
           <SearchFieldSearchIcon />
           <SearchFieldInput placeholder="Search components" />
@@ -202,63 +154,33 @@ function handleSubmit(event: SubmitEvent) {
         </SearchFieldGroup>
       </SearchField>
       <InputGroup class="max-w-sm">
-        <InputGroupPrefix>
-          @
-        </InputGroupPrefix>
+        <InputGroupPrefix> @ </InputGroupPrefix>
         <InputGroupInput placeholder="sail" />
-        <InputGroupSuffix>
-          .ui
-        </InputGroupSuffix>
+        <InputGroupSuffix> .ui </InputGroupSuffix>
       </InputGroup>
     </div>
 
-    <div
-      id="forms-toolbar"
-      class="flex flex-col gap-3"
-    >
-      <h3 class="text-sm font-medium">
-        Toolbar
-      </h3>
+    <div id="forms-toolbar" class="flex flex-col gap-3">
+      <h3 class="text-sm font-medium">Toolbar</h3>
       <Toolbar>
-        <ToggleButtonGroup
-          v-model="format"
-          type="multiple"
-        >
-          <ToggleButton value="bold">
-            Bold
-          </ToggleButton>
+        <ToggleButtonGroup v-model="format" type="multiple">
+          <ToggleButton value="bold"> Bold </ToggleButton>
           <ToggleButtonGroupSeparator />
-          <ToggleButton value="italic">
-            Italic
-          </ToggleButton>
+          <ToggleButton value="italic"> Italic </ToggleButton>
           <ToggleButtonGroupSeparator />
-          <ToggleButton value="underline">
-            Underline
-          </ToggleButton>
+          <ToggleButton value="underline"> Underline </ToggleButton>
         </ToggleButtonGroup>
         <ButtonGroup>
-          <Button size="sm">
-            Left
-          </Button>
+          <Button size="sm"> Left </Button>
           <ButtonGroupSeparator />
-          <Button size="sm">
-            Right
-          </Button>
+          <Button size="sm"> Right </Button>
         </ButtonGroup>
       </Toolbar>
     </div>
 
-    <div
-      id="forms-states"
-      class="flex flex-col gap-3"
-    >
-      <h3 class="text-sm font-medium">
-        States
-      </h3>
-      <CheckboxGroup
-        v-model="terms"
-        class="max-w-sm"
-      >
+    <div id="forms-states" class="flex flex-col gap-3">
+      <h3 class="text-sm font-medium">States</h3>
+      <CheckboxGroup v-model="terms" class="max-w-sm">
         <Checkbox value="newsletter">
           <CheckboxContent>
             <CheckboxControl>
@@ -268,10 +190,7 @@ function handleSubmit(event: SubmitEvent) {
           </CheckboxContent>
           <Description>Weekly product updates.</Description>
         </Checkbox>
-        <Checkbox
-          is-disabled
-          value="beta"
-        >
+        <Checkbox is-disabled value="beta">
           <CheckboxContent>
             <CheckboxControl>
               <CheckboxIndicator />
@@ -280,19 +199,11 @@ function handleSubmit(event: SubmitEvent) {
           </CheckboxContent>
         </Checkbox>
       </CheckboxGroup>
-      <TextField
-        is-disabled
-        class="max-w-sm"
-        full-width
-      >
+      <TextField is-disabled class="max-w-sm" full-width>
         <Label>Disabled field</Label>
         <Input placeholder="Unavailable" />
       </TextField>
-      <TextField
-        is-invalid
-        class="max-w-sm"
-        full-width
-      >
+      <TextField is-invalid class="max-w-sm" full-width>
         <Label>Invalid field</Label>
         <Input placeholder="Broken" />
         <FieldError>This field is required.</FieldError>

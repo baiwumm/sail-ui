@@ -11,7 +11,7 @@ describe("Description", () => {
   it("renders a standalone span with the upstream slot", () => {
     const wrapper = mount(Description, {
       attrs: {class: "extra"},
-      slots: {default: () => "We never share it."}
+      slots: {default: () => "We never share it."},
     });
 
     expect(wrapper.element.tagName).toBe("SPAN");
@@ -28,10 +28,10 @@ describe("Description", () => {
             default: () => [
               h(Label, null, {default: () => "Email"}),
               h(Input),
-              h(Description, null, {default: () => "We never share it."})
-            ]
+              h(Description, null, {default: () => "We never share it."}),
+            ],
           });
-      }
+      },
     });
     const wrapper = mount(host, {attachTo: document.body});
 

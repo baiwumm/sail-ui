@@ -11,17 +11,11 @@ defineProps<InputGroupSuffixProps>();
 
 const {className, forwarded} = useForwardedAttrs();
 
-const classes = computed(() =>
-  cx(inputGroupVariants().suffix(), className.value)
-);
+const classes = computed(() => cx(inputGroupVariants().suffix(), className.value));
 </script>
 
 <template>
-  <div
-    v-bind="forwarded"
-    :class="classes"
-    :data-slot="'input-group-suffix'"
-  >
+  <div v-bind="forwarded" :class="classes" :data-slot="'input-group-suffix'">
     <slot />
   </div>
 </template>

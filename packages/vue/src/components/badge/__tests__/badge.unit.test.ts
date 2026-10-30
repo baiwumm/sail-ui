@@ -20,16 +20,20 @@ describe("Badge", () => {
       slots: {
         default: () => [
           h("span", "Inbox"),
-          h(Badge, {color: "danger", placement: "bottom-left", size: "lg"}, {
-            default: () => h(BadgeLabel, {class: "label-extra"}, {default: () => "3"})
-          })
-        ]
-      }
+          h(
+            Badge,
+            {color: "danger", placement: "bottom-left", size: "lg"},
+            {
+              default: () => h(BadgeLabel, {class: "label-extra"}, {default: () => "3"}),
+            },
+          ),
+        ],
+      },
     });
 
     expect(wrapper.get("[data-slot='badge-anchor']").classes()).toContain("badge-anchor");
     expect(wrapper.get("[data-slot='badge']").classes()).toEqual(
-      expect.arrayContaining(["badge", "badge--danger", "badge--bottom-left", "badge--lg"])
+      expect.arrayContaining(["badge", "badge--danger", "badge--bottom-left", "badge--lg"]),
     );
     expect(wrapper.get("[data-slot='badge-label']").classes()).toContain("label-extra");
   });

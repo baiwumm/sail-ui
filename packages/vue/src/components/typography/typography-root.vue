@@ -15,7 +15,7 @@ const defaultElementByType: Record<TypographyType, string> = {
   h3: "h3",
   h4: "h4",
   h5: "h5",
-  h6: "h6"
+  h6: "h6",
 };
 
 defineOptions({name: "SailTypography", inheritAttrs: false});
@@ -23,7 +23,7 @@ defineOptions({name: "SailTypography", inheritAttrs: false});
 const props = withDefaults(defineProps<TypographyRootProps>(), {
   align: "start",
   color: "default",
-  type: "body"
+  type: "body",
 });
 
 const attrs = useAttrs();
@@ -34,10 +34,10 @@ const classes = computed(() =>
       color: props.color,
       truncate: props.truncate,
       type: props.type,
-      weight: props.weight
+      weight: props.weight,
     }).base(),
-    attrs.class as string | undefined
-  )
+    attrs.class as string | undefined,
+  ),
 );
 const element = computed(() => props.as ?? defaultElementByType[props.type]);
 </script>

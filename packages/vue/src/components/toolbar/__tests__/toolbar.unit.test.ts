@@ -9,7 +9,7 @@ describe("Toolbar", () => {
   it("renders the upstream slot and orientation", () => {
     const wrapper = mount(Toolbar, {
       props: {orientation: "vertical", isAttached: true},
-      slots: {default: () => h(Button, null, {default: () => "Bold"})}
+      slots: {default: () => h(Button, null, {default: () => "Bold"})},
     });
     const toolbar = wrapper.get('[data-slot="toolbar"]');
 
@@ -28,12 +28,12 @@ describe("Toolbar", () => {
               default: () => [
                 h(Button, {key: "a"}, {default: () => "A"}),
                 h(Button, {key: "b"}, {default: () => "B"}),
-                h(Button, {key: "c"}, {default: () => "C"})
-              ]
+                h(Button, {key: "c"}, {default: () => "C"}),
+              ],
             });
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const buttons = wrapper.findAll("button");
@@ -58,15 +58,19 @@ describe("Toolbar", () => {
       defineComponent({
         setup() {
           return () =>
-            h(Toolbar, {dir: "rtl"}, {
-              default: () => [
-                h(Button, {key: "a"}, {default: () => "A"}),
-                h(Button, {key: "b"}, {default: () => "B"})
-              ]
-            });
-        }
+            h(
+              Toolbar,
+              {dir: "rtl"},
+              {
+                default: () => [
+                  h(Button, {key: "a"}, {default: () => "A"}),
+                  h(Button, {key: "b"}, {default: () => "B"}),
+                ],
+              },
+            );
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const buttons = wrapper.findAll("button");

@@ -9,14 +9,12 @@ import type {ProgressCircleTrackProps} from "./types";
 defineOptions({name: "SailProgressCircleTrack", inheritAttrs: false});
 
 withDefaults(defineProps<ProgressCircleTrackProps>(), {
-  as: "svg"
+  as: "svg",
 });
 
 const attrs = useAttrs();
 const context = inject(progressCircleContextKey, null);
-const classes = computed(() =>
-  cx(context?.slots.value.track(), attrs.class as string | undefined)
-);
+const classes = computed(() => cx(context?.slots.value.track(), attrs.class as string | undefined));
 </script>
 
 <template>

@@ -22,11 +22,7 @@ const {isPressed} = usePress(buttonRef, {isDisabled});
 const {isFocused, isFocusVisible} = useFocusRing(buttonRef, {isDisabled});
 
 const classes = computed(() =>
-  cx(
-    closeButtonVariants(),
-    searchFieldVariants().clearButton(),
-    className.value
-  )
+  cx(closeButtonVariants(), searchFieldVariants().clearButton(), className.value),
 );
 </script>
 

@@ -9,7 +9,7 @@ import type {FieldsetLegendProps} from "./types";
 defineOptions({name: "SailFieldsetLegend", inheritAttrs: false});
 
 withDefaults(defineProps<FieldsetLegendProps>(), {
-  as: "legend"
+  as: "legend",
 });
 
 const attrs = useAttrs();

@@ -15,11 +15,7 @@ const classes = computed(() => cx("switch__icon", className.value));
 </script>
 
 <template>
-  <span
-    v-bind="forwarded"
-    :class="classes"
-    :data-slot="'switch-icon'"
-  >
+  <span v-bind="forwarded" :class="classes" :data-slot="'switch-icon'">
     <slot />
   </span>
 </template>

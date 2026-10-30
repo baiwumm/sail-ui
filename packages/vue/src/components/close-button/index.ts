@@ -1,7 +1,7 @@
 import CloseButtonRoot from "./close-button-root.vue";
 
 const CloseButton = Object.assign(CloseButtonRoot, {
-  Root: CloseButtonRoot
+  Root: CloseButtonRoot,
 });
 
 export {CloseButton, CloseButtonRoot};

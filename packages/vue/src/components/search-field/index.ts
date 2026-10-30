@@ -9,7 +9,7 @@ const SearchField = Object.assign(SearchFieldRoot, {
   Group: SearchFieldGroup,
   Input: SearchFieldInput,
   SearchIcon: SearchFieldSearchIcon,
-  ClearButton: SearchFieldClearButton
+  ClearButton: SearchFieldClearButton,
 });
 
 export {
@@ -18,7 +18,7 @@ export {
   SearchFieldGroup,
   SearchFieldInput,
   SearchFieldSearchIcon,
-  SearchFieldClearButton
+  SearchFieldClearButton,
 };
 export type {
   SearchFieldRootProps,
@@ -26,6 +26,6 @@ export type {
   SearchFieldGroupProps,
   SearchFieldInputProps,
   SearchFieldSearchIconProps,
-  SearchFieldClearButtonProps
+  SearchFieldClearButtonProps,
 } from "./types";
 export {searchFieldVariants, type SearchFieldVariants} from "@sail-ui/styles";

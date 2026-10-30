@@ -26,13 +26,13 @@
 
 采用 **Sail UI**：
 
-| 包 | 用途 |
-|---|---|
-| `@sail-ui/vue` | 组件库，支持子路径 `@sail-ui/vue/button` |
-| `@sail-ui/styles` | 上游 CSS fork + `compat.css` |
+| 包                    | 用途                                                         |
+| --------------------- | ------------------------------------------------------------ |
+| `@sail-ui/vue`        | 组件库，支持子路径 `@sail-ui/vue/button`                     |
+| `@sail-ui/styles`     | 上游 CSS fork + `compat.css`                                 |
 | `@sail-ui/primitives` | `useHover` / `usePress` / `useFocusRing` / `useOverlayState` |
-| `@sail-ui/nuxt` | Nuxt module |
-| `@sail-ui/testing` | 契约、SSR、视觉测试工具 |
+| `@sail-ui/nuxt`       | Nuxt module                                                  |
+| `@sail-ui/testing`    | 契约、SSR、视觉测试工具                                      |
 
 仓库名：`sail-ui`。GitHub topics：`heroui`、`heroui-vue`、`vue`、`nuxt`、`tailwindcss`。
 

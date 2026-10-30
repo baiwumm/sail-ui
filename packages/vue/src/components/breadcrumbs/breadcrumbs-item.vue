@@ -11,18 +11,16 @@ import type {BreadcrumbsItemInternalProps} from "./types";
 defineOptions({name: "SailBreadcrumbsItem", inheritAttrs: false});
 
 const props = withDefaults(defineProps<BreadcrumbsItemInternalProps>(), {
-  isCurrent: false
+  isCurrent: false,
 });
 
 const attrs = useAttrs();
 const context = inject(breadcrumbsContextKey, null);
 const slots = context?.slots;
-const itemClasses = computed(() =>
-  cx(slots?.value.item(), attrs.class as string | undefined)
-);
+const itemClasses = computed(() => cx(slots?.value.item(), attrs.class as string | undefined));
 const linkClasses = computed(() => slots?.value.link());
 const isDisabled = computed(
-  () => props.isDisabled === true || props.isCurrent || Boolean(context?.isDisabled.value)
+  () => props.isDisabled === true || props.isCurrent || Boolean(context?.isDisabled.value),
 );
 
 function renderSeparator(): VNode {
@@ -31,14 +29,14 @@ function renderSeparator(): VNode {
   if (separator == null) {
     return h(ChevronRightIcon, {
       class: slots?.value.separator(),
-      "data-slot": "breadcrumbs-separator"
+      "data-slot": "breadcrumbs-separator",
     });
   }
 
   if (isVNode(separator)) {
     return cloneVNode(separator, {
       class: slots?.value.separator(),
-      "data-slot": "breadcrumbs-separator"
+      "data-slot": "breadcrumbs-separator",
     });
   }
 
@@ -70,9 +68,6 @@ function renderSeparator(): VNode {
     >
       <slot />
     </Link>
-    <RenderNodes
-      v-if="!isCurrent"
-      :render="renderSeparator"
-    />
+    <RenderNodes v-if="!isCurrent" :render="renderSeparator" />
   </li>
 </template>

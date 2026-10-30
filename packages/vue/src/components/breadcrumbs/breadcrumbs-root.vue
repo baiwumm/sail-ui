@@ -12,7 +12,7 @@ defineOptions({name: "SailBreadcrumbs", inheritAttrs: false});
 
 const props = withDefaults(defineProps<BreadcrumbsRootProps>(), {
   as: "ol",
-  isDisabled: false
+  isDisabled: false,
 });
 
 const attrs = useAttrs();
@@ -24,7 +24,7 @@ const ariaLabel = computed(() => (attrs["aria-label"] as string | undefined) ?? 
 provide(breadcrumbsContextKey, {
   slots,
   separator: computed(() => props.separator),
-  isDisabled: computed(() => props.isDisabled)
+  isDisabled: computed(() => props.isDisabled),
 });
 
 function renderChildren(): VNode[] {
@@ -40,7 +40,7 @@ function renderChildren(): VNode[] {
   return children.map((child, index) =>
     child.type === BreadcrumbsItem && index === currentIndex
       ? cloneVNode(child, {isCurrent: true})
-      : child
+      : child,
   );
 }
 </script>

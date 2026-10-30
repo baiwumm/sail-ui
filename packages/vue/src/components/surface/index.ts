@@ -1,7 +1,7 @@
 import SurfaceRoot from "./surface.vue";
 
 const Surface = Object.assign(SurfaceRoot, {
-  Root: SurfaceRoot
+  Root: SurfaceRoot,
 });
 
 export {Surface, SurfaceRoot};

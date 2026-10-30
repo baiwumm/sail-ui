@@ -12,15 +12,9 @@ defineProps<SearchFieldSearchIconProps>();
 
 const {className, forwarded} = useForwardedAttrs();
 
-const classes = computed(() =>
-  cx(searchFieldVariants().searchIcon(), className.value)
-);
+const classes = computed(() => cx(searchFieldVariants().searchIcon(), className.value));
 </script>
 
 <template>
-  <SearchIcon
-    v-bind="forwarded"
-    :class="classes"
-    :data-slot="'search-field-search-icon'"
-  />
+  <SearchIcon v-bind="forwarded" :class="classes" :data-slot="'search-field-search-icon'" />
 </template>

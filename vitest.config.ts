@@ -49,7 +49,7 @@ const componentAliases = [
   "toggle-button",
   "toggle-button-group",
   "toolbar",
-  "typography"
+  "typography",
 ] as const;
 
 const alias = {
@@ -58,24 +58,24 @@ const alias = {
   ...Object.fromEntries(
     componentAliases.map((component) => [
       `@sail-ui/vue/${component}`,
-      resolvePath(`./packages/vue/src/components/${component}/index.ts`)
-    ])
+      resolvePath(`./packages/vue/src/components/${component}/index.ts`),
+    ]),
   ),
   "@sail-ui/vue": resolvePath("./packages/vue/src/index.ts"),
-  "@sail-ui/testing": resolvePath("./packages/testing/src/index.ts")
+  "@sail-ui/testing": resolvePath("./packages/testing/src/index.ts"),
 };
 
 const shared = {
   globals: true,
   restoreMocks: true,
   clearMocks: true,
-  mockReset: true
+  mockReset: true,
 };
 
 export default defineConfig({
   plugins: [vue()],
   resolve: {
-    alias
+    alias,
   },
   test: {
     projects: [
@@ -86,8 +86,8 @@ export default defineConfig({
           name: "unit",
           environment: "jsdom",
           setupFiles: [resolvePath("./tests/setup.ts")],
-          include: ["packages/**/__tests__/**/*.unit.test.ts"]
-        }
+          include: ["packages/**/__tests__/**/*.unit.test.ts"],
+        },
       },
       {
         extends: true,
@@ -96,8 +96,8 @@ export default defineConfig({
           name: "contract",
           environment: "jsdom",
           setupFiles: [resolvePath("./tests/setup.ts")],
-          include: ["packages/**/__tests__/**/*.contract.test.ts"]
-        }
+          include: ["packages/**/__tests__/**/*.contract.test.ts"],
+        },
       },
       {
         extends: true,
@@ -105,9 +105,9 @@ export default defineConfig({
           ...shared,
           name: "ssr",
           environment: "node",
-          include: ["packages/**/__tests__/**/*.ssr.test.ts"]
-        }
-      }
-    ]
-  }
+          include: ["packages/**/__tests__/**/*.ssr.test.ts"],
+        },
+      },
+    ],
+  },
 });

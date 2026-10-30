@@ -17,9 +17,7 @@ test.describe("Form controls", () => {
   });
 
   test("checkbox toggles with the keyboard and reports the state", async ({page}) => {
-    const content = forms(page)
-      .locator('#forms-states [data-slot="checkbox-content"]')
-      .first();
+    const content = forms(page).locator('#forms-states [data-slot="checkbox-content"]').first();
     const input = content.locator('input[type="checkbox"]');
 
     await expect(content).toHaveAttribute("data-selected", "true");
@@ -34,9 +32,7 @@ test.describe("Form controls", () => {
   });
 
   test("checkbox does not leave a sticky hover state after a tap", async ({page}) => {
-    const content = forms(page)
-      .locator('#forms-states [data-slot="checkbox-content"]')
-      .first();
+    const content = forms(page).locator('#forms-states [data-slot="checkbox-content"]').first();
 
     await content.dispatchEvent("pointerenter", {pointerType: "touch"});
     await expect(content).not.toHaveAttribute("data-hovered", "true");
@@ -168,14 +164,14 @@ test.describe("Form controls", () => {
           key: "Enter",
           bubbles: true,
           cancelable: true,
-          isComposing: true
-        })
+          isComposing: true,
+        }),
       );
     });
 
-    expect(
-      await page.evaluate(() => (window as unknown as {submitted: boolean}).submitted)
-    ).toBe(false);
+    expect(await page.evaluate(() => (window as unknown as {submitted: boolean}).submitted)).toBe(
+      false,
+    );
   });
 
   test("press and click stay separate events", async ({page}) => {

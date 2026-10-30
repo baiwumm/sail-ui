@@ -9,7 +9,7 @@ import type {BadgeLabelProps} from "./types";
 defineOptions({name: "SailBadgeLabel", inheritAttrs: false});
 
 withDefaults(defineProps<BadgeLabelProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();

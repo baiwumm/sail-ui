@@ -8,23 +8,15 @@ import type {ProseProps} from "./types";
 defineOptions({name: "SailTypographyProse", inheritAttrs: false});
 
 withDefaults(defineProps<ProseProps>(), {
-  as: "div"
+  as: "div",
 });
 
 const attrs = useAttrs();
-const classes = computed(() =>
-  cx(typographyVariants().prose(), attrs.class as string | undefined)
-);
+const classes = computed(() => cx(typographyVariants().prose(), attrs.class as string | undefined));
 </script>
 
 <template>
-  <Primitive
-    v-bind="$attrs"
-    :as="as"
-    :as-child="asChild"
-    :class="classes"
-    :data-slot="'prose'"
-  >
+  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes" :data-slot="'prose'">
     <slot />
   </Primitive>
 </template>

@@ -6,7 +6,7 @@ import KbdRoot from "./kbd-root.vue";
 const Kbd = Object.assign(KbdRoot, {
   Root: KbdRoot,
   Abbr: KbdAbbr,
-  Content: KbdContent
+  Content: KbdContent,
 });
 
 export {Kbd, KbdRoot, KbdAbbr, KbdContent, kbdKeysMap, kbdKeysLabelMap};

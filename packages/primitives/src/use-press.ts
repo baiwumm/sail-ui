@@ -110,10 +110,7 @@ export function usePress(
     if (keyboardEvent.key === " " || keyboardEvent.key === "Spacebar") {
       // Submit and reset buttons keep the native Space activation so the form
       // still submits. React Aria makes the same exception.
-      if (
-        !keepsNativeActivation(element) &&
-        !isWithinFormControl(keyboardEvent.target)
-      ) {
+      if (!keepsNativeActivation(element) && !isWithinFormControl(keyboardEvent.target)) {
         keyboardEvent.preventDefault();
       }
 
@@ -137,10 +134,7 @@ export function usePress(
     }
 
     if (keyboardEvent.key === " " || keyboardEvent.key === "Spacebar") {
-      if (
-        !keepsNativeActivation(element) &&
-        !isWithinFormControl(keyboardEvent.target)
-      ) {
+      if (!keepsNativeActivation(element) && !isWithinFormControl(keyboardEvent.target)) {
         keyboardEvent.preventDefault();
       }
 

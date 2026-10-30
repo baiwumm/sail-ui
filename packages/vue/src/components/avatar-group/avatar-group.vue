@@ -14,20 +14,18 @@ const props = withDefaults(defineProps<AvatarGroupRootProps>(), {
   as: "div",
   isGrid: false,
   overlap: "clip",
-  size: "md"
+  size: "md",
 });
 
 const attrs = useAttrs();
-const slots = computed(() =>
-  avatarGroupVariants({isGrid: props.isGrid, overlap: props.overlap})
-);
+const slots = computed(() => avatarGroupVariants({isGrid: props.isGrid, overlap: props.overlap}));
 const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
 
 provide(avatarGroupContextKey, {
   slots,
   color: computed(() => props.color),
   size: computed(() => props.size),
-  variant: computed(() => props.variant)
+  variant: computed(() => props.variant),
 });
 
 const componentSlots = useSlots() as Slots;
@@ -47,8 +45,7 @@ function renderChildren(): VNode[] {
 
   const visible =
     props.max == null ? avatarChildren : avatarChildren.slice(0, Math.max(0, props.max));
-  const remaining =
-    props.max == null ? 0 : Math.max(0, avatarChildren.length - visible.length);
+  const remaining = props.max == null ? 0 : Math.max(0, avatarChildren.length - visible.length);
 
   const rendered = [...visible];
 

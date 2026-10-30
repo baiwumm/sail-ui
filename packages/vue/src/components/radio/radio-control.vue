@@ -15,11 +15,7 @@ const classes = computed(() => cx("radio__control", className.value));
 </script>
 
 <template>
-  <span
-    v-bind="forwarded"
-    :class="classes"
-    :data-slot="'radio-control'"
-  >
+  <span v-bind="forwarded" :class="classes" :data-slot="'radio-control'">
     <slot />
   </span>
 </template>

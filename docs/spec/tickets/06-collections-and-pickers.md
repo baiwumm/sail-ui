@@ -16,15 +16,15 @@ Select 复用 T05 的 popover 状态机；ListBox 同时作为 Select/Combobox/D
 
 ## Scope
 
-| 组件 | 基础 | 关键行为 |
-|---|---|---|
-| Accordion / Disclosure / DisclosureGroup | Reka Accordion / Collapsible | 展开/收起、`data-expanded`、`data-pressed`、多开/单开、禁用、键盘 |
-| Select | Reka Select | trigger/value/popover/listbox/option、`v-model`、typeahead、`data-open`、`data-selected` |
-| ListBox / ListBoxItem / ListBoxSection | Reka Listbox | 单选/多选、分组、禁用、键盘、`data-selected`、虚拟化接口 |
-| Dropdown / Menu / MenuItem / MenuSection | Reka DropdownMenu | 触发器、定位、键盘、typeahead、选择/命令、分组、危险项 |
-| Tabs | Reka Tabs | 方向键、自动/手动激活、orientation、`data-selected`、`data-disabled` |
-| Tag / TagGroup | Reka TagGroup | 可选择、可删除、键盘删除、`data-selected`、`data-disabled` |
-| Pagination | 自研 | `nav` + `aria-current`、页码/省略、上一页/下一页、禁用、RTL |
+| 组件                                     | 基础                         | 关键行为                                                                                 |
+| ---------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------- |
+| Accordion / Disclosure / DisclosureGroup | Reka Accordion / Collapsible | 展开/收起、`data-expanded`、`data-pressed`、多开/单开、禁用、键盘                        |
+| Select                                   | Reka Select                  | trigger/value/popover/listbox/option、`v-model`、typeahead、`data-open`、`data-selected` |
+| ListBox / ListBoxItem / ListBoxSection   | Reka Listbox                 | 单选/多选、分组、禁用、键盘、`data-selected`、虚拟化接口                                 |
+| Dropdown / Menu / MenuItem / MenuSection | Reka DropdownMenu            | 触发器、定位、键盘、typeahead、选择/命令、分组、危险项                                   |
+| Tabs                                     | Reka Tabs                    | 方向键、自动/手动激活、orientation、`data-selected`、`data-disabled`                     |
+| Tag / TagGroup                           | Reka TagGroup                | 可选择、可删除、键盘删除、`data-selected`、`data-disabled`                               |
+| Pagination                               | 自研                         | `nav` + `aria-current`、页码/省略、上一页/下一页、禁用、RTL                              |
 
 ## 关键实现点
 
@@ -75,11 +75,12 @@ Select 复用 T05 的 popover 状态机；ListBox 同时作为 Select/Combobox/D
 
 ## Risks
 
-| 风险 | 处理 |
-|---|---|
+| 风险                                               | 处理                                |
+| -------------------------------------------------- | ----------------------------------- |
 | Select 的 `data-selected` 在 Reka 不同版本行为不同 | 固定 2.11.0；契约逐项；组件层补属性 |
-| Popover 定位与 T05 的冲突 | 复用同一状态机与层级；嵌套测试 |
-| typeahead 与 IME 冲突 | `isComposing` 检查；多语言 fixture |
-| Menu 子菜单/滚动 | 按上游能力裁剪；不在 MVP 硬做 |
-| Pagination 的省略号可访问性 | 提供可聚焦入口；键盘测试 |
+| Popover 定位与 T05 的冲突                          | 复用同一状态机与层级；嵌套测试      |
+| typeahead 与 IME 冲突                              | `isComposing` 检查；多语言 fixture  |
+| Menu 子菜单/滚动                                   | 按上游能力裁剪；不在 MVP 硬做       |
+| Pagination 的省略号可访问性                        | 提供可聚焦入口；键盘测试            |
+
 </content>

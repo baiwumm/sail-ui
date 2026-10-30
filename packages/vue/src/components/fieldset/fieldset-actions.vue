@@ -9,7 +9,7 @@ import type {FieldsetActionsProps} from "./types";
 defineOptions({name: "SailFieldsetActions", inheritAttrs: false});
 
 withDefaults(defineProps<FieldsetActionsProps>(), {
-  as: "div"
+  as: "div",
 });
 
 const attrs = useAttrs();

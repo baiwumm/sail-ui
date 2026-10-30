@@ -1,12 +1,5 @@
 import {createHash} from "node:crypto";
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  readdirSync,
-  rmSync,
-  writeFileSync
-} from "node:fs";
+import {existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync} from "node:fs";
 import {dirname, join, relative, resolve} from "node:path";
 
 import postcss from "postcss";
@@ -27,9 +20,7 @@ const OWNERS = ["compat", "component", "native", "reka"];
 const args = process.argv.slice(2);
 const checkMode = args.includes("--check");
 const customUpstreamRoot = readOption("--upstream-root");
-const upstreamRoot = customUpstreamRoot
-  ? resolve(customUpstreamRoot)
-  : defaultUpstreamRoot;
+const upstreamRoot = customUpstreamRoot ? resolve(customUpstreamRoot) : defaultUpstreamRoot;
 const upstreamComponents = join(upstreamRoot, "components");
 
 if (customUpstreamRoot && !checkMode) {
@@ -73,9 +64,7 @@ function readJson(path) {
   try {
     return JSON.parse(readText(path));
   } catch (error) {
-    die(
-      `${toPosix(relative(packageRoot, path))} is not valid JSON: ${error.message}`
-    );
+    die(`${toPosix(relative(packageRoot, path))} is not valid JSON: ${error.message}`);
   }
 }
 
@@ -88,8 +77,7 @@ function listFiles(root, extension) {
 
 function collectAttributeNames(css) {
   const names = new Set();
-  const regex =
-    /\[(data-[a-z0-9-]+)(?:\s*[~|^$*]?=\s*(?:"[^"]*"|'[^']*'|[^\]]+))?\]/g;
+  const regex = /\[(data-[a-z0-9-]+)(?:\s*[~|^$*]?=\s*(?:"[^"]*"|'[^']*'|[^\]]+))?\]/g;
   let match;
 
   while ((match = regex.exec(css))) {
@@ -114,7 +102,7 @@ function assertNoDuplicateKeys(text) {
     if (seen.has(match[1])) {
       die(
         `Duplicate attribute in contracts/attributes.json: ${match[1]}\n` +
-          "Keep exactly one owner per data attribute."
+          "Keep exactly one owner per data attribute.",
       );
     }
 
@@ -147,25 +135,20 @@ const scopeSet = new Set(scope.components);
 const dataSlotsText = readText(dataSlotsPath);
 const dataSlots = readJson(dataSlotsPath);
 
-if (
-  dataSlots.upstream?.version !== pin.version ||
-  dataSlots.upstream?.commit !== pin.commit
-) {
+if (dataSlots.upstream?.version !== pin.version || dataSlots.upstream?.commit !== pin.commit) {
   die(
     "contracts/data-slots.json is pinned to a different upstream.\n" +
-      "Run node scripts/gen-data-slots.mjs against the pinned source."
+      "Run node scripts/gen-data-slots.mjs against the pinned source.",
   );
 }
 
 const slotTotal = Object.values(dataSlots.components ?? {}).reduce(
   (total, slots) => total + slots.length,
-  0
+  0,
 );
 
 if (slotTotal !== dataSlots.total) {
-  die(
-    `contracts/data-slots.json total is ${dataSlots.total}, but the groups sum to ${slotTotal}.`
-  );
+  die(`contracts/data-slots.json total is ${dataSlots.total}, but the groups sum to ${slotTotal}.`);
 }
 
 const componentFiles = listFiles(upstreamComponents, ".css");
@@ -178,16 +161,14 @@ for (const name of componentNames) {
   if (!scopeSet.has(name)) {
     die(
       `components/${name}.css is not listed in contracts/scope.json.\n` +
-        "Every upstream component CSS file must be scoped before generating compat output."
+        "Every upstream component CSS file must be scoped before generating compat output.",
     );
   }
 }
 
 for (const name of scopeSet) {
   if (!componentNames.includes(name)) {
-    die(
-      `contracts/scope.json lists ${name}, but components/${name}.css does not exist upstream.`
-    );
+    die(`contracts/scope.json lists ${name}, but components/${name}.css does not exist upstream.`);
   }
 }
 
@@ -197,10 +178,7 @@ for (const [name, config] of Object.entries(attributes)) {
   }
 
   if (!OWNERS.includes(config.owner)) {
-    die(
-      `Unknown owner "${config.owner}" for ${name}.\n` +
-        `Choose one of: ${OWNERS.join(", ")}.`
-    );
+    die(`Unknown owner "${config.owner}" for ${name}.\n` + `Choose one of: ${OWNERS.join(", ")}.`);
   }
 
   for (const key of Object.keys(config)) {
@@ -211,9 +189,7 @@ for (const [name, config] of Object.entries(attributes)) {
 
   if (config.map !== undefined) {
     if (config.owner !== "compat") {
-      die(
-        `${name} declares map but its owner is ${config.owner}; only compat aliases expand.`
-      );
+      die(`${name} declares map but its owner is ${config.owner}; only compat aliases expand.`);
     }
 
     if (!Array.isArray(config.map) || config.map.length === 0) {
@@ -270,7 +246,7 @@ for (const file of upstreamCssFiles) {
     if (!attributes[attribute]) {
       die(
         `Unknown data attribute: ${attribute} (${path})\n` +
-          "Choose an owner in packages/styles/contracts/attributes.json"
+          "Choose an owner in packages/styles/contracts/attributes.json",
       );
     }
 
@@ -293,7 +269,7 @@ for (const attribute of Object.keys(attributes)) {
   if (!usage.has(attribute)) {
     die(
       `Declared data attribute is not used by upstream CSS: ${attribute}\n` +
-        "Remove it from contracts/attributes.json or fix its spelling."
+        "Remove it from contracts/attributes.json or fix its spelling.",
     );
   }
 }
@@ -318,7 +294,7 @@ function expandSelector(selector, siblings, component) {
 
   const additions = [];
   const attributesInSelector = selectorNode.nodes.filter(
-    (node) => node.type === "attribute" && node.attribute.startsWith("data-")
+    (node) => node.type === "attribute" && node.attribute.startsWith("data-"),
   );
 
   for (const attributeNode of attributesInSelector) {
@@ -342,10 +318,7 @@ function expandSelector(selector, siblings, component) {
       // Upstream may already scope the native pseudo-class, e.g.
       // `:focus-visible:not([data-focused])`. Appending a bare `:focus-visible`
       // would broaden that rule and re-enable rings React suppresses.
-      if (
-        alias.startsWith(":") &&
-        siblings.some((sibling) => sibling.includes(alias))
-      ) {
+      if (alias.startsWith(":") && siblings.some((sibling) => sibling.includes(alias))) {
         continue;
       }
 
@@ -357,8 +330,7 @@ function expandSelector(selector, siblings, component) {
 
       const clone = selectorNode.clone();
       const target = clone.nodes.find(
-        (node) =>
-          node.type === "attribute" && node.attribute === attributeNode.attribute
+        (node) => node.type === "attribute" && node.attribute === attributeNode.attribute,
       );
 
       if (!target) {
@@ -399,7 +371,7 @@ function transformComponentCss(css, component) {
 
   return {
     css: root.toString(),
-    aliasCount
+    aliasCount,
   };
 }
 
@@ -432,32 +404,32 @@ for (const sourceFile of componentFiles) {
     sourceHash: hash(sourceCss),
     generatedHash: hash(generatedCss),
     aliases: aliasCount,
-    scoped
+    scoped,
   });
 }
 
 const manifest = {
   upstream: {
     version: pin.version,
-    commit: pin.commit
+    commit: pin.commit,
   },
   dataSlots: {
     total: dataSlots.total,
     components: Object.keys(dataSlots.components).length,
-    hash: hash(dataSlotsText)
+    hash: hash(dataSlotsText),
   },
   counts: {
     upstreamCssFiles: upstreamCssFiles.length,
     componentCssFiles: componentFiles.length,
     scopedComponents: scopeSet.size,
     attributes: Object.keys(attributes).length,
-    aliases: aliasTotal
+    aliases: aliasTotal,
   },
   owners: Object.fromEntries(
     OWNERS.map((owner) => [
       owner,
-      Object.values(attributes).filter((config) => config.owner === owner).length
-    ])
+      Object.values(attributes).filter((config) => config.owner === owner).length,
+    ]),
   ),
   attributes: Object.fromEntries(
     Object.keys(attributes)
@@ -478,10 +450,10 @@ const manifest = {
         entry.components = [...usage.get(name).components].sort();
 
         return [name, entry];
-      })
+      }),
   ),
   files: fileEntries,
-  upstreamFiles
+  upstreamFiles,
 };
 
 function expectedManifest() {
@@ -514,12 +486,8 @@ if (checkMode) {
     }
 
     if (Array.isArray(committed.upstreamFiles)) {
-      const recorded = new Map(
-        committed.upstreamFiles.map((file) => [file.path, file.hash])
-      );
-      const current = new Map(
-        manifest.upstreamFiles.map((file) => [file.path, file.hash])
-      );
+      const recorded = new Map(committed.upstreamFiles.map((file) => [file.path, file.hash]));
+      const current = new Map(manifest.upstreamFiles.map((file) => [file.path, file.hash]));
 
       for (const [path, currentHash] of current) {
         if (!recorded.has(path)) {
@@ -552,9 +520,7 @@ if (checkMode) {
 
   const expectedPaths = new Set(generatedFiles.keys());
   const actualPaths = existsSync(generatedRoot)
-    ? listFiles(generatedRoot, ".css").map((file) =>
-        toPosix(relative(packageRoot, file))
-      )
+    ? listFiles(generatedRoot, ".css").map((file) => toPosix(relative(packageRoot, file)))
     : [];
 
   for (const path of actualPaths) {
@@ -571,7 +537,7 @@ if (checkMode) {
     `gen-compat check passed: ${manifest.counts.upstreamCssFiles} upstream CSS files, ` +
       `${manifest.counts.scopedComponents} scoped components, ` +
       `${manifest.counts.attributes} attributes (${manifest.owners.compat} compat), ` +
-      `${manifest.counts.aliases} aliases, ${manifest.dataSlots.total} data slots`
+      `${manifest.counts.aliases} aliases, ${manifest.dataSlots.total} data slots`,
   );
   process.exit(0);
 }
@@ -591,5 +557,5 @@ console.log(
   `gen-compat wrote ${manifest.counts.componentCssFiles} component files, ` +
     `${manifest.counts.scopedComponents} scoped components, ` +
     `${manifest.counts.attributes} attributes (${manifest.owners.compat} compat), ` +
-    `${manifest.counts.aliases} aliases, ${manifest.dataSlots.total} data slots`
+    `${manifest.counts.aliases} aliases, ${manifest.dataSlots.total} data slots`,
 );

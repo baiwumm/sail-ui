@@ -7,7 +7,7 @@ import {
   readFileSync,
   readdirSync,
   rmSync,
-  writeFileSync
+  writeFileSync,
 } from "node:fs";
 import {join} from "node:path";
 
@@ -25,7 +25,7 @@ interface SourceFixture {
 }
 
 function createSource(
-  options: {version?: string; mutate?: (stylesDir: string) => void} = {}
+  options: {version?: string; mutate?: (stylesDir: string) => void} = {},
 ): SourceFixture {
   mkdirSync(fixturesRoot, {recursive: true});
 
@@ -35,7 +35,7 @@ function createSource(
   cpSync(upstreamRoot, stylesDir, {recursive: true});
   writeFileSync(
     join(stylesDir, "package.json"),
-    `${JSON.stringify({name: "@heroui/styles", version: options.version ?? "3.2.7"}, null, 2)}\n`
+    `${JSON.stringify({name: "@heroui/styles", version: options.version ?? "3.2.7"}, null, 2)}\n`,
   );
 
   options.mutate?.(stylesDir);
@@ -54,15 +54,15 @@ function createSource(
       "commit",
       "-q",
       "-m",
-      "fixture"
+      "fixture",
     ],
-    {cwd: root, stdio: "pipe"}
+    {cwd: root, stdio: "pipe"},
   );
 
   const head = execFileSync("git", ["rev-parse", "HEAD"], {
     cwd: root,
     encoding: "utf8",
-    stdio: "pipe"
+    stdio: "pipe",
   }).trim();
 
   return {root, stylesDir, head};
@@ -77,7 +77,7 @@ describe("sync:styles contract", () => {
     const output = execFileSync(
       process.execPath,
       [join(packageRoot, "scripts", "sync-styles.mjs"), "--check"],
-      {cwd: packageRoot, encoding: "utf8", stdio: "pipe"}
+      {cwd: packageRoot, encoding: "utf8", stdio: "pipe"},
     );
 
     expect(output).toContain("sync:styles check passed: 96 CSS files");
@@ -87,7 +87,7 @@ describe("sync:styles contract", () => {
     const fixture = createStylesFixture({generated: false});
     const files = readdirSync(join(fixture.root, "upstream"), {
       recursive: true,
-      withFileTypes: true
+      withFileTypes: true,
     })
       .filter((entry) => entry.isFile())
       .map((entry) => join(entry.parentPath, entry.name));
@@ -116,14 +116,14 @@ describe("sync:styles contract", () => {
     try {
       appendFileSync(
         join(fixture.root, "upstream", "components", "button.css"),
-        "\n/* tampered */\n"
+        "\n/* tampered */\n",
       );
 
       const result = fixture.run("sync-styles.mjs", ["--check"]);
 
       expect(result.status).toBe(1);
       expect(result.stderr).toContain(
-        "upstream/components/button.css does not match the pinned hash"
+        "upstream/components/button.css does not match the pinned hash",
       );
     } finally {
       fixture.dispose();
@@ -136,14 +136,14 @@ describe("sync:styles contract", () => {
     try {
       writeFileSync(
         join(fixture.root, "upstream", "components", "orphan.css"),
-        ".orphan { color: red; }\n"
+        ".orphan { color: red; }\n",
       );
 
       const result = fixture.run("sync-styles.mjs", ["--check"]);
 
       expect(result.status).toBe(1);
       expect(result.stderr).toContain(
-        "upstream/components/orphan.css is not part of the pinned snapshot"
+        "upstream/components/orphan.css is not part of the pinned snapshot",
       );
     } finally {
       fixture.dispose();
@@ -155,19 +155,14 @@ describe("sync:styles contract", () => {
     const source = createSource({version: "9.9.9"});
 
     try {
-      const before = readFileSync(
-        join(fixture.root, "contracts", "upstream.json"),
-        "utf8"
-      );
+      const before = readFileSync(join(fixture.root, "contracts", "upstream.json"), "utf8");
       const result = fixture.run("sync-styles.mjs", ["--source", source.root]);
 
       expect(result.status).toBe(1);
       expect(result.stderr).toContain("Refusing to overwrite the snapshot.");
       expect(result.stderr).toContain("Source: @heroui/styles 9.9.9");
       expect(result.stderr).toContain("Pinned: @heroui/styles 3.2.7");
-      expect(
-        readFileSync(join(fixture.root, "contracts", "upstream.json"), "utf8")
-      ).toBe(before);
+      expect(readFileSync(join(fixture.root, "contracts", "upstream.json"), "utf8")).toBe(before);
     } finally {
       fixture.dispose();
       disposeSource(source);
@@ -178,11 +173,8 @@ describe("sync:styles contract", () => {
     const fixture = createStylesFixture({generated: false});
     const source = createSource({
       mutate: (stylesDir) => {
-        appendFileSync(
-          join(stylesDir, "components", "button.css"),
-          "\n/* dirty */\n"
-        );
-      }
+        appendFileSync(join(stylesDir, "components", "button.css"), "\n/* dirty */\n");
+      },
     });
 
     try {
@@ -190,11 +182,9 @@ describe("sync:styles contract", () => {
 
       expect(result.status).toBe(1);
       expect(result.stderr).toContain(
-        "Refusing to overwrite the snapshot: source CSS differs from the pin."
+        "Refusing to overwrite the snapshot: source CSS differs from the pin.",
       );
-      expect(result.stderr).toContain(
-        "- components/button.css does not match the pinned hash"
-      );
+      expect(result.stderr).toContain("- components/button.css does not match the pinned hash");
     } finally {
       fixture.dispose();
       disposeSource(source);
@@ -209,13 +199,11 @@ describe("sync:styles contract", () => {
       const result = fixture.run("sync-styles.mjs", [
         "--source",
         source.root,
-        "--allow-upstream-change"
+        "--allow-upstream-change",
       ]);
 
       expect(result.status).toBe(1);
-      expect(result.stderr).toContain(
-        "--allow-upstream-change requires --commit <sha>"
-      );
+      expect(result.stderr).toContain("--allow-upstream-change requires --commit <sha>");
     } finally {
       fixture.dispose();
       disposeSource(source);
@@ -232,13 +220,11 @@ describe("sync:styles contract", () => {
         source.root,
         "--allow-upstream-change",
         "--commit",
-        "0".repeat(40)
+        "0".repeat(40),
       ]);
 
       expect(result.status).toBe(1);
-      expect(result.stderr).toContain(
-        `does not match the source HEAD ${source.head}`
-      );
+      expect(result.stderr).toContain(`does not match the source HEAD ${source.head}`);
     } finally {
       fixture.dispose();
       disposeSource(source);
@@ -255,14 +241,14 @@ describe("sync:styles contract", () => {
         source.root,
         "--allow-upstream-change",
         "--commit",
-        source.head
+        source.head,
       ]);
 
       expect(result.status).toBe(0);
       expect(result.stdout).toContain("sync:styles wrote 98 files (96 CSS)");
 
       const pin = JSON.parse(
-        readFileSync(join(fixture.root, "contracts", "upstream.json"), "utf8")
+        readFileSync(join(fixture.root, "contracts", "upstream.json"), "utf8"),
       ) as {version: string; commit: string};
 
       expect(pin.version).toBe("9.9.9");

@@ -11,7 +11,7 @@ import type {AlertIndicatorProps} from "./types";
 defineOptions({name: "SailAlertIndicator", inheritAttrs: false});
 
 withDefaults(defineProps<AlertIndicatorProps>(), {
-  as: "div"
+  as: "div",
 });
 
 const attrs = useAttrs();
@@ -42,10 +42,6 @@ const defaultIcon = computed(() => {
     :data-slot="'alert-indicator'"
   >
     <slot v-if="hasSlotContent(componentSlots.default)" />
-    <component
-      :is="defaultIcon"
-      v-else
-      data-slot="alert-default-icon"
-    />
+    <component :is="defaultIcon" v-else data-slot="alert-default-icon" />
   </Primitive>
 </template>

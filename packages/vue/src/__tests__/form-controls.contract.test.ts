@@ -8,11 +8,22 @@ import {dataSlots, renderSSR} from "@sail-ui/testing";
 
 import {Button} from "../components/button";
 import {ButtonGroup, ButtonGroupSeparator} from "../components/button-group";
-import {Checkbox, CheckboxContent, CheckboxControl, CheckboxIndicator} from "../components/checkbox";
+import {
+  Checkbox,
+  CheckboxContent,
+  CheckboxControl,
+  CheckboxIndicator,
+} from "../components/checkbox";
 import {CheckboxGroup} from "../components/checkbox-group";
 import {Form} from "../components/form";
 import {Input, TextField} from "../components/input";
-import {InputGroup, InputGroupInput, InputGroupPrefix, InputGroupSuffix, InputGroupTextArea} from "../components/input-group";
+import {
+  InputGroup,
+  InputGroupInput,
+  InputGroupPrefix,
+  InputGroupSuffix,
+  InputGroupTextArea,
+} from "../components/input-group";
 import {Label} from "../components/label";
 import {Description} from "../components/description";
 import {FieldError} from "../components/field-error";
@@ -21,7 +32,7 @@ import {
   NumberFieldDecrementButton,
   NumberFieldGroup,
   NumberFieldIncrementButton,
-  NumberFieldInput
+  NumberFieldInput,
 } from "../components/number-field";
 import {Radio, RadioContent, RadioControl, RadioIndicator} from "../components/radio";
 import {RadioGroup} from "../components/radio-group";
@@ -30,7 +41,7 @@ import {
   SearchFieldClearButton,
   SearchFieldGroup,
   SearchFieldInput,
-  SearchFieldSearchIcon
+  SearchFieldSearchIcon,
 } from "../components/search-field";
 import {
   Slider,
@@ -41,7 +52,7 @@ import {
   SliderStep,
   SliderSteps,
   SliderThumb,
-  SliderTrack
+  SliderTrack,
 } from "../components/slider";
 import {Switch, SwitchContent, SwitchControl, SwitchIcon, SwitchThumb} from "../components/switch";
 import {SwitchGroup} from "../components/switch-group";
@@ -52,7 +63,7 @@ import {Toolbar} from "../components/toolbar";
 
 const stylesRoot = join(process.cwd(), "packages", "styles");
 const slotSnapshot = JSON.parse(
-  readFileSync(join(stylesRoot, "contracts", "data-slots.json"), "utf8")
+  readFileSync(join(stylesRoot, "contracts", "data-slots.json"), "utf8"),
 ) as {components: Record<string, string[]>};
 
 const renderedSlots = new Set<string>();
@@ -76,8 +87,8 @@ const pointer = (element: Element, type: string, init: PointerEventInit = {}) =>
       bubbles: true,
       pointerId: 1,
       pointerType: "mouse",
-      ...init
-    })
+      ...init,
+    }),
   );
 };
 
@@ -100,10 +111,10 @@ describe("T04 data-slot parity", () => {
             default: () => [
               h(Button, null, {default: () => "A"}),
               h(ButtonGroupSeparator),
-              h(Button, null, {default: () => "B"})
-            ]
+              h(Button, null, {default: () => "B"}),
+            ],
           });
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -117,32 +128,40 @@ describe("T04 data-slot parity", () => {
       setup() {
         return () =>
           h("div", null, [
-            h(Checkbox, {value: "terms", modelValue: "indeterminate"}, {
-              default: () => [
-                h(CheckboxContent, null, {
-                  default: () => [
-                    h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]}),
-                    h(Label, null, {default: () => "Accept"})
-                  ]
-                })
-              ]
-            }),
+            h(
+              Checkbox,
+              {value: "terms", modelValue: "indeterminate"},
+              {
+                default: () => [
+                  h(CheckboxContent, null, {
+                    default: () => [
+                      h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]}),
+                      h(Label, null, {default: () => "Accept"}),
+                    ],
+                  }),
+                ],
+              },
+            ),
             h(CheckboxGroup, null, {
               default: () => [
-                h(Checkbox, {value: "terms"}, {
-                  default: () => [
-                    h(CheckboxContent, null, {
-                      default: () => [
-                        h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]}),
-                        h(Label, null, {default: () => "Accept"})
-                      ]
-                    })
-                  ]
-                })
-              ]
-            })
+                h(
+                  Checkbox,
+                  {value: "terms"},
+                  {
+                    default: () => [
+                      h(CheckboxContent, null, {
+                        default: () => [
+                          h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]}),
+                          h(Label, null, {default: () => "Accept"}),
+                        ],
+                      }),
+                    ],
+                  },
+                ),
+              ],
+            }),
           ]);
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -157,19 +176,23 @@ describe("T04 data-slot parity", () => {
         return () =>
           h(RadioGroup, null, {
             default: () => [
-              h(Radio, {value: "a"}, {
-                default: () => [
-                  h(RadioContent, null, {
-                    default: () => [
-                      h(RadioControl, null, {default: () => [h(RadioIndicator)]}),
-                      "A"
-                    ]
-                  })
-                ]
-              })
-            ]
+              h(
+                Radio,
+                {value: "a"},
+                {
+                  default: () => [
+                    h(RadioContent, null, {
+                      default: () => [
+                        h(RadioControl, null, {default: () => [h(RadioIndicator)]}),
+                        "A",
+                      ],
+                    }),
+                  ],
+                },
+              ),
+            ],
           });
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -189,16 +212,16 @@ describe("T04 data-slot parity", () => {
                   h(SwitchContent, null, {
                     default: () => [
                       h(SwitchControl, null, {
-                        default: () => [h(SwitchThumb), h(SwitchIcon)]
+                        default: () => [h(SwitchThumb), h(SwitchIcon)],
                       }),
-                      "Enable"
-                    ]
-                  })
-                ]
-              })
-            ]
+                      "Enable",
+                    ],
+                  }),
+                ],
+              }),
+            ],
           });
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -215,10 +238,10 @@ describe("T04 data-slot parity", () => {
               h(InputGroupPrefix, null, {default: () => "@"}),
               h(InputGroupInput),
               h(InputGroupTextArea),
-              h(InputGroupSuffix, null, {default: () => ".com"})
-            ]
+              h(InputGroupSuffix, null, {default: () => ".com"}),
+            ],
           });
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -236,12 +259,12 @@ describe("T04 data-slot parity", () => {
                 default: () => [
                   h(SearchFieldSearchIcon),
                   h(SearchFieldInput),
-                  h(SearchFieldClearButton)
-                ]
-              })
-            ]
+                  h(SearchFieldClearButton),
+                ],
+              }),
+            ],
           });
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -260,12 +283,12 @@ describe("T04 data-slot parity", () => {
                 default: () => [
                   h(NumberFieldDecrementButton),
                   h(NumberFieldInput),
-                  h(NumberFieldIncrementButton)
-                ]
-              })
-            ]
+                  h(NumberFieldIncrementButton),
+                ],
+              }),
+            ],
           });
-      }
+      },
     });
     const html = await renderSSR(host);
 
@@ -279,24 +302,28 @@ describe("T04 data-slot parity", () => {
     const host = defineComponent({
       setup() {
         return () =>
-          h(Slider, {modelValue: 40}, {
-            default: () => [
-              h(SliderOutput),
-              h(SliderTrack, null, {
-                default: () => [
-                  h(SliderFill),
-                  h(SliderSteps, null, {
-                    default: () => [h(SliderStep)]
-                  }),
-                  h(SliderThumb)
-                ]
-              }),
-              h(SliderMarks, null, {
-                default: () => [h(SliderMark, {value: 20})]
-              })
-            ]
-          });
-      }
+          h(
+            Slider,
+            {modelValue: 40},
+            {
+              default: () => [
+                h(SliderOutput),
+                h(SliderTrack, null, {
+                  default: () => [
+                    h(SliderFill),
+                    h(SliderSteps, null, {
+                      default: () => [h(SliderStep)],
+                    }),
+                    h(SliderThumb),
+                  ],
+                }),
+                h(SliderMarks, null, {
+                  default: () => [h(SliderMark, {value: 20})],
+                }),
+              ],
+            },
+          );
+      },
     });
     const html = await renderSSR(host);
 
@@ -311,23 +338,27 @@ describe("T04 data-slot parity", () => {
         return () =>
           h(Toolbar, null, {
             default: () => [
-              h(ToggleButtonGroup, {type: "multiple"}, {
-                default: () => [
-                  h(ToggleButton, {value: "bold"}, {default: () => "B"}),
-                  h(ToggleButtonGroupSeparator),
-                  h(ToggleButton, {value: "italic"}, {default: () => "I"})
-                ]
-              })
-            ]
+              h(
+                ToggleButtonGroup,
+                {type: "multiple"},
+                {
+                  default: () => [
+                    h(ToggleButton, {value: "bold"}, {default: () => "B"}),
+                    h(ToggleButtonGroupSeparator),
+                    h(ToggleButton, {value: "italic"}, {default: () => "I"}),
+                  ],
+                },
+              ),
+            ],
           });
-      }
+      },
     });
     const html = await renderSSR(host);
 
     expectUpstreamSlots(html, "toolbar", [
       "toggle-button",
       "toggle-button-group",
-      "toggle-button-group-separator"
+      "toggle-button-group-separator",
     ]);
     expect(html).toContain('role="toolbar"');
   });
@@ -336,16 +367,20 @@ describe("T04 data-slot parity", () => {
     const host = defineComponent({
       setup() {
         return () =>
-          h(TextField, {isInvalid: true}, {
-            default: () => [
-              h(Label, null, {default: () => "Message"}),
-              h(Input),
-              h(Textarea),
-              h(Description, null, {default: () => "Tell us more."}),
-              h(FieldError, null, {default: () => "Too short."})
-            ]
-          });
-      }
+          h(
+            TextField,
+            {isInvalid: true},
+            {
+              default: () => [
+                h(Label, null, {default: () => "Message"}),
+                h(Input),
+                h(Textarea),
+                h(Description, null, {default: () => "Tell us more."}),
+                h(FieldError, null, {default: () => "Too short."}),
+              ],
+            },
+          );
+      },
     });
     const html = await renderSSR(host);
 
@@ -354,7 +389,7 @@ describe("T04 data-slot parity", () => {
       "label",
       "input",
       "description",
-      "field-error"
+      "field-error",
     ]);
   });
 
@@ -384,14 +419,12 @@ describe("T04 data-slot parity", () => {
       "textfield",
       "toggle-button",
       "toggle-button-group",
-      "toolbar"
+      "toolbar",
     ];
 
     for (const component of components) {
       for (const slot of slotSnapshot.components[component] ?? []) {
-        expect(renderedSlots.has(slot), `${component} is missing the slot ${slot}`).toBe(
-          true
-        );
+        expect(renderedSlots.has(slot), `${component} is missing the slot ${slot}`).toBe(true);
       }
     }
   });
@@ -403,16 +436,22 @@ describe("T04 interactive state contract", () => {
       defineComponent({
         setup() {
           return () =>
-            h(Checkbox, {modelValue: "indeterminate", isDisabled: true}, {
-              default: () => [
-                h(CheckboxContent, null, {
-                  default: () => [h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})]
-                })
-              ]
-            });
-        }
+            h(
+              Checkbox,
+              {modelValue: "indeterminate", isDisabled: true},
+              {
+                default: () => [
+                  h(CheckboxContent, null, {
+                    default: () => [
+                      h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]}),
+                    ],
+                  }),
+                ],
+              },
+            );
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
     const root = wrapper.get('[data-slot="checkbox"]');
     const content = wrapper.get('[data-slot="checkbox-content"]');
@@ -425,7 +464,7 @@ describe("T04 interactive state contract", () => {
     const indicator = wrapper.get('[data-slot="checkbox-indicator"]');
 
     expect(indicator.find('[data-slot="checkbox-default-indicator--indeterminate"]').exists()).toBe(
-      true
+      true,
     );
 
     wrapper.unmount();
@@ -438,15 +477,22 @@ describe("T04 interactive state contract", () => {
       defineComponent({
         setup() {
           return () =>
-            h(CheckboxGroup, {"modelValue": values.value, "onUpdate:modelValue": (next: string[]) => (values.value = next)}, {
-              default: () => [
-                h(Checkbox, {value: "a"}, {default: () => "A"}),
-                h(Checkbox, {value: "b"}, {default: () => "B"})
-              ]
-            });
-        }
+            h(
+              CheckboxGroup,
+              {
+                modelValue: values.value,
+                "onUpdate:modelValue": (next: string[]) => (values.value = next),
+              },
+              {
+                default: () => [
+                  h(Checkbox, {value: "a"}, {default: () => "A"}),
+                  h(Checkbox, {value: "b"}, {default: () => "B"}),
+                ],
+              },
+            );
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     await nextTick();
@@ -464,19 +510,31 @@ describe("T04 interactive state contract", () => {
       defineComponent({
         setup() {
           return () =>
-            h(RadioGroup, {modelValue: "b"}, {
-              default: () => [
-                h(Radio, {value: "a"}, {
-                  default: () => [h(RadioContent, null, {default: () => "A"})]
-                }),
-                h(Radio, {value: "b"}, {
-                  default: () => [h(RadioContent, null, {default: () => "B"})]
-                })
-              ]
-            });
-        }
+            h(
+              RadioGroup,
+              {modelValue: "b"},
+              {
+                default: () => [
+                  h(
+                    Radio,
+                    {value: "a"},
+                    {
+                      default: () => [h(RadioContent, null, {default: () => "A"})],
+                    },
+                  ),
+                  h(
+                    Radio,
+                    {value: "b"},
+                    {
+                      default: () => [h(RadioContent, null, {default: () => "B"})],
+                    },
+                  ),
+                ],
+              },
+            );
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const radios = wrapper.findAll('[data-slot="radio"]');
@@ -498,16 +556,20 @@ describe("T04 interactive state contract", () => {
       defineComponent({
         setup() {
           return () =>
-            h(Switch, {modelValue: true}, {
-              default: () => [
-                h(SwitchContent, null, {
-                  default: () => [h(SwitchControl, null, {default: () => [h(SwitchThumb)]})]
-                })
-              ]
-            });
-        }
+            h(
+              Switch,
+              {modelValue: true},
+              {
+                default: () => [
+                  h(SwitchContent, null, {
+                    default: () => [h(SwitchControl, null, {default: () => [h(SwitchThumb)]})],
+                  }),
+                ],
+              },
+            );
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     expect(wrapper.get('[data-slot="switch"]').attributes("data-selected")).toBe("true");
@@ -521,7 +583,7 @@ describe("T04 interactive state contract", () => {
     const wrapper = mount(ToggleButton, {
       attachTo: document.body,
       props: {modelValue: true},
-      slots: {default: "Bold"}
+      slots: {default: "Bold"},
     });
     const button = wrapper.get('[data-slot="toggle-button"]');
 
@@ -548,20 +610,22 @@ describe("T04 interactive state contract", () => {
       defineComponent({
         setup() {
           return () =>
-            h(ToggleButtonGroup, {type: "single", modelValue: "a"}, {
-              default: () => [
-                h(ToggleButton, {value: "a"}, {default: () => "A"}),
-                h(ToggleButton, {value: "b"}, {default: () => "B"})
-              ]
-            });
-        }
+            h(
+              ToggleButtonGroup,
+              {type: "single", modelValue: "a"},
+              {
+                default: () => [
+                  h(ToggleButton, {value: "a"}, {default: () => "A"}),
+                  h(ToggleButton, {value: "b"}, {default: () => "B"}),
+                ],
+              },
+            );
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
-    expect(wrapper.get('[data-slot="toggle-button-group"]').attributes("role")).toBe(
-      "radiogroup"
-    );
+    expect(wrapper.get('[data-slot="toggle-button-group"]').attributes("role")).toBe("radiogroup");
 
     const buttons = wrapper.findAll('[data-slot="toggle-button"]');
 
@@ -577,17 +641,21 @@ describe("T04 interactive state contract", () => {
       defineComponent({
         setup() {
           return () =>
-            h(Slider, {modelValue: 30}, {
-              default: () => [
-                h(SliderOutput),
-                h(SliderTrack, null, {
-                  default: () => [h(SliderFill), h(SliderThumb)]
-                })
-              ]
-            });
-        }
+            h(
+              Slider,
+              {modelValue: 30},
+              {
+                default: () => [
+                  h(SliderOutput),
+                  h(SliderTrack, null, {
+                    default: () => [h(SliderFill), h(SliderThumb)],
+                  }),
+                ],
+              },
+            );
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const track = wrapper.get('[data-slot="slider-track"]');
@@ -622,16 +690,20 @@ describe("T04 interactive state contract", () => {
       defineComponent({
         setup() {
           return () =>
-            h(SearchField, {modelValue: "sail"}, {
-              default: () => [
-                h(SearchFieldGroup, null, {
-                  default: () => [h(SearchFieldInput), h(SearchFieldClearButton)]
-                })
-              ]
-            });
-        }
+            h(
+              SearchField,
+              {modelValue: "sail"},
+              {
+                default: () => [
+                  h(SearchFieldGroup, null, {
+                    default: () => [h(SearchFieldInput), h(SearchFieldClearButton)],
+                  }),
+                ],
+              },
+            );
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     expect(wrapper.get('[data-slot="search-field"]').attributes("data-empty")).toBeUndefined();
@@ -652,13 +724,15 @@ describe("T04 interactive state contract", () => {
             h(Checkbox, null, {
               default: () => [
                 h(CheckboxContent, null, {
-                  default: () => [h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})]
-                })
-              ]
+                  default: () => [
+                    h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]}),
+                  ],
+                }),
+              ],
             });
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
     const content = wrapper.get('[data-slot="checkbox-content"]');
 
@@ -689,18 +763,20 @@ describe("T04 interactive state contract", () => {
         setup() {
           return () =>
             h("div", null, [
-              h(Radio, {value: "a"}, {
-                default: () => [h(RadioContent, null, {default: () => "A"})]
-              }),
+              h(
+                Radio,
+                {value: "a"},
+                {
+                  default: () => [h(RadioContent, null, {default: () => "A"})],
+                },
+              ),
               h(Switch, null, {
-                default: () => [
-                  h(SwitchContent, null, {default: () => "Enable"})
-                ]
-              })
+                default: () => [h(SwitchContent, null, {default: () => "Enable"})],
+              }),
             ]);
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const radioContent = wrapper.get('[data-slot="radio-content"]');
@@ -726,13 +802,11 @@ describe("T04 interactive state contract", () => {
         setup() {
           return () =>
             h(NumberField, null, {
-              default: () => [
-                h(NumberFieldGroup, null, {default: () => [h(NumberFieldInput)]})
-              ]
+              default: () => [h(NumberFieldGroup, null, {default: () => [h(NumberFieldInput)]})],
             });
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
     const group = numberField.get('[data-slot="number-field-group"]');
 
@@ -750,12 +824,16 @@ describe("T04 interactive state contract", () => {
       defineComponent({
         setup() {
           return () =>
-            h(InputGroup, {isInvalid: true}, {
-              default: () => [h(InputGroupInput)]
-            });
-        }
+            h(
+              InputGroup,
+              {isInvalid: true},
+              {
+                default: () => [h(InputGroupInput)],
+              },
+            );
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
     const inputGroupRoot = inputGroup.get('[data-slot="input-group"]');
 
@@ -771,18 +849,20 @@ describe("T04 interactive state contract", () => {
       defineComponent({
         setup() {
           return () =>
-            h(SearchField, {isDisabled: true}, {
-              default: () => [
-                h(SearchFieldGroup, null, {default: () => [h(SearchFieldInput)]})
-              ]
-            });
-        }
+            h(
+              SearchField,
+              {isDisabled: true},
+              {
+                default: () => [h(SearchFieldGroup, null, {default: () => [h(SearchFieldInput)]})],
+              },
+            );
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     expect(searchField.get('[data-slot="search-field-group"]').attributes("data-disabled")).toBe(
-      "true"
+      "true",
     );
     expect(searchField.get('[data-slot="search-field"]').attributes("data-disabled")).toBe("true");
 
@@ -794,17 +874,21 @@ describe("T04 interactive state contract", () => {
       defineComponent({
         setup() {
           return () =>
-            h(Slider, {modelValue: 100}, {
-              default: () => [
-                h(SliderTrack, null, {
-                  default: () => [h(SliderFill), h(SliderThumb)]
-                }),
-                h(SliderMarks, null, {default: () => [h(SliderMark, {value: 20})]})
-              ]
-            });
-        }
+            h(
+              Slider,
+              {modelValue: 100},
+              {
+                default: () => [
+                  h(SliderTrack, null, {
+                    default: () => [h(SliderFill), h(SliderThumb)],
+                  }),
+                  h(SliderMarks, null, {default: () => [h(SliderMark, {value: 20})]}),
+                ],
+              },
+            );
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const track = wrapper.get('[data-slot="slider-track"]');
@@ -843,9 +927,9 @@ describe("T04 interactive state contract", () => {
       slots: {
         default: () => [
           h(Input, {name: "email", required: true}),
-          h(Button, {type: "submit"}, {default: () => "Send"})
-        ]
-      }
+          h(Button, {type: "submit"}, {default: () => "Send"}),
+        ],
+      },
     });
 
     await wrapper.get("form").trigger("submit");

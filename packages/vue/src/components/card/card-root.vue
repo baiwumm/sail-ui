@@ -11,7 +11,7 @@ defineOptions({name: "SailCard", inheritAttrs: false});
 
 const props = withDefaults(defineProps<CardRootProps>(), {
   as: "div",
-  variant: "default"
+  variant: "default",
 });
 
 const attrs = useAttrs();
@@ -21,18 +21,12 @@ const classes = computed(() => cx(slots.value.base(), attrs.class as string | un
 provide(cardContextKey, {slots});
 provide(
   surfaceContextKey,
-  computed(() => (props.variant === "transparent" ? undefined : props.variant))
+  computed(() => (props.variant === "transparent" ? undefined : props.variant)),
 );
 </script>
 
 <template>
-  <Primitive
-    v-bind="$attrs"
-    :as="as"
-    :as-child="asChild"
-    :class="classes"
-    :data-slot="'card'"
-  >
+  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes" :data-slot="'card'">
     <slot />
   </Primitive>
 </template>

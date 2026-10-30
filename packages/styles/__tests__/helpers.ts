@@ -36,11 +36,11 @@ export function createStylesFixture(options: {generated?: boolean} = {}): Styles
     root,
     run(script, args = []) {
       try {
-        const stdout = execFileSync(
-          process.execPath,
-          [join(root, "scripts", script), ...args],
-          {cwd: root, encoding: "utf8", stdio: "pipe"}
-        );
+        const stdout = execFileSync(process.execPath, [join(root, "scripts", script), ...args], {
+          cwd: root,
+          encoding: "utf8",
+          stdio: "pipe",
+        });
 
         return {status: 0, stdout, stderr: ""};
       } catch (error) {
@@ -49,12 +49,12 @@ export function createStylesFixture(options: {generated?: boolean} = {}): Styles
         return {
           status: failure.status ?? 1,
           stdout: failure.stdout ?? "",
-          stderr: failure.stderr ?? ""
+          stderr: failure.stderr ?? "",
         };
       }
     },
     dispose() {
       rmSync(root, {recursive: true, force: true});
-    }
+    },
   };
 }

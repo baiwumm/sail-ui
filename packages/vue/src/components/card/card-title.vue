@@ -9,7 +9,7 @@ import type {CardTitleProps} from "./types";
 defineOptions({name: "SailCardTitle", inheritAttrs: false});
 
 withDefaults(defineProps<CardTitleProps>(), {
-  as: "h3"
+  as: "h3",
 });
 
 const attrs = useAttrs();

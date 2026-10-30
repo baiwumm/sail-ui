@@ -7,7 +7,7 @@ import BreadcrumbsItem from "../breadcrumbs-item.vue";
 
 const pointer = (element: Element, type: string) => {
   element.dispatchEvent(
-    new PointerEvent(type, {bubbles: true, pointerId: 1, pointerType: "mouse"})
+    new PointerEvent(type, {bubbles: true, pointerId: 1, pointerType: "mouse"}),
   );
 };
 
@@ -18,9 +18,9 @@ function renderBreadcrumbs(props: Record<string, unknown> = {}) {
       default: () => [
         h(BreadcrumbsItem, {href: "/"}, {default: () => "Home"}),
         h(BreadcrumbsItem, {href: "/products"}, {default: () => "Products"}),
-        h(BreadcrumbsItem, {href: "/laptop"}, {default: () => "Laptop"})
-      ]
-    }
+        h(BreadcrumbsItem, {href: "/laptop"}, {default: () => "Laptop"}),
+      ],
+    },
   });
 }
 
@@ -74,9 +74,9 @@ describe("Breadcrumbs", () => {
       slots: {
         default: () => [
           h(BreadcrumbsItem, {href: "/", onPress}, {default: () => "Home"}),
-          h(BreadcrumbsItem, {href: "/current"}, {default: () => "Current"})
-        ]
-      }
+          h(BreadcrumbsItem, {href: "/current"}, {default: () => "Current"}),
+        ],
+      },
     });
     const home = wrapper.get("a");
 
@@ -96,9 +96,9 @@ describe("Breadcrumbs", () => {
       slots: {
         default: () => [
           h(BreadcrumbsItem, {href: "/", onPress}, {default: () => "Home"}),
-          h(BreadcrumbsItem, {href: "/current", onPress}, {default: () => "Current"})
-        ]
-      }
+          h(BreadcrumbsItem, {href: "/current", onPress}, {default: () => "Current"}),
+        ],
+      },
     });
     const current = wrapper.get("span[role='link']");
 

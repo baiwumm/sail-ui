@@ -9,7 +9,7 @@ import type {EmptyStateRootProps} from "./types";
 defineOptions({name: "SailEmptyState", inheritAttrs: false});
 
 withDefaults(defineProps<EmptyStateRootProps>(), {
-  as: "div"
+  as: "div",
 });
 
 const attrs = useAttrs();
@@ -27,8 +27,6 @@ const hasContent = computed(() => hasSlotContent(componentSlots.default));
     :data-slot="'empty-state'"
   >
     <slot v-if="hasContent" />
-    <template v-else>
-      No results found
-    </template>
+    <template v-else> No results found </template>
   </Primitive>
 </template>

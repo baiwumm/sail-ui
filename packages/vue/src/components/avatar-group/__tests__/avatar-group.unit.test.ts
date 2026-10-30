@@ -14,19 +14,17 @@ describe("AvatarGroup", () => {
   it("renders the group slot, overlap class, and every child below max", () => {
     const wrapper = mount(AvatarGroup, {
       props: {overlap: "ring"},
-      slots: {default: () => [avatar("A"), avatar("B")]}
+      slots: {default: () => [avatar("A"), avatar("B")]},
     });
 
-    expect(wrapper.get("[data-slot='avatar-group']").classes()).toContain(
-      "avatar-group--ring"
-    );
+    expect(wrapper.get("[data-slot='avatar-group']").classes()).toContain("avatar-group--ring");
     expect(wrapper.findAll("[data-slot='avatar-fallback']")).toHaveLength(2);
   });
 
   it("truncates children and appends a count at max", () => {
     const wrapper = mount(AvatarGroup, {
       props: {max: 2},
-      slots: {default: () => [avatar("A"), avatar("B"), avatar("C")]}
+      slots: {default: () => [avatar("A"), avatar("B"), avatar("C")]},
     });
 
     expect(wrapper.findAll("[data-slot='avatar-fallback']")).toHaveLength(3);
@@ -40,35 +38,35 @@ describe("AvatarGroup", () => {
         default: () => [
           avatar("A"),
           avatar("B"),
-          h(AvatarGroupCount, {"aria-label": "Two more"}, {default: () => "2+"})
-        ]
-      }
+          h(AvatarGroupCount, {"aria-label": "Two more"}, {default: () => "2+"}),
+        ],
+      },
     });
 
     expect(wrapper.findAll("[data-slot='avatar-group-count']")).toHaveLength(1);
     expect(wrapper.get("[data-slot='avatar-group-count']").text()).toBe("2+");
     expect(wrapper.get("[data-slot='avatar-group-count']").attributes("aria-label")).toBe(
-      "Two more"
+      "Two more",
     );
   });
 
   it("inherits size and color from the group context", () => {
     const wrapper = mount(AvatarGroup, {
       props: {color: "warning", size: "sm"},
-      slots: {default: () => [avatar("A")]}
+      slots: {default: () => [avatar("A")]},
     });
     const avatarRoot = wrapper.get(".avatar");
 
     expect(avatarRoot.classes()).toContain("avatar--sm");
     expect(wrapper.get("[data-slot='avatar-fallback']").classes()).toContain(
-      "avatar__fallback--warning"
+      "avatar__fallback--warning",
     );
   });
 
   it("supports the grid modifier", () => {
     const wrapper = mount(AvatarGroup, {
       props: {isGrid: true},
-      slots: {default: () => [avatar("A")]}
+      slots: {default: () => [avatar("A")]},
     });
 
     expect(wrapper.classes()).toContain("avatar-group--grid");
@@ -77,7 +75,7 @@ describe("AvatarGroup", () => {
   it("casts the boolean is-grid shorthand", () => {
     const wrapper = mount(AvatarGroup, {
       props: {isGrid: "" as unknown as boolean},
-      slots: {default: () => [avatar("A")]}
+      slots: {default: () => [avatar("A")]},
     });
 
     expect(wrapper.classes()).toContain("avatar-group--grid");

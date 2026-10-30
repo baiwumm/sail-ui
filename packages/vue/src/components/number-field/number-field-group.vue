@@ -16,9 +16,7 @@ const isFocusWithin = ref(false);
 
 const {isHovered} = useHover(groupRef);
 
-const classes = computed(() =>
-  cx(numberFieldVariants().group(), className.value)
-);
+const classes = computed(() => cx(numberFieldVariants().group(), className.value));
 
 function handleFocusIn() {
   isFocusWithin.value = true;

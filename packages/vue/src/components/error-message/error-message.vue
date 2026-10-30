@@ -8,7 +8,7 @@ import type {ErrorMessageRootProps} from "./types";
 defineOptions({name: "SailErrorMessage", inheritAttrs: false});
 
 withDefaults(defineProps<ErrorMessageRootProps>(), {
-  as: "span"
+  as: "span",
 });
 
 const attrs = useAttrs();

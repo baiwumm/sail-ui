@@ -41,7 +41,7 @@ Vue 端采用双出口：
 
 ```vue
 <script setup lang="ts">
-import { Select, SelectTrigger, SelectValue, SelectPopover } from "@sail-ui/vue";
+import {Select, SelectTrigger, SelectValue, SelectPopover} from "@sail-ui/vue";
 </script>
 
 <template>
@@ -57,9 +57,9 @@ import { Select, SelectTrigger, SelectValue, SelectPopover } from "@sail-ui/vue"
 2. **同时导出复合对象，用于动态/程序化场景**
 
 ```ts
-import { Select } from "@sail-ui/vue";
+import {Select} from "@sail-ui/vue";
 
-Select.Root;    // === SelectRoot
+Select.Root; // === SelectRoot
 Select.Trigger; // === SelectTrigger
 ```
 

@@ -9,7 +9,7 @@ const NumberField = Object.assign(NumberFieldRoot, {
   Group: NumberFieldGroup,
   Input: NumberFieldInput,
   IncrementButton: NumberFieldIncrementButton,
-  DecrementButton: NumberFieldDecrementButton
+  DecrementButton: NumberFieldDecrementButton,
 });
 
 export {
@@ -18,13 +18,13 @@ export {
   NumberFieldGroup,
   NumberFieldInput,
   NumberFieldIncrementButton,
-  NumberFieldDecrementButton
+  NumberFieldDecrementButton,
 };
 export type {
   NumberFieldRootProps,
   NumberFieldRootProps as NumberFieldProps,
   NumberFieldGroupProps,
   NumberFieldInputProps,
-  NumberFieldButtonProps
+  NumberFieldButtonProps,
 } from "./types";
 export {numberFieldVariants, type NumberFieldVariants} from "@sail-ui/styles";

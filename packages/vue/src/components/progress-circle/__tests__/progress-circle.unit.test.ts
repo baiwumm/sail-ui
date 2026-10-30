@@ -12,7 +12,7 @@ const CIRCUMFERENCE = 2 * Math.PI * 16;
 
 const parts = () =>
   h(ProgressCircleTrack, null, {
-    default: () => [h(ProgressCircleTrackCircle), h(ProgressCircleFillCircle)]
+    default: () => [h(ProgressCircleTrackCircle), h(ProgressCircleFillCircle)],
   });
 
 describe("ProgressCircle", () => {
@@ -31,31 +31,25 @@ describe("ProgressCircle", () => {
     expect(trackCircle.attributes("cy")).toBe("18");
     expect(trackCircle.attributes("r")).toBe("16");
     expect(trackCircle.attributes("stroke-width")).toBe("4");
-    expect(Number(fill.attributes("stroke-dashoffset"))).toBeCloseTo(
-      CIRCUMFERENCE / 2,
-      5
-    );
+    expect(Number(fill.attributes("stroke-dashoffset"))).toBeCloseTo(CIRCUMFERENCE / 2, 5);
     expect(fill.attributes("transform")).toBe("rotate(-90 18 18)");
   });
 
   it("uses three quarters of the circle while indeterminate", () => {
     const wrapper = mount(ProgressCircle, {
       props: {isIndeterminate: true},
-      slots: {default: parts}
+      slots: {default: parts},
     });
     const fill = wrapper.get("[data-slot='progress-circle-fill-circle']");
 
     expect(wrapper.attributes("aria-valuenow")).toBeUndefined();
-    expect(Number(fill.attributes("stroke-dashoffset"))).toBeCloseTo(
-      CIRCUMFERENCE * 0.75,
-      5
-    );
+    expect(Number(fill.attributes("stroke-dashoffset"))).toBeCloseTo(CIRCUMFERENCE * 0.75, 5);
   });
 
   it("links a slotted Label through aria-labelledby", () => {
     const wrapper = mount(ProgressCircle, {
       props: {value: 25},
-      slots: {default: () => h(Label, null, {default: () => "Loading"})}
+      slots: {default: () => h(Label, null, {default: () => "Loading"})},
     });
     const label = wrapper.get("[data-slot='label']");
 
@@ -66,7 +60,7 @@ describe("ProgressCircle", () => {
   it("reflects the disabled state", () => {
     const wrapper = mount(ProgressCircle, {
       props: {isDisabled: true, value: 10},
-      slots: {default: parts}
+      slots: {default: parts},
     });
 
     expect(wrapper.attributes("data-disabled")).toBe("true");

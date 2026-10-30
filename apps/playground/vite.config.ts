@@ -50,7 +50,7 @@ const componentAliases = [
   "toggle-button",
   "toggle-button-group",
   "toolbar",
-  "typography"
+  "typography",
 ] as const;
 
 export default defineConfig({
@@ -63,16 +63,16 @@ export default defineConfig({
       ...Object.fromEntries(
         componentAliases.map((component) => [
           `@sail-ui/vue/${component}`,
-          resolvePath(`../../packages/vue/src/components/${component}/index.ts`)
-        ])
+          resolvePath(`../../packages/vue/src/components/${component}/index.ts`),
+        ]),
       ),
-      "@sail-ui/vue": resolvePath("../../packages/vue/src/index.ts")
-    }
+      "@sail-ui/vue": resolvePath("../../packages/vue/src/index.ts"),
+    },
   },
   server: {
-    port: 5173
+    port: 5173,
   },
   preview: {
-    port: 4173
-  }
+    port: 4173,
+  },
 });

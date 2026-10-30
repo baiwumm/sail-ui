@@ -14,8 +14,8 @@ const press = (element: Element) => {
       bubbles: true,
       button: 0,
       pointerId: 1,
-      pointerType: "mouse"
-    })
+      pointerType: "mouse",
+    }),
   );
 };
 
@@ -25,33 +25,37 @@ describe("NumberField", () => {
       defineComponent({
         setup() {
           return () =>
-            h(NumberField, {modelValue: 3}, {
-              default: () => [
-                h(NumberFieldGroup, null, {
-                  default: () => [
-                    h(NumberFieldDecrementButton),
-                    h(NumberFieldInput),
-                    h(NumberFieldIncrementButton)
-                  ]
-                })
-              ]
-            });
-        }
-      })
+            h(
+              NumberField,
+              {modelValue: 3},
+              {
+                default: () => [
+                  h(NumberFieldGroup, null, {
+                    default: () => [
+                      h(NumberFieldDecrementButton),
+                      h(NumberFieldInput),
+                      h(NumberFieldIncrementButton),
+                    ],
+                  }),
+                ],
+              },
+            );
+        },
+      }),
     );
 
     expect(wrapper.get('[data-slot="number-field"]').classes()).toContain("number-field--primary");
     expect(wrapper.get('[data-slot="number-field-group"]').classes()).toContain(
-      "number-field__group"
+      "number-field__group",
     );
     expect(wrapper.get('[data-slot="number-field-input"]').classes()).toContain(
-      "number-field__input"
+      "number-field__input",
     );
     expect(wrapper.get('[data-slot="number-field-increment-button"]').attributes("slot")).toBe(
-      "increment"
+      "increment",
     );
     expect(wrapper.get('[data-slot="number-field-decrement-button"]').attributes("slot")).toBe(
-      "decrement"
+      "decrement",
     );
   });
 
@@ -60,13 +64,15 @@ describe("NumberField", () => {
       defineComponent({
         setup() {
           return () =>
-            h(NumberField, {modelValue: 3, min: 0, max: 10}, {
-              default: () => [
-                h(NumberFieldGroup, null, {default: () => [h(NumberFieldInput)]})
-              ]
-            });
-        }
-      })
+            h(
+              NumberField,
+              {modelValue: 3, min: 0, max: 10},
+              {
+                default: () => [h(NumberFieldGroup, null, {default: () => [h(NumberFieldInput)]})],
+              },
+            );
+        },
+      }),
     );
     const input = wrapper.get('input[role="spinbutton"]');
 
@@ -88,7 +94,7 @@ describe("NumberField", () => {
                 modelValue: value.value,
                 "onUpdate:modelValue": (next: number | undefined) => (value.value = next ?? 0),
                 min: 0,
-                max: 10
+                max: 10,
               },
               {
                 default: () => [
@@ -96,15 +102,15 @@ describe("NumberField", () => {
                     default: () => [
                       h(NumberFieldDecrementButton),
                       h(NumberFieldInput),
-                      h(NumberFieldIncrementButton)
-                    ]
-                  })
-                ]
-              }
+                      h(NumberFieldIncrementButton),
+                    ],
+                  }),
+                ],
+              },
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     await nextTick();
@@ -131,17 +137,15 @@ describe("NumberField", () => {
               NumberField,
               {
                 modelValue: value.value,
-                "onUpdate:modelValue": (next: number | undefined) => (value.value = next ?? 0)
+                "onUpdate:modelValue": (next: number | undefined) => (value.value = next ?? 0),
               },
               {
-                default: () => [
-                  h(NumberFieldGroup, null, {default: () => [h(NumberFieldInput)]})
-                ]
-              }
+                default: () => [h(NumberFieldGroup, null, {default: () => [h(NumberFieldInput)]})],
+              },
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const input = wrapper.get('input[role="spinbutton"]');
@@ -170,7 +174,7 @@ describe("NumberField", () => {
                 modelValue: value.value,
                 "onUpdate:modelValue": (next: number | undefined) => (value.value = next ?? 0),
                 min: 0,
-                max: 10
+                max: 10,
               },
               {
                 default: () => [
@@ -178,19 +182,19 @@ describe("NumberField", () => {
                     default: () => [
                       h(NumberFieldDecrementButton),
                       h(NumberFieldInput),
-                      h(NumberFieldIncrementButton)
-                    ]
-                  })
-                ]
-              }
+                      h(NumberFieldIncrementButton),
+                    ],
+                  }),
+                ],
+              },
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     expect(
-      wrapper.get('[data-slot="number-field-increment-button"]').attributes("disabled")
+      wrapper.get('[data-slot="number-field-increment-button"]').attributes("disabled"),
     ).toBeDefined();
 
     wrapper.unmount();

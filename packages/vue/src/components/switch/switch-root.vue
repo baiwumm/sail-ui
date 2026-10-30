@@ -12,16 +12,14 @@ const props = withDefaults(defineProps<SwitchRootProps>(), {
   value: "on",
   isDisabled: false,
   isInvalid: false,
-  isRequired: false
+  isRequired: false,
 });
 
 const model = defineModel<boolean>({default: false});
 const {className, forwarded} = useForwardedAttrs();
 
 const isSelected = computed(() => model.value === true);
-const classes = computed(() =>
-  cx(switchVariants({size: props.size}).base(), className.value)
-);
+const classes = computed(() => cx(switchVariants({size: props.size}).base(), className.value));
 
 function toggle() {
   if (props.isDisabled) {
@@ -38,7 +36,7 @@ provide(switchContextKey, {
   isRequired: computed(() => props.isRequired),
   name: computed(() => props.name),
   value: computed(() => props.value),
-  toggle
+  toggle,
 });
 </script>
 

@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<NumberFieldRootProps>(), {
   isReadOnly: false,
   isInvalid: false,
   isRequired: false,
-  step: 1
+  step: 1,
 });
 
 const model = defineModel<number | undefined>();
@@ -26,10 +26,10 @@ const classes = computed(() =>
   cx(
     numberFieldVariants({
       fullWidth: props.fullWidth,
-      variant: props.variant
+      variant: props.variant,
     }).base(),
-    className.value
-  )
+    className.value,
+  ),
 );
 
 const labelId = useId();

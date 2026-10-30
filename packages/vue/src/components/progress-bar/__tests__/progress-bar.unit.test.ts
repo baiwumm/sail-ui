@@ -8,13 +8,16 @@ import ProgressBarFill from "../progress-bar-fill.vue";
 import ProgressBarOutput from "../progress-bar-output.vue";
 import ProgressBarTrack from "../progress-bar-track.vue";
 
-const parts = () => [h(ProgressBarOutput), h(ProgressBarTrack, null, {default: () => h(ProgressBarFill)})];
+const parts = () => [
+  h(ProgressBarOutput),
+  h(ProgressBarTrack, null, {default: () => h(ProgressBarFill)}),
+];
 
 describe("ProgressBar", () => {
   it("exposes the progressbar contract with formatted values", () => {
     const wrapper = mount(ProgressBar, {
       props: {maxValue: 10, minValue: 0, value: 5},
-      slots: {default: parts}
+      slots: {default: parts},
     });
 
     expect(wrapper.attributes("role")).toBe("progressbar");
@@ -24,7 +27,7 @@ describe("ProgressBar", () => {
     expect(wrapper.attributes("aria-valuetext")).toBe("50%");
     expect(wrapper.get("[data-slot='progress-bar-output']").text()).toBe("50%");
     expect(wrapper.get("[data-slot='progress-bar-fill']").attributes("style")).toContain(
-      "width: 50%"
+      "width: 50%",
     );
   });
 
@@ -53,7 +56,7 @@ describe("ProgressBar", () => {
   it("links a slotted Label through aria-labelledby", () => {
     const wrapper = mount(ProgressBar, {
       props: {value: 30},
-      slots: {default: () => [h(Label, null, {default: () => "Uploading"})]}
+      slots: {default: () => [h(Label, null, {default: () => "Uploading"})]},
     });
     const label = wrapper.get("[data-slot='label']");
 
@@ -65,7 +68,7 @@ describe("ProgressBar", () => {
   it("keeps a consumer aria-label instead of linking a label", () => {
     const wrapper = mount(ProgressBar, {
       attrs: {"aria-label": "Upload progress"},
-      slots: {default: () => h(Label, null, {default: () => "Uploading"})}
+      slots: {default: () => h(Label, null, {default: () => "Uploading"})},
     });
 
     expect(wrapper.attributes("aria-label")).toBe("Upload progress");
@@ -75,7 +78,7 @@ describe("ProgressBar", () => {
   it("prefers valueLabel and custom format options", () => {
     const labelled = mount(ProgressBar, {
       props: {value: 0.4, valueLabel: "Almost done"},
-      slots: {default: () => h(ProgressBarOutput)}
+      slots: {default: () => h(ProgressBarOutput)},
     });
 
     expect(labelled.attributes("aria-valuetext")).toBe("Almost done");
@@ -83,7 +86,7 @@ describe("ProgressBar", () => {
 
     const formatted = mount(ProgressBar, {
       props: {formatOptions: {maximumFractionDigits: 0, style: "percent"}, value: 33},
-      slots: {default: () => h(ProgressBarOutput)}
+      slots: {default: () => h(ProgressBarOutput)},
     });
 
     expect(formatted.attributes("aria-valuetext")).toBe("33%");
@@ -92,7 +95,7 @@ describe("ProgressBar", () => {
   it("renders custom output content", () => {
     const wrapper = mount(ProgressBar, {
       props: {value: 10},
-      slots: {default: () => h(ProgressBarOutput, null, {default: () => "ten"})}
+      slots: {default: () => h(ProgressBarOutput, null, {default: () => "ten"})},
     });
 
     expect(wrapper.get("[data-slot='progress-bar-output']").text()).toBe("ten");

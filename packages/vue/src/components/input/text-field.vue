@@ -12,11 +12,11 @@ const props = defineProps<TextFieldProps>();
 const {className, forwarded} = useForwardedAttrs();
 
 provide(textFieldContextKey, {
-  variant: computed(() => props.variant)
+  variant: computed(() => props.variant),
 });
 
 const classes = computed(() =>
-  cx(textFieldVariants({fullWidth: props.fullWidth}), className.value)
+  cx(textFieldVariants({fullWidth: props.fullWidth}), className.value),
 );
 </script>
 

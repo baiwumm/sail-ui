@@ -7,7 +7,7 @@ const ProgressBar = Object.assign(ProgressBarRoot, {
   Root: ProgressBarRoot,
   Output: ProgressBarOutput,
   Track: ProgressBarTrack,
-  Fill: ProgressBarFill
+  Fill: ProgressBarFill,
 });
 
 export {ProgressBar, ProgressBarRoot, ProgressBarOutput, ProgressBarTrack, ProgressBarFill};
@@ -16,6 +16,6 @@ export type {
   ProgressBarRootProps as ProgressBarProps,
   ProgressBarOutputProps,
   ProgressBarTrackProps,
-  ProgressBarFillProps
+  ProgressBarFillProps,
 } from "./types";
 export {progressBarVariants, type ProgressBarVariants} from "@sail-ui/styles";

@@ -2,14 +2,7 @@
 import {useFocusRing, useHover} from "@sail-ui/primitives";
 import {cx, textAreaVariants} from "@sail-ui/styles";
 import {FieldControl, injectFieldRootContext} from "reka-ui";
-import {
-  computed,
-  inject,
-  nextTick,
-  ref,
-  watch,
-  type ComponentPublicInstance
-} from "vue";
+import {computed, inject, nextTick, ref, watch, type ComponentPublicInstance} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
 import {textFieldContextKey} from "../input/types";
@@ -22,7 +15,7 @@ const props = withDefaults(defineProps<TextAreaRootProps>(), {
   fullWidth: false,
   isDisabled: false,
   isInvalid: false,
-  autoResize: false
+  autoResize: false,
 });
 
 const model = defineModel<string>();
@@ -37,17 +30,11 @@ const isInvalid = computed(() => Boolean(field?.invalid.value) || props.isInvali
 const isDisabled = computed(() => Boolean(field?.disabled.value) || props.isDisabled);
 
 const classes = computed(() =>
-  cx(
-    textAreaVariants({fullWidth: props.fullWidth, variant: variant.value}),
-    className.value
-  )
+  cx(textAreaVariants({fullWidth: props.fullWidth, variant: variant.value}), className.value),
 );
 
 const element = computed(() => {
-  const value = textareaRef.value as
-    | ComponentPublicInstance
-    | HTMLTextAreaElement
-    | null;
+  const value = textareaRef.value as ComponentPublicInstance | HTMLTextAreaElement | null;
 
   if (!value) {
     return null;
@@ -60,12 +47,8 @@ const {isHovered} = useHover(element, {isDisabled});
 const {isFocused, isFocusVisible} = useFocusRing(element, {isDisabled});
 
 function resize() {
-  const value = textareaRef.value as
-    | ComponentPublicInstance
-    | HTMLTextAreaElement
-    | null;
-  const textarea =
-    value && "$el" in value ? (value.$el as HTMLTextAreaElement) : value;
+  const value = textareaRef.value as ComponentPublicInstance | HTMLTextAreaElement | null;
+  const textarea = value && "$el" in value ? (value.$el as HTMLTextAreaElement) : value;
 
   if (!textarea || !props.autoResize) {
     return;

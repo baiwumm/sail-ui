@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   isIconOnly: false,
   isDisabled: false,
   isLoading: false,
-  type: "button"
+  type: "button",
 });
 
 const emit = defineEmits<{
@@ -30,14 +30,14 @@ const size = computed(() => props.size ?? group?.size.value);
 const variant = computed(() => props.variant ?? group?.variant.value);
 const fullWidth = computed(() => props.fullWidth || Boolean(group?.fullWidth.value));
 const isDisabled = computed(
-  () => props.isDisabled || Boolean(group?.isDisabled.value) || props.isLoading
+  () => props.isDisabled || Boolean(group?.isDisabled.value) || props.isLoading,
 );
 const isNativeButton = computed(() => !props.as || props.as === "button");
 
 const {isHovered} = useHover(element, {isDisabled});
 const {isPressed} = usePress(element, {
   isDisabled,
-  onPress: (event) => emit("press", event)
+  onPress: (event) => emit("press", event),
 });
 const {isFocused, isFocusVisible} = useFocusRing(element, {isDisabled});
 
@@ -47,10 +47,10 @@ const classes = computed(() =>
       fullWidth: fullWidth.value,
       isIconOnly: props.isIconOnly,
       size: size.value,
-      variant: variant.value
+      variant: variant.value,
     }),
-    className.value
-  )
+    className.value,
+  ),
 );
 
 const spinnerClasses = computed(() => spinnerVariants({color: "current", size: "sm"}));
@@ -80,12 +80,7 @@ const spinnerClasses = computed(() => spinnerVariants({color: "current", size: "
       data-slot="spinner"
       role="status"
     >
-      <svg
-        aria-hidden="true"
-        data-slot="spinner-icon"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
+      <svg aria-hidden="true" data-slot="spinner-icon" fill="none" viewBox="0 0 24 24">
         <circle
           cx="12"
           cy="12"

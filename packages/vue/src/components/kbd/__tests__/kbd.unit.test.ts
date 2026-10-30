@@ -10,8 +10,11 @@ describe("Kbd", () => {
   it("renders a kbd element without inventing data-slots", () => {
     const wrapper = mount(Kbd, {
       slots: {
-        default: () => [h(KbdContent, null, {default: () => "Save"}), h(KbdAbbr, {keyValue: "command"})]
-      }
+        default: () => [
+          h(KbdContent, null, {default: () => "Save"}),
+          h(KbdAbbr, {keyValue: "command"}),
+        ],
+      },
     });
 
     expect(wrapper.element.tagName).toBe("KBD");
@@ -24,19 +27,19 @@ describe("Kbd", () => {
   it("renders content span and abbr classes", () => {
     const wrapper = mount(Kbd, {
       slots: {
-        default: () => [h(KbdContent, {class: "extra"}, {default: () => "Ctrl"})]
-      }
+        default: () => [h(KbdContent, {class: "extra"}, {default: () => "Ctrl"})],
+      },
     });
 
     expect(wrapper.get("span").classes()).toEqual(
-      expect.arrayContaining(["kbd__content", "extra"])
+      expect.arrayContaining(["kbd__content", "extra"]),
     );
   });
 
   it("keeps a custom title and applies the light variant", () => {
     const wrapper = mount(Kbd, {
       props: {variant: "light"},
-      slots: {default: () => h(KbdAbbr, {keyValue: "enter", title: "Return"})}
+      slots: {default: () => h(KbdAbbr, {keyValue: "enter", title: "Return"})},
     });
 
     expect(wrapper.classes()).toContain("kbd--light");

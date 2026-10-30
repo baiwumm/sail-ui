@@ -8,10 +8,7 @@ defineProps<CodeProps>();
 </script>
 
 <template>
-  <TypographyRoot
-    v-bind="$attrs"
-    type="code"
-  >
+  <TypographyRoot v-bind="$attrs" type="code">
     <slot />
   </TypographyRoot>
 </template>

@@ -7,5 +7,4 @@ export interface BreadcrumbsContext {
   isDisabled: ComputedRef<boolean>;
 }
 
-export const breadcrumbsContextKey: InjectionKey<BreadcrumbsContext> =
-  Symbol("sail-breadcrumbs");
+export const breadcrumbsContextKey: InjectionKey<BreadcrumbsContext> = Symbol("sail-breadcrumbs");

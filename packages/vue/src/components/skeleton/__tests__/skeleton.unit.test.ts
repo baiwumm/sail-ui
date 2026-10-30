@@ -28,7 +28,7 @@ describe("Skeleton", () => {
     await nextTick();
 
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(["skeleton", "skeleton--pulse", "extra"])
+      expect.arrayContaining(["skeleton", "skeleton--pulse", "extra"]),
     );
 
     document.documentElement.style.removeProperty("--skeleton-animation");

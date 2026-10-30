@@ -9,7 +9,7 @@ const Typography = Object.assign(TypographyRoot, {
   Heading: TypographyHeading,
   Paragraph: TypographyParagraph,
   Code: TypographyCode,
-  Prose: TypographyProse
+  Prose: TypographyProse,
 });
 
 export {
@@ -18,7 +18,7 @@ export {
   TypographyHeading,
   TypographyParagraph,
   TypographyCode,
-  TypographyProse
+  TypographyProse,
 };
 export type {
   TypographyRootProps,
@@ -30,6 +30,6 @@ export type {
   TypographyType,
   TypographyAlign,
   TypographyColor,
-  TypographyWeight
+  TypographyWeight,
 } from "./types";
 export {typographyVariants, type TypographyVariants} from "@sail-ui/styles";

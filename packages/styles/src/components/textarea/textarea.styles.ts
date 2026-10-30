@@ -6,18 +6,18 @@ export const textAreaVariants = tv({
   base: "textarea",
   defaultVariants: {
     fullWidth: false,
-    variant: "primary"
+    variant: "primary",
   },
   variants: {
     fullWidth: {
       false: "",
-      true: "textarea--full-width"
+      true: "textarea--full-width",
     },
     variant: {
       primary: "textarea--primary",
-      secondary: "textarea--secondary"
-    }
-  }
+      secondary: "textarea--secondary",
+    },
+  },
 });
 
 export type TextAreaVariants = VariantProps<typeof textAreaVariants>;

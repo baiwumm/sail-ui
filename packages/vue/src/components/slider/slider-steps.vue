@@ -24,7 +24,7 @@ const steps = computed(() => {
   const {min, max, step} = {
     min: context.min.value,
     max: context.max.value,
-    step: context.step.value
+    step: context.step.value,
   };
 
   if (!Number.isFinite(min) || !Number.isFinite(max) || max < min) {
@@ -49,7 +49,7 @@ const steps = computed(() => {
 
     return {
       value: Math.min(max, precision <= 100 ? Number(rawValue.toFixed(precision)) : rawValue),
-      percent: context.percentOf(Math.min(max, rawValue))
+      percent: context.percentOf(Math.min(max, rawValue)),
     };
   });
 });
@@ -88,8 +88,11 @@ const direction = computed(() => (context.isRTL.value ? "rtl" : "ltr"));
       :data-slot="'slider-step'"
       :data-value="step.value"
       :style="{
-        [context.orientation.value === 'vertical' ? 'bottom' : context.isRTL.value ? 'right' : 'left']:
-          `${step.percent * 100}%`
+        [context.orientation.value === 'vertical'
+          ? 'bottom'
+          : context.isRTL.value
+            ? 'right'
+            : 'left']: `${step.percent * 100}%`,
       }"
     />
   </div>

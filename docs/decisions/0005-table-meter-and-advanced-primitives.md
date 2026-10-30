@@ -8,12 +8,12 @@
 
 Reka UI 覆盖了大部分 HeroUI 组件，但有四类缺口：
 
-| 组件 | 缺口 |
-|---|---|
-| `Table` | Reka 没有 `TableRoot`；HeroUI Table 依赖 RAC 的 Collection、键盘网格导航、列宽调整、虚拟化、LoadMore |
-| `Meter` | Reka 的 `Progress` 是 `role="progressbar"`；HeroUI Meter 是 `role="meter"`，语义不同 |
-| `ScrollShadow` | 没有现成原语；依赖 `scroll`/`ResizeObserver` 计算边缘阴影 |
-| `ColorInputGroup` / `DateInputGroup` | 上游内部组合组件，不是公共导出，但样式存在 |
+| 组件                                 | 缺口                                                                                                 |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| `Table`                              | Reka 没有 `TableRoot`；HeroUI Table 依赖 RAC 的 Collection、键盘网格导航、列宽调整、虚拟化、LoadMore |
+| `Meter`                              | Reka 的 `Progress` 是 `role="progressbar"`；HeroUI Meter 是 `role="meter"`，语义不同                 |
+| `ScrollShadow`                       | 没有现成原语；依赖 `scroll`/`ResizeObserver` 计算边缘阴影                                            |
+| `ColorInputGroup` / `DateInputGroup` | 上游内部组合组件，不是公共导出，但样式存在                                                           |
 
 不能为了“行为层统一”而削减这些能力；也不能把 RAC 的 Table 直接搬过来。
 

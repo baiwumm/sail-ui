@@ -58,5 +58,4 @@ export interface NumberFieldContext {
   labelId: string;
 }
 
-export const numberFieldContextKey: InjectionKey<NumberFieldContext> =
-  Symbol("sail-number-field");
+export const numberFieldContextKey: InjectionKey<NumberFieldContext> = Symbol("sail-number-field");

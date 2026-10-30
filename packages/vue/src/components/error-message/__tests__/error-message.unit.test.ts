@@ -7,7 +7,7 @@ describe("ErrorMessage", () => {
   it("renders a span with the upstream slot and class", () => {
     const wrapper = mount(ErrorMessage, {
       attrs: {class: "extra"},
-      slots: {default: () => "Something went wrong"}
+      slots: {default: () => "Something went wrong"},
     });
 
     expect(wrapper.element.tagName).toBe("SPAN");

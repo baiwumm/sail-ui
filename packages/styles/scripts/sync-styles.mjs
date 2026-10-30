@@ -1,13 +1,6 @@
 import {execFileSync} from "node:child_process";
 import {createHash} from "node:crypto";
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  readdirSync,
-  rmSync,
-  writeFileSync
-} from "node:fs";
+import {existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync} from "node:fs";
 import {dirname, join, relative, resolve} from "node:path";
 
 const packageRoot = resolve(import.meta.dirname, "..");
@@ -73,9 +66,12 @@ function listFiles(root) {
   return readdirSync(root, {recursive: true, withFileTypes: true})
     .filter((entry) => entry.isFile())
     .map((entry) => join(entry.parentPath, entry.name))
-    .filter((file) => !toPosix(relative(root, file)).split("/").some((segment) =>
-      ["node_modules", "dist", ".turbo"].includes(segment)
-    ))
+    .filter(
+      (file) =>
+        !toPosix(relative(root, file))
+          .split("/")
+          .some((segment) => ["node_modules", "dist", ".turbo"].includes(segment)),
+    )
     .sort((a, b) => toPosix(a).localeCompare(toPosix(b)));
 }
 
@@ -95,7 +91,7 @@ function git(repository, ...gitArgs) {
   try {
     return execFileSync("git", ["-C", repository, ...gitArgs], {
       encoding: "utf8",
-      stdio: ["ignore", "pipe", "pipe"]
+      stdio: ["ignore", "pipe", "pipe"],
     }).trim();
   } catch (error) {
     die(`git ${gitArgs.join(" ")} failed in ${repository}: ${error.message}`);
@@ -119,7 +115,7 @@ function resolveStylesDir(source) {
 
   die(
     `Cannot find @heroui/styles at ${source}.\n` +
-      "Pass --source <path-to-heroui-checkout> or --source <path-to-packages/styles>."
+      "Pass --source <path-to-heroui-checkout> or --source <path-to-packages/styles>.",
   );
 }
 
@@ -157,7 +153,7 @@ function assertCleanSource(repository, stylesDir) {
         status
           .split("\n")
           .map((line) => `  ${line}`)
-          .join("\n")
+          .join("\n"),
     );
   }
 }
@@ -168,26 +164,18 @@ function checkSnapshot() {
   const dataSlots = readJson(dataSlotsPath);
   const errors = [];
 
-  if (
-    manifest.upstream?.version !== pin.version ||
-    manifest.upstream?.commit !== pin.commit
-  ) {
+  if (manifest.upstream?.version !== pin.version || manifest.upstream?.commit !== pin.commit) {
     errors.push("manifest.json is pinned to a different upstream than contracts/upstream.json.");
   }
 
-  if (
-    dataSlots.upstream?.version !== pin.version ||
-    dataSlots.upstream?.commit !== pin.commit
-  ) {
+  if (dataSlots.upstream?.version !== pin.version || dataSlots.upstream?.commit !== pin.commit) {
     errors.push("contracts/data-slots.json is pinned to a different upstream.");
   }
 
   if (!Array.isArray(manifest.upstreamFiles)) {
     errors.push("manifest.json does not record upstreamFiles.");
   } else {
-    const recorded = new Map(
-      manifest.upstreamFiles.map((file) => [file.path, file.hash])
-    );
+    const recorded = new Map(manifest.upstreamFiles.map((file) => [file.path, file.hash]));
     const actual = collectSnapshot(upstreamRoot);
 
     for (const path of ["LICENSE", "README.md"]) {
@@ -220,7 +208,7 @@ function checkSnapshot() {
   console.log(
     `sync:styles check passed: ${manifest.upstreamFiles.length} CSS files, ` +
       "LICENSE and README match the pin, " +
-      `${pin.package} ${pin.version} @ ${pin.commit.slice(0, 9)}`
+      `${pin.package} ${pin.version} @ ${pin.commit.slice(0, 9)}`,
   );
 }
 
@@ -240,9 +228,7 @@ function syncSnapshot() {
   const cssFiles = [...files.keys()].filter((path) => path.endsWith(".css"));
 
   if (!allowUpstreamChange) {
-    const recorded = new Map(
-      (manifest.upstreamFiles ?? []).map((file) => [file.path, file.hash])
-    );
+    const recorded = new Map((manifest.upstreamFiles ?? []).map((file) => [file.path, file.hash]));
     const mismatches = [];
 
     for (const [path, content] of files) {
@@ -268,7 +254,7 @@ function syncSnapshot() {
       mismatches.forEach((mismatch) => console.error(`- ${mismatch}`));
       console.error(
         "Restore the pinned checkout, or update the pin explicitly with " +
-          "--allow-upstream-change --commit <sha>."
+          "--allow-upstream-change --commit <sha>.",
       );
       process.exit(1);
     }
@@ -279,7 +265,7 @@ function syncSnapshot() {
           `Source: ${sourcePackage.name} ${sourcePackage.version} @ ${head}\n` +
           `Pinned: ${pin.package} ${pin.version} @ ${pin.commit}\n` +
           "Check out the pinned commit, or update the pin explicitly with " +
-          "--allow-upstream-change --commit <sha>."
+          "--allow-upstream-change --commit <sha>.",
       );
     }
   } else {
@@ -290,7 +276,7 @@ function syncSnapshot() {
     if (commitArg !== head) {
       die(
         `Recorded commit ${commitArg} does not match the source HEAD ${head}.\n` +
-          "Check out the intended commit before pinning it."
+          "Check out the intended commit before pinning it.",
       );
     }
   }
@@ -312,23 +298,23 @@ function syncSnapshot() {
           package: pin.package,
           version: sourcePackage.version,
           commit: head,
-          repository: pin.repository
+          repository: pin.repository,
         },
         null,
-        2
-      )}\n`
+        2,
+      )}\n`,
     );
   }
 
   console.log(
     `sync:styles wrote ${files.size} files (${cssFiles.length} CSS) from ` +
-      `${sourcePackage.name} ${sourcePackage.version} @ ${head.slice(0, 9)}`
+      `${sourcePackage.name} ${sourcePackage.version} @ ${head.slice(0, 9)}`,
   );
 
   if (allowUpstreamChange) {
     console.log(
       "Upstream pin updated. Next: refresh contracts/data-slots.json against the new source, " +
-        "run pnpm gen:compat, then pnpm test:contract."
+        "run pnpm gen:compat, then pnpm test:contract.",
     );
   }
 }

@@ -9,7 +9,7 @@ import type {CardDescriptionProps} from "./types";
 defineOptions({name: "SailCardDescription", inheritAttrs: false});
 
 withDefaults(defineProps<CardDescriptionProps>(), {
-  as: "p"
+  as: "p",
 });
 
 const attrs = useAttrs();

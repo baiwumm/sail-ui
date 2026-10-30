@@ -1,7 +1,7 @@
 import DescriptionRoot from "./description.vue";
 
 const Description = Object.assign(DescriptionRoot, {
-  Root: DescriptionRoot
+  Root: DescriptionRoot,
 });
 
 export {Description, DescriptionRoot};

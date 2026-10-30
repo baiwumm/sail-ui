@@ -15,11 +15,7 @@ const classes = computed(() => cx("checkbox__control", className.value));
 </script>
 
 <template>
-  <span
-    v-bind="forwarded"
-    :class="classes"
-    :data-slot="'checkbox-control'"
-  >
+  <span v-bind="forwarded" :class="classes" :data-slot="'checkbox-control'">
     <slot />
   </span>
 </template>

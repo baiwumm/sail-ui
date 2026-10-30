@@ -15,11 +15,7 @@ const classes = computed(() => cx("switch__thumb", className.value));
 </script>
 
 <template>
-  <span
-    v-bind="forwarded"
-    :class="classes"
-    :data-slot="'switch-thumb'"
-  >
+  <span v-bind="forwarded" :class="classes" :data-slot="'switch-thumb'">
     <slot />
   </span>
 </template>

@@ -7,19 +7,16 @@ import type {ParagraphProps, TypographyType} from "./types";
 defineOptions({name: "SailTypographyParagraph", inheritAttrs: false});
 
 const props = withDefaults(defineProps<ParagraphProps>(), {
-  size: "base"
+  size: "base",
 });
 
 const type = computed(
-  () => (props.size === "base" ? "body" : `body-${props.size}`) as TypographyType
+  () => (props.size === "base" ? "body" : `body-${props.size}`) as TypographyType,
 );
 </script>
 
 <template>
-  <TypographyRoot
-    v-bind="$attrs"
-    :type="type"
-  >
+  <TypographyRoot v-bind="$attrs" :type="type">
     <slot />
   </TypographyRoot>
 </template>

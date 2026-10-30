@@ -16,12 +16,12 @@
 
 ## Scope
 
-| 组件 | 基础 | 关键行为 |
-|---|---|---|
-| Calendar / RangeCalendar / CalendarYearPicker | Reka Calendar | 键盘网格、月/年切换、不可用日期、`data-outside-view`、`data-today`、`data-selected` |
-| DateField / DatePicker / DateRangePicker / TimeField | Reka DateField/DatePicker/TimeField | 分段输入、校验、min/max、locale、timezone、弹层 |
-| ComboBox / Autocomplete | Reka Combobox | 输入过滤、异步/受控、键盘、允许自由输入、空状态 |
-| ColorArea / ColorSlider / ColorField / ColorPicker / ColorSwatch / ColorSwatchPicker | Reka Color* | 格式（hex/rgb/hsl）、键盘、拖动、色板选择、受控/非受控 |
+| 组件                                                                                 | 基础                                | 关键行为                                                                            |
+| ------------------------------------------------------------------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------- |
+| Calendar / RangeCalendar / CalendarYearPicker                                        | Reka Calendar                       | 键盘网格、月/年切换、不可用日期、`data-outside-view`、`data-today`、`data-selected` |
+| DateField / DatePicker / DateRangePicker / TimeField                                 | Reka DateField/DatePicker/TimeField | 分段输入、校验、min/max、locale、timezone、弹层                                     |
+| ComboBox / Autocomplete                                                              | Reka Combobox                       | 输入过滤、异步/受控、键盘、允许自由输入、空状态                                     |
+| ColorArea / ColorSlider / ColorField / ColorPicker / ColorSwatch / ColorSwatchPicker | Reka Color*                         | 格式（hex/rgb/hsl）、键盘、拖动、色板选择、受控/非受控                              |
 
 ## 关键实现点
 
@@ -72,12 +72,13 @@
 
 ## Risks
 
-| 风险 | 处理 |
-|---|---|
-| 时区/夏令时边界 | 固定 `@internationalized/date`；测试 DST fixture |
-| SSR locale 不一致 | 显式传 locale/timezone；禁止默认读 `navigator` |
-| Reka Color API 变动 | 锁 2.11.0；颜色格式单测 |
-| Calendar 的 `data-outside-month` 映射错误 | 契约测试 + 视觉跨月截图 |
-| ComboBox 异步与受控状态竞态 | 受控优先；取消过期请求的示例 |
-| `calendar-year-picker` 上游未稳定 | 标 preview；不阻塞 MVP |
+| 风险                                      | 处理                                             |
+| ----------------------------------------- | ------------------------------------------------ |
+| 时区/夏令时边界                           | 固定 `@internationalized/date`；测试 DST fixture |
+| SSR locale 不一致                         | 显式传 locale/timezone；禁止默认读 `navigator`   |
+| Reka Color API 变动                       | 锁 2.11.0；颜色格式单测                          |
+| Calendar 的 `data-outside-month` 映射错误 | 契约测试 + 视觉跨月截图                          |
+| ComboBox 异步与受控状态竞态               | 受控优先；取消过期请求的示例                     |
+| `calendar-year-picker` 上游未稳定         | 标 preview；不阻塞 MVP                           |
+
 </content>

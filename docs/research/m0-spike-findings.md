@@ -9,46 +9,46 @@
 
 ## 1. 结论总览
 
-| 决策 | 结论 | 主要证据 |
-|---|---|---|
-| D1 上游 CSS 在 Tailwind v4 下原样编译 | 通过 | 96 个上游 CSS 文件未改动；88 个文件含 `@apply`，`@theme inline`/`@utility` 正常；playground 构建 CSS 467.65 kB；视觉对比通过 |
-| D2 `gen-compat` 原位扩展不破坏层叠 | 通过 | 86 个生成文件；29 个别名分布在 8 个文件；7 条生成器契约测试；`--check` 确定性通过 |
-| D3 Reka 产出上游 `data-slot` / `data-*` | 通过（有归一化） | 5 条 SSR 契约快照；Modal/Select 状态属性由组件 + `useOverlayState` 补齐 |
-| D4 退场 hold 在 Chromium / WebKit 不闪烁、不提前卸载 | 通过 | 浏览器测试 9 × 2 引擎全部通过；WebKit `pending` 动画按帧重试 |
-| D5 命名导出与 `<component :is="Select.Trigger" />` | 通过 | 浏览器 compound 测试；静态 `<Select.Trigger>` 按 ADR 0004 预期不可用 |
-| D6 SSR 无 hydration mismatch；关闭的覆盖层无 DOM | 通过（Select 有已知限制） | 契约/SSR 测试；Nuxt dev 下 hydration 0 warning；预先选中值的 SelectValue 需应用侧规避 |
-| D7 Button 透传与 `tv()` 变体 | 通过 | jsdom 透传测试；变体/尺寸/hover/focus 视觉 diff 为 0 |
-| D8 子路径与类型在 Vite/Nuxt 可解析 | 通过 | playground、Nuxt fixture、tarball 安装三方验证 |
+| 决策                                                 | 结论                      | 主要证据                                                                                                                     |
+| ---------------------------------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| D1 上游 CSS 在 Tailwind v4 下原样编译                | 通过                      | 96 个上游 CSS 文件未改动；88 个文件含 `@apply`，`@theme inline`/`@utility` 正常；playground 构建 CSS 467.65 kB；视觉对比通过 |
+| D2 `gen-compat` 原位扩展不破坏层叠                   | 通过                      | 86 个生成文件；29 个别名分布在 8 个文件；7 条生成器契约测试；`--check` 确定性通过                                            |
+| D3 Reka 产出上游 `data-slot` / `data-*`              | 通过（有归一化）          | 5 条 SSR 契约快照；Modal/Select 状态属性由组件 + `useOverlayState` 补齐                                                      |
+| D4 退场 hold 在 Chromium / WebKit 不闪烁、不提前卸载 | 通过                      | 浏览器测试 9 × 2 引擎全部通过；WebKit `pending` 动画按帧重试                                                                 |
+| D5 命名导出与 `<component :is="Select.Trigger" />`   | 通过                      | 浏览器 compound 测试；静态 `<Select.Trigger>` 按 ADR 0004 预期不可用                                                         |
+| D6 SSR 无 hydration mismatch；关闭的覆盖层无 DOM     | 通过（Select 有已知限制） | 契约/SSR 测试；Nuxt dev 下 hydration 0 warning；预先选中值的 SelectValue 需应用侧规避                                        |
+| D7 Button 透传与 `tv()` 变体                         | 通过                      | jsdom 透传测试；变体/尺寸/hover/focus 视觉 diff 为 0                                                                         |
+| D8 子路径与类型在 Vite/Nuxt 可解析                   | 通过                      | playground、Nuxt fixture、tarball 安装三方验证                                                                               |
 
 ## 2. 量化结果
 
 ### 2.1 样式与生成器
 
-| 指标 | 数值 |
-|---|---:|
-| 上游快照 CSS 文件 | 96 |
-| 生成组件 CSS | 86 |
-| `attributes.json` 条目 | 18（compat 9 / component 8 / reka 1） |
-| T01 scope 组件 | 15 |
-| 生效别名总数 | 29 |
-| 含别名的生成文件 | 8 |
-| 记录在 manifest 的待归属属性 | 47 |
+| 指标                         |                                  数值 |
+| ---------------------------- | ------------------------------------: |
+| 上游快照 CSS 文件            |                                    96 |
+| 生成组件 CSS                 |                                    86 |
+| `attributes.json` 条目       | 18（compat 9 / component 8 / reka 1） |
+| T01 scope 组件               |                                    15 |
+| 生效别名总数                 |                                    29 |
+| 含别名的生成文件             |                                     8 |
+| 记录在 manifest 的待归属属性 |                                    47 |
 
 别名分布：`select` 8、`list-box-item` 7、`input` 5、`button` 3、`close-button` 2、`label` 2、`modal` 1、`textfield` 1。
 
 ### 2.2 门禁与测试
 
-| 门禁 | 结果 |
-|---|---|
-| `pnpm lint` | 7/7 包通过，0 warning |
-| `pnpm typecheck` / `typecheck:tests` | 7/7 包通过 / 0 error |
-| `pnpm test:contract` | 12/12（生成器 7 + 组件 5） |
-| `pnpm test` | 18/18（jsdom 行为） |
-| `pnpm test:ssr` | 2/2 |
-| `pnpm test:browser` | 18/18（9 用例 × Chromium + WebKit） |
-| `pnpm test:visual` | 8/8 用例，30 张对比图，最大 diff ratio `0.00426`（阈值 `0.01`） |
-| `pnpm build` | 7/7 包（含 Nuxt Nitro） |
-| `pnpm pack:check` | tarball 安装 47 个依赖后 SSR 渲染 Button 通过 |
+| 门禁                                 | 结果                                                            |
+| ------------------------------------ | --------------------------------------------------------------- |
+| `pnpm lint`                          | 7/7 包通过，0 warning                                           |
+| `pnpm typecheck` / `typecheck:tests` | 7/7 包通过 / 0 error                                            |
+| `pnpm test:contract`                 | 12/12（生成器 7 + 组件 5）                                      |
+| `pnpm test`                          | 18/18（jsdom 行为）                                             |
+| `pnpm test:ssr`                      | 2/2                                                             |
+| `pnpm test:browser`                  | 18/18（9 用例 × Chromium + WebKit）                             |
+| `pnpm test:visual`                   | 8/8 用例，30 张对比图，最大 diff ratio `0.00426`（阈值 `0.01`） |
+| `pnpm build`                         | 7/7 包（含 Nuxt Nitro）                                         |
+| `pnpm pack:check`                    | tarball 安装 47 个依赖后 SSR 渲染 Button 通过                   |
 
 视觉对比的剩余差异集中在禁用态文字与 loading 图标（`input-disabled-dark` 131 px / `0.00426`，`button-states-*` 38 px / `0.00110`），其余变体、尺寸、hover、focus、Modal、Select trigger 均为 0；判断为字体抗锯齿差异，不是类名或层叠差异。
 
@@ -88,18 +88,18 @@ Reka 原生发射：`data-state`、`data-highlighted`（presence）、`data-disa
 
 Sail 组件/primitive 补齐上游词汇：
 
-| 上游属性 | 来源 |
-|---|---|
-| `data-slot` | 每个 part 显式设置，含内置 chevron `select-default-indicator` |
-| `data-open` | `useOverlayState` 的 `isOpen` |
-| `data-entering` / `data-exiting` | `useOverlayState` 状态机 |
-| `data-placement` | 组件（Modal 为 `auto`，Select 由 `data-side` 映射） |
-| `data-hovered` | `useHover` |
-| `data-pressed` | `usePress` |
-| `data-focus-visible` | `useFocusRing`（键盘模态门槛，见 4.1） |
-| `data-focused` | `useFocusRing.isFocused`（Select item） |
-| `data-selected` | 组件按 Reka model 计算 |
-| `aria-modal` | Modal dialog |
+| 上游属性                         | 来源                                                          |
+| -------------------------------- | ------------------------------------------------------------- |
+| `data-slot`                      | 每个 part 显式设置，含内置 chevron `select-default-indicator` |
+| `data-open`                      | `useOverlayState` 的 `isOpen`                                 |
+| `data-entering` / `data-exiting` | `useOverlayState` 状态机                                      |
+| `data-placement`                 | 组件（Modal 为 `auto`，Select 由 `data-side` 映射）           |
+| `data-hovered`                   | `useHover`                                                    |
+| `data-pressed`                   | `usePress`                                                    |
+| `data-focus-visible`             | `useFocusRing`（键盘模态门槛，见 4.1）                        |
+| `data-focused`                   | `useFocusRing.isFocused`（Select item）                       |
+| `data-selected`                  | 组件按 Reka model 计算                                        |
+| `aria-modal`                     | Modal dialog                                                  |
 
 覆盖层把 Reka 的受控 `open` 绑定到 `isMounted`，而不是 `isOpen`；这是退场 hold 能保留 DOM 的前提。
 
@@ -175,10 +175,10 @@ Reka 的 `DialogContent` 总是把 `aria-describedby` 指向内部生成的 desc
 
 ### 4.3 Select trigger 的 ARIA 差异（未解决）
 
-| | 上游 React | Sail（Reka） |
-|---|---|---|
-| 元素 | `<button>`（RAC Button） | `<button>` |
-| role | 原生 button role | `role="combobox"` |
+|          | 上游 React                | Sail（Reka）       |
+| -------- | ------------------------- | ------------------ |
+| 元素     | `<button>`（RAC Button）  | `<button>`         |
+| role     | 原生 button role          | `role="combobox"`  |
 | 弹出提示 | `aria-haspopup="listbox"` | 无 `aria-haspopup` |
 
 CSS 不依赖这两个属性，视觉无差异；属于可访问性/语义 parity 欠账，留给 Select 正式实现（T05）决定是保留 Reka combobox 模式还是归一化到上游。
@@ -201,16 +201,16 @@ CSS 不依赖这两个属性，视觉无差异；属于可访问性/语义 parit
 
 ## 5. 遗留项与后续 ticket
 
-| 项 | 交给 |
-|---|---|
-| `attributes.json` 从 18 扩到 65，47 个 pending 属性逐个归属 | T02 |
-| 从上游 React 源码生成 `data-slot` 快照；故障注入 CI | T02（已完成，完整提取为 334 值，见 [T02 findings](./t02-contract-findings.md#2-data-slot332--334)） |
-| `sync-styles`、维护文档、owner 分布写回 ADR 0003 | T02 |
-| Select trigger `role`/`aria-haspopup` 决策与实现 | T05 |
-| 预先选中值的 SSR 安全文本 API（如 `SelectValue` 的显式 label 或 root item map） | T05 |
-| `ModalTrigger` 与上游 `div role="button"` 的标签差异 | T05 |
-| WebKit 视觉回归（当前视觉仅 Chromium；跨引擎基线需分别维护） | visual ticket |
-| 本地固定 Chromium 下载；CI 浏览器矩阵 | CI ticket |
+| 项                                                                              | 交给                                                                                                |
+| ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `attributes.json` 从 18 扩到 65，47 个 pending 属性逐个归属                     | T02                                                                                                 |
+| 从上游 React 源码生成 `data-slot` 快照；故障注入 CI                             | T02（已完成，完整提取为 334 值，见 [T02 findings](./t02-contract-findings.md#2-data-slot332--334)） |
+| `sync-styles`、维护文档、owner 分布写回 ADR 0003                                | T02                                                                                                 |
+| Select trigger `role`/`aria-haspopup` 决策与实现                                | T05                                                                                                 |
+| 预先选中值的 SSR 安全文本 API（如 `SelectValue` 的显式 label 或 root item map） | T05                                                                                                 |
+| `ModalTrigger` 与上游 `div role="button"` 的标签差异                            | T05                                                                                                 |
+| WebKit 视觉回归（当前视觉仅 Chromium；跨引擎基线需分别维护）                    | visual ticket                                                                                       |
+| 本地固定 Chromium 下载；CI 浏览器矩阵                                           | CI ticket                                                                                           |
 
 T02 已完成前三条工具链欠账（属性扩到 65、快照与故障注入、同步脚本与维护文档），实测见 [T02 findings](./t02-contract-findings.md)。
 

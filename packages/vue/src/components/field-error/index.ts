@@ -1,7 +1,7 @@
 import FieldErrorRoot from "./field-error.vue";
 
 const FieldError = Object.assign(FieldErrorRoot, {
-  Root: FieldErrorRoot
+  Root: FieldErrorRoot,
 });
 
 export {FieldError, FieldErrorRoot};

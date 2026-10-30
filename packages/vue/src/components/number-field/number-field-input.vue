@@ -13,9 +13,7 @@ defineProps<NumberFieldInputProps>();
 const {className, forwarded} = useForwardedAttrs();
 const context = inject(numberFieldContextKey, null);
 
-const classes = computed(() =>
-  cx(numberFieldVariants().input(), className.value)
-);
+const classes = computed(() => cx(numberFieldVariants().input(), className.value));
 </script>
 
 <template>

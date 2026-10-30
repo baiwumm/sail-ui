@@ -15,8 +15,8 @@ const pointer = (element: Element, type: string, init: PointerEventInit = {}) =>
       bubbles: true,
       pointerId: 1,
       pointerType: "mouse",
-      ...init
-    })
+      ...init,
+    }),
   );
 };
 
@@ -29,21 +29,17 @@ describe("Checkbox", () => {
           h(CheckboxContent, null, {
             default: () => [
               h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]}),
-              h(Label, null, {default: () => "Accept"})
-            ]
-          })
-      }
+              h(Label, null, {default: () => "Accept"}),
+            ],
+          }),
+      },
     });
 
     expect(wrapper.get('[data-slot="checkbox"]').classes()).toContain("checkbox--secondary");
-    expect(wrapper.get('[data-slot="checkbox-content"]').classes()).toContain(
-      "checkbox__content"
-    );
-    expect(wrapper.get('[data-slot="checkbox-control"]').classes()).toContain(
-      "checkbox__control"
-    );
+    expect(wrapper.get('[data-slot="checkbox-content"]').classes()).toContain("checkbox__content");
+    expect(wrapper.get('[data-slot="checkbox-control"]').classes()).toContain("checkbox__control");
     expect(wrapper.get('[data-slot="checkbox-indicator"]').classes()).toContain(
-      "checkbox__indicator"
+      "checkbox__indicator",
     );
     expect(wrapper.get('[data-slot="label"]').element.tagName).toBe("SPAN");
   });
@@ -60,19 +56,21 @@ describe("Checkbox", () => {
               {
                 modelValue: selected.value,
                 "onUpdate:modelValue": (value: boolean | "indeterminate") =>
-                  (selected.value = value === true)
+                  (selected.value = value === true),
               },
               {
                 default: () => [
                   h(CheckboxContent, null, {
-                    default: () => [h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})]
-                  })
-                ]
-              }
+                    default: () => [
+                      h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]}),
+                    ],
+                  }),
+                ],
+              },
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const input = wrapper.get('input[type="checkbox"]');
@@ -92,20 +90,20 @@ describe("Checkbox", () => {
       slots: {
         default: () =>
           h(CheckboxContent, null, {
-            default: () => [h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})]
-          })
-      }
+            default: () => [h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})],
+          }),
+      },
     });
 
     expect(wrapper.get('[data-slot="checkbox"]').attributes("data-indeterminate")).toBe("true");
     expect(wrapper.get('[data-slot="checkbox"]').attributes("data-selected")).toBeUndefined();
+    expect(wrapper.find('[data-slot="checkbox-default-indicator--indeterminate"]').exists()).toBe(
+      true,
+    );
     expect(
-      wrapper.find('[data-slot="checkbox-default-indicator--indeterminate"]').exists()
-    ).toBe(true);
-    expect(
-      wrapper.get('[data-slot="checkbox-default-indicator--checkmark"]').attributes(
-        "stroke-dashoffset"
-      )
+      wrapper
+        .get('[data-slot="checkbox-default-indicator--checkmark"]')
+        .attributes("stroke-dashoffset"),
     ).toBe("66");
   });
 
@@ -115,9 +113,9 @@ describe("Checkbox", () => {
       slots: {
         default: () =>
           h(CheckboxContent, null, {
-            default: () => [h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})]
-          })
-      }
+            default: () => [h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})],
+          }),
+      },
     });
 
     expect(wrapper.get('[data-slot="checkbox"]').attributes("data-disabled")).toBe("true");
@@ -131,9 +129,9 @@ describe("Checkbox", () => {
       slots: {
         default: () =>
           h(CheckboxContent, null, {
-            default: () => [h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})]
-          })
-      }
+            default: () => [h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})],
+          }),
+      },
     });
     const content = wrapper.get('[data-slot="checkbox-content"]');
 
@@ -158,9 +156,9 @@ describe("Checkbox", () => {
       slots: {
         default: () =>
           h(CheckboxContent, null, {
-            default: () => [h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})]
-          })
-      }
+            default: () => [h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})],
+          }),
+      },
     });
 
     const input = wrapper.get('input[type="checkbox"]');
@@ -184,34 +182,42 @@ describe("Checkbox", () => {
               CheckboxGroup,
               {
                 modelValue: values.value,
-                "onUpdate:modelValue": (next: string[]) => (values.value = next)
+                "onUpdate:modelValue": (next: string[]) => (values.value = next),
               },
               {
                 default: () => [
-                  h(Checkbox, {value: "a"}, {
-                    default: () => [
-                      h(CheckboxContent, null, {
-                        default: () => [
-                          h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})
-                        ]
-                      })
-                    ]
-                  }),
-                  h(Checkbox, {value: "b"}, {
-                    default: () => [
-                      h(CheckboxContent, null, {
-                        default: () => [
-                          h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]})
-                        ]
-                      })
-                    ]
-                  })
-                ]
-              }
+                  h(
+                    Checkbox,
+                    {value: "a"},
+                    {
+                      default: () => [
+                        h(CheckboxContent, null, {
+                          default: () => [
+                            h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]}),
+                          ],
+                        }),
+                      ],
+                    },
+                  ),
+                  h(
+                    Checkbox,
+                    {value: "b"},
+                    {
+                      default: () => [
+                        h(CheckboxContent, null, {
+                          default: () => [
+                            h(CheckboxControl, null, {default: () => [h(CheckboxIndicator)]}),
+                          ],
+                        }),
+                      ],
+                    },
+                  ),
+                ],
+              },
             );
-        }
+        },
       }),
-      {attachTo: document.body}
+      {attachTo: document.body},
     );
 
     const checkboxes = wrapper.findAll('[data-slot="checkbox"]');

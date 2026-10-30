@@ -1,3 +1,11 @@
+# Text files are stored and checked out with LF on every OS.
+#
+# The repository content is LF and Prettier checks with `endOfLine: "lf"`.
+# Without this rule a Windows checkout with `core.autocrlf=true` writes CRLF,
+# and every text file is reported as unformatted even though it matches the
+# committed blob byte for byte.
+* text=auto eol=lf
+
 # Upstream and generated snapshots are hashed by content; keep them LF on every OS.
 packages/styles/upstream/** text eol=lf
 packages/styles/generated/** text eol=lf
