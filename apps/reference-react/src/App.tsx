@@ -11,6 +11,8 @@ import {
 } from "@heroui/react";
 import {useEffect, useState} from "react";
 
+import Gallery from "./Gallery";
+
 const states = [
   {id: "florida", label: "Florida"},
   {id: "delaware", label: "Delaware"},
@@ -44,7 +46,7 @@ export default function App() {
       <header className="flex items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold">Sail UI playground</h1>
-          <p className="text-sm text-muted">Button · Input · Modal · Select</p>
+          <p className="text-sm text-muted">Button · Input · Modal · Select · Display & feedback</p>
         </div>
         <Button
           variant="outline"
@@ -260,6 +262,8 @@ export default function App() {
           </p>
         </div>
       </section>
+
+      <Gallery />
     </main>
   );
 }

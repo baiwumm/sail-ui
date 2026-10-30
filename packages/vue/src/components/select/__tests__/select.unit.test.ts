@@ -2,7 +2,7 @@ import type {AcceptableValue} from "reka-ui";
 
 import {flushPromises, mount} from "@vue/test-utils";
 import {defineComponent, ref} from "vue";
-import {afterEach, describe, expect, it} from "vitest";
+import {afterEach, describe, expect, it, vi} from "vitest";
 
 import SelectClearButton from "../select-clear-button.vue";
 import SelectIndicator from "../select-indicator.vue";
@@ -64,8 +64,6 @@ function createHost(initial: AcceptableValue = "california") {
   });
 }
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 afterEach(() => {
   document.body.replaceChildren();
 });
@@ -121,11 +119,14 @@ describe("Select", () => {
 
     texas?.dispatchEvent(new PointerEvent("pointerup", {bubbles: true}));
     await flushPromises();
-    await wait(80);
 
-    expect((wrapper.vm as unknown as {value: string}).value).toBe("texas");
-    expect(wrapper.get('[data-slot="select-value"]').text()).toBe("Texas");
-    expect(document.querySelector('[data-slot="select-popover"]')).toBeNull();
+    // The exit hold waits for real frames and CSS animations, so poll instead of
+    // assuming a fixed delay under load.
+    await vi.waitFor(() => {
+      expect((wrapper.vm as unknown as {value: string}).value).toBe("texas");
+      expect(wrapper.get('[data-slot="select-value"]').text()).toBe("Texas");
+      expect(document.querySelector('[data-slot="select-popover"]')).toBeNull();
+    });
 
     wrapper.unmount();
   });

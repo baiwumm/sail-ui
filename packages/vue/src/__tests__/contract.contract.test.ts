@@ -14,10 +14,10 @@ import {
 } from "@sail-ui/testing";
 
 import Button from "../components/button/button.vue";
-import Description from "../components/input/description.vue";
-import FieldError from "../components/input/field-error.vue";
+import Description from "../components/description/description.vue";
+import FieldError from "../components/field-error/field-error.vue";
 import Input from "../components/input/input.vue";
-import Label from "../components/input/label.vue";
+import Label from "../components/label/label.vue";
 import TextField from "../components/input/text-field.vue";
 import Modal from "../components/modal/modal-root.vue";
 import ModalBackdrop from "../components/modal/modal-backdrop.vue";
@@ -477,6 +477,14 @@ interface StateCoverage {
 // documented fallbacks: native pseudo-classes, negative-only guards, compat
 // aliases, or flags that only a real animation/browser test can observe.
 const STATE_COVERAGE: Record<string, StateCoverage> = {
+  alert: {
+    asserted: ["data-slot"],
+    gaps: {}
+  },
+  breadcrumbs: {
+    asserted: ["data-current", "data-hovered"],
+    gaps: {}
+  },
   button: {
     asserted: [
       "data-focus-visible",
@@ -525,13 +533,14 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
     }
   },
   "close-button": {
-    asserted: ["data-hovered"],
-    gaps: {
-      "data-focus-visible": "Focus-trap managed; jsdom does not report :focus-visible for it (browser suite).",
-      "data-focused": "Negative guard: :focus-visible is scoped with :not([data-focused]).",
-      "data-pending": "Close button has no loading state upstream.",
-      "data-pressed": "Native :active fallback; ModalCloseTrigger does not run usePress."
-    }
+    asserted: [
+      "data-focus-visible",
+      "data-focused",
+      "data-hovered",
+      "data-pending",
+      "data-pressed"
+    ],
+    gaps: {}
   },
   select: {
     asserted: [
@@ -572,6 +581,24 @@ const STATE_COVERAGE: Record<string, StateCoverage> = {
       "data-focus-visible": "jsdom does not report :focus-visible for role=option divs (browser suite).",
       "data-pressed": "Native :active fallback; SelectItem does not run usePress."
     }
+  },
+  link: {
+    asserted: [
+      "data-default-icon",
+      "data-focus-visible",
+      "data-focused",
+      "data-hovered",
+      "data-pressed"
+    ],
+    gaps: {}
+  },
+  "progress-bar": {
+    asserted: ["data-disabled", "data-slot"],
+    gaps: {}
+  },
+  "progress-circle": {
+    asserted: ["data-disabled"],
+    gaps: {}
   }
 };
 

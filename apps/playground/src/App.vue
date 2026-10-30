@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import {Button} from "@sail-ui/vue/button";
-import {
-  Description,
-  FieldError,
-  Input,
-  Label,
-  TextField
-} from "@sail-ui/vue/input";
+import {Input, TextField} from "@sail-ui/vue/input";
+import {Label} from "@sail-ui/vue/label";
+import {Description} from "@sail-ui/vue/description";
+import {FieldError} from "@sail-ui/vue/field-error";
 import {
   Modal,
   ModalBackdrop,
@@ -33,6 +30,8 @@ import {
   SelectValue
 } from "@sail-ui/vue/select";
 import {onMounted, ref} from "vue";
+
+import Gallery from "./Gallery.vue";
 
 const inputValue = ref("heroui.com");
 const state = ref<string | undefined>("california");
@@ -76,7 +75,7 @@ onMounted(() => {
           Sail UI playground
         </h1>
         <p class="text-sm text-muted">
-          Button · Input · Modal · Select
+          Button · Input · Modal · Select · Display & feedback
         </p>
       </div>
       <Button
@@ -346,5 +345,6 @@ onMounted(() => {
         </component>
       </component>
     </section>
+    <Gallery />
   </main>
 </template>

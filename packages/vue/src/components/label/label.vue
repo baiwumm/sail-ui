@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import {cx, labelVariants} from "@sail-ui/styles";
 import {FieldLabel, injectFieldRootContext} from "reka-ui";
-import {computed, useAttrs} from "vue";
+import {computed, inject, useAttrs} from "vue";
+
+import {labelContextKey} from "../../shared/label-context";
+import type {LabelRootProps} from "./types";
 
 defineOptions({name: "SailLabel", inheritAttrs: false});
 
-const props = defineProps<{
-  isDisabled?: boolean;
-  isInvalid?: boolean;
-  isRequired?: boolean;
-}>();
+const props = defineProps<LabelRootProps>();
 
 const attrs = useAttrs();
 const field = injectFieldRootContext(null);
+const labelContext = inject(labelContextKey, null);
 
 const classes = computed(() =>
   cx(
@@ -23,6 +23,11 @@ const classes = computed(() =>
     }),
     attrs.class as string | undefined
   )
+);
+
+const resolvedId = computed(() => (attrs.id as string | undefined) ?? labelContext?.id);
+const renderAsSpan = computed(
+  () => !field && labelContext?.elementType === "span"
 );
 </script>
 
@@ -35,9 +40,19 @@ const classes = computed(() =>
   >
     <slot />
   </FieldLabel>
+  <span
+    v-else-if="renderAsSpan"
+    v-bind="$attrs"
+    :id="resolvedId"
+    :class="classes"
+    :data-slot="'label'"
+  >
+    <slot />
+  </span>
   <label
     v-else
     v-bind="$attrs"
+    :id="resolvedId"
     :class="classes"
     :data-slot="'label'"
   >

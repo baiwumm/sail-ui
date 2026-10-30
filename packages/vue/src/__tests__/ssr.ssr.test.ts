@@ -3,9 +3,9 @@ import {describe, expect, it} from "vitest";
 import {defineComponent, h, ref} from "vue";
 
 import Button from "../components/button/button.vue";
-import Description from "../components/input/description.vue";
+import Description from "../components/description/description.vue";
 import Input from "../components/input/input.vue";
-import Label from "../components/input/label.vue";
+import Label from "../components/label/label.vue";
 import TextField from "../components/input/text-field.vue";
 import Modal from "../components/modal/modal-root.vue";
 import ModalBackdrop from "../components/modal/modal-backdrop.vue";

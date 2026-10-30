@@ -12,25 +12,145 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
+    "./alert": {
+      "types": "./dist/components/alert/index.d.ts",
+      "import": "./dist/components/alert/index.js",
+      "default": "./dist/components/alert/index.js"
+    },
+    "./avatar": {
+      "types": "./dist/components/avatar/index.d.ts",
+      "import": "./dist/components/avatar/index.js",
+      "default": "./dist/components/avatar/index.js"
+    },
+    "./avatar-group": {
+      "types": "./dist/components/avatar-group/index.d.ts",
+      "import": "./dist/components/avatar-group/index.js",
+      "default": "./dist/components/avatar-group/index.js"
+    },
+    "./badge": {
+      "types": "./dist/components/badge/index.d.ts",
+      "import": "./dist/components/badge/index.js",
+      "default": "./dist/components/badge/index.js"
+    },
+    "./breadcrumbs": {
+      "types": "./dist/components/breadcrumbs/index.d.ts",
+      "import": "./dist/components/breadcrumbs/index.js",
+      "default": "./dist/components/breadcrumbs/index.js"
+    },
     "./button": {
       "types": "./dist/components/button/index.d.ts",
       "import": "./dist/components/button/index.js",
       "default": "./dist/components/button/index.js"
+    },
+    "./card": {
+      "types": "./dist/components/card/index.d.ts",
+      "import": "./dist/components/card/index.js",
+      "default": "./dist/components/card/index.js"
+    },
+    "./chip": {
+      "types": "./dist/components/chip/index.d.ts",
+      "import": "./dist/components/chip/index.js",
+      "default": "./dist/components/chip/index.js"
+    },
+    "./close-button": {
+      "types": "./dist/components/close-button/index.d.ts",
+      "import": "./dist/components/close-button/index.js",
+      "default": "./dist/components/close-button/index.js"
+    },
+    "./description": {
+      "types": "./dist/components/description/index.d.ts",
+      "import": "./dist/components/description/index.js",
+      "default": "./dist/components/description/index.js"
+    },
+    "./empty-state": {
+      "types": "./dist/components/empty-state/index.d.ts",
+      "import": "./dist/components/empty-state/index.js",
+      "default": "./dist/components/empty-state/index.js"
+    },
+    "./error-message": {
+      "types": "./dist/components/error-message/index.d.ts",
+      "import": "./dist/components/error-message/index.js",
+      "default": "./dist/components/error-message/index.js"
+    },
+    "./field-error": {
+      "types": "./dist/components/field-error/index.d.ts",
+      "import": "./dist/components/field-error/index.js",
+      "default": "./dist/components/field-error/index.js"
+    },
+    "./fieldset": {
+      "types": "./dist/components/fieldset/index.d.ts",
+      "import": "./dist/components/fieldset/index.js",
+      "default": "./dist/components/fieldset/index.js"
+    },
+    "./header": {
+      "types": "./dist/components/header/index.d.ts",
+      "import": "./dist/components/header/index.js",
+      "default": "./dist/components/header/index.js"
     },
     "./input": {
       "types": "./dist/components/input/index.d.ts",
       "import": "./dist/components/input/index.js",
       "default": "./dist/components/input/index.js"
     },
+    "./kbd": {
+      "types": "./dist/components/kbd/index.d.ts",
+      "import": "./dist/components/kbd/index.js",
+      "default": "./dist/components/kbd/index.js"
+    },
+    "./label": {
+      "types": "./dist/components/label/index.d.ts",
+      "import": "./dist/components/label/index.js",
+      "default": "./dist/components/label/index.js"
+    },
+    "./link": {
+      "types": "./dist/components/link/index.d.ts",
+      "import": "./dist/components/link/index.js",
+      "default": "./dist/components/link/index.js"
+    },
     "./modal": {
       "types": "./dist/components/modal/index.d.ts",
       "import": "./dist/components/modal/index.js",
       "default": "./dist/components/modal/index.js"
     },
+    "./progress-bar": {
+      "types": "./dist/components/progress-bar/index.d.ts",
+      "import": "./dist/components/progress-bar/index.js",
+      "default": "./dist/components/progress-bar/index.js"
+    },
+    "./progress-circle": {
+      "types": "./dist/components/progress-circle/index.d.ts",
+      "import": "./dist/components/progress-circle/index.js",
+      "default": "./dist/components/progress-circle/index.js"
+    },
     "./select": {
       "types": "./dist/components/select/index.d.ts",
       "import": "./dist/components/select/index.js",
       "default": "./dist/components/select/index.js"
+    },
+    "./separator": {
+      "types": "./dist/components/separator/index.d.ts",
+      "import": "./dist/components/separator/index.js",
+      "default": "./dist/components/separator/index.js"
+    },
+    "./skeleton": {
+      "types": "./dist/components/skeleton/index.d.ts",
+      "import": "./dist/components/skeleton/index.js",
+      "default": "./dist/components/skeleton/index.js"
+    },
+    "./spinner": {
+      "types": "./dist/components/spinner/index.d.ts",
+      "import": "./dist/components/spinner/index.js",
+      "default": "./dist/components/spinner/index.js"
+    },
+    "./surface": {
+      "types": "./dist/components/surface/index.d.ts",
+      "import": "./dist/components/surface/index.js",
+      "default": "./dist/components/surface/index.js"
+    },
+    "./typography": {
+      "types": "./dist/components/typography/index.d.ts",
+      "import": "./dist/components/typography/index.js",
+      "default": "./dist/components/typography/index.js"
     },
     "./package.json": "./package.json"
   },

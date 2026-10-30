@@ -26,7 +26,7 @@ test.describe("Button", () => {
   test("activates with the keyboard and exposes focus-visible", async ({page}) => {
     const themeButton = page.getByRole("button", {name: "Dark", exact: true});
 
-    await page.locator("h1").click();
+    await page.locator("header h1").click();
     await page.keyboard.press("Tab");
 
     await expect(themeButton).toBeFocused();

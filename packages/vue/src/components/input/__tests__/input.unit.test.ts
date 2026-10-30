@@ -2,10 +2,10 @@ import {mount} from "@vue/test-utils";
 import {defineComponent, h, ref} from "vue";
 import {describe, expect, it} from "vitest";
 
-import Description from "../description.vue";
-import FieldError from "../field-error.vue";
+import Description from "../../description/description.vue";
+import FieldError from "../../field-error/field-error.vue";
+import Label from "../../label/label.vue";
 import Input from "../input.vue";
-import Label from "../label.vue";
 import TextField from "../text-field.vue";
 
 describe("Input", () => {

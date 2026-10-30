@@ -6,6 +6,28 @@ const PLAYGROUND = "http://127.0.0.1:4173";
 const REFERENCE = "http://127.0.0.1:5174";
 const MAX_DIFF_RATIO = 0.01;
 
+const GALLERY_SECTIONS = [
+  "alert",
+  "avatar",
+  "badge",
+  "breadcrumbs",
+  "card",
+  "chip",
+  "close-button",
+  "fieldset",
+  "header",
+  "kbd",
+  "link",
+  "progress",
+  "separator",
+  "skeleton",
+  "spinner",
+  "surface",
+  "text",
+  "typography",
+  "empty-state"
+] as const;
+
 type Theme = "light" | "dark";
 
 async function openApp(page: Page, baseUrl: string, theme: Theme) {
@@ -78,7 +100,7 @@ for (const theme of ["light", "dark"] as const) {
       );
 
       for (const page of [vuePage, reactPage]) {
-        await page.locator("h1").click();
+        await page.locator("header h1").click();
         await page.keyboard.press("Tab");
         await page.keyboard.press("Tab");
       }
@@ -191,5 +213,20 @@ for (const theme of ["light", "dark"] as const) {
       await vuePage.close();
       await reactPage.close();
     });
+
+    for (const section of GALLERY_SECTIONS) {
+      test(`${section} gallery matches the React reference`, async ({browser}) => {
+        const vuePage = await browser.newPage();
+        const reactPage = await browser.newPage();
+
+        await openApp(vuePage, PLAYGROUND, theme);
+        await openApp(reactPage, REFERENCE, theme);
+
+        await expectParity(vuePage, reactPage, `#${section}`, `${section}-${theme}`);
+
+        await vuePage.close();
+        await reactPage.close();
+      });
+    }
   });
 }

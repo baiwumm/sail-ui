@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {Button} from "@sail-ui/vue/button";
-import {Input, Label, TextField} from "@sail-ui/vue/input";
+import {Input, TextField} from "@sail-ui/vue/input";
+import {Label} from "@sail-ui/vue/label";
 import {
   Modal,
   ModalBackdrop,
