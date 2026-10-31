@@ -792,6 +792,14 @@ describe("interactive state contract", () => {
     const trigger = document.querySelector<HTMLElement>('[data-slot="popover-trigger"]')!;
 
     trigger.click();
+    await nextTick();
+
+    // `data-entering` ends on the first animation frame when no CSS animation
+    // applies (jsdom), so assert it before yielding to timers or frames.
+    expect(document.querySelector<HTMLElement>(".popover")?.getAttribute("data-entering")).toBe(
+      "true",
+    );
+
     await flushPromises();
 
     const html = document.body.innerHTML;
@@ -805,7 +813,6 @@ describe("interactive state contract", () => {
       "popover-trigger",
     ]);
     expectKnownSlots(html);
-    expect(content.getAttribute("data-entering")).toBe("true");
     expect(content.getAttribute("data-placement")).toBe("bottom");
     expect(content.getAttribute("role")).toBe("dialog");
     expect(content.getAttribute("aria-labelledby")).toBeTruthy();
@@ -822,6 +829,14 @@ describe("interactive state contract", () => {
     const trigger = document.querySelector<HTMLElement>('[data-slot="tooltip-trigger"]')!;
 
     trigger.focus();
+    await nextTick();
+
+    // `data-entering` ends on the first animation frame when no CSS animation
+    // applies (jsdom), so assert it before yielding to timers or frames.
+    expect(document.querySelector<HTMLElement>(".tooltip")?.getAttribute("data-entering")).toBe(
+      "true",
+    );
+
     await flushPromises();
 
     const html = document.body.innerHTML;
@@ -830,7 +845,6 @@ describe("interactive state contract", () => {
 
     expect(dataSlots(html).sort()).toEqual(["overlay-arrow", "tooltip-arrow", "tooltip-trigger"]);
     expectKnownSlots(html);
-    expect(content.getAttribute("data-entering")).toBe("true");
     expect(content.getAttribute("data-placement")).toBe("top");
     expect(describedBy).toBeTruthy();
     expect(document.getElementById(describedBy)?.getAttribute("role")).toBe("tooltip");
