@@ -1,0 +1,24 @@
+<script setup lang="ts">
+import {cx} from "@sail-ui/styles";
+import {computed} from "vue";
+
+import {useForwardedAttrs} from "../../shared/attrs";
+import {useComboBoxContext} from "./context";
+import type {ComboBoxValueProps} from "./types";
+
+defineOptions({name: "SailComboBoxValue", inheritAttrs: false});
+
+defineProps<ComboBoxValueProps>();
+
+const context = useComboBoxContext();
+const {className, forwarded} = useForwardedAttrs();
+
+const classes = computed(() => cx(context.slots.value.value(), className.value));
+const label = computed(() => context.binding.labelFor(context.binding.modelValue.value));
+</script>
+
+<template>
+  <span v-bind="forwarded" :class="classes" :data-slot="'combo-box-value'">
+    <slot>{{ label }}</slot>
+  </span>
+</template>

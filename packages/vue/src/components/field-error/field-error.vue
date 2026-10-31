@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {fieldErrorVariants} from "@sail-ui/styles";
 import {injectFieldRootContext} from "reka-ui";
-import {computed, onBeforeUnmount, onMounted, useId, useSlots, watch, type Slots} from "vue";
+import {computed, inject, onBeforeUnmount, onMounted, useId, useSlots, watch} from "vue";
 
-import {hasSlotContent} from "../../shared/vnode";
+import {fieldContextKey} from "../../shared/field-context";
 import type {FieldErrorProps} from "./types";
 
 defineOptions({name: "SailFieldError", inheritAttrs: true});
@@ -11,19 +11,25 @@ defineOptions({name: "SailFieldError", inheritAttrs: true});
 defineProps<FieldErrorProps>();
 
 const field = injectFieldRootContext(null);
-const componentSlots = useSlots() as Slots;
+const sailField = inject(fieldContextKey, null);
+const componentSlots = useSlots();
 const errorId = useId();
-const visible = computed(() => Boolean(field?.invalid.value));
-const errors = computed(() => field?.errors.value ?? []);
-const hasContent = computed(() => hasSlotContent(componentSlots.default));
+const visible = computed(() => Boolean(field?.invalid.value ?? sailField?.invalid.value));
+const errors = computed(() => field?.errors.value ?? sailField?.errors.value ?? []);
+// Only check that a slot exists: invoking it here would happen outside the
+// render function (mount/watch), which Vue warns about and cannot track.
+const hasContent = computed(() => Boolean(componentSlots.default));
 const show = computed(() => visible.value && (hasContent.value || errors.value.length > 0));
 const classes = computed(() => fieldErrorVariants());
+
+const registerDescription = (id: string) =>
+  field?.registerDescription(id) ?? sailField?.registerDescription(id) ?? (() => {});
 
 let unregister: (() => void) | undefined;
 
 const syncDescription = () => {
-  if (show.value && field && !unregister) {
-    unregister = field.registerDescription(errorId);
+  if (show.value && (field || sailField) && !unregister) {
+    unregister = registerDescription(errorId);
   } else if (!show.value && unregister) {
     unregister();
     unregister = undefined;

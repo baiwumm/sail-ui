@@ -93,23 +93,23 @@
 
 ## 日期 / 颜色 / 自动完成（15）
 
-| 组件                   | Reka 基础                              | 里程碑 | MVP | 备注                      |
-| ---------------------- | -------------------------------------- | ------ | --- | ------------------------- |
-| `autocomplete`         | `AutocompleteRoot`                     | M3     |     | 过滤/异步/自由输入        |
-| `calendar`             | `CalendarRoot`                         | M3     |     | 键盘网格/跨月             |
-| `calendar-year-picker` | `CalendarRoot` + 自定义年视图          | M3     |     | **Preview**：上游仍在开发 |
-| `combo-box`            | `ComboboxRoot`                         | M3     |     | 输入过滤/空状态           |
-| `date-field`           | `DateFieldRoot`                        | M3     |     | 分段输入/locale/timezone  |
-| `date-picker`          | `DatePickerRoot`                       | M3     |     | 弹层/焦点回退             |
-| `date-range-picker`    | `DateRangePickerRoot`                  | M3     |     | 起止/反向选择             |
-| `range-calendar`       | `RangeCalendarRoot`                    | M3     |     | 范围高亮                  |
-| `time-field`           | `TimeFieldRoot`                        | M3     |     | 12/24 小时                |
-| `color-area`           | `ColorAreaRoot`                        | M3     |     | 拖动/键盘                 |
-| `color-field`          | `ColorFieldRoot`                       | M3     |     | 格式/无效输入             |
-| `color-picker`         | 组合（Area + Slider + Field + Swatch） | M3     |     | 无 Reka ColorPickerRoot   |
-| `color-slider`         | `ColorSliderRoot`                      | M3     |     | 透明度/色相               |
-| `color-swatch`         | `ColorSwatch`                          | M3     |     | 色块                      |
-| `color-swatch-picker`  | `ColorSwatchPickerRoot`                | M3     |     | 色板选择/键盘             |
+| 组件                   | Reka 基础                              | 里程碑 | MVP | 备注                                        |
+| ---------------------- | -------------------------------------- | ------ | --- | ------------------------------------------- |
+| `autocomplete`         | `AutocompleteRoot`                     | M3     | ✅  | 弹层搜索/清空/`displayValue`；T07 done      |
+| `calendar`             | `CalendarRoot`                         | M3     | ✅  | 键盘网格/跨月/多可见月/不可用日期；T07 done |
+| `calendar-year-picker` | `CalendarRoot` + 自定义年视图          | M3     | ✅  | **Preview**：上游仍在开发；T07 done         |
+| `combo-box`            | `ComboboxRoot`                         | M3     | ✅  | 输入过滤/空状态/自由输入/异步受控；T07 done |
+| `date-field`           | `DateFieldRoot`                        | M3     | ✅  | 分段输入/locale/范围校验；T07 done          |
+| `date-picker`          | `DatePickerRoot`                       | M3     | ✅  | 弹层/焦点回退/受控 open；T07 done           |
+| `date-range-picker`    | `DateRangePickerRoot`                  | M3     | ✅  | 起止/反向选择/partial 输入；T07 done        |
+| `range-calendar`       | `RangeCalendarRoot`                    | M3     | ✅  | 范围高亮/悬停预览；T07 done                 |
+| `time-field`           | `TimeFieldRoot`                        | M3     | ✅  | 12/24 小时/秒级粒度；T07 done               |
+| `color-area`           | `ColorAreaRoot`                        | M3     | ✅  | 拖动/键盘；外层 group 差异；T07 done        |
+| `color-field`          | `ColorFieldRoot`                       | M3     | ✅  | 格式/无效输入；空值回退 #000000；T07 done   |
+| `color-picker`         | 组合（Area + Slider + Field + Swatch） | M3     | ✅  | 无 Reka ColorPickerRoot；T07 done           |
+| `color-slider`         | `ColorSliderRoot`                      | M3     | ✅  | 透明度/色相；`aria-disabled` 差异；T07 done |
+| `color-swatch`         | `ColorSwatch`                          | M3     | ✅  | 色块；T07 done                              |
+| `color-swatch-picker`  | `ColorSwatchPickerRoot`                | M3     | ✅  | 色板选择/键盘；Listbox 直组合；T07 done     |
 
 ## 高级数据（4）
 
@@ -125,7 +125,7 @@
 | 名称                | 说明                                       |
 | ------------------- | ------------------------------------------ |
 | `color-input-group` | `ColorPicker` 内部组合；不导出             |
-| `date-input-group`  | `DatePicker` 内部组合；不导出              |
+| `date-input-group`  | DateField/TimeField 内部组合；经别名导出   |
 | `rac`               | 上游 React Aria 兼容目录；**不移植**       |
 | `icons`             | 上游内部图标；Sail UI 使用 Iconify，不移植 |
 

@@ -80,7 +80,12 @@ import {
 import {Tooltip, TooltipArrow, TooltipContent, TooltipTrigger} from "@sail-ui/vue/tooltip";
 import {onMounted, ref} from "vue";
 
+import Calendar from "./Calendar.vue";
 import Collections from "./Collections.vue";
+import Colors from "./Colors.vue";
+import ComboBoxes from "./ComboBoxes.vue";
+import DateFields from "./DateFields.vue";
+import DatePickers from "./DatePickers.vue";
 import Forms from "./Forms.vue";
 import Gallery from "./Gallery.vue";
 import Toasts from "./Toasts.vue";
@@ -134,7 +139,8 @@ onMounted(() => {
       <div>
         <h1 class="text-2xl font-semibold">Sail UI playground</h1>
         <p class="text-sm text-muted">
-          Button · Input · Overlays · Select · Collections · Forms · Display & feedback
+          Button · Input · Overlays · Select · Collections · Forms · Display & feedback · Calendar ·
+          Date pickers · Date &amp; time fields · Combo box · Colors
         </p>
       </div>
       <Button variant="outline" size="sm" @press="toggleTheme">
@@ -508,6 +514,11 @@ onMounted(() => {
     </section>
     <Collections />
     <Forms />
+    <Calendar />
+    <DateFields />
+    <DatePickers />
+    <ComboBoxes />
+    <Colors />
     <Gallery />
     <Toasts />
   </main>

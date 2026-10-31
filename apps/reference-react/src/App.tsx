@@ -11,7 +11,12 @@ import {
 } from "@heroui/react";
 import {useEffect, useState} from "react";
 
+import CalendarDemo from "./Calendar";
 import Collections from "./Collections";
+import Colors from "./Colors";
+import ComboBoxes from "./ComboBoxes";
+import DateFields from "./DateFields";
+import DatePickers from "./DatePickers";
 import Forms from "./Forms";
 import Gallery from "./Gallery";
 
@@ -49,7 +54,8 @@ export default function App() {
         <div>
           <h1 className="text-2xl font-semibold">Sail UI playground</h1>
           <p className="text-sm text-muted">
-            Button · Input · Modal · Select · Collections · Forms · Display & feedback
+            Button · Input · Modal · Select · Collections · Forms · Display & feedback · Calendar ·
+            Date pickers · Date &amp; time fields · Combo box · Colors
           </p>
         </div>
         <Button variant="outline" size="sm" onPress={toggleTheme}>
@@ -214,6 +220,11 @@ export default function App() {
 
       <Collections />
       <Forms />
+      <CalendarDemo />
+      <DateFields />
+      <DatePickers />
+      <ComboBoxes />
+      <Colors />
       <Gallery />
     </main>
   );

@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import {cx, listboxVariants} from "@sail-ui/styles";
 import {
+  ComboboxEmpty,
   ListboxContent as ListboxContentPrimitive,
   ListboxRoot as ListboxRootPrimitive,
 } from "reka-ui";
 import {computed, getCurrentInstance, provide, ref} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {useComboboxBinding, type ComboBoxModelValue} from "../../shared/combobox-context";
 import {listBoxContextKey} from "./context";
 import type {
   ListBoxKey,
@@ -29,6 +31,7 @@ const model = defineModel<ListBoxSelection>();
 
 const instance = getCurrentInstance();
 const {className, forwarded} = useForwardedAttrs();
+const combobox = useComboboxBinding();
 
 const listRef = ref<HTMLElement | null>(null);
 const isFocused = ref(false);
@@ -36,7 +39,9 @@ const isFocused = ref(false);
 const slots = computed(() => listboxVariants({variant: props.variant}));
 const classes = computed(() => cx(slots.value, className.value));
 
-const selectionMode = computed<ListBoxSelectionMode>(() => props.selectionMode);
+const selectionMode = computed<ListBoxSelectionMode>(() =>
+  combobox ? "single" : props.selectionMode,
+);
 const disabledKeys = computed<ReadonlySet<ListBoxKey>>(() => new Set(props.disabledKeys ?? []));
 const comparator = computed(
   () => props.by as string | ((value: unknown, currentValue: unknown) => boolean) | undefined,
@@ -58,9 +63,13 @@ const internalSelected = ref<ListBoxSelection>(
       : props.defaultValue,
 );
 
-const selectedValue = computed<ListBoxSelection>(() =>
-  isControlled ? model.value : internalSelected.value,
-);
+const selectedValue = computed<ListBoxSelection>(() => {
+  if (combobox) {
+    return combobox.modelValue.value;
+  }
+
+  return isControlled ? model.value : internalSelected.value;
+});
 
 const rekaModel = computed<ListBoxSelection>(() => {
   if (selectionMode.value !== "multiple") {
@@ -75,6 +84,10 @@ function isSelected(value: ListBoxKey) {
     return false;
   }
 
+  if (combobox) {
+    return combobox.isSelected(value);
+  }
+
   const current = selectedValue.value;
 
   return Array.isArray(current) ? current.includes(value) : current === value;
@@ -85,6 +98,11 @@ function isDisabled(value: ListBoxKey) {
 }
 
 function setSelected(value: ListBoxSelection) {
+  if (combobox) {
+    combobox.setSelected(value as ComboBoxModelValue);
+    return;
+  }
+
   internalSelected.value = value;
   model.value = value;
   emit("selection-change", value);
@@ -140,6 +158,7 @@ provide(listBoxContextKey, {
 
 <template>
   <ListboxRootPrimitive
+    v-if="!combobox"
     as-child
     :by="comparator"
     :model-value="rekaModel"
@@ -161,4 +180,20 @@ provide(listBoxContextKey, {
       </div>
     </ListboxContentPrimitive>
   </ListboxRootPrimitive>
+  <div
+    v-else
+    v-bind="forwarded"
+    ref="listRef"
+    :class="classes"
+    :data-focused="isFocused ? 'true' : undefined"
+    :data-slot="'list-box'"
+    role="listbox"
+    @focusin="handleFocusIn"
+    @focusout="handleFocusOut"
+  >
+    <slot />
+    <ComboboxEmpty v-if="$slots.empty" as-child>
+      <slot name="empty" />
+    </ComboboxEmpty>
+  </div>
 </template>

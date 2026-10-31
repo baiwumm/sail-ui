@@ -2,7 +2,7 @@
 
 Instructions for AI agents and contributors working on **Sail UI** — an unofficial Vue 3 / Nuxt port of HeroUI v3.
 
-> **Current phase: M2 in progress.** T01 (M0 architecture spike), T02 (contract tooling), T03 (24 display/layout/feedback components), T04 (19 form controls), T05 (7 overlays + Toast), and T06 (15 collections/pickers) are complete. The workspace builds and `pnpm verify` plus browser CI are the gates. T06 delivered 65 components; T07 (date/color) and T08 (advanced data) are next and unblocked.
+> **Current phase: M3 in progress.** T01 (M0 architecture spike), T02 (contract tooling), T03 (24 display/layout/feedback components), T04 (19 form controls), T05 (7 overlays + Toast), T06 (15 collections/pickers), and T07 (15 date/color/autocomplete components) are complete. The workspace builds and `pnpm verify` plus browser CI are the gates. T07 delivered 80 components; T08 (advanced data) is next and unblocked, with T09 (docs/release) after it.
 
 ---
 

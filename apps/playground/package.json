@@ -11,6 +11,7 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@internationalized/date": "3.12.4",
     "@sail-ui/primitives": "workspace:*",
     "@sail-ui/styles": "workspace:*",
     "@sail-ui/vue": "workspace:*",

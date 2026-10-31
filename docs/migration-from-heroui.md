@@ -447,6 +447,35 @@ Nuxt 下 `<ToastProvider />` 由模块自动挂载，直接用 `useToast()`。
 - Tooltip 的 hover 模式忽略触摸指针；触摸/键盘聚焦仍按 focus 语义打开。`aria-describedby` 指向一个隐藏的 `role="tooltip"` 节点。
 - Sheet 在 T05 只实现方向、尺寸、把手拖拽与进出场；snap points、detached、嵌套 sheet 尚未实现。
 
+### 6.10 日期、组合框与颜色（15 个）
+
+日期与颜色组件同样用 `v-model` 取代受控 props；日期值统一使用 `@internationalized/date` 类型，颜色接受 CSS 字符串或 `Color` 对象。
+
+| React                                                         | Vue                                                                                     |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `<Calendar value={date} onChange={setDate}>`                  | `<CalendarRoot v-model="date" v-model:focused="focused">`                               |
+| `<RangeCalendar value={range} onChange={setRange}>`           | `<RangeCalendarRoot v-model="range">`                                                   |
+| `<Calendar value={date} onChange={setDate}>`（YearPicker）    | `<CalendarRoot v-model="date">` + `<CalendarYearPickerTrigger>`（preview）              |
+| `<DateField value={date} onChange={setDate}>`                 | `<DateFieldRoot v-model="date">`                                                        |
+| `<TimeField value={time} onChange={setTime}>`                 | `<TimeFieldRoot v-model="time">`                                                        |
+| `<DatePicker value={date} onChange={setDate}>`                | `<DatePickerRoot v-model="date">`                                                       |
+| `<DateRangePicker value={range} onChange={setRange}>`         | `<DateRangePickerRoot v-model="range">`，值为 `{start?, end?} \| null`                  |
+| `<ComboBox value={key} onChange={setKey}>`                    | `<ComboBox v-model="key">`，受控输入用 `v-model:input-value`                            |
+| `<Autocomplete selectedKey={key} onSelectionChange={setKey}>` | `<Autocomplete v-model="key">`，过滤结果用 `ignore-filter` / `display-value` 接管       |
+| `<ColorArea value={color} onChange={setColor}>`               | `<ColorAreaRoot v-model="color">`，`@change` 载荷为 hex 字符串                          |
+| `<ColorSlider value={color} onChange={setColor}>`             | `<ColorSliderRoot v-model="color">`                                                     |
+| `<ColorField value={color} onChange={setColor}>`              | `<ColorFieldRoot v-model="color">`                                                      |
+| `<ColorSwatchPicker value={color} onChange={setColor}>`       | `<ColorSwatchPickerRoot v-model="color">`（item 用 `color` prop，不用子 `ColorSwatch`） |
+| `<ColorPicker value={color} onChange={setColor}>`             | `<ColorPickerRoot v-model="color">`                                                     |
+| `<ColorSwatch color={color} label="…" />`                     | `<ColorSwatchRoot color="…" label="…" />`，无 label 时需 `aria-label`                   |
+
+- 日期分段必须显式组合：`DateFieldInput` 内提供 `DateFieldSegment`（`TimeFieldInput` 内置分段），`DateFieldInput` 通过 `slot="start"` / `slot="end"` 区分范围字段。
+- `locale` 默认 `en` 以保证 SSR 稳定，可显式覆盖；`granularity`、`hour-cycle`、`placeholder-value`、`week-starts-on` 也都是显式 props。时区不在组件 prop 上，由 `DateValue`（如 `ZonedDateTime`）携带，组件不会在服务端读取浏览器环境。
+- DatePicker / DateRangePicker 的日历位于 `DatePickerPopover` 内，弹层关闭后焦点回到 trigger；picker 内的 `CalendarRoot` / `RangeCalendarRoot` 自动继承 picker 的值、min/max、locale 与不可用日期。
+- `ComboBox` 未提供 `display-value` 时，初始选中值在弹层首次挂载后才会回填输入框；需要稳定回显时传 `display-value` 函数或 `text-value`。
+- 颜色组件不导出内部 `ColorInputGroup`；`ColorPicker` 直接组合 `ColorAreaRoot` / `ColorSliderRoot` / `ColorFieldRoot` / `ColorSwatchPickerRoot`。
+- `ColorSwatchPickerRoot` 没有默认可访问名称，必须传 `aria-label`；禁用可下放到 item 级 `isDisabled`。
+
 ## 7. 样式与主题
 
 - 保留 `className` 里的 BEM/工具类写法，改为 `class`。
@@ -470,31 +499,41 @@ export default defineNuxtConfig({
 
 ## 9. 已知差异（必须知道）
 
-| 差异                                   | 影响                                               | 处理                                                                                |
-| -------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| 静态 `<Select.Trigger>` 不工作         | 复制 React 示例会报解析失败                        | 改成 `<SelectTrigger>` 或 `:is`                                                     |
-| `className` 函数不支持                 | 依赖 render props 的样式写法失效                   | scoped slot + `data-*` CSS                                                          |
-| React 事件对象不存在                   | `e.continuePropagation()` 等失效                   | 用 Vue 事件 + 我们的 `PressEvent`                                                   |
-| RAC 内部 hooks/context 不公开          | 深度定制代码失效                                   | 用公开 props/slots 或 `asChild`                                                     |
-| `Table` 虚拟化/列宽 API 不同           | 迁移需改数据层                                     | 用 TanStack 表模型；见 ADR 0005                                                     |
-| Toast manager 不是全局单例             | 直接 import `toast` 的写法失效                     | `useToast()` + `<ToastProvider />`                                                  |
-| `disabled` 不是 `isDisabled` 别名      | 误用会静默失效                                     | 统一 `isDisabled`                                                                   |
-| 日期值类型                             | React 用 `DateValue` 对象                          | Vue 同样用 `@internationalized/date` 值，不用原生 `Date`                            |
-| `ToggleButtonGroup` 的选择模式         | React 用 `selectionMode` + `selectedKeys`（`Set`） | Vue 用 `type="single" \| "multiple"` + `v-model`（单选为字符串，多选为数组）        |
-| `ToggleButton` / `ListBoxItem` 的标识  | React 用 `id` 作为选择键                           | Vue 用 `value`                                                                      |
-| `Checkbox` / `Radio` / `Switch` 的 DOM | React 是 `<label>` + 隐藏原生 `input`              | Vue 同样输出 `<label>` + 隐藏原生 `input`，DOM 与参考实现一致                       |
-| `Textarea` 自适应高度                  | React 的 TextArea 不自动增高                       | Vue 需显式开启 `autoResize`                                                         |
-| `Form` 的提交                          | React 的 `onSubmit` 拿到合成事件                   | Vue 的 `@submit` 拿到原生 `SubmitEvent`，组件不阻止默认行为                         |
-| TagGroup 的描述关联                    | React 经 TextContext 自动写入 `aria-describedby`   | 显式传 `aria-describedby` 并给 Description 设置 id；见 ADR 0010                     |
-| ListBox 的 typeahead                   | React 可自定义文本                                 | 使用 item 渲染文本；`textValue` 仅作无 Label 时的 `aria-label`；见 ADR 0011         |
-| Select 的列表组成                      | React 在 `Select.Popover` 内直接放 `ListBox`       | Vue 用 `SelectListBox` / `SelectItem`；独立 ListBox 不共享 Select 状态；见 ADR 0012 |
-| Select 的 SSR 选中文本                 | 服务端输出 placeholder，挂载后才显示选中标签       | 无 hydration mismatch；依赖首屏文本的场景需注意；见 ADR 0012                        |
-| Select 多选与禁用键                    | `v-model` 为数组；禁用键按值比较                   | `by` 支持键名或比较函数；空字符串 `value` 保留给“无选择”                            |
-| Dropdown 的 trigger                    | React 克隆 `Dropdown` 的第一个子元素作为 trigger   | Vue 显式写 `<DropdownTrigger>`；见 ADR 0013                                         |
-| Dropdown trigger 的外观                | `Dropdown.Trigger` 是 24px 的 `.dropdown__trigger` | Vue 同为原生 button，不叠加 `.button` 变体；需要按钮外观时加 `button button--*` 类  |
-| Dropdown 的 item 标识                  | React 用 `id` 作为选择键                           | Vue 用 `value`                                                                      |
-| Dropdown 的子菜单                      | `SubmenuTrigger` 内放 `Item` + `Popover`           | 结构相同，item 用共享 `MenuItem`；见 ADR 0013                                       |
-| 独立 Menu 的宿主                       | React 可直接使用 `Menu`                            | Vue 的 `Menu` 必须位于 `DropdownPopover` 内；见 ADR 0013                            |
+| 差异                                   | 影响                                                                                                      | 处理                                                                                   |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| 静态 `<Select.Trigger>` 不工作         | 复制 React 示例会报解析失败                                                                               | 改成 `<SelectTrigger>` 或 `:is`                                                        |
+| `className` 函数不支持                 | 依赖 render props 的样式写法失效                                                                          | scoped slot + `data-*` CSS                                                             |
+| React 事件对象不存在                   | `e.continuePropagation()` 等失效                                                                          | 用 Vue 事件 + 我们的 `PressEvent`                                                      |
+| RAC 内部 hooks/context 不公开          | 深度定制代码失效                                                                                          | 用公开 props/slots 或 `asChild`                                                        |
+| `Table` 虚拟化/列宽 API 不同           | 迁移需改数据层                                                                                            | 用 TanStack 表模型；见 ADR 0005                                                        |
+| Toast manager 不是全局单例             | 直接 import `toast` 的写法失效                                                                            | `useToast()` + `<ToastProvider />`                                                     |
+| `disabled` 不是 `isDisabled` 别名      | 误用会静默失效                                                                                            | 统一 `isDisabled`                                                                      |
+| 日期值类型                             | React 用 `DateValue` 对象                                                                                 | Vue 同样用 `@internationalized/date` 值，不用原生 `Date`                               |
+| `ToggleButtonGroup` 的选择模式         | React 用 `selectionMode` + `selectedKeys`（`Set`）                                                        | Vue 用 `type="single" \| "multiple"` + `v-model`（单选为字符串，多选为数组）           |
+| `ToggleButton` / `ListBoxItem` 的标识  | React 用 `id` 作为选择键                                                                                  | Vue 用 `value`                                                                         |
+| `Checkbox` / `Radio` / `Switch` 的 DOM | React 是 `<label>` + 隐藏原生 `input`                                                                     | Vue 同样输出 `<label>` + 隐藏原生 `input`，DOM 与参考实现一致                          |
+| `Textarea` 自适应高度                  | React 的 TextArea 不自动增高                                                                              | Vue 需显式开启 `autoResize`                                                            |
+| `Form` 的提交                          | React 的 `onSubmit` 拿到合成事件                                                                          | Vue 的 `@submit` 拿到原生 `SubmitEvent`，组件不阻止默认行为                            |
+| TagGroup 的描述关联                    | React 经 TextContext 自动写入 `aria-describedby`                                                          | 显式传 `aria-describedby` 并给 Description 设置 id；见 ADR 0010                        |
+| ListBox 的 typeahead                   | React 可自定义文本                                                                                        | 使用 item 渲染文本；`textValue` 仅作无 Label 时的 `aria-label`；见 ADR 0011            |
+| Select 的列表组成                      | React 在 `Select.Popover` 内直接放 `ListBox`                                                              | Vue 用 `SelectListBox` / `SelectItem`；独立 ListBox 不共享 Select 状态；见 ADR 0012    |
+| Select 的 SSR 选中文本                 | 服务端输出 placeholder，挂载后才显示选中标签                                                              | 无 hydration mismatch；依赖首屏文本的场景需注意；见 ADR 0012                           |
+| Select 多选与禁用键                    | `v-model` 为数组；禁用键按值比较                                                                          | `by` 支持键名或比较函数；空字符串 `value` 保留给“无选择”                               |
+| Dropdown 的 trigger                    | React 克隆 `Dropdown` 的第一个子元素作为 trigger                                                          | Vue 显式写 `<DropdownTrigger>`；见 ADR 0013                                            |
+| Dropdown trigger 的外观                | `Dropdown.Trigger` 是 24px 的 `.dropdown__trigger`                                                        | Vue 同为原生 button，不叠加 `.button` 变体；需要按钮外观时加 `button button--*` 类     |
+| Dropdown 的 item 标识                  | React 用 `id` 作为选择键                                                                                  | Vue 用 `value`                                                                         |
+| Dropdown 的子菜单                      | `SubmenuTrigger` 内放 `Item` + `Popover`                                                                  | 结构相同，item 用共享 `MenuItem`；见 ADR 0013                                          |
+| 独立 Menu 的宿主                       | React 可直接使用 `Menu`                                                                                   | Vue 的 `Menu` 必须位于 `DropdownPopover` 内；见 ADR 0013                               |
+| 日期分段输入                           | React 的 `DateField.Input` 自动渲染分段                                                                   | Vue 需在 `DateFieldInput` 内用插槽渲染 `DateFieldSegment`                              |
+| 日期 picker 的值                       | RAC 的 `DateRangePicker` 需要完整范围                                                                     | Vue 的 `v-model` 允许 `{start?, end?} \| null`，键入中的半截范围也会保留               |
+| 颜色事件载荷                           | React 的 `onChange` 给出 `Color` 对象                                                                     | Vue 的 `@change` 给出 hex 字符串；`v-model` 同时接受字符串与 `Color`                   |
+| 颜色更新频率                           | React 在拖动结束时触发一次                                                                                | Vue 每次 update 触发 `@change`，与 RAC 的连续 input 事件对齐                           |
+| SwatchPicker 的选项                    | React 在 item 内放子 `ColorSwatch`                                                                        | Vue 用 `<ColorSwatchPickerItem color="…">`，swatch 由 `ColorSwatchPickerSwatch` 渲染   |
+| CalendarYearPicker                     | 上游仍在演进                                                                                              | 标为 preview，API 可能随上游调整                                                       |
+| ComboBox 关闭态回显                    | React 的常驻 collection 可直接显示选中标签                                                                | Vue 在弹层首次挂载前不知道标签，需 `display-value` 或 `text-value`                     |
+| 日期字段的 min/max 无效态              | Reka 初始渲染即标记 `data-invalid`；RAC 默认 `validationBehavior="native"` 要失焦/提交后才显示            | Vue 立即显示无效样式；逐像素对照 React 时给 `DateField` 传 `validationBehavior="aria"` |
+| ColorArea 的默认值与通道               | RAC 默认值 `#ffffff`，缺省轴按颜色空间通道顺序（sRGB 为 red/green）；Reka 默认 `#ff0000` + hue/saturation | 需要同图时显式传 `default-value`、`color-space`、`x-channel`、`y-channel`              |
+| 颜色 hex 字符串大小写                  | RAC 的 `toString("hex")` 输出大写，Reka 输出小写                                                          | 展示与比较前统一大小写；`v-model` 两种都接受                                           |
 
 ## 10. 迁移检查清单
 

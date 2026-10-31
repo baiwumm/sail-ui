@@ -4,6 +4,11 @@ import {onBeforeUnmount, onMounted, ref, toValue, watch} from "vue";
 
 export interface UseFocusRingOptions {
   isDisabled?: MaybeRefOrGetter<boolean | undefined>;
+  /**
+   * Reports focus of any descendant of the target instead of the target
+   * itself. Used by group elements that are not focusable on their own.
+   */
+  within?: MaybeRefOrGetter<boolean | undefined>;
 }
 
 export interface UseFocusRingReturn {
@@ -59,6 +64,23 @@ function matchesFocusVisible(element: Element) {
 }
 
 /**
+ * Applies the same keyboard-modality rule as `useFocusRing` to an event
+ * target. Used by components that cannot hold a ref on the element they
+ * render through a slot merge.
+ */
+export function isKeyboardFocusVisible(target: EventTarget | null): boolean {
+  if (!(target instanceof Element)) {
+    return false;
+  }
+
+  if (typeof document !== "undefined") {
+    trackModality(document);
+  }
+
+  return matchesFocusVisible(target) && lastInputWasKeyboard;
+}
+
+/**
  * Reka does not emit `data-focus-visible`. Browser `:focus-visible` is not
  * enough on its own: Chromium reports it for programmatic focus inside popups
  * opened with a pointer. The attribute therefore requires keyboard modality.
@@ -70,8 +92,10 @@ export function useFocusRing(
   const isFocused = ref(false);
   const isFocusVisible = ref(false);
   let element: Element | null = null;
+  let boundWithin: boolean | undefined;
 
   const disabled = () => Boolean(toValue(options.isDisabled));
+  const within = () => Boolean(toValue(options.within));
 
   const handleFocus = () => {
     if (disabled()) {
@@ -93,16 +117,50 @@ export function useFocusRing(
     isFocusVisible.value = false;
   };
 
+  const handleFocusIn = (event: Event) => {
+    if (disabled()) {
+      return;
+    }
+
+    const target = event.target;
+
+    if (!(target instanceof Element) || !element?.contains(target)) {
+      return;
+    }
+
+    if (typeof document !== "undefined") {
+      trackModality(document);
+    }
+
+    isFocused.value = true;
+    isFocusVisible.value = matchesFocusVisible(target) && lastInputWasKeyboard;
+  };
+
+  const handleFocusOut = (event: Event) => {
+    const next = (event as FocusEvent).relatedTarget as Node | null;
+
+    if (element && next && element.contains(next)) {
+      return;
+    }
+
+    isFocused.value = false;
+    isFocusVisible.value = false;
+  };
+
   const unbind = () => {
     element?.removeEventListener("focus", handleFocus);
     element?.removeEventListener("blur", handleBlur);
+    element?.removeEventListener("focusin", handleFocusIn);
+    element?.removeEventListener("focusout", handleFocusOut);
     element = null;
+    boundWithin = undefined;
   };
 
   const bind = () => {
     const next = toValue(target) as Element | null | undefined;
+    const mode = within();
 
-    if (next === element) {
+    if (next === element && mode === boundWithin) {
       return;
     }
 
@@ -113,8 +171,15 @@ export function useFocusRing(
     }
 
     element = next;
-    element.addEventListener("focus", handleFocus);
-    element.addEventListener("blur", handleBlur);
+    boundWithin = mode;
+
+    if (mode) {
+      element.addEventListener("focusin", handleFocusIn);
+      element.addEventListener("focusout", handleFocusOut);
+    } else {
+      element.addEventListener("focus", handleFocus);
+      element.addEventListener("blur", handleBlur);
+    }
 
     if (typeof document !== "undefined") {
       trackModality(document);
@@ -123,6 +188,7 @@ export function useFocusRing(
 
   onMounted(bind);
   watch(() => toValue(target), bind);
+  watch(() => within(), bind);
   watch(
     () => disabled(),
     (value) => {

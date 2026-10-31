@@ -27,6 +27,11 @@
       "import": "./dist/components/alert-dialog/index.js",
       "default": "./dist/components/alert-dialog/index.js"
     },
+    "./autocomplete": {
+      "types": "./dist/components/autocomplete/index.d.ts",
+      "import": "./dist/components/autocomplete/index.js",
+      "default": "./dist/components/autocomplete/index.js"
+    },
     "./avatar": {
       "types": "./dist/components/avatar/index.d.ts",
       "import": "./dist/components/avatar/index.js",
@@ -57,6 +62,16 @@
       "import": "./dist/components/button-group/index.js",
       "default": "./dist/components/button-group/index.js"
     },
+    "./calendar": {
+      "types": "./dist/components/calendar/index.d.ts",
+      "import": "./dist/components/calendar/index.js",
+      "default": "./dist/components/calendar/index.js"
+    },
+    "./calendar-year-picker": {
+      "types": "./dist/components/calendar-year-picker/index.d.ts",
+      "import": "./dist/components/calendar-year-picker/index.js",
+      "default": "./dist/components/calendar-year-picker/index.js"
+    },
     "./card": {
       "types": "./dist/components/card/index.d.ts",
       "import": "./dist/components/card/index.js",
@@ -81,6 +96,56 @@
       "types": "./dist/components/close-button/index.d.ts",
       "import": "./dist/components/close-button/index.js",
       "default": "./dist/components/close-button/index.js"
+    },
+    "./color-area": {
+      "types": "./dist/components/color-area/index.d.ts",
+      "import": "./dist/components/color-area/index.js",
+      "default": "./dist/components/color-area/index.js"
+    },
+    "./color-field": {
+      "types": "./dist/components/color-field/index.d.ts",
+      "import": "./dist/components/color-field/index.js",
+      "default": "./dist/components/color-field/index.js"
+    },
+    "./color-picker": {
+      "types": "./dist/components/color-picker/index.d.ts",
+      "import": "./dist/components/color-picker/index.js",
+      "default": "./dist/components/color-picker/index.js"
+    },
+    "./color-slider": {
+      "types": "./dist/components/color-slider/index.d.ts",
+      "import": "./dist/components/color-slider/index.js",
+      "default": "./dist/components/color-slider/index.js"
+    },
+    "./color-swatch": {
+      "types": "./dist/components/color-swatch/index.d.ts",
+      "import": "./dist/components/color-swatch/index.js",
+      "default": "./dist/components/color-swatch/index.js"
+    },
+    "./color-swatch-picker": {
+      "types": "./dist/components/color-swatch-picker/index.d.ts",
+      "import": "./dist/components/color-swatch-picker/index.js",
+      "default": "./dist/components/color-swatch-picker/index.js"
+    },
+    "./combo-box": {
+      "types": "./dist/components/combo-box/index.d.ts",
+      "import": "./dist/components/combo-box/index.js",
+      "default": "./dist/components/combo-box/index.js"
+    },
+    "./date-field": {
+      "types": "./dist/components/date-field/index.d.ts",
+      "import": "./dist/components/date-field/index.js",
+      "default": "./dist/components/date-field/index.js"
+    },
+    "./date-picker": {
+      "types": "./dist/components/date-picker/index.d.ts",
+      "import": "./dist/components/date-picker/index.js",
+      "default": "./dist/components/date-picker/index.js"
+    },
+    "./date-range-picker": {
+      "types": "./dist/components/date-range-picker/index.d.ts",
+      "import": "./dist/components/date-range-picker/index.js",
+      "default": "./dist/components/date-range-picker/index.js"
     },
     "./description": {
       "types": "./dist/components/description/index.d.ts",
@@ -233,6 +298,11 @@
       "import": "./dist/components/radio-group/index.js",
       "default": "./dist/components/radio-group/index.js"
     },
+    "./range-calendar": {
+      "types": "./dist/components/range-calendar/index.d.ts",
+      "import": "./dist/components/range-calendar/index.js",
+      "default": "./dist/components/range-calendar/index.js"
+    },
     "./search-field": {
       "types": "./dist/components/search-field/index.d.ts",
       "import": "./dist/components/search-field/index.js",
@@ -303,6 +373,11 @@
       "import": "./dist/components/textarea/index.js",
       "default": "./dist/components/textarea/index.js"
     },
+    "./time-field": {
+      "types": "./dist/components/time-field/index.d.ts",
+      "import": "./dist/components/time-field/index.js",
+      "default": "./dist/components/time-field/index.js"
+    },
     "./toast": {
       "types": "./dist/components/toast/index.d.ts",
       "import": "./dist/components/toast/index.js",
@@ -344,6 +419,7 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@internationalized/date": "3.12.4",
     "@sail-ui/primitives": "workspace:*",
     "@sail-ui/styles": "workspace:*",
     "reka-ui": "2.11.0"

@@ -4,6 +4,7 @@ import {FieldLabel, injectFieldRootContext} from "reka-ui";
 import {computed, inject} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {fieldContextKey} from "../../shared/field-context";
 import {labelContextKey} from "../../shared/label-context";
 import type {LabelRootProps} from "./types";
 
@@ -13,14 +14,15 @@ const props = defineProps<LabelRootProps>();
 
 const {attrs, className, forwarded} = useForwardedAttrs();
 const field = injectFieldRootContext(null);
+const sailField = inject(fieldContextKey, null);
 const labelContext = inject(labelContextKey, null);
 
 const classes = computed(() =>
   cx(
     labelVariants({
-      isDisabled: props.isDisabled || field?.disabled.value || false,
-      isInvalid: props.isInvalid || field?.invalid.value || false,
-      isRequired: props.isRequired || field?.required.value || false,
+      isDisabled: props.isDisabled || field?.disabled.value || sailField?.disabled.value || false,
+      isInvalid: props.isInvalid || field?.invalid.value || sailField?.invalid.value || false,
+      isRequired: props.isRequired || field?.required.value || sailField?.required.value || false,
     }),
     className.value,
   ),

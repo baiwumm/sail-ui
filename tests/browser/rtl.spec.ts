@@ -56,6 +56,23 @@ test.describe("RTL", () => {
     await expect(second).toHaveCSS("margin-inline-start", "-8px");
   });
 
+  test("calendar follows the document direction", async ({page}) => {
+    const root = page.getByTestId("calendar-basic");
+    const cell = (iso: string) => root.locator(`[data-slot="calendar-cell"][data-value="${iso}"]`);
+
+    await cell("2025-02-14").click();
+    await page.keyboard.press("ArrowLeft");
+    await expect(cell("2025-02-13")).toBeFocused();
+
+    await setDirection(page, "rtl");
+
+    await expect(root).toHaveAttribute("dir", "rtl");
+
+    await cell("2025-02-13").click();
+    await page.keyboard.press("ArrowRight");
+    await expect(cell("2025-02-12")).toBeFocused();
+  });
+
   test("progress circle keeps its geometry unmirrored", async ({page}) => {
     const circle = page.locator('#progress [data-slot="progress-circle"]').first();
     const track = circle.locator('[data-slot="progress-circle-track"]');

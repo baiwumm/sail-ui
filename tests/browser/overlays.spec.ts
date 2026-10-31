@@ -2,13 +2,13 @@ import {expect, test, type Locator, type Page} from "@playwright/test";
 
 const SLOW_MOTION = "/?animations=slow";
 
-async function expectHeldExit(page: Page, target: Locator) {
+async function expectHeldExit(page: Page, target: Locator, since: number, minimumMs = 1_000) {
   await expect(target).toHaveAttribute("data-exiting", "true");
-
-  await page.waitForTimeout(300);
-  await expect(target).toBeAttached();
-
   await expect(target).not.toBeAttached({timeout: 5_000});
+
+  // Measure from the close action instead of sleeping a fixed window: host
+  // scheduling delays made the old timeout assertion flaky under WebKit load.
+  expect(Date.now() - since).toBeGreaterThanOrEqual(minimumMs);
 }
 
 test.describe("Overlay exit hold", () => {
@@ -20,8 +20,9 @@ test.describe("Overlay exit hold", () => {
 
     await expect(page.getByRole("dialog")).toBeVisible();
     await page.keyboard.press("Escape");
+    const since = Date.now();
 
-    await expectHeldExit(page, container);
+    await expectHeldExit(page, container, since);
   });
 
   test("AlertDialog keeps the container mounted until the exit animation ends", async ({page}) => {
@@ -33,8 +34,9 @@ test.describe("Overlay exit hold", () => {
 
     await expect(dialog).toBeVisible();
     await dialog.locator('[data-slot="alert-dialog-close-trigger"]').click();
+    const since = Date.now();
 
-    await expectHeldExit(page, container);
+    await expectHeldExit(page, container, since);
   });
 
   test("Drawer keeps the content mounted until the exit animation ends", async ({page}) => {
@@ -46,8 +48,9 @@ test.describe("Overlay exit hold", () => {
 
     await expect(dialog).toBeVisible();
     await dialog.locator('[data-slot="drawer-close-trigger"]').click();
+    const since = Date.now();
 
-    await expectHeldExit(page, content);
+    await expectHeldExit(page, content, since);
   });
 
   test("Sheet keeps the content mounted until the exit animation ends", async ({page}) => {
@@ -59,8 +62,11 @@ test.describe("Overlay exit hold", () => {
 
     await expect(dialog).toBeVisible();
     await dialog.locator('[data-slot="sheet-close-trigger"]').click();
+    const since = Date.now();
 
-    await expectHeldExit(page, content);
+    // Sheet slides with a 500ms Web Animation, which the slow-mode CSS does
+    // not override.
+    await expectHeldExit(page, content, since, 400);
   });
 
   test("Popover keeps the content mounted until the exit animation ends", async ({page}) => {
@@ -71,8 +77,9 @@ test.describe("Overlay exit hold", () => {
 
     await expect(content).toBeVisible();
     await page.keyboard.press("Escape");
+    const since = Date.now();
 
-    await expectHeldExit(page, content);
+    await expectHeldExit(page, content, since);
   });
 
   test("Tooltip keeps the content mounted until the exit animation ends", async ({page}) => {
@@ -86,11 +93,9 @@ test.describe("Overlay exit hold", () => {
     await expect(content).not.toHaveAttribute("data-entering", "true", {timeout: 4_000});
 
     await page.mouse.move(0, 0);
-    await expect(content).toHaveAttribute("data-exiting", "true");
+    const since = Date.now();
 
-    await page.waitForTimeout(300);
-    await expect(content).toBeAttached();
-    await expect(content).not.toBeAttached({timeout: 5_000});
+    await expectHeldExit(page, content, since);
   });
 
   test("Toast keeps the frontmost toast mounted until the exit animation ends", async ({page}) => {
@@ -107,12 +112,9 @@ test.describe("Overlay exit hold", () => {
     await expect(frontmost).not.toHaveAttribute("data-entering", "true", {timeout: 4_000});
     await frontmost.hover();
     await frontmost.getByRole("button", {name: "Close"}).click();
+    const since = Date.now();
 
-    await expect(frontmost).toHaveAttribute("data-exiting", "true");
-
-    await page.waitForTimeout(100);
-    await expect(frontmost).toBeAttached();
-
-    await expect(frontmost).not.toBeAttached({timeout: 5_000});
+    // The queue's fixed 300ms window is shorter than the slow-mode CSS.
+    await expectHeldExit(page, frontmost, since, 200);
   });
 });
