@@ -31,7 +31,7 @@ T03..T08 ──> T09 Nuxt module + 文档站 + 发布门禁
 | [T05](./05-overlays.md)                | 覆盖层与 Toast（7）          | M2     | T02        | T06, T09           | 覆盖层状态矩阵 + SSR + 动画                             | Done    |
 | [T06](./06-collections-and-pickers.md) | 集合 / 选择器（15）          | M2     | T02, T05   | T09                | Select/ListBox/Menu/Tabs/Accordion/Pagination           | Done    |
 | [T07](./07-date-and-color.md)          | 日期 / 颜色 / 自动完成（15） | M3     | T02        | T09                | 日期/颜色表单 + 时区/RTL 冒烟                           | Done    |
-| [T08](./08-advanced-data.md)           | 高级数据（4）                | M3     | T03, T04   | T09                | 可排序/可选择/虚拟化 Table + Meter + ScrollShadow + OTP | Pending |
+| [T08](./08-advanced-data.md)           | 高级数据（4）                | M3     | T03, T04   | T09                | 可排序/可选择/虚拟化 Table + Meter + ScrollShadow + OTP | Done    |
 | [T09](./09-nuxt-docs-release.md)       | Nuxt module + 文档站 + 发布  | M4     | T03–T08    | —                  | Nuxt 自动导入 SSR 应用 + canary 安装                    | Pending |
 
 ## 为什么这样切

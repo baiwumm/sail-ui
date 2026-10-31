@@ -2,7 +2,7 @@
 
 Instructions for AI agents and contributors working on **Sail UI** — an unofficial Vue 3 / Nuxt port of HeroUI v3.
 
-> **Current phase: M3 in progress.** T01 (M0 architecture spike), T02 (contract tooling), T03 (24 display/layout/feedback components), T04 (19 form controls), T05 (7 overlays + Toast), T06 (15 collections/pickers), and T07 (15 date/color/autocomplete components) are complete. The workspace builds and `pnpm verify` plus browser CI are the gates. T07 delivered 80 components; T08 (advanced data) is next and unblocked, with T09 (docs/release) after it.
+> **Current phase: M3 complete; T09 next.** T01 (M0 architecture spike), T02 (contract tooling), T03 (24 display/layout/feedback components), T04 (19 form controls), T05 (7 overlays + Toast), T06 (15 collections/pickers), T07 (15 date/color/autocomplete components), and T08 (Table / Meter / ScrollShadow / InputOtp) are complete. The workspace builds and `pnpm verify` plus browser CI are the gates. T08 delivered the remaining 4 components (84 total); T09 (docs/release) is next. Table is data-driven (`columns`/`data`, no RAC parts) per ADR 0005.
 
 ---
 
@@ -64,8 +64,8 @@ Exact versions are pinned in the lockfile once T01 lands. The target baseline:
 | tailwind-variants       | 3.3.1              | `tv()`; keep `twMerge: false` like upstream             |
 | Reka UI                 | 2.11.0             | Pin exactly; attribute behavior is part of the contract |
 | @internationalized/date | 3.12.4             | Date/calendar components                                |
-| @tanstack/vue-table     | 8.x                | Table behavior; resolve exact at T08                    |
-| @tanstack/vue-virtual   | 3.x                | Collection virtualization                               |
+| @tanstack/vue-table     | 8.21.3             | Table data model (pinned at T08)                        |
+| @tanstack/vue-virtual   | 3.13.50            | Table virtualization (pinned at T08)                    |
 | Vitest                  | latest compatible  | jsdom + browser projects                                |
 | Storybook               | latest `vue3-vite` | Component workshop                                      |
 | Nuxt                    | 4.x                | Docs site, module, SSR fixtures                         |
@@ -280,6 +280,11 @@ Do not ship a component with only a render test. "Renders without crashing" is n
 - Reka renders `CheckboxRoot`, `RadioGroupItem` and `SwitchRoot` as `<button role="checkbox|radio|switch">`. Upstream HeroUI renders a `<label>` with a visually hidden native input, so the upstream checkbox, radio and switch are self-implemented in Sail UI to keep the DOM contract.
 - `useFocusRing` only reports `data-focus-visible` after a keyboard interaction. Browser tests must press a key before focusing an element programmatically, otherwise the attribute is intentionally absent.
 - If the Nuxt UI reference clone is broken, re-clone instead of guessing its internals.
+- Table is data-driven (`columns` + `data`), not RAC-style parts; custom content uses `#cell-<key>` / `#header-<key>` slots (ADR 0005). Do not add `TableContent`/`TableRow` exports.
+- Table virtualization requires a fixed `rowHeight` (default 44). Non-virtualized tables render `<table>`; `isVirtualized` switches to a `role="grid"` div grid whose rows/cells are wrapped in `role="presentation"` so the upstream CSS selectors still apply. Do not assume `<table>` element selectors in consumer CSS.
+- Table virtualization SSR renders the first 10 rows deterministically; the virtualizer takes over on mount. Keep that window stable or hydration/snapshot tests will drift.
+- LoadMore is `hasMore` + `isLoadingMore` + `#loadMore` with an IntersectionObserver rooted at the scroll container; `isStickyHeader` uses an inline sticky style, and the scroll height comes from `scrollContainerClass`.
+- The React reference app's virtualized mirror imports `react-aria-components/Virtualizer` (devDependency 1.22.1, matching HeroUI's peer).
 
 ## 14. When blocked
 

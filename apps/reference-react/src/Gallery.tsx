@@ -32,11 +32,13 @@ import {
   Header,
   Heading,
   Input,
+  InputOTP,
   Kbd,
   KbdAbbr,
   KbdContent,
   Label,
   Link,
+  Meter,
   LinkIcon,
   Paragraph,
   ProgressBar,
@@ -48,10 +50,12 @@ import {
   ProgressCircleTrack,
   ProgressCircleTrackCircle,
   Prose,
+  ScrollShadow,
   Separator,
   Skeleton,
   Spinner,
   Surface,
+  Table,
   TextField,
   Typography,
 } from "@heroui/react";
@@ -138,6 +142,121 @@ const circleSizes = [
 ] as const;
 const spinnerColors = ["accent", "current", "success", "warning", "danger"] as const;
 const spinnerSizes = ["sm", "md", "lg", "xl"] as const;
+const tableRows = [
+  {email: "kate@acme.com", id: 1, name: "Kate Moore", role: "CEO"},
+  {email: "john@acme.com", id: 2, name: "John Smith", role: "CTO"},
+  {email: "sara@acme.com", id: 3, name: "Sara Johnson", role: "CMO"},
+];
+const sortedTableRows = [...tableRows].sort((a, b) => a.name.localeCompare(b.name));
+
+function GalleryTable({variant}: {variant: "primary" | "secondary"}) {
+  return (
+    <Table variant={variant}>
+      <Table.ScrollContainer>
+        <Table.Content aria-label="Team members" className="min-w-[600px]">
+          <Table.Header>
+            <Table.Column isRowHeader>Name</Table.Column>
+            <Table.Column>Role</Table.Column>
+            <Table.Column>Email</Table.Column>
+          </Table.Header>
+          <Table.Body>
+            {tableRows.map((row) => (
+              <Table.Row key={row.id} id={row.id}>
+                <Table.Cell>{row.name}</Table.Cell>
+                <Table.Cell>{row.role}</Table.Cell>
+                <Table.Cell>{row.email}</Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+  );
+}
+
+function SortableGalleryTable() {
+  return (
+    <Table>
+      <Table.ScrollContainer>
+        <Table.Content
+          aria-label="Team members"
+          className="min-w-[600px]"
+          defaultSelectedKeys={new Set([2])}
+          disabledKeys={[3]}
+          selectionMode="multiple"
+          sortDescriptor={{column: "name", direction: "ascending"}}
+          onSortChange={() => {}}
+        >
+          <Table.Header>
+            <Table.Column id="name" isRowHeader allowsSorting>
+              {({sortDirection}) => (
+                <Table.SortableColumnHeader sortDirection={sortDirection}>
+                  Name
+                </Table.SortableColumnHeader>
+              )}
+            </Table.Column>
+            <Table.Column id="role" allowsSorting>
+              {({sortDirection}) => (
+                <Table.SortableColumnHeader sortDirection={sortDirection}>
+                  Role
+                </Table.SortableColumnHeader>
+              )}
+            </Table.Column>
+            <Table.Column id="email" allowsSorting>
+              {({sortDirection}) => (
+                <Table.SortableColumnHeader sortDirection={sortDirection}>
+                  Email
+                </Table.SortableColumnHeader>
+              )}
+            </Table.Column>
+          </Table.Header>
+          <Table.Body>
+            {sortedTableRows.map((row) => (
+              <Table.Row key={row.id} id={row.id}>
+                <Table.Cell>{row.name}</Table.Cell>
+                <Table.Cell>{row.role}</Table.Cell>
+                <Table.Cell>{row.email}</Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table.Content>
+      </Table.ScrollContainer>
+    </Table>
+  );
+}
+
+function ResizableGalleryTable() {
+  return (
+    <Table>
+      <Table.ResizableContainer>
+        <Table.Content aria-label="Team members" className="min-w-[600px]">
+          <Table.Header>
+            <Table.Column defaultWidth={220} id="name" isRowHeader minWidth={160}>
+              Name
+              <Table.ColumnResizer />
+            </Table.Column>
+            <Table.Column defaultWidth={180} id="role" minWidth={140}>
+              Role
+              <Table.ColumnResizer />
+            </Table.Column>
+            <Table.Column defaultWidth={260} id="email" minWidth={200}>
+              Email
+            </Table.Column>
+          </Table.Header>
+          <Table.Body>
+            {tableRows.map((row) => (
+              <Table.Row key={row.id} id={row.id}>
+                <Table.Cell>{row.name}</Table.Cell>
+                <Table.Cell>{row.role}</Table.Cell>
+                <Table.Cell>{row.email}</Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table.Content>
+      </Table.ResizableContainer>
+    </Table>
+  );
+}
 
 export default function Gallery() {
   return (
@@ -668,6 +787,92 @@ export default function Gallery() {
         <div className="flex flex-wrap items-start gap-4">
           <EmptyState />
           <EmptyState>No projects yet</EmptyState>
+        </div>
+      </section>
+
+      <section id="meter" className="flex flex-col gap-4">
+        <h2 className="text-lg font-semibold">Meter</h2>
+        <div className="flex w-64 flex-col gap-4">
+          {barColors.map((item) => (
+            <Meter key={item.color} color={item.color} value={50}>
+              <Label>{item.label}</Label>
+              <Meter.Output />
+              <Meter.Track>
+                <Meter.Fill />
+              </Meter.Track>
+            </Meter>
+          ))}
+        </div>
+      </section>
+
+      <section id="scroll-shadow" className="flex flex-col gap-4">
+        <h2 className="text-lg font-semibold">ScrollShadow</h2>
+        <div className="flex flex-wrap items-start gap-4">
+          <ScrollShadow
+            aria-label="Vertical scroll example"
+            className="max-h-[200px] w-72 p-4"
+            role="region"
+            tabIndex={0}
+          >
+            <div className="space-y-4">
+              {Array.from({length: 8}).map((_, index) => (
+                <p key={index}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
+                  risus hendrerit venenatis.
+                </p>
+              ))}
+            </div>
+          </ScrollShadow>
+          <ScrollShadow
+            aria-label="Horizontal scroll example"
+            className="w-72 p-4"
+            orientation="horizontal"
+            role="region"
+            tabIndex={0}
+          >
+            <div className="flex flex-row gap-4">
+              {Array.from({length: 6}).map((_, index) => (
+                <div key={index} className="h-16 min-w-[120px] rounded-xl bg-default" />
+              ))}
+            </div>
+          </ScrollShadow>
+        </div>
+      </section>
+
+      <section id="input-otp" className="flex flex-col gap-4">
+        <h2 className="text-lg font-semibold">InputOtp</h2>
+        <div className="flex flex-wrap items-start gap-4">
+          <InputOTP defaultValue="123" maxLength={6}>
+            <InputOTP.Group>
+              <InputOTP.Slot index={0} />
+              <InputOTP.Slot index={1} />
+              <InputOTP.Slot index={2} />
+            </InputOTP.Group>
+            <InputOTP.Separator />
+            <InputOTP.Group>
+              <InputOTP.Slot index={3} />
+              <InputOTP.Slot index={4} />
+              <InputOTP.Slot index={5} />
+            </InputOTP.Group>
+          </InputOTP>
+          <InputOTP maxLength={4} variant="secondary">
+            <InputOTP.Group>
+              <InputOTP.Slot index={0} />
+              <InputOTP.Slot index={1} />
+              <InputOTP.Slot index={2} />
+              <InputOTP.Slot index={3} />
+            </InputOTP.Group>
+          </InputOTP>
+        </div>
+      </section>
+
+      <section id="table" className="flex flex-col gap-4">
+        <h2 className="text-lg font-semibold">Table</h2>
+        <div className="flex flex-col gap-4">
+          <GalleryTable variant="primary" />
+          <GalleryTable variant="secondary" />
+          <SortableGalleryTable />
+          <ResizableGalleryTable />
         </div>
       </section>
     </>

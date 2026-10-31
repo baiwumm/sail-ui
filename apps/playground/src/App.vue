@@ -84,6 +84,7 @@ import Calendar from "./Calendar.vue";
 import Collections from "./Collections.vue";
 import Colors from "./Colors.vue";
 import ComboBoxes from "./ComboBoxes.vue";
+import Data from "./Data.vue";
 import DateFields from "./DateFields.vue";
 import DatePickers from "./DatePickers.vue";
 import Forms from "./Forms.vue";
@@ -519,6 +520,7 @@ onMounted(() => {
     <DatePickers />
     <ComboBoxes />
     <Colors />
+    <Data />
     <Gallery />
     <Toasts />
   </main>

@@ -212,6 +212,11 @@
       "import": "./dist/components/input-group/index.js",
       "default": "./dist/components/input-group/index.js"
     },
+    "./input-otp": {
+      "types": "./dist/components/input-otp/index.d.ts",
+      "import": "./dist/components/input-otp/index.js",
+      "default": "./dist/components/input-otp/index.js"
+    },
     "./kbd": {
       "types": "./dist/components/kbd/index.d.ts",
       "import": "./dist/components/kbd/index.js",
@@ -256,6 +261,11 @@
       "types": "./dist/components/menu-section/index.d.ts",
       "import": "./dist/components/menu-section/index.js",
       "default": "./dist/components/menu-section/index.js"
+    },
+    "./meter": {
+      "types": "./dist/components/meter/index.d.ts",
+      "import": "./dist/components/meter/index.js",
+      "default": "./dist/components/meter/index.js"
     },
     "./modal": {
       "types": "./dist/components/modal/index.d.ts",
@@ -302,6 +312,11 @@
       "types": "./dist/components/range-calendar/index.d.ts",
       "import": "./dist/components/range-calendar/index.js",
       "default": "./dist/components/range-calendar/index.js"
+    },
+    "./scroll-shadow": {
+      "types": "./dist/components/scroll-shadow/index.d.ts",
+      "import": "./dist/components/scroll-shadow/index.js",
+      "default": "./dist/components/scroll-shadow/index.js"
     },
     "./search-field": {
       "types": "./dist/components/search-field/index.d.ts",
@@ -352,6 +367,11 @@
       "types": "./dist/components/switch-group/index.d.ts",
       "import": "./dist/components/switch-group/index.js",
       "default": "./dist/components/switch-group/index.js"
+    },
+    "./table": {
+      "types": "./dist/components/table/index.d.ts",
+      "import": "./dist/components/table/index.js",
+      "default": "./dist/components/table/index.js"
     },
     "./tabs": {
       "types": "./dist/components/tabs/index.d.ts",
@@ -422,6 +442,8 @@
     "@internationalized/date": "3.12.4",
     "@sail-ui/primitives": "workspace:*",
     "@sail-ui/styles": "workspace:*",
+    "@tanstack/vue-table": "8.21.3",
+    "@tanstack/vue-virtual": "3.13.50",
     "reka-ui": "2.11.0"
   },
   "peerDependencies": {

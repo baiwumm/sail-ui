@@ -70,8 +70,8 @@
 
 ## M3 — 日期/颜色/高级数据（4–6 周）
 
-- [ ] 15 个日期/颜色/自动完成（[T07](./spec/tickets/07-date-and-color.md)）
-- [ ] 4 个高级数据（[T08](./spec/tickets/08-advanced-data.md)）
+- [x] 15 个日期/颜色/自动完成（[T07](./spec/tickets/07-date-and-color.md)）
+- [x] 4 个高级数据（[T08](./spec/tickets/08-advanced-data.md)）
 - [ ] Table：键盘/ARIA/排序/选择/列宽/虚拟化/LoadMore
 - [ ] Meter / ScrollShadow / OTP
 - [ ] RTL 冒烟（Calendar/Drawer/Select/Table）

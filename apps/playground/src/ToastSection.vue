@@ -52,7 +52,8 @@ function showPromise() {
         variant="secondary"
         @press="
           () => {
-            for (let index = 0; index < 5; index += 1) toast(`Queued item ${index + 1}`);
+            for (let index = 0; index < 5; index += 1)
+              toast(`Queued item ${index + 1}`, {timeout: 0});
           }
         "
       >

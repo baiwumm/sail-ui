@@ -113,12 +113,12 @@
 
 ## 高级数据（4）
 
-| 组件            | Reka 基础                             | 里程碑 | MVP | 备注                            |
-| --------------- | ------------------------------------- | ------ | --- | ------------------------------- |
-| `table`         | `@tanstack/vue-table` + 自研 DOM/ARIA | M3     |     | 最大自研块；见 ADR 0005         |
-| `meter`         | 自研                                  | M3     |     | `role="meter"`，不复用 Progress |
-| `scroll-shadow` | `ScrollAreaRoot` + 自研侦测           | M3     |     | 四方向阴影                      |
-| `input-otp`     | `PinInputRoot`                        | M3     |     | 粘贴/分组/完成态                |
+| 组件            | Reka 基础                             | 里程碑 | MVP | 备注                                                                          |
+| --------------- | ------------------------------------- | ------ | --- | ----------------------------------------------------------------------------- |
+| `table`         | `@tanstack/vue-table` + 自研 DOM/ARIA | M3     | ✅  | 数据驱动；2D 键盘/排序/选择/列宽/虚拟化/LoadMore/粘性表头；ADR 0005；T08 done |
+| `meter`         | 自研                                  | M3     | ✅  | `role="meter"`，不复用 Progress；T08 done                                     |
+| `scroll-shadow` | `ScrollAreaRoot` + 自研侦测           | M3     | ✅  | 四方向阴影/可见性事件/隐藏滚动条；T08 done                                    |
+| `input-otp`     | `PinInputRoot`                        | M3     | ✅  | 粘贴/分组/完成态/pattern；T08 done                                            |
 
 ## 内部组合（不计入 84）
 

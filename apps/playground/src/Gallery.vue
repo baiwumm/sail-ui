@@ -28,9 +28,12 @@ import {FieldError} from "@sail-ui/vue/field-error";
 import {FieldGroup, Fieldset, FieldsetActions, FieldsetLegend} from "@sail-ui/vue/fieldset";
 import {Header} from "@sail-ui/vue/header";
 import {Input, TextField} from "@sail-ui/vue/input";
+import {InputOtp, InputOtpGroup, InputOtpSeparator, InputOtpSlot} from "@sail-ui/vue/input-otp";
 import {Kbd, KbdAbbr, KbdContent} from "@sail-ui/vue/kbd";
 import {Label} from "@sail-ui/vue/label";
 import {Link, LinkIcon} from "@sail-ui/vue/link";
+import {Meter, MeterFill, MeterOutput, MeterTrack} from "@sail-ui/vue/meter";
+import {ScrollShadow} from "@sail-ui/vue/scroll-shadow";
 import {
   ProgressBar,
   ProgressBarFill,
@@ -47,6 +50,7 @@ import {Separator} from "@sail-ui/vue/separator";
 import {Skeleton} from "@sail-ui/vue/skeleton";
 import {Spinner} from "@sail-ui/vue/spinner";
 import {Surface} from "@sail-ui/vue/surface";
+import {Table, type TableColumn} from "@sail-ui/vue/table";
 import {
   Typography,
   TypographyCode,
@@ -137,6 +141,29 @@ const circleSizes = [
 ] as const;
 const spinnerColors = ["accent", "current", "success", "warning", "danger"] as const;
 const spinnerSizes = ["sm", "md", "lg", "xl"] as const;
+const tableColumns: TableColumn[] = [
+  {key: "name", header: "Name", isRowHeader: true},
+  {key: "role", header: "Role"},
+  {key: "email", header: "Email"},
+];
+const tableRows = [
+  {email: "kate@acme.com", id: 1, name: "Kate Moore", role: "CEO"},
+  {email: "john@acme.com", id: 2, name: "John Smith", role: "CTO"},
+  {email: "sara@acme.com", id: 3, name: "Sara Johnson", role: "CMO"},
+];
+const sortableTableColumns: TableColumn[] = [
+  {key: "name", header: "Name", isRowHeader: true, allowsSorting: true},
+  {key: "role", header: "Role", allowsSorting: true},
+  {key: "email", header: "Email", allowsSorting: true},
+];
+const sortedTableRows = [...tableRows].sort((a, b) => a.name.localeCompare(b.name));
+const selectedTableKeys = new Set([2]);
+const disabledTableKeys = [3];
+const resizableTableColumns: TableColumn[] = [
+  {key: "name", header: "Name", isRowHeader: true, allowsResizing: true, width: 220, minWidth: 160},
+  {key: "role", header: "Role", allowsResizing: true, width: 180, minWidth: 140},
+  {key: "email", header: "Email", width: 260, minWidth: 200},
+];
 </script>
 
 <template>
@@ -612,6 +639,112 @@ const spinnerSizes = ["sm", "md", "lg", "xl"] as const;
     <div class="flex flex-wrap items-start gap-4">
       <EmptyState />
       <EmptyState>No projects yet</EmptyState>
+    </div>
+  </section>
+
+  <section id="meter" class="flex flex-col gap-4">
+    <h2 class="text-lg font-semibold">Meter</h2>
+    <div class="flex w-64 flex-col gap-4">
+      <Meter v-for="item in barColors" :key="item.color" :color="item.color" :value="50">
+        <Label>{{ item.label }}</Label>
+        <MeterOutput />
+        <MeterTrack>
+          <MeterFill />
+        </MeterTrack>
+      </Meter>
+    </div>
+  </section>
+
+  <section id="scroll-shadow" class="flex flex-col gap-4">
+    <h2 class="text-lg font-semibold">ScrollShadow</h2>
+    <div class="flex flex-wrap items-start gap-4">
+      <ScrollShadow
+        aria-label="Vertical scroll example"
+        class="max-h-[200px] w-72 p-4"
+        role="region"
+        tabindex="0"
+      >
+        <div class="space-y-4">
+          <p v-for="index in 8" :key="index">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus
+            hendrerit venenatis.
+          </p>
+        </div>
+      </ScrollShadow>
+      <ScrollShadow
+        aria-label="Horizontal scroll example"
+        class="w-72 p-4"
+        orientation="horizontal"
+        role="region"
+        tabindex="0"
+      >
+        <div class="flex flex-row gap-4">
+          <div v-for="index in 6" :key="index" class="h-16 min-w-[120px] rounded-xl bg-default" />
+        </div>
+      </ScrollShadow>
+    </div>
+  </section>
+
+  <section id="input-otp" class="flex flex-col gap-4">
+    <h2 class="text-lg font-semibold">InputOtp</h2>
+    <div class="flex flex-wrap items-start gap-4">
+      <InputOtp default-value="123" :max-length="6">
+        <InputOtpGroup>
+          <InputOtpSlot :index="0" />
+          <InputOtpSlot :index="1" />
+          <InputOtpSlot :index="2" />
+        </InputOtpGroup>
+        <InputOtpSeparator />
+        <InputOtpGroup>
+          <InputOtpSlot :index="3" />
+          <InputOtpSlot :index="4" />
+          <InputOtpSlot :index="5" />
+        </InputOtpGroup>
+      </InputOtp>
+      <InputOtp :max-length="4" variant="secondary">
+        <InputOtpGroup>
+          <InputOtpSlot :index="0" />
+          <InputOtpSlot :index="1" />
+          <InputOtpSlot :index="2" />
+          <InputOtpSlot :index="3" />
+        </InputOtpGroup>
+      </InputOtp>
+    </div>
+  </section>
+
+  <section id="table" class="flex flex-col gap-4">
+    <h2 class="text-lg font-semibold">Table</h2>
+    <div class="flex flex-col gap-4">
+      <Table
+        :columns="tableColumns"
+        :data="tableRows"
+        aria-label="Team members"
+        content-class="min-w-[600px]"
+      />
+      <Table
+        :columns="tableColumns"
+        :data="tableRows"
+        aria-label="Team members"
+        content-class="min-w-[600px]"
+        variant="secondary"
+      />
+      <Table
+        :columns="sortableTableColumns"
+        :data="sortedTableRows"
+        aria-label="Team members"
+        content-class="min-w-[600px]"
+        :default-selected-keys="selectedTableKeys"
+        :default-sort-descriptor="{column: 'name', direction: 'ascending'}"
+        :disabled-keys="disabledTableKeys"
+        selection-mode="multiple"
+      />
+      <Table
+        :columns="resizableTableColumns"
+        :data="tableRows"
+        aria-label="Team members"
+        content-class="min-w-[600px]"
+        is-resizable
+      />
     </div>
   </section>
 </template>

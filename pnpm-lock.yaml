@@ -176,6 +176,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: 6.1.2
         version: 6.1.2(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2))
+      react-aria-components:
+        specifier: 1.22.1
+        version: 1.22.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -256,6 +259,12 @@ importers:
       '@sail-ui/styles':
         specifier: workspace:*
         version: link:../styles
+      '@tanstack/vue-table':
+        specifier: 8.21.3
+        version: 8.21.3(vue@3.5.44(typescript@5.9.3))
+      '@tanstack/vue-virtual':
+        specifier: 3.13.50
+        version: 3.13.50(vue@3.5.44(typescript@5.9.3))
       reka-ui:
         specifier: 2.11.0
         version: 2.11.0(vue@3.5.44(typescript@5.9.3))
@@ -1834,8 +1843,18 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7 || ^8
 
+  '@tanstack/table-core@8.21.3':
+    resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
+    engines: {node: '>=12'}
+
   '@tanstack/virtual-core@3.19.9':
     resolution: {integrity: sha512-Syiaf3w69dFyYv4o2mqJ1/2VtBJTNq5Hu5cVXfnzOuJKFpUojukQR13ZW+5NvdMJM7GFHeNPmveMNhoIubiFyA==}
+
+  '@tanstack/vue-table@8.21.3':
+    resolution: {integrity: sha512-rusRyd77c5tDPloPskctMyPLFEQUeBzxdQ+2Eow4F7gDPlPOB1UnnhzfpdvqZ8ZyX2rRNGmqNnQWm87OI2OQPw==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      vue: '>=3.2'
 
   '@tanstack/vue-virtual@3.13.50':
     resolution: {integrity: sha512-dSNztWxLuZskVwlq6bSStbB3rNIJlQeJFot+WQnTdsQgxI5ljmZpzz15ycNhqyDRFHEVdk8qboXY2jnxVTzYZg==}
@@ -6924,7 +6943,14 @@ snapshots:
       tailwindcss: 4.3.3
       vite: 8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)
 
+  '@tanstack/table-core@8.21.3': {}
+
   '@tanstack/virtual-core@3.19.9': {}
+
+  '@tanstack/vue-table@8.21.3(vue@3.5.44(typescript@5.9.3))':
+    dependencies:
+      '@tanstack/table-core': 8.21.3
+      vue: 3.5.44(typescript@5.9.3)
 
   '@tanstack/vue-virtual@3.13.50(vue@3.5.44(typescript@5.9.3))':
     dependencies:

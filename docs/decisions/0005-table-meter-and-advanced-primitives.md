@@ -1,6 +1,6 @@
 # ADR 0005: Table、Meter、ScrollShadow 与组合型组件
 
-- Status: Proposed（Table 细节待 T08 评审）
+- Status: Accepted（T08 已实现，2026-11-01）
 - Date: 2026-10-30
 - Related: [Ticket 08](../spec/tickets/08-advanced-data.md), [组件矩阵](../component-matrix.md)
 
@@ -75,3 +75,18 @@ Reka UI 覆盖了大部分 HeroUI 组件，但有四类缺口：
 - **移植 RAC Table**：工作量与风险最高，且 Vue 端没有收益，排除。
 - **用原生 `<table>`**：无法满足 RAC 的 grid 键盘/虚拟化契约，排除。
 - **CSS-only ScrollShadow**：无法感知滚动位置与边缘阈值，排除。
+
+## Implementation notes（T08 落地）
+
+- **数据驱动 Table**：`Table` 只有 `TableRoot` 一个 SFC，接收 `columns` / `data`，不导出 `TableContent`、`TableRow` 等 part。自定义内容走 `#cell-<key>`、`#header-<key>` 插槽。TanStack `getCoreRowModel` + `getSortedRowModel`，排序/选择状态同时支持受控（`v-model:*`）与非受控（`default*`）。
+- **列宽**：pointer 拖拽 + 隐藏 `<input type="range">`，复刻 RAC resizer 的 ARIA 契约（`aria-label="Resizer"`、`aria-valuetext="N pixels"`、`aria-labelledby="${inputId} ${headerId}"`、`data-resizable-direction`）；宽度写入 `th` 内联 style，`table-layout: fixed; width: min-content`。
+- **虚拟化**：`@tanstack/vue-virtual` + 固定 `rowHeight`（默认 44）。非虚拟化仍是原生 `<table>`；虚拟化切换为 `role="grid"` 的 div 结构，行/单元格外包 `role="presentation"`（与上游 CSS `[role="row"] > [role="presentation"]` 选择器一致）。SSR 固定渲染前 10 行，挂载后再由 virtualizer 接管，避免 hydration mismatch；键盘激活行不在窗口内时强制渲染并异步聚焦。
+- **LoadMore**：`hasMore` / `isLoadingMore` 两个 props + `#loadMore` 插槽；`IntersectionObserver` 以滚动容器为 root，仅在可见且未加载时触发一次 `@load-more`。虚拟化模式下 sentinel 绝对定位在 `totalSize` 之后。
+- **粘性表头**：`isStickyHeader` 使用内联 `position: sticky; top: 0`，不注入工具类（避免要求消费方扫描库源码）；滚动高度通过 `scrollContainerClass` 由消费方提供。
+- **Meter / ScrollShadow / InputOtp**：按本 ADR 的自研方向实现；Meter 输出 `role="meter"` 与 `aria-valuetext`，ScrollShadow 输出四个方向的 `data-*` 滚动状态，InputOtp 用隐藏原生 input + 槽位镜像（粘贴/分组/完成态）。
+
+## Consequences（落地后更新）
+
+- 虚拟化仅支持固定行高；动态行高内容不在契约内（与上游 `TableLayout` 的 `rowHeight` 约束一致）。
+- 虚拟化 DOM 与原生 `<table>` 不同，但类名与 `data-slot` 保持同一套；依赖 `<table>` 元素选择器的自定义 CSS 在虚拟化模式下不适用。
+- 列宽只在 `isResizable` 时启用，且只有 `allowsResizing` 的列输出 resizer；宽度不持久化。

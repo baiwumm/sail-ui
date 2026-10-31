@@ -15,6 +15,7 @@ import CalendarDemo from "./Calendar";
 import Collections from "./Collections";
 import Colors from "./Colors";
 import ComboBoxes from "./ComboBoxes";
+import DataDemo from "./Data";
 import DateFields from "./DateFields";
 import DatePickers from "./DatePickers";
 import Forms from "./Forms";
@@ -225,6 +226,7 @@ export default function App() {
       <DatePickers />
       <ComboBoxes />
       <Colors />
+      <DataDemo />
       <Gallery />
     </main>
   );

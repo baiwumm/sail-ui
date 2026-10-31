@@ -105,6 +105,7 @@ test.describe("Modal", () => {
 test.describe("Toast", () => {
   test("stacks newest first, hides overflow, and dismisses with an exit phase", async ({page}) => {
     await page.goto("/");
+    await page.waitForLoadState("networkidle");
 
     await page.locator("#toast").getByRole("button", {name: "Long queue"}).click();
 
@@ -122,9 +123,32 @@ test.describe("Toast", () => {
     await expect(toasts.nth(3)).toHaveAttribute("data-hidden", "true");
     await expect(toasts.nth(3)).toHaveAttribute("inert", "");
 
+    // The toast exit window is a fixed 300ms; record the transient
+    // `data-exiting` phase from a MutationObserver so WebKit load cannot
+    // make the assertion poll miss it.
+    await page.evaluate(() => {
+      const toast = document.querySelector('[data-slot="toast-region"] [data-slot="toast"]');
+
+      (window as unknown as {__toastExiting: boolean}).__toastExiting = false;
+
+      const observer = new MutationObserver(() => {
+        if (toast?.getAttribute("data-exiting") === "true") {
+          (window as unknown as {__toastExiting: boolean}).__toastExiting = true;
+        }
+      });
+
+      if (toast) {
+        observer.observe(toast, {attributeFilter: ["data-exiting"], attributes: true});
+      }
+    });
+
     await frontmost.getByRole("button", {name: "Close"}).click();
 
-    await expect(frontmost).toHaveAttribute("data-exiting", "true");
+    await expect
+      .poll(() =>
+        page.evaluate(() => (window as unknown as {__toastExiting: boolean}).__toastExiting),
+      )
+      .toBe(true);
     await expect(region).toHaveAttribute("aria-label", "4 notifications.");
     await expect(frontmost).not.toBeAttached();
   });
@@ -338,7 +362,8 @@ test.describe("Sheet", () => {
 
 test.describe("Popover", () => {
   test("opens anchored with an arrow, closes on Escape, and restores focus", async ({page}) => {
-    await page.goto("/");
+    await page.goto("/?animations=slow");
+    await page.waitForLoadState("networkidle");
 
     const trigger = page.locator('#popover [data-slot="popover-trigger"]').first();
 

@@ -41,6 +41,10 @@ const GALLERY_SECTIONS = [
   "collections-tabs",
   "collections-tag-group",
   "collections-pagination",
+  "meter",
+  "scroll-shadow",
+  "input-otp",
+  "table",
 ] as const;
 
 async function collectContrastViolations(page: Page) {

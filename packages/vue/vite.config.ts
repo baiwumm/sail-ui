@@ -31,7 +31,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: [/^vue$/, /^vue\//, /^reka-ui($|\/)/, /^@sail-ui\//],
+      external: [/^vue$/, /^vue\//, /^reka-ui($|\/)/, /^@tanstack\//, /^@sail-ui\//],
     },
   },
   plugins: [

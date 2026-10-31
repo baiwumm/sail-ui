@@ -34,7 +34,7 @@ Vue 编译器不会把 `<Card.Header>` 解析成 `Card` 对象的属性；必须
 | `<Card.Header>`    | `<CardHeader>`      | `<component :is="Card.Header" />`    |
 | `<Modal.Backdrop>` | `<ModalBackdrop>`   | `<component :is="Modal.Backdrop" />` |
 | `<Select.Trigger>` | `<SelectTrigger>`   | `<component :is="Select.Trigger" />` |
-| `<Table.Header>`   | `<TableHeader>`     | `<component :is="Table.Header" />`   |
+| `<Meter.Output>`   | `<MeterOutput>`     | `<component :is="Meter.Output" />`   |
 | `<Toast.Provider>` | `<ToastProvider>`   | —                                    |
 
 完整映射：
@@ -44,11 +44,13 @@ Vue 编译器不会把 `<Card.Header>` 解析成 `Card` 对象的属性；必须
 | Card      | `Card`, `Card.Header`, `Card.Title`, `Card.Description`, `Card.Content`, `Card.Footer`                                                                                                     | `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`                                                                                      |
 | Modal     | `Modal`, `Modal.Trigger`, `Modal.Backdrop`, `Modal.Container`, `Modal.Dialog`, `Modal.Header`, `Modal.Icon`, `Modal.Heading`, `Modal.Body`, `Modal.Footer`, `Modal.CloseTrigger`           | `Modal`, `ModalTrigger`, `ModalBackdrop`, `ModalContainer`, `ModalDialog`, `ModalHeader`, `ModalIcon`, `ModalHeading`, `ModalBody`, `ModalFooter`, `ModalCloseTrigger` |
 | Select    | `Select`, `Select.Trigger`, `Select.Value`, `Select.Popover`, `ListBox`, `ListBox.Item`, `ListBox.ItemIndicator`                                                                           | `Select`, `SelectTrigger`, `SelectValue`, `SelectIndicator`, `SelectClearButton`, `SelectPopover`, `SelectListBox`, `SelectItem`, `SelectItemIndicator`                |
-| Table     | `Table`, `Table.Root/ScrollContainer/Content/Header/Column/Body/Row/Cell/Footer/…`                                                                                                         | `Table`, `TableRoot`, `TableScrollContainer`, `TableContent`, `TableHeader`, `TableColumn`, `TableBody`, `TableRow`, `TableCell`, `TableFooter`, …                     |
+| Table     | `Table`, `Table.Root/ScrollContainer/Content/Header/Column/Body/Row/Cell/Footer/…`                                                                                                         | `Table`（数据驱动：`columns` + `data`，无 part；自定义用 `#cell-<key>` / `#header-<key>` 插槽）                                                                        |
 | Tabs      | `Tabs`, `Tabs.List`, `Tabs.Tab`, `Tabs.Panel`                                                                                                                                              | `Tabs`, `TabsList`, `TabsTab`, `TabsPanel`                                                                                                                             |
 | Accordion | `Accordion`, `Accordion.Item`, `Accordion.Trigger`, `Accordion.Panel`                                                                                                                      | `Accordion`, `AccordionItem`, `AccordionTrigger`, `AccordionPanel`                                                                                                     |
 | TagGroup  | `TagGroup`, `TagGroup.List`, `Tag`, `Tag.RemoveButton`                                                                                                                                     | `TagGroup`, `TagGroupList`, `Tag`, `TagRemoveButton`                                                                                                                   |
 | ListBox   | `ListBox`, `ListBox.Item`, `ListBox.ItemIndicator`, `ListBox.Section`                                                                                                                      | `ListBox`, `ListBoxItem`, `ListBoxItemIndicator`, `ListBoxSection`                                                                                                     |
+| Meter     | `Meter`, `Meter.Output`, `Meter.Track`, `Meter.Fill`                                                                                                                                       | `Meter`, `MeterOutput`, `MeterTrack`, `MeterFill`                                                                                                                      |
+| InputOTP  | `InputOTP`, `InputOTP.Group`, `InputOTP.Slot`, `InputOTP.Separator`                                                                                                                        | `InputOtp`, `InputOtpGroup`, `InputOtpSlot`, `InputOtpSeparator`                                                                                                       |
 | Dropdown  | `Dropdown`, `Dropdown.Trigger`, `Dropdown.Popover`, `Dropdown.Menu`, `Dropdown.Item`, `Dropdown.ItemIndicator`, `Dropdown.SubmenuIndicator`, `Dropdown.SubmenuTrigger`, `Dropdown.Section` | `Dropdown`, `DropdownTrigger`, `DropdownPopover`, `DropdownMenu`, `MenuItem`, `MenuItemIndicator`, `MenuItemSubmenuIndicator`, `DropdownSubmenuTrigger`, `MenuSection` |
 
 > 命名以最终实现为准；每个组件的 `index.ts` 同时导出命名 part 与复合对象。文档不写静态点号标签。
@@ -476,6 +478,65 @@ Nuxt 下 `<ToastProvider />` 由模块自动挂载，直接用 `useToast()`。
 - 颜色组件不导出内部 `ColorInputGroup`；`ColorPicker` 直接组合 `ColorAreaRoot` / `ColorSliderRoot` / `ColorFieldRoot` / `ColorSwatchPickerRoot`。
 - `ColorSwatchPickerRoot` 没有默认可访问名称，必须传 `aria-label`；禁用可下放到 item 级 `isDisabled`。
 
+### 6.11 高级数据（4 个）
+
+`Table` 不移植 RAC 的复合 part，而是用 `@tanstack/vue-table` 数据模型 + 自研 DOM/ARIA：传 `columns` 与 `data`，单元格和表头用插槽覆盖。`Meter`、`ScrollShadow`、`InputOtp` 保持与上游相同的 props 名称。
+
+```vue
+<Table
+  :columns="[
+    {
+      key: 'name',
+      header: 'Name',
+      isRowHeader: true,
+      allowsSorting: true,
+      allowsResizing: true,
+      width: 200,
+      minWidth: 160,
+    },
+    {key: 'role', header: 'Role', allowsSorting: true},
+  ]"
+  :data="members"
+  aria-label="Team members"
+  selection-mode="multiple"
+  v-model:selected-keys="selectedKeys"
+  v-model:sort-descriptor="sort"
+  is-resizable
+  is-virtualized
+  :row-height="42"
+  scroll-container-class="h-[320px] overflow-auto"
+  :has-more="hasMore"
+  :is-loading-more="isLoadingMore"
+  is-sticky-header
+  @load-more="loadMore"
+>
+  <template #cell-role="{value}">
+    <Chip size="sm" variant="soft">{{ value }}</Chip>
+  </template>
+  <template #loadMore="{isLoading}">
+    <Spinner v-if="isLoading" size="md" />
+  </template>
+</Table>
+```
+
+| React                                                         | Vue                                                                                   |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `<Table><Table.Header><Table.Column>…`（RAC 复合 part）       | `columns` prop；`#header-<key>` / `#header` 插槽                                      |
+| `<Table.Body><Table.Row><Table.Cell>`                         | `data` prop；`#cell-<key>` 插槽（`{row, value, column, rowIndex}`）                   |
+| `sortDescriptor` + `onSortChange`                             | `v-model:sort-descriptor` / `default-sort-descriptor`（列 `allowsSorting`）           |
+| `selectedKeys` + `onSelectionChange`                          | `v-model:selected-keys` / `default-selected-keys` + `selection-mode` / `disabledKeys` |
+| `<Table.ColumnResizer>` + `defaultWidth` / `minWidth`         | 列上 `allowsResizing` + `width` / `minWidth` / `maxWidth`，根上 `is-resizable`        |
+| RAC `Virtualizer` + `TableLayout`                             | `is-virtualized` + 固定 `row-height`（默认 44）+ `scroll-container-class`             |
+| `<Table.LoadMore onLoadMore>` + `<Table.LoadMoreContent>`     | `has-more` / `is-loading-more` + `#loadMore` 插槽，滚动到底自动 `@load-more`          |
+| `<Table.Header className="sticky top-0 …">`                   | `is-sticky-header`（内联 sticky，避免依赖消费方扫描工具类）                           |
+| `<Meter value={72}><Meter.Output /><Meter.Track><Meter.Fill>` | `<Meter :value="72"><MeterOutput /><MeterTrack><MeterFill /></MeterTrack></Meter>`    |
+| `<ScrollShadow />`                                            | `<ScrollShadow />`（`orientation` / `visibility` / `size` / `offset` / `isEnabled`）  |
+| `<InputOTP maxLength={6}><InputOTP.Group><InputOTP.Slot>`     | `<InputOtp :max-length="6"><InputOtpGroup><InputOtpSlot :index="0">`                  |
+
+- 虚拟化只能是固定行高：`row-height` 同时用于估算滚动高度与服务端首屏窗口（SSR 固定渲染前 10 行，挂载后由 virtualizer 接管，避免 hydration mismatch）。
+- LoadMore 使用 `IntersectionObserver`（root 为滚动容器），仅在 `has-more` 且未处于 `is-loading-more` 时发一次；没有 `IntersectionObserver` 的环境不会触发。
+- Table 的表格/网格语义由组件输出（`role="grid"`、`aria-rowcount`、2D 键盘），无需手动添加；`is-virtualized` 时 DOM 从 `<table>` 切换为 grid 行容器，样式仍走同一套上游 BEM 类。
+
 ## 7. 样式与主题
 
 - 保留 `className` 里的 BEM/工具类写法，改为 `class`。
@@ -505,7 +566,10 @@ export default defineNuxtConfig({
 | `className` 函数不支持                 | 依赖 render props 的样式写法失效                                                                          | scoped slot + `data-*` CSS                                                             |
 | React 事件对象不存在                   | `e.continuePropagation()` 等失效                                                                          | 用 Vue 事件 + 我们的 `PressEvent`                                                      |
 | RAC 内部 hooks/context 不公开          | 深度定制代码失效                                                                                          | 用公开 props/slots 或 `asChild`                                                        |
-| `Table` 虚拟化/列宽 API 不同           | 迁移需改数据层                                                                                            | 用 TanStack 表模型；见 ADR 0005                                                        |
+| `Table` 是数据驱动                     | React 的复合 part 不能逐个替换                                                                            | 传 `columns` / `data`，自定义用插槽；见 6.11 与 ADR 0005                               |
+| `Table` 列宽 API                       | `<Table.ColumnResizer>` 不存在                                                                            | 列上 `allowsResizing` + `width`/`minWidth`/`maxWidth`，根上 `is-resizable`             |
+| `Table` 虚拟化需固定行高               | 动态行高/可变内容不适配                                                                                   | `is-virtualized` + `row-height`；DOM 切换为 grid 行容器                                |
+| `Table` LoadMore 是 props + 插槽       | `Table.LoadMore` / `Table.LoadMoreContent` 不存在                                                         | `has-more` / `is-loading-more` + `#loadMore`，滚动触发 `@load-more`                    |
 | Toast manager 不是全局单例             | 直接 import `toast` 的写法失效                                                                            | `useToast()` + `<ToastProvider />`                                                     |
 | `disabled` 不是 `isDisabled` 别名      | 误用会静默失效                                                                                            | 统一 `isDisabled`                                                                      |
 | 日期值类型                             | React 用 `DateValue` 对象                                                                                 | Vue 同样用 `@internationalized/date` 值，不用原生 `Date`                               |

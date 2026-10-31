@@ -31,6 +31,10 @@ const GALLERY_SECTIONS = [
   "typography",
   "empty-state",
   "forms",
+  "meter",
+  "scroll-shadow",
+  "input-otp",
+  "table",
 ] as const;
 
 interface AxeViolation {
