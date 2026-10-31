@@ -44,8 +44,8 @@ function setTriggerRef(element: unknown) {
   rootContext.onTriggerChange(resolved ?? undefined);
 }
 
-function handlePointerEnter() {
-  if (isDisabled.value || triggerMode.value !== "hover") {
+function handlePointerEnter(event: PointerEvent) {
+  if (event.pointerType === "touch" || isDisabled.value || triggerMode.value !== "hover") {
     return;
   }
 
@@ -57,8 +57,8 @@ function handlePointerEnter() {
   scheduleOpen();
 }
 
-function handlePointerLeave() {
-  if (isDisabled.value || triggerMode.value !== "hover") {
+function handlePointerLeave(event: PointerEvent) {
+  if (event.pointerType === "touch" || isDisabled.value || triggerMode.value !== "hover") {
     return;
   }
 

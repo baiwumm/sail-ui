@@ -1,3 +1,4 @@
+import type {SelectModelValue, SelectSelectionMode} from "./types";
 import type {ListBoxItemVariants, selectVariants} from "@sail-ui/styles";
 import type {AcceptableValue} from "reka-ui";
 import type {ComputedRef, InjectionKey, Ref} from "vue";
@@ -14,8 +15,11 @@ export interface SelectContext {
   isExiting: Ref<boolean>;
   contentRef: Ref<HTMLElement | null>;
   placeholder: ComputedRef<string | undefined>;
-  modelValue: Ref<AcceptableValue | undefined>;
+  modelValue: Ref<SelectModelValue | undefined>;
   isDisabled: ComputedRef<boolean>;
+  selectionMode: ComputedRef<SelectSelectionMode>;
+  disabledKeys: ComputedRef<readonly AcceptableValue[]>;
+  isItemDisabled: (value: AcceptableValue) => boolean;
   clear: () => void;
   registerClearButton: () => () => void;
   hasClearButton: () => boolean;

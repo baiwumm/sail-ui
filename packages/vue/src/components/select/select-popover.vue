@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
-import {
-  injectSelectRootContext,
-  SelectContent as SelectContentPrimitive,
-  SelectPortal,
-} from "reka-ui";
-import {computed, nextTick, onBeforeUnmount, onMounted, useAttrs, watch} from "vue";
+import {SelectContent as SelectContentPrimitive, SelectPortal} from "reka-ui";
+import {computed, nextTick, onBeforeUnmount, ref, watch} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {useSelectContext} from "./context";
 import type {SelectPopoverProps} from "./types";
 
@@ -16,18 +13,16 @@ const props = withDefaults(defineProps<SelectPopoverProps>(), {
   placement: "bottom",
 });
 
-const attrs = useAttrs();
+const {attrs, className, forwarded} = useForwardedAttrs();
 const context = useSelectContext();
-const rootContext = injectSelectRootContext();
 
-const classes = computed(() =>
-  cx(context.slots.value.popover(), attrs.class as string | undefined),
-);
+const elementRef = ref<HTMLElement | null>(null);
+
+const classes = computed(() => cx(context.slots.value.popover(), className.value));
 
 const forwardedAttrs = computed(() => {
-  const rest: Record<string, unknown> = {...attrs};
+  const rest = {...forwarded.value};
 
-  delete rest.class;
   delete rest.style;
 
   return rest;
@@ -71,19 +66,12 @@ function observePlacement(element: HTMLElement) {
   });
 }
 
-async function syncContent() {
-  await nextTick();
+function syncContent() {
+  const element = elementRef.value;
 
-  if (!context.isMounted.value) {
+  if (!context.isMounted.value || !element) {
     context.contentRef.value = null;
     disconnectPlacementObserver();
-    return;
-  }
-
-  const contentId = rootContext.contentId;
-  const element = contentId ? document.getElementById(contentId) : null;
-
-  if (!(element instanceof HTMLElement)) {
     return;
   }
 
@@ -94,8 +82,15 @@ async function syncContent() {
   }
 }
 
-watch(() => context.isMounted.value, syncContent, {flush: "post"});
-onMounted(syncContent);
+watch(
+  [() => context.isMounted.value, elementRef],
+  async () => {
+    await nextTick();
+    syncContent();
+  },
+  {flush: "post"},
+);
+
 onBeforeUnmount(() => {
   disconnectPlacementObserver();
   context.contentRef.value = null;
@@ -105,16 +100,24 @@ onBeforeUnmount(() => {
 <template>
   <SelectPortal>
     <SelectContentPrimitive
-      v-bind="forwardedAttrs"
+      as-child
       position="popper"
-      :class="classes"
-      :data-entering="context.isEntering.value ? 'true' : undefined"
-      :data-exiting="context.isExiting.value ? 'true' : undefined"
-      :data-slot="'select-popover'"
       :side-offset="sideOffset"
       :style="contentStyle"
     >
-      <slot />
+      <div
+        :id="undefined"
+        ref="elementRef"
+        v-bind="forwardedAttrs"
+        :role="undefined"
+        :class="classes"
+        :data-entering="context.isEntering.value ? 'true' : undefined"
+        :data-exiting="context.isExiting.value ? 'true' : undefined"
+        :data-slot="'select-popover'"
+        :data-state="undefined"
+      >
+        <slot />
+      </div>
     </SelectContentPrimitive>
   </SelectPortal>
 </template>

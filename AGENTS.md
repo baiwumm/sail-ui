@@ -2,7 +2,7 @@
 
 Instructions for AI agents and contributors working on **Sail UI** — an unofficial Vue 3 / Nuxt port of HeroUI v3.
 
-> **Current phase: M1 complete.** T01 (M0 architecture spike), T02 (contract tooling), T03 (24 display/layout/feedback components), and T04 (19 form controls) are complete. The workspace builds and `pnpm verify` is the full gate. M1 delivered 43 components; every other entry in the component matrix is still pending. T08 (advanced data) and T09 (Nuxt module, docs site, release) are now unblocked.
+> **Current phase: M2 in progress.** T01 (M0 architecture spike), T02 (contract tooling), T03 (24 display/layout/feedback components), T04 (19 form controls), T05 (7 overlays + Toast), and T06 (15 collections/pickers) are complete. The workspace builds and `pnpm verify` plus browser CI are the gates. T06 delivered 65 components; T07 (date/color) and T08 (advanced data) are next and unblocked.
 
 ---
 
@@ -274,6 +274,7 @@ Do not ship a component with only a render test. "Renders without crashing" is n
 - `color-input-group` and `date-input-group` are internal composites in upstream (not exported); they still have styles and may need internal Vue implementations.
 - Upstream `tv()` disables `twMerge`; do not "improve" class merging.
 - The upstream overlay exit logic waits for the real CSS animation (including WebKit's pending state) and pins opacity before unmount. Do not replace it with a naive `setTimeout`.
+- `useOverlayState` owns `contentRef`; overlay roots must provide that exact ref and never declare a second one. The exit hold reads it and silently skips the animation if it is null. Toast is the exception: its queue holds a fixed 300ms exit window (`DEFAULT_EXIT_DURATION`) instead of measuring CSS.
 - Upstream modal-level overlays (Modal/AlertDialog/Drawer/Sheet) use `--z-index-overlay: 100000`; toast uses `--z-index-toast: 100001`. Popover/tooltip rely on portal stacking; do not invent a higher layer.
 - `@heroui/styles` has zero inline utility classes in components, so Tailwind does not need to scan `node_modules` with `@source`.
 - Reka renders `CheckboxRoot`, `RadioGroupItem` and `SwitchRoot` as `<button role="checkbox|radio|switch">`. Upstream HeroUI renders a `<label>` with a visually hidden native input, so the upstream checkbox, radio and switch are self-implemented in Sail UI to keep the DOM contract.

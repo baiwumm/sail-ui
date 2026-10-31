@@ -1,4 +1,4 @@
-import type {PropType, Slot, VNode} from "vue";
+import type {Component, PropType, Slot, VNode} from "vue";
 
 import {Comment, Fragment, Text, defineComponent, isVNode} from "vue";
 
@@ -18,6 +18,22 @@ export function isRenderableVNode(node: VNode): boolean {
   }
 
   return !(node.type === Text && typeof node.children === "string" && node.children.trim() === "");
+}
+
+/**
+ * Finds a component nested inside plain elements (e.g. a `Label` inside a
+ * layout `div`), which a direct-child check would miss.
+ */
+export function containsComponent(nodes: VNode[], component: Component): boolean {
+  return nodes.some((node) => {
+    if (node.type === component) {
+      return true;
+    }
+
+    return Array.isArray(node.children)
+      ? containsComponent(node.children as VNode[], component)
+      : false;
+  });
 }
 
 export function hasSlotContent(slot?: Slot): boolean {

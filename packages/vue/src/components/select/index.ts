@@ -15,6 +15,9 @@ const Select = Object.assign(SelectRoot, {
   Indicator: SelectIndicator,
   ClearButton: SelectClearButton,
   Popover: SelectPopover,
+  ListBox: SelectListBox,
+  Item: SelectItem,
+  ItemIndicator: SelectItemIndicator,
 });
 
 export {
@@ -33,6 +36,8 @@ export {
 export type {
   SelectRootProps,
   SelectRootProps as SelectProps,
+  SelectModelValue,
+  SelectSelectionMode,
   SelectTriggerProps,
   SelectValueProps,
   SelectPopoverProps,

@@ -12,7 +12,9 @@ defineOptions({name: "SailSheetRoot", inheritAttrs: false});
 const props = withDefaults(defineProps<SheetRootProps>(), {
   placement: "bottom",
 });
-const openModel = defineModel<boolean>("open");
+// An explicit undefined default keeps Vue from casting an absent Boolean prop
+// to false, so `defaultOpen` can still initialize the overlay.
+const openModel = defineModel<boolean>("open", {default: undefined as unknown as boolean});
 
 const overlay = useOverlayState({
   isOpen: () => openModel.value,

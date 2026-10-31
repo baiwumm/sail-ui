@@ -39,39 +39,44 @@ Vue 编译器不会把 `<Card.Header>` 解析成 `Card` 对象的属性；必须
 
 完整映射：
 
-| 家族      | React parts                                                                                                                                                                      | Vue named exports                                                                                                                                                      |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Card      | `Card`, `Card.Header`, `Card.Title`, `Card.Description`, `Card.Content`, `Card.Footer`                                                                                           | `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`                                                                                      |
-| Modal     | `Modal`, `Modal.Trigger`, `Modal.Backdrop`, `Modal.Container`, `Modal.Dialog`, `Modal.Header`, `Modal.Icon`, `Modal.Heading`, `Modal.Body`, `Modal.Footer`, `Modal.CloseTrigger` | `Modal`, `ModalTrigger`, `ModalBackdrop`, `ModalContainer`, `ModalDialog`, `ModalHeader`, `ModalIcon`, `ModalHeading`, `ModalBody`, `ModalFooter`, `ModalCloseTrigger` |
-| Select    | `Select`, `Select.Trigger`, `Select.Value`, `Select.Popover`, `Select.Listbox`（以实际上游为准）                                                                                 | `Select`, `SelectTrigger`, `SelectValue`, `SelectPopover`, `ListBox`, …                                                                                                |
-| Table     | `Table`, `Table.Root/ScrollContainer/Content/Header/Column/Body/Row/Cell/Footer/…`                                                                                               | `Table`, `TableRoot`, `TableScrollContainer`, `TableContent`, `TableHeader`, `TableColumn`, `TableBody`, `TableRow`, `TableCell`, `TableFooter`, …                     |
-| Tabs      | `Tabs`, `Tabs.List`, `Tabs.Tab`, `Tabs.Panel`                                                                                                                                    | `Tabs`, `TabsList`, `TabsTab`, `TabsPanel`                                                                                                                             |
-| Accordion | `Accordion`, `Accordion.Item`, `Accordion.Trigger`, `Accordion.Panel`                                                                                                            | `Accordion`, `AccordionItem`, `AccordionTrigger`, `AccordionPanel`                                                                                                     |
+| 家族      | React parts                                                                                                                                                                                | Vue named exports                                                                                                                                                      |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Card      | `Card`, `Card.Header`, `Card.Title`, `Card.Description`, `Card.Content`, `Card.Footer`                                                                                                     | `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`                                                                                      |
+| Modal     | `Modal`, `Modal.Trigger`, `Modal.Backdrop`, `Modal.Container`, `Modal.Dialog`, `Modal.Header`, `Modal.Icon`, `Modal.Heading`, `Modal.Body`, `Modal.Footer`, `Modal.CloseTrigger`           | `Modal`, `ModalTrigger`, `ModalBackdrop`, `ModalContainer`, `ModalDialog`, `ModalHeader`, `ModalIcon`, `ModalHeading`, `ModalBody`, `ModalFooter`, `ModalCloseTrigger` |
+| Select    | `Select`, `Select.Trigger`, `Select.Value`, `Select.Popover`, `ListBox`, `ListBox.Item`, `ListBox.ItemIndicator`                                                                           | `Select`, `SelectTrigger`, `SelectValue`, `SelectIndicator`, `SelectClearButton`, `SelectPopover`, `SelectListBox`, `SelectItem`, `SelectItemIndicator`                |
+| Table     | `Table`, `Table.Root/ScrollContainer/Content/Header/Column/Body/Row/Cell/Footer/…`                                                                                                         | `Table`, `TableRoot`, `TableScrollContainer`, `TableContent`, `TableHeader`, `TableColumn`, `TableBody`, `TableRow`, `TableCell`, `TableFooter`, …                     |
+| Tabs      | `Tabs`, `Tabs.List`, `Tabs.Tab`, `Tabs.Panel`                                                                                                                                              | `Tabs`, `TabsList`, `TabsTab`, `TabsPanel`                                                                                                                             |
+| Accordion | `Accordion`, `Accordion.Item`, `Accordion.Trigger`, `Accordion.Panel`                                                                                                                      | `Accordion`, `AccordionItem`, `AccordionTrigger`, `AccordionPanel`                                                                                                     |
+| TagGroup  | `TagGroup`, `TagGroup.List`, `Tag`, `Tag.RemoveButton`                                                                                                                                     | `TagGroup`, `TagGroupList`, `Tag`, `TagRemoveButton`                                                                                                                   |
+| ListBox   | `ListBox`, `ListBox.Item`, `ListBox.ItemIndicator`, `ListBox.Section`                                                                                                                      | `ListBox`, `ListBoxItem`, `ListBoxItemIndicator`, `ListBoxSection`                                                                                                     |
+| Dropdown  | `Dropdown`, `Dropdown.Trigger`, `Dropdown.Popover`, `Dropdown.Menu`, `Dropdown.Item`, `Dropdown.ItemIndicator`, `Dropdown.SubmenuIndicator`, `Dropdown.SubmenuTrigger`, `Dropdown.Section` | `Dropdown`, `DropdownTrigger`, `DropdownPopover`, `DropdownMenu`, `MenuItem`, `MenuItemIndicator`, `MenuItemSubmenuIndicator`, `DropdownSubmenuTrigger`, `MenuSection` |
 
 > 命名以最终实现为准；每个组件的 `index.ts` 同时导出命名 part 与复合对象。文档不写静态点号标签。
 
 ## 3. Props
 
-| React                               | Vue                       | 说明                                            |
-| ----------------------------------- | ------------------------- | ----------------------------------------------- |
-| `className`                         | `class`                   | 字符串；不接受函数                              |
-| `style`                             | `style`                   | 同                                              |
-| `isDisabled`                        | `isDisabled`              | 保留                                            |
-| `isRequired`                        | `isRequired`              | 保留                                            |
-| `isInvalid`                         | `isInvalid`               | 保留                                            |
-| `isReadOnly`                        | `isReadOnly`              | 保留                                            |
-| `isLoading`                         | `isLoading`               | 保留                                            |
-| `isOpen`                            | `v-model:open`            | 不再单独传 `isOpen`（仍可传 `open` 做只读绑定） |
-| `defaultOpen`                       | `defaultOpen`             | 非受控                                          |
-| `onOpenChange`                      | `@update:open`            | `v-model:open` 的标准事件                       |
-| `value` + `onChange`                | `v-model`                 | 输入/选择类                                     |
-| `selectedKey` + `onSelectionChange` | `v-model`                 | Select/ListBox/Tabs；另发 `@selection-change`   |
-| `defaultSelectedKey`                | `defaultSelectedKey`      | 非受控                                          |
-| `expandedKeys` + `onExpandedChange` | `v-model:expanded-keys`   | Accordion/DisclosureGroup                       |
-| `sortDescriptor` + `onSortChange`   | `v-model:sort-descriptor` | Table                                           |
-| `as` / `asChild`                    | `as` / `asChild`          | 多态渲染                                        |
-| `render` prop                       | scoped slot 或 `asChild`  | 不提供函数式 `className`                        |
-| `ref`                               | `ref`                     | 指向根 DOM/组件                                 |
+| React                                | Vue                       | 说明                                                    |
+| ------------------------------------ | ------------------------- | ------------------------------------------------------- |
+| `className`                          | `class`                   | 字符串；不接受函数                                      |
+| `style`                              | `style`                   | 同                                                      |
+| `isDisabled`                         | `isDisabled`              | 保留                                                    |
+| `isRequired`                         | `isRequired`              | 保留                                                    |
+| `isInvalid`                          | `isInvalid`               | 保留                                                    |
+| `isReadOnly`                         | `isReadOnly`              | 保留                                                    |
+| `isLoading`                          | `isLoading`               | 保留                                                    |
+| `isOpen`                             | `v-model:open`            | 不再单独传 `isOpen`（仍可传 `open` 做只读绑定）         |
+| `defaultOpen`                        | `defaultOpen`             | 非受控                                                  |
+| `onOpenChange`                       | `@update:open`            | `v-model:open` 的标准事件                               |
+| `value` + `onChange`                 | `v-model`                 | 输入/选择类                                             |
+| `selectedKey` + `onSelectionChange`  | `v-model`                 | Select/ListBox/Tabs；另发 `@selection-change`           |
+| `selectedKeys` + `onSelectionChange` | `v-model`                 | TagGroup；`multiple` 时为数组，另发 `@selection-change` |
+| `onRemove`                           | `@remove`                 | TagGroup；只有监听时标签才可删除                        |
+| `defaultSelectedKey`                 | `defaultSelectedKey`      | 非受控                                                  |
+| `expandedKeys` + `onExpandedChange`  | `v-model:expanded-keys`   | Accordion/DisclosureGroup                               |
+| `sortDescriptor` + `onSortChange`    | `v-model:sort-descriptor` | Table                                                   |
+| `as` / `asChild`                     | `as` / `asChild`          | 多态渲染                                                |
+| `render` prop                        | scoped slot 或 `asChild`  | 不提供函数式 `className`                                |
+| `ref`                                | `ref`                     | 指向根 DOM/组件                                         |
 
 `disabled` **不是** `isDisabled` 的别名。原生 `disabled` 只用于直接映射到原生元素的场景；组件级禁用统一 `isDisabled`。
 
@@ -84,6 +89,7 @@ Vue 编译器不会把 `<Card.Header>` 解析成 `Card` 对象的属性；必须
 | `onSelectionChange` | `@update:model-value`、`@selection-change` | `v-model` 优先                                                 |
 | `onOpenChange`      | `@update:open`                             |                                                                |
 | `onValueChange`     | `@update:model-value`                      |                                                                |
+| `onAction`          | `@action`                                  | ListBox / Menu；payload 是 key                                 |
 | `onSortChange`      | `@update:sort-descriptor`                  |                                                                |
 | `onExpandedChange`  | `@update:expanded-keys`                    |                                                                |
 | `onLoadMore`        | `@load-more`                               | Table                                                          |
@@ -233,9 +239,9 @@ const isOpen = ref(false);
 <!-- Vue -->
 <script setup lang="ts">
 import {
-  ListBox,
-  ListBoxItem,
   Select,
+  SelectItem,
+  SelectListBox,
   SelectPopover,
   SelectTrigger,
   SelectValue,
@@ -250,16 +256,116 @@ const value = ref("a");
       <SelectValue />
     </SelectTrigger>
     <SelectPopover>
-      <ListBox>
-        <ListBoxItem id="a">A</ListBoxItem>
-        <ListBoxItem id="b">B</ListBoxItem>
-      </ListBox>
+      <SelectListBox>
+        <SelectItem value="a">A</SelectItem>
+        <SelectItem value="b">B</SelectItem>
+      </SelectListBox>
     </SelectPopover>
   </Select>
 </template>
 ```
 
-### 6.5 Toast
+上游 `Select.Popover` 内的 `ListBox` 在 Vue 中必须替换为 Select 专用 parts：`ListBox` → `SelectListBox`，`ListBox.Item` → `SelectItem`，`ListBox.ItemIndicator` → `SelectItemIndicator`。独立 `ListBox` 不共享 Select 的状态，不能放进 `SelectPopover`（见 [ADR 0012](./decisions/0012-select-composition.md)）。
+
+多选使用 `selection-mode="multiple"`，`v-model` 为数组；`disabled-keys` 接收值集合，`by` 可传键名或比较函数。
+
+### 6.5 Dropdown
+
+```tsx
+// React
+<Dropdown>
+  <Button>Actions</Button>
+  <Dropdown.Popover>
+    <Dropdown.Menu selectionMode="single" onAction={handleAction}>
+      <Dropdown.Item id="edit">Edit</Dropdown.Item>
+      <Dropdown.Section selectionMode="multiple">
+        <Header>Share</Header>
+        <Dropdown.Item id="email">Email</Dropdown.Item>
+      </Dropdown.Section>
+      <Dropdown.SubmenuTrigger>
+        <Dropdown.Item id="social">
+          Social
+          <Dropdown.SubmenuIndicator />
+        </Dropdown.Item>
+        <Dropdown.Popover>
+          <Dropdown.Menu>
+            <Dropdown.Item id="mastodon">Mastodon</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown.Popover>
+      </Dropdown.SubmenuTrigger>
+    </Dropdown.Menu>
+  </Dropdown.Popover>
+</Dropdown>
+```
+
+```vue
+<!-- Vue -->
+<script setup lang="ts">
+import {
+  Dropdown,
+  DropdownMenu,
+  DropdownPopover,
+  DropdownSubmenuTrigger,
+  DropdownTrigger,
+  Header,
+  Label,
+  MenuItem,
+  MenuItemIndicator,
+  MenuItemSubmenuIndicator,
+  MenuSection,
+  type MenuKey,
+} from "@sail-ui/vue";
+
+const value = ref("edit");
+
+function handleAction(key: MenuKey) {
+  console.log(key);
+}
+</script>
+
+<template>
+  <Dropdown>
+    <DropdownTrigger>Actions</DropdownTrigger>
+    <DropdownPopover>
+      <DropdownMenu v-model="value" selection-mode="single" @action="handleAction">
+        <MenuItem value="edit" text-value="Edit">
+          <Label>Edit</Label>
+          <MenuItemIndicator />
+        </MenuItem>
+        <MenuSection selection-mode="multiple">
+          <Header>Share</Header>
+          <MenuItem value="email" text-value="Email">
+            <Label>Email</Label>
+          </MenuItem>
+        </MenuSection>
+        <DropdownSubmenuTrigger>
+          <MenuItem value="social" text-value="Social">
+            <Label>Social</Label>
+            <MenuItemSubmenuIndicator />
+          </MenuItem>
+          <DropdownPopover>
+            <DropdownMenu>
+              <MenuItem value="mastodon" text-value="Mastodon">
+                <Label>Mastodon</Label>
+              </MenuItem>
+            </DropdownMenu>
+          </DropdownPopover>
+        </DropdownSubmenuTrigger>
+      </DropdownMenu>
+    </DropdownPopover>
+  </Dropdown>
+</template>
+```
+
+与上游的差别：
+
+- Trigger 必须显式写 `<DropdownTrigger>`；Vue 无法可靠克隆第一个子元素。
+- `Dropdown.Item` / `Dropdown.Section` 复用命名导出 `MenuItem` / `MenuSection`；item 的选择键是 `value`，不是 `id`。
+- `selectedKeys` 改为 `v-model`（`single` 为标量，`multiple` 为数组）；`onAction` 改为 `@action`。
+- 子菜单在 `DropdownSubmenuTrigger` 内放恰好一个 `MenuItem` 和一个 `DropdownPopover`；`DropdownPopover` 会自动渲染 Reka 的 `MenuSubContent`。
+- 独立 `Menu` 可替代 `DropdownMenu`，但必须位于 `DropdownPopover` 内（Reka 没有可脱离弹层的菜单根）。见 [ADR 0013](./decisions/0013-dropdown-menu-behavior.md)。
+
+### 6.6 Toast
 
 ```tsx
 // React
@@ -286,7 +392,7 @@ function save() {
 
 Nuxt 下 `<ToastProvider />` 由模块自动挂载，直接用 `useToast()`。
 
-### 6.6 Form / Input
+### 6.7 Form / Input
 
 ```tsx
 // React
@@ -312,7 +418,7 @@ Nuxt 下 `<ToastProvider />` 由模块自动挂载，直接用 `useToast()`。
 </Form>
 ```
 
-### 6.7 表单控件（19 个）
+### 6.8 表单控件（19 个）
 
 选择类控件统一用 `v-model` 取代 React 的 `value` / `onChange`：
 
@@ -330,6 +436,16 @@ Nuxt 下 `<ToastProvider />` 由模块自动挂载，直接用 `useToast()`。
 | `<Form onSubmit={submit}>`                                           | `<Form @submit="submit">`（透传原生事件，不阻止默认行为） |
 
 复合部件保持上游命名：`Checkbox.Content` / `Checkbox.Control` / `Checkbox.Indicator`、`Radio.Content` / `Radio.Control` / `Radio.Indicator`、`Switch.Content` / `Switch.Control` / `Switch.Thumb`、`NumberField.Group` / `NumberField.Input` / `NumberField.IncrementButton`、`Slider.Track` / `Slider.Fill` / `Slider.Thumb`、`SearchField.Group` / `SearchField.Input` / `SearchField.ClearButton`、`InputGroup.Prefix` / `InputGroup.Input` / `InputGroup.Suffix`。静态 `<Checkbox.Control>` 标签不生效，用命名导出 `<CheckboxControl>`。
+
+### 6.9 覆盖层通用约定
+
+- 开关状态统一用 `v-model:open` / `defaultOpen`，不再传 `isOpen` + `onOpenChange` 组合。
+- 关闭态不渲染覆盖层 DOM；服务端不会输出 Modal / Drawer / Sheet / Popover / Tooltip / Toast 的浮层内容。
+- 退场由真实 CSS animation/transition 驱动：元素保持挂载并带 `data-exiting="true"`，动画结束后才卸载；`prefers-reduced-motion` 下跳过动画但保留同样的生命周期。
+- Modal / AlertDialog 的 trigger 是 `div role="button"`；Drawer 的 trigger 是原生 `<button>`。这是上游 DOM 合约，不是可配置项。
+- Popover 的可见容器由 Reka 输出 `role="dialog"`；标题语义由 `PopoverDialog` / `PopoverHeading` 提供。上游由 Dialog 承载语义，屏幕阅读器行为一致。
+- Tooltip 的 hover 模式忽略触摸指针；触摸/键盘聚焦仍按 focus 语义打开。`aria-describedby` 指向一个隐藏的 `role="tooltip"` 节点。
+- Sheet 在 T05 只实现方向、尺寸、把手拖拽与进出场；snap points、detached、嵌套 sheet 尚未实现。
 
 ## 7. 样式与主题
 
@@ -354,21 +470,31 @@ export default defineNuxtConfig({
 
 ## 9. 已知差异（必须知道）
 
-| 差异                                   | 影响                                               | 处理                                                                         |
-| -------------------------------------- | -------------------------------------------------- | ---------------------------------------------------------------------------- |
-| 静态 `<Select.Trigger>` 不工作         | 复制 React 示例会报解析失败                        | 改成 `<SelectTrigger>` 或 `:is`                                              |
-| `className` 函数不支持                 | 依赖 render props 的样式写法失效                   | scoped slot + `data-*` CSS                                                   |
-| React 事件对象不存在                   | `e.continuePropagation()` 等失效                   | 用 Vue 事件 + 我们的 `PressEvent`                                            |
-| RAC 内部 hooks/context 不公开          | 深度定制代码失效                                   | 用公开 props/slots 或 `asChild`                                              |
-| `Table` 虚拟化/列宽 API 不同           | 迁移需改数据层                                     | 用 TanStack 表模型；见 ADR 0005                                              |
-| Toast manager 不是全局单例             | 直接 import `toast` 的写法失效                     | `useToast()` + `<ToastProvider />`                                           |
-| `disabled` 不是 `isDisabled` 别名      | 误用会静默失效                                     | 统一 `isDisabled`                                                            |
-| 日期值类型                             | React 用 `DateValue` 对象                          | Vue 同样用 `@internationalized/date` 值，不用原生 `Date`                     |
-| `ToggleButtonGroup` 的选择模式         | React 用 `selectionMode` + `selectedKeys`（`Set`） | Vue 用 `type="single" \| "multiple"` + `v-model`（单选为字符串，多选为数组） |
-| `ToggleButton` 的标识                  | React 用 `id` 作为选择键                           | Vue 用 `value`                                                               |
-| `Checkbox` / `Radio` / `Switch` 的 DOM | React 是 `<label>` + 隐藏原生 `input`              | Vue 同样输出 `<label>` + 隐藏原生 `input`，DOM 与参考实现一致                |
-| `Textarea` 自适应高度                  | React 的 TextArea 不自动增高                       | Vue 需显式开启 `autoResize`                                                  |
-| `Form` 的提交                          | React 的 `onSubmit` 拿到合成事件                   | Vue 的 `@submit` 拿到原生 `SubmitEvent`，组件不阻止默认行为                  |
+| 差异                                   | 影响                                               | 处理                                                                                |
+| -------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| 静态 `<Select.Trigger>` 不工作         | 复制 React 示例会报解析失败                        | 改成 `<SelectTrigger>` 或 `:is`                                                     |
+| `className` 函数不支持                 | 依赖 render props 的样式写法失效                   | scoped slot + `data-*` CSS                                                          |
+| React 事件对象不存在                   | `e.continuePropagation()` 等失效                   | 用 Vue 事件 + 我们的 `PressEvent`                                                   |
+| RAC 内部 hooks/context 不公开          | 深度定制代码失效                                   | 用公开 props/slots 或 `asChild`                                                     |
+| `Table` 虚拟化/列宽 API 不同           | 迁移需改数据层                                     | 用 TanStack 表模型；见 ADR 0005                                                     |
+| Toast manager 不是全局单例             | 直接 import `toast` 的写法失效                     | `useToast()` + `<ToastProvider />`                                                  |
+| `disabled` 不是 `isDisabled` 别名      | 误用会静默失效                                     | 统一 `isDisabled`                                                                   |
+| 日期值类型                             | React 用 `DateValue` 对象                          | Vue 同样用 `@internationalized/date` 值，不用原生 `Date`                            |
+| `ToggleButtonGroup` 的选择模式         | React 用 `selectionMode` + `selectedKeys`（`Set`） | Vue 用 `type="single" \| "multiple"` + `v-model`（单选为字符串，多选为数组）        |
+| `ToggleButton` / `ListBoxItem` 的标识  | React 用 `id` 作为选择键                           | Vue 用 `value`                                                                      |
+| `Checkbox` / `Radio` / `Switch` 的 DOM | React 是 `<label>` + 隐藏原生 `input`              | Vue 同样输出 `<label>` + 隐藏原生 `input`，DOM 与参考实现一致                       |
+| `Textarea` 自适应高度                  | React 的 TextArea 不自动增高                       | Vue 需显式开启 `autoResize`                                                         |
+| `Form` 的提交                          | React 的 `onSubmit` 拿到合成事件                   | Vue 的 `@submit` 拿到原生 `SubmitEvent`，组件不阻止默认行为                         |
+| TagGroup 的描述关联                    | React 经 TextContext 自动写入 `aria-describedby`   | 显式传 `aria-describedby` 并给 Description 设置 id；见 ADR 0010                     |
+| ListBox 的 typeahead                   | React 可自定义文本                                 | 使用 item 渲染文本；`textValue` 仅作无 Label 时的 `aria-label`；见 ADR 0011         |
+| Select 的列表组成                      | React 在 `Select.Popover` 内直接放 `ListBox`       | Vue 用 `SelectListBox` / `SelectItem`；独立 ListBox 不共享 Select 状态；见 ADR 0012 |
+| Select 的 SSR 选中文本                 | 服务端输出 placeholder，挂载后才显示选中标签       | 无 hydration mismatch；依赖首屏文本的场景需注意；见 ADR 0012                        |
+| Select 多选与禁用键                    | `v-model` 为数组；禁用键按值比较                   | `by` 支持键名或比较函数；空字符串 `value` 保留给“无选择”                            |
+| Dropdown 的 trigger                    | React 克隆 `Dropdown` 的第一个子元素作为 trigger   | Vue 显式写 `<DropdownTrigger>`；见 ADR 0013                                         |
+| Dropdown trigger 的外观                | `Dropdown.Trigger` 是 24px 的 `.dropdown__trigger` | Vue 同为原生 button，不叠加 `.button` 变体；需要按钮外观时加 `button button--*` 类  |
+| Dropdown 的 item 标识                  | React 用 `id` 作为选择键                           | Vue 用 `value`                                                                      |
+| Dropdown 的子菜单                      | `SubmenuTrigger` 内放 `Item` + `Popover`           | 结构相同，item 用共享 `MenuItem`；见 ADR 0013                                       |
+| 独立 Menu 的宿主                       | React 可直接使用 `Menu`                            | Vue 的 `Menu` 必须位于 `DropdownPopover` 内；见 ADR 0013                            |
 
 ## 10. 迁移检查清单
 

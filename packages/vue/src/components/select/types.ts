@@ -2,9 +2,15 @@ import type {SelectItemVariant} from "./context";
 import type {ListBoxVariants, SelectVariants} from "@sail-ui/styles";
 import type {AcceptableValue} from "reka-ui";
 
+export type SelectSelectionMode = "single" | "multiple";
+export type SelectModelValue = AcceptableValue | AcceptableValue[];
+
 export interface SelectRootProps {
-  modelValue?: AcceptableValue;
-  defaultValue?: AcceptableValue;
+  modelValue?: SelectModelValue;
+  defaultValue?: SelectModelValue;
+  selectionMode?: SelectSelectionMode;
+  /** Keys that cannot be selected. */
+  disabledKeys?: Iterable<AcceptableValue>;
   open?: boolean;
   defaultOpen?: boolean;
   placeholder?: string;
@@ -12,6 +18,7 @@ export interface SelectRootProps {
   isInvalid?: boolean;
   isRequired?: boolean;
   name?: string;
+  autoComplete?: string;
   fullWidth?: boolean;
   variant?: SelectVariants["variant"];
   by?: string | ((value: AcceptableValue, currentValue: AcceptableValue) => boolean);

@@ -340,11 +340,11 @@ test.describe("Popover", () => {
   test("opens anchored with an arrow, closes on Escape, and restores focus", async ({page}) => {
     await page.goto("/");
 
-    const trigger = page.locator('[data-slot="popover-trigger"]');
+    const trigger = page.locator('#popover [data-slot="popover-trigger"]').first();
 
     await trigger.click();
 
-    const content = page.locator(".popover");
+    const content = page.locator(".popover").first();
 
     await expect(content).toBeVisible();
     await expect(content).toHaveAttribute("role", "dialog");
@@ -380,6 +380,25 @@ test.describe("Popover", () => {
     await page.locator("#popover h2").click();
 
     await expect(content).not.toBeAttached();
+  });
+
+  test("keeps the outer popover open while a nested popover opens and closes", async ({page}) => {
+    await page.goto("/");
+
+    await page.locator('#popover [data-slot="popover-trigger"]').first().click();
+
+    const popovers = page.locator(".popover");
+
+    await expect(popovers).toHaveCount(1);
+
+    await page.getByRole("button", {name: "Open nested popover"}).click();
+    await expect(popovers).toHaveCount(2);
+
+    await page.keyboard.press("Escape");
+    await expect(popovers).toHaveCount(1);
+
+    await page.keyboard.press("Escape");
+    await expect(popovers).toHaveCount(0);
   });
 });
 
@@ -435,15 +454,15 @@ test.describe("Select", () => {
     await trigger.focus();
     await page.keyboard.press("ArrowDown");
 
-    const listbox = page.getByRole("listbox");
-    await expect(listbox).toBeVisible();
+    const popover = page.locator('[data-slot="select-popover"]');
+    await expect(popover).toBeVisible();
 
     await page.keyboard.press("ArrowDown");
-    await expect(listbox.locator("[data-highlighted]")).toHaveText("Texas");
+    await expect(popover.locator("[data-focused]")).toHaveText("Texas");
 
     await page.keyboard.press("Enter");
 
-    await expect(listbox).not.toBeAttached();
+    await expect(popover).not.toBeAttached();
     await expect(trigger).toContainText("Texas");
     await expect(page.getByTestId("select-value")).toHaveText("texas");
   });
@@ -472,7 +491,7 @@ test.describe("Select", () => {
     await page.goto("/");
 
     const trigger = page.locator('#select [role="combobox"]');
-    const clearButton = page.locator('[data-slot="select-clear-button"]');
+    const clearButton = page.locator('#select [data-slot="select-clear-button"]');
 
     await expect(trigger).toContainText("California");
     await clearButton.click();
@@ -480,7 +499,7 @@ test.describe("Select", () => {
     await expect(trigger).toContainText("Select one");
     await expect(clearButton).toHaveAttribute("data-empty", "true");
     await expect(page.getByTestId("select-value")).toHaveText("none");
-    await expect(page.getByRole("listbox")).not.toBeAttached();
+    await expect(page.locator('[data-slot="select-popover"]')).not.toBeAttached();
   });
 
   test("compound object parts resolve through <component :is>", async ({page}) => {

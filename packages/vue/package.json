@@ -12,6 +12,11 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
+    "./accordion": {
+      "types": "./dist/components/accordion/index.d.ts",
+      "import": "./dist/components/accordion/index.js",
+      "default": "./dist/components/accordion/index.js"
+    },
     "./alert": {
       "types": "./dist/components/alert/index.d.ts",
       "import": "./dist/components/alert/index.js",
@@ -82,10 +87,25 @@
       "import": "./dist/components/description/index.js",
       "default": "./dist/components/description/index.js"
     },
+    "./disclosure": {
+      "types": "./dist/components/disclosure/index.d.ts",
+      "import": "./dist/components/disclosure/index.js",
+      "default": "./dist/components/disclosure/index.js"
+    },
+    "./disclosure-group": {
+      "types": "./dist/components/disclosure-group/index.d.ts",
+      "import": "./dist/components/disclosure-group/index.js",
+      "default": "./dist/components/disclosure-group/index.js"
+    },
     "./drawer": {
       "types": "./dist/components/drawer/index.d.ts",
       "import": "./dist/components/drawer/index.js",
       "default": "./dist/components/drawer/index.js"
+    },
+    "./dropdown": {
+      "types": "./dist/components/dropdown/index.d.ts",
+      "import": "./dist/components/dropdown/index.js",
+      "default": "./dist/components/dropdown/index.js"
     },
     "./empty-state": {
       "types": "./dist/components/empty-state/index.d.ts",
@@ -142,6 +162,36 @@
       "import": "./dist/components/link/index.js",
       "default": "./dist/components/link/index.js"
     },
+    "./list-box": {
+      "types": "./dist/components/list-box/index.d.ts",
+      "import": "./dist/components/list-box/index.js",
+      "default": "./dist/components/list-box/index.js"
+    },
+    "./list-box-item": {
+      "types": "./dist/components/list-box-item/index.d.ts",
+      "import": "./dist/components/list-box-item/index.js",
+      "default": "./dist/components/list-box-item/index.js"
+    },
+    "./list-box-section": {
+      "types": "./dist/components/list-box-section/index.d.ts",
+      "import": "./dist/components/list-box-section/index.js",
+      "default": "./dist/components/list-box-section/index.js"
+    },
+    "./menu": {
+      "types": "./dist/components/menu/index.d.ts",
+      "import": "./dist/components/menu/index.js",
+      "default": "./dist/components/menu/index.js"
+    },
+    "./menu-item": {
+      "types": "./dist/components/menu-item/index.d.ts",
+      "import": "./dist/components/menu-item/index.js",
+      "default": "./dist/components/menu-item/index.js"
+    },
+    "./menu-section": {
+      "types": "./dist/components/menu-section/index.d.ts",
+      "import": "./dist/components/menu-section/index.js",
+      "default": "./dist/components/menu-section/index.js"
+    },
     "./modal": {
       "types": "./dist/components/modal/index.d.ts",
       "import": "./dist/components/modal/index.js",
@@ -151,6 +201,11 @@
       "types": "./dist/components/number-field/index.d.ts",
       "import": "./dist/components/number-field/index.js",
       "default": "./dist/components/number-field/index.js"
+    },
+    "./pagination": {
+      "types": "./dist/components/pagination/index.d.ts",
+      "import": "./dist/components/pagination/index.js",
+      "default": "./dist/components/pagination/index.js"
     },
     "./popover": {
       "types": "./dist/components/popover/index.d.ts",
@@ -227,6 +282,21 @@
       "types": "./dist/components/switch-group/index.d.ts",
       "import": "./dist/components/switch-group/index.js",
       "default": "./dist/components/switch-group/index.js"
+    },
+    "./tabs": {
+      "types": "./dist/components/tabs/index.d.ts",
+      "import": "./dist/components/tabs/index.js",
+      "default": "./dist/components/tabs/index.js"
+    },
+    "./tag": {
+      "types": "./dist/components/tag/index.d.ts",
+      "import": "./dist/components/tag/index.js",
+      "default": "./dist/components/tag/index.js"
+    },
+    "./tag-group": {
+      "types": "./dist/components/tag-group/index.d.ts",
+      "import": "./dist/components/tag-group/index.js",
+      "default": "./dist/components/tag-group/index.js"
     },
     "./textarea": {
       "types": "./dist/components/textarea/index.d.ts",

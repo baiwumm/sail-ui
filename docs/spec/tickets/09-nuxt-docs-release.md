@@ -41,7 +41,7 @@
 - `pnpm pack:check`：干净 Vite + Nuxt fixture 安装 tarball。
 - 类型检查：`exports` 每个子路径可解析；`arethetypeswrong` 类检查。
 - 许可证：根 LICENSE/NOTICE，上游快照 LICENSE/NOTICE，依赖清单。
-- 视觉基线：84 个组件（或 MVP 40 先行）截图入库。
+- 视觉基线：84 个组件（或 MVP 40 先行）截图入库；**补齐 T05 顺延的覆盖层视觉截图**（light/dark × placement × 进出场关键帧）。
 - a11y：axe 全量 + 键盘清单抽检。
 - Bundle/CSS 体积记录（不设硬 SLA，回归 >10% 需说明）。
 - changesets + `0.x` 版本；canary dist-tag。
@@ -83,7 +83,7 @@
 - [ ] `pnpm pack:check` 在 Vite + Nuxt fixture 通过。
 - [ ] 所有子路径 exports 与类型解析通过。
 - [ ] LICENSE/NOTICE 随包发布；依赖许可证清单完成。
-- [ ] 视觉基线入库；CI 可复跑。
+- [ ] 视觉基线入库；CI 可复跑（含覆盖层状态矩阵）。
 - [ ] axe 无 critical/serious；键盘清单通过。
 - [ ] changesets 版本与 CHANGELOG 生成。
 - [ ] canary 发布后，在独立项目安装并渲染成功。

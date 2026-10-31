@@ -80,6 +80,7 @@ import {
 import {Tooltip, TooltipArrow, TooltipContent, TooltipTrigger} from "@sail-ui/vue/tooltip";
 import {onMounted, ref} from "vue";
 
+import Collections from "./Collections.vue";
 import Forms from "./Forms.vue";
 import Gallery from "./Gallery.vue";
 import Toasts from "./Toasts.vue";
@@ -116,6 +117,10 @@ onMounted(() => {
 
   showCompound.value = params.has("compound");
 
+  if (params.get("animations") === "slow") {
+    document.documentElement.dataset.animations = "slow";
+  }
+
   if (theme === "dark") {
     isDark.value = true;
     document.documentElement.classList.add("dark");
@@ -129,7 +134,7 @@ onMounted(() => {
       <div>
         <h1 class="text-2xl font-semibold">Sail UI playground</h1>
         <p class="text-sm text-muted">
-          Button · Input · Modal · Drawer · Sheet · Select · Forms · Display & feedback
+          Button · Input · Overlays · Select · Collections · Forms · Display & feedback
         </p>
       </div>
       <Button variant="outline" size="sm" @press="toggleTheme">
@@ -199,7 +204,11 @@ onMounted(() => {
       <h2 class="text-lg font-semibold">Modal</h2>
       <div class="flex flex-wrap items-center gap-3">
         <Modal v-model:open="modalOpen">
-          <ModalTrigger class="button button--secondary button--md"> Open Modal </ModalTrigger>
+          <ModalTrigger
+            class="button button--secondary button--md inline-flex items-center justify-center"
+          >
+            Open Modal
+          </ModalTrigger>
           <ModalBackdrop>
             <ModalContainer>
               <ModalDialog class="sm:max-w-[360px]">
@@ -425,6 +434,19 @@ onMounted(() => {
               <p class="text-sm text-muted">
                 Anchored content with an arrow, placement flipping, and Escape dismissal.
               </p>
+              <Popover>
+                <PopoverTrigger class="button button--secondary button--sm mt-3">
+                  Open nested popover
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverDialog class="w-56">
+                    <PopoverHeading>Nested title</PopoverHeading>
+                    <p class="text-sm text-muted">
+                      Nested content stays inside the parent layer until dismissed.
+                    </p>
+                  </PopoverDialog>
+                </PopoverContent>
+              </Popover>
             </PopoverDialog>
           </PopoverContent>
         </Popover>
@@ -484,6 +506,7 @@ onMounted(() => {
         </component>
       </component>
     </section>
+    <Collections />
     <Forms />
     <Gallery />
     <Toasts />

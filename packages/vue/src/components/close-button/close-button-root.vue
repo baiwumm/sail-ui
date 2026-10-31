@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {useFocusRing, useHover, usePress} from "@sail-ui/primitives";
 import {closeButtonVariants, cx} from "@sail-ui/styles";
-import {computed, ref, useAttrs, useSlots, type Slots} from "vue";
+import {computed, ref, useSlots, type Slots} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {CloseIcon} from "../../shared/icons";
 import {hasSlotContent} from "../../shared/vnode";
 import type {CloseButtonRootProps} from "./types";
@@ -16,14 +17,12 @@ const props = withDefaults(defineProps<CloseButtonRootProps>(), {
   variant: "default",
 });
 
-const attrs = useAttrs();
+const {attrs, className, forwarded} = useForwardedAttrs();
 const componentSlots = useSlots() as Slots;
 const buttonRef = ref<HTMLButtonElement | null>(null);
 const isDisabled = computed(() => props.isDisabled);
 const isInteractiveDisabled = computed(() => props.isDisabled || props.isPending);
-const classes = computed(() =>
-  cx(closeButtonVariants({variant: props.variant}), attrs.class as string | undefined),
-);
+const classes = computed(() => cx(closeButtonVariants({variant: props.variant}), className.value));
 const dataSlot = computed(() => (attrs["data-slot"] as string | undefined) ?? "close-button");
 const ariaLabel = computed(() => {
   const label = attrs["aria-label"] as string | undefined;
@@ -45,7 +44,7 @@ const {isFocused, isFocusVisible} = useFocusRing(buttonRef, {isDisabled: isInter
 <template>
   <button
     ref="buttonRef"
-    v-bind="$attrs"
+    v-bind="forwarded"
     :aria-disabled="isPending ? 'true' : undefined"
     :aria-label="ariaLabel"
     :class="classes"

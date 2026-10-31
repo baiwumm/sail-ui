@@ -63,33 +63,33 @@
 
 | 组件           | Reka 基础                       | 里程碑         | MVP | 备注                                                        |
 | -------------- | ------------------------------- | -------------- | --- | ----------------------------------------------------------- |
-| `alert-dialog` | `AlertDialogRoot`               | M2             | ✅  | `alertdialog`、不可遮罩关闭                                 |
+| `alert-dialog` | `AlertDialogRoot`               | M2             | ✅  | `alertdialog`、不可遮罩关闭；T05 done                       |
 | `drawer`       | `DialogRoot` + 自研 motion/拖拽 | M2             | ✅  | swipe/把手/方向；T05 done                                   |
 | `modal`        | `DialogRoot`                    | M2（M0 spike） | ✅  | placement/退场/滚动锁；T01 已验证；T05 对齐 div trigger     |
 | `popover`      | `PopoverRoot`                   | M2             | ✅  | Floating UI/箭头/`data-placement` 镜像；T05 done            |
 | `sheet`        | `DialogRoot` + 自研 motion/拖拽 | M2             | ✅  | 方向/尺寸、WAAPI 进出场；snap/detached/嵌套未实现；T05 done |
-| `toast`        | `ToastProvider` / `ToastRoot`   | M2             | ✅  | 队列/暂停/Promise/每请求实例                                |
+| `toast`        | `ToastProvider` / `ToastRoot`   | M2             | ✅  | 队列/暂停/Promise/每请求实例；T05 done                      |
 | `tooltip`      | `TooltipRoot`                   | M2             | ✅  | 延迟/关闭延迟、`aria-describedby`、hoverable 内容；T05 done |
 
 ## 集合 / 选择（15）
 
-| 组件               | Reka 基础                                 | 里程碑         | MVP | 备注                                                                                  |
-| ------------------ | ----------------------------------------- | -------------- | --- | ------------------------------------------------------------------------------------- |
-| `accordion`        | `AccordionRoot`                           | M2             | ✅  | 单开/多开、`data-expanded`、`data-pressed`                                            |
-| `disclosure`       | `CollapsibleRoot`                         | M2             |     | 单个展开                                                                              |
-| `disclosure-group` | `AccordionRoot`                           | M2             |     | 分组展开                                                                              |
-| `dropdown`         | `DropdownMenuRoot`                        | M2             | ✅  | 触发/定位/键盘                                                                        |
-| `list-box`         | `ListboxRoot`                             | M2             | ✅  | 单选/多选/分组                                                                        |
-| `list-box-item`    | `ListboxItem`                             | M2             |     | 独立 part                                                                             |
-| `list-box-section` | `ListboxGroup`                            | M2             |     | 分组                                                                                  |
-| `menu`             | `DropdownMenu` content（无独立 MenuRoot） | M2             | ✅  | **Gap**：独立 Menu 需组合 DropdownMenu                                                |
-| `menu-item`        | `DropdownMenuItem`                        | M2             |     | 选择/命令                                                                             |
-| `menu-section`     | `DropdownMenuGroup`                       | M2             |     | 分组/标签                                                                             |
-| `pagination`       | `PaginationRoot`                          | M2             | ✅  | 页码/省略/RTL                                                                         |
-| `select`           | `SelectRoot`                              | M2（M0 spike） | ✅  | `data-open`/`data-selected`/typeahead；T01 已验证；trigger ARIA 与 SSR 选中文本待 T05 |
-| `tabs`             | `TabsRoot`                                | M2             | ✅  | 方向/手动激活                                                                         |
-| `tag`              | `TagGroupItem`                            | M2             | ✅  | 可选择/可删除                                                                         |
-| `tag-group`        | `TagGroupRoot`                            | M2             |     | 键盘删除/焦点回退                                                                     |
+| 组件               | Reka 基础                                 | 里程碑         | MVP | 备注                                                                                                  |
+| ------------------ | ----------------------------------------- | -------------- | --- | ----------------------------------------------------------------------------------------------------- |
+| `accordion`        | `AccordionRoot`（集合状态 / 方向键）      | M2             | ✅  | 单开/多开、`data-expanded`、`data-pressed`；面板自渲染（ADR 0008）；T06 切片 A done                   |
+| `disclosure`       | 自研（App 上下文 + 面板）                 | M2             | ✅  | 单个展开；`useDisclosurePanel` 复刻 RAC；T06 切片 A done                                              |
+| `disclosure-group` | 自研分组上下文                            | M2             | ✅  | 分组展开、单开/多开；T06 切片 A done                                                                  |
+| `dropdown`         | `DropdownMenuRoot`                        | M2             | ✅  | 触发/定位/键盘/子菜单；选择模型与弹层策略见 ADR 0013；T06 切片 F done                                 |
+| `list-box`         | `ListboxRoot`                             | M2             | ✅  | 单选/多选/分组/键盘；单节点 + Reka 状态（ADR 0011）；T06 切片 D done                                  |
+| `list-box-item`    | `ListboxItem`                             | M2             | ✅  | 独立 part；状态词汇与 Label/Description 关联（ADR 0011）；T06 切片 D done                             |
+| `list-box-section` | `ListboxGroup`                            | M2             | ✅  | 分组；Header 自动关联（ADR 0011）；T06 切片 D done                                                    |
+| `menu`             | `DropdownMenu` content（无独立 MenuRoot） | M2             | ✅  | **Gap**：独立 Menu 需组合 DropdownPopover；ADR 0013；T06 切片 F done                                  |
+| `menu-item`        | `DropdownMenuItem`                        | M2             | ✅  | 选择/命令/危险项/指示器；子菜单 trigger 输出 `dropdown-submenu-trigger`；T06 切片 F done              |
+| `menu-section`     | `DropdownMenuGroup`                       | M2             | ✅  | 分组/标签/选择模式覆盖；T06 切片 F done                                                               |
+| `pagination`       | 自研（对齐上游 10 个复合 part）           | M2             | ✅  | 页码/省略/禁用/RTL、`aria-current`；命名导出；T06 切片 G done                                         |
+| `select`           | `SelectRoot`                              | M2（M0 spike） | ✅  | trigger ARIA、popover/listbox 单 role、多选/禁用键；ADR 0012；T06 切片 E done；SSR 选中文本限制见 ADR |
+| `tabs`             | `TabsRoot`（集合状态 / 方向键）           | M2             | ✅  | 方向/手动激活；tab 自渲染、per-tab indicator（ADR 0009）；T06 切片 B done，浏览器/视觉测试已收尾      |
+| `tag`              | `TagGroupItem`                            | M2             | ✅  | 可选择/可删除；remove 按钮仅在监听 remove 时渲染；T06 切片 C done                                     |
+| `tag-group`        | `TagGroupRoot`                            | M2             | ✅  | 键盘删除/焦点回退；自渲染行 + Reka 列表（ADR 0010）；T06 切片 C done                                  |
 
 ## 日期 / 颜色 / 自动完成（15）
 

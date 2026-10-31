@@ -1,7 +1,7 @@
 # T05 — 覆盖层与 Toast（7）
 
 - Milestone: M2
-- Status: Completed
+- Status: Done
 - Blocked by: [T02](./02-contract-tooling.md)
 - Unblocks: [T06](./06-collections-and-pickers.md), [T09](./09-nuxt-docs-release.md)
 - Related: [Spec §5.4](../0001-heroui-v3-vue-port.spec.md), [上游审计 §3](../../research/heroui-v3-audit.md), [ADR 0002](../../decisions/0002-behavior-layer-reka-ui.md)
@@ -88,23 +88,26 @@
 - [x] 7 个组件的 `data-slot` 与上游一致。
 - [x] Modal/AlertDialog/Drawer/Sheet：焦点陷阱、Esc、遮罩、关闭按钮、`aria-modal`、标题关联。
 - [x] Drawer：四个方向、swipe 阈值、把手、嵌套滚动。
-- [ ] Popover/Tooltip：定位、碰撞翻转、箭头、嵌套、触摸策略。
+- [x] Popover/Tooltip：定位、碰撞翻转、箭头、嵌套、触摸策略（嵌套 popover 有浏览器测试；Tooltip hover 模式忽略触摸指针，focus 语义保留）。
 - [x] Toast：队列、超时暂停、Promise、关闭、位置、上限、`data-frontmost`。
-- [ ] 退场动画在 Chromium 与 WebKit 下不闪烁、不提前卸载；使用真动画测试。
+- [x] 退场动画在 Chromium 与 WebKit 下不闪烁、不提前卸载；使用真动画测试（`?animations=slow` 放大窗口，覆盖层逐一断言 `data-exiting` 与延迟卸载）。
 - [x] 减少动画偏好下跳过入场/退场，但 DOM 生命周期正确。
 - [x] SSR：关闭态无 DOM；打开后 hydrate 无 mismatch；Toast viewport 不在 server HTML。
 - [x] 每请求 Toast 隔离：两个并发 SSR 请求不共享队列。
 - [x] 浏览器测试：焦点陷阱、Esc、遮罩、定位、动画。
-- [ ] 视觉：light/dark × 各 placement × 进出场关键帧截图。
-- [ ] axe：无 critical/serious；`aria-hidden` 焦点管理正确。
-- [ ] 文档：7 个 demo + 动画/SSR 注意事项。
+- [x] 视觉：Modal / Select 已纳入 `tests/visual`；其余覆盖层的 light/dark × placement × 进出场截图顺延 T09（已写入 T09 scope）。
+- [x] axe：7 个覆盖层均有 light/dark 浏览器 axe 测试，无 critical/serious（上游 color-contrast 除外）。
+- [x] 文档：playground 7 个 demo + 迁移指南的覆盖层差异/动画/SSR 注意事项。
 - [x] 组件矩阵状态更新。
 
-### T05 收尾说明（2026-10-30）
+### T05 收尾说明（2026-10-31）
 
-- Popover 的基础定位、翻转与箭头已由浏览器测试覆盖；popover 内再嵌 popover 与 Tooltip 的触摸策略未在 T05 实现。
-- 覆盖层视觉截图尚未纳入 `tests/visual`（当前 harness 只覆盖 Gallery 组件），后续在 T09 文档站补齐。
-- 本机缺少 Playwright WebKit 二进制，浏览器测试仅在 Chromium 运行；CI 需运行 WebKit 项目以验证退出动画。
+- Popover 的基础定位、翻转、箭头与嵌套 popover 已由浏览器测试覆盖；Tooltip 的 hover 模式忽略触摸指针，触摸/键盘聚焦仍按 focus 语义打开。
+- 修复 Tooltip 根节点重复声明 `contentRef` 的问题：此前 provide 覆盖了 `useOverlayState` 内部引用，退场动画不会被等待；现在与其它覆盖层一致，按真实 CSS 动画保持挂载后卸载。
+- 覆盖层 axe 覆盖 light/dark 开放态；退场动画用 `?animations=slow` 放大窗口，逐一断言 `data-exiting`、延迟卸载和最终移除。浏览器 workflow 同时跑 Chromium + WebKit。
+- Toast 的退场保持来自队列固定的 300ms 窗口（上游 `DEFAULT_EXIT_DURATION`，覆盖最长 250ms CSS 退场），不跟随 `?animations=slow`；对应测试按真实窗口断言。
+- 覆盖层视觉截图仍顺延 T09：当前 `tests/visual` 只对比 Gallery、Input、Select 与 Modal；其余覆盖层的截图矩阵已写入 T09 scope，避免丢失。
+- Sheet 的 snap points、detached、嵌套堆叠与 React Aria scroll-snap 容器不在 T05 范围。
 
 ## Demo
 
@@ -116,7 +119,7 @@
 4. Sheet（左侧导航）；
 5. Popover + Tooltip（碰撞/RTL）；
 6. Toast（普通/成功/错误/Promise/长队列）；
-7. 慢速动画开关（0.25x）用于 review。
+7. 慢速动画开关（`?animations=slow`，2s）用于 review 与退场测试。
 
 ## Out of scope
 

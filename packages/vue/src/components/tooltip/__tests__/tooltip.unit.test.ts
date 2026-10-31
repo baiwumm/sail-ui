@@ -52,8 +52,8 @@ function createHost(options: HostOptions = {}) {
 const triggerOf = () => document.querySelector<HTMLElement>('[data-slot="tooltip-trigger"]')!;
 const contentOf = () => document.querySelector<HTMLElement>(".tooltip");
 
-const pointer = (element: Element, type: string) => {
-  element.dispatchEvent(new PointerEvent(type, {bubbles: true, pointerType: "mouse"}));
+const pointer = (element: Element, type: string, pointerType = "mouse") => {
+  element.dispatchEvent(new PointerEvent(type, {bubbles: true, pointerType}));
 };
 
 afterEach(() => {
@@ -166,6 +166,23 @@ describe("Tooltip", () => {
     const trigger = triggerOf();
 
     pointer(trigger, "pointerenter");
+    await wait(10);
+    await flushPromises();
+    expect(contentOf()).toBeNull();
+
+    trigger.focus();
+    await flushPromises();
+    expect(contentOf()).not.toBeNull();
+
+    wrapper.unmount();
+  });
+
+  it("ignores touch hover but still opens on focus", async () => {
+    const wrapper = mount(createHost(), {attachTo: document.body});
+    const trigger = triggerOf();
+
+    pointer(trigger, "pointerenter", "touch");
+    pointer(trigger, "pointerleave", "touch");
     await wait(10);
     await flushPromises();
     expect(contentOf()).toBeNull();

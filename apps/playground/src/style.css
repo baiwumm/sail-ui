@@ -12,3 +12,11 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+html[data-animations="slow"] [data-entering="true"],
+html[data-animations="slow"] [data-entering="true"] *,
+html[data-animations="slow"] [data-exiting="true"],
+html[data-animations="slow"] [data-exiting="true"] * {
+  animation-duration: 2s !important;
+  transition-duration: 2s !important;
+}

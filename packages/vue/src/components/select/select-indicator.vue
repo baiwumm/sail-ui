@@ -1,25 +1,24 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
-import {computed, useAttrs, useSlots} from "vue";
+import {computed, useSlots} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {useSelectContext} from "./context";
 
 defineOptions({name: "SailSelectIndicator", inheritAttrs: false});
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const slots = useSlots();
 const context = useSelectContext();
 
 const hasCustomIndicator = computed(() => Boolean(slots.default));
-const classes = computed(() =>
-  cx(context.slots.value.indicator(), attrs.class as string | undefined),
-);
+const classes = computed(() => cx(context.slots.value.indicator(), className.value));
 </script>
 
 <template>
   <span
     v-if="hasCustomIndicator"
-    v-bind="$attrs"
+    v-bind="forwarded"
     :class="classes"
     :data-open="context.isOpen.value ? 'true' : undefined"
     :data-slot="'select-indicator'"
@@ -28,7 +27,7 @@ const classes = computed(() =>
   </span>
   <svg
     v-else
-    v-bind="$attrs"
+    v-bind="forwarded"
     aria-hidden="true"
     :class="classes"
     :data-open="context.isOpen.value ? 'true' : undefined"

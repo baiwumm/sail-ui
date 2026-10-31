@@ -27,6 +27,13 @@ const GALLERY_SECTIONS = [
   "typography",
   "empty-state",
   "forms",
+  "collections-select",
+  "collections-listbox",
+  "collections-dropdown",
+  "collections-accordion",
+  "collections-tabs",
+  "collections-tag-group",
+  "collections-pagination",
 ] as const;
 
 type Theme = "light" | "dark";
@@ -161,6 +168,54 @@ for (const theme of ["light", "dark"] as const) {
         reactPage,
         '[data-slot="select-popover"]',
         `select-popover-${theme}`,
+      );
+
+      await vuePage.close();
+      await reactPage.close();
+    });
+
+    test("Collections Select popover matches the React reference", async ({browser}) => {
+      const vuePage = await browser.newPage();
+      const reactPage = await browser.newPage();
+
+      await openApp(vuePage, PLAYGROUND, theme);
+      await openApp(reactPage, REFERENCE, theme);
+
+      const trigger = '#collections-select [data-slot="select-trigger"]';
+
+      await expectParity(vuePage, reactPage, trigger, `collections-select-trigger-${theme}`);
+
+      await vuePage.locator(trigger).first().click();
+      await reactPage.locator(trigger).first().click();
+      await expectParity(
+        vuePage,
+        reactPage,
+        '[data-slot="select-popover"]',
+        `collections-select-popover-${theme}`,
+      );
+
+      await vuePage.close();
+      await reactPage.close();
+    });
+
+    test("Collections Dropdown popover matches the React reference", async ({browser}) => {
+      const vuePage = await browser.newPage();
+      const reactPage = await browser.newPage();
+
+      await openApp(vuePage, PLAYGROUND, theme);
+      await openApp(reactPage, REFERENCE, theme);
+
+      const trigger = '#collections-dropdown [data-slot="dropdown-trigger"]';
+
+      await expectParity(vuePage, reactPage, trigger, `collections-dropdown-trigger-${theme}`);
+
+      await vuePage.locator(trigger).first().click();
+      await reactPage.locator(trigger).first().click();
+      await expectParity(
+        vuePage,
+        reactPage,
+        '[data-slot="dropdown-popover"]',
+        `collections-dropdown-popover-${theme}`,
       );
 
       await vuePage.close();

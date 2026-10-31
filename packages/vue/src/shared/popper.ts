@@ -47,14 +47,13 @@ export function useDataPlacement(fallback: MaybeRefOrGetter<string | undefined>)
   };
 
   const attach = (next: HTMLElement | null) => {
-    observer?.disconnect();
-    observer = null;
-
     if (next === element.value) {
       apply();
       return;
     }
 
+    observer?.disconnect();
+    observer = null;
     element.value = next;
 
     if (!next) {

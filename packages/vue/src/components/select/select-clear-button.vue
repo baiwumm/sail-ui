@@ -2,13 +2,14 @@
 import {useFocusRing, useHover, usePress} from "@sail-ui/primitives";
 import {cx} from "@sail-ui/styles";
 import {injectSelectRootContext} from "reka-ui";
-import {computed, onBeforeUnmount, onMounted, ref, useAttrs} from "vue";
+import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {useSelectContext} from "./context";
 
 defineOptions({name: "SailSelectClearButton", inheritAttrs: false});
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const context = useSelectContext();
 const rootContext = injectSelectRootContext();
 const elementRef = ref<HTMLSpanElement | null>(null);
@@ -20,9 +21,7 @@ const {isHovered} = useHover(elementRef, {isDisabled});
 const {isPressed} = usePress(elementRef, {isDisabled});
 const {isFocusVisible} = useFocusRing(elementRef, {isDisabled});
 
-const classes = computed(() =>
-  cx(context.slots.value.clearButton(), attrs.class as string | undefined),
-);
+const classes = computed(() => cx(context.slots.value.clearButton(), className.value));
 
 let unregister: (() => void) | undefined;
 
@@ -49,7 +48,7 @@ function handleClick(event: MouseEvent) {
 <template>
   <span
     ref="elementRef"
-    v-bind="$attrs"
+    v-bind="forwarded"
     aria-hidden="true"
     :class="classes"
     :data-empty="isEmpty ? 'true' : undefined"

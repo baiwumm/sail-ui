@@ -11,6 +11,7 @@ import {
 } from "@heroui/react";
 import {useEffect, useState} from "react";
 
+import Collections from "./Collections";
 import Forms from "./Forms";
 import Gallery from "./Gallery";
 
@@ -48,7 +49,7 @@ export default function App() {
         <div>
           <h1 className="text-2xl font-semibold">Sail UI playground</h1>
           <p className="text-sm text-muted">
-            Button · Input · Modal · Select · Forms · Display & feedback
+            Button · Input · Modal · Select · Collections · Forms · Display & feedback
           </p>
         </div>
         <Button variant="outline" size="sm" onPress={toggleTheme}>
@@ -211,6 +212,7 @@ export default function App() {
         </div>
       </section>
 
+      <Collections />
       <Forms />
       <Gallery />
     </main>

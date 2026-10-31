@@ -46,11 +46,11 @@
 
 ## M2 — 覆盖层 + 集合（MVP，3–4 周）
 
-- [ ] 7 个覆盖层/Toast（[T05](./spec/tickets/05-overlays.md)）
-- [ ] 15 个集合/选择器（[T06](./spec/tickets/06-collections-and-pickers.md)）
-- [ ] 覆盖层动画/焦点/SSR/层级
+- [x] 7 个覆盖层/Toast（[T05](./spec/tickets/05-overlays.md)）
+- [x] 15 个集合/选择器（[T06](./spec/tickets/06-collections-and-pickers.md)）
+- [x] 覆盖层动画/焦点/SSR/层级
 - [ ] Select 与 popover 状态机打通
-- [ ] 迁移指南初稿
+- [ ] 迁移指南初稿（覆盖层差异已记录，集合/日期待补）
 - [ ] MVP 40 的 API 冻结（允许修 bug，不再大改命名）
 
 风险：退场动画、Toast 每请求隔离、Select 选中属性。

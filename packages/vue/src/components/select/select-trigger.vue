@@ -2,8 +2,9 @@
 import {useFocusRing, useHover} from "@sail-ui/primitives";
 import {cx} from "@sail-ui/styles";
 import {injectSelectRootContext, SelectTrigger as SelectTriggerPrimitive} from "reka-ui";
-import {computed, ref, useAttrs} from "vue";
+import {computed, ref} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {useSelectContext} from "./context";
 import type {SelectTriggerProps} from "./types";
 
@@ -13,7 +14,7 @@ const props = withDefaults(defineProps<SelectTriggerProps>(), {
   isDisabled: false,
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const context = useSelectContext();
 const rootContext = injectSelectRootContext();
 const buttonRef = ref<HTMLButtonElement | null>(null);
@@ -23,9 +24,7 @@ const isDisabled = computed(() => context.isDisabled.value || props.isDisabled);
 const {isHovered} = useHover(buttonRef, {isDisabled});
 const {isFocusVisible} = useFocusRing(buttonRef, {isDisabled});
 
-const classes = computed(() =>
-  cx(context.slots.value.trigger(), attrs.class as string | undefined),
-);
+const classes = computed(() => cx(context.slots.value.trigger(), className.value));
 
 function handleKeyDown(event: KeyboardEvent) {
   if (event.key !== "Backspace" && event.key !== "Delete") {
@@ -45,12 +44,17 @@ function handleKeyDown(event: KeyboardEvent) {
   <SelectTriggerPrimitive as-child :disabled="isDisabled">
     <button
       ref="buttonRef"
-      v-bind="$attrs"
+      v-bind="forwarded"
+      aria-haspopup="listbox"
+      :aria-autocomplete="undefined"
       :class="classes"
+      :data-disabled="isDisabled ? 'true' : undefined"
       :data-focus-visible="isFocusVisible ? 'true' : undefined"
       :data-hovered="isHovered ? 'true' : undefined"
       :data-open="context.isOpen.value ? 'true' : undefined"
+      :data-placeholder="undefined"
       :data-slot="'select-trigger'"
+      :data-state="undefined"
       :disabled="isDisabled || undefined"
       type="button"
       @keydown="handleKeyDown"

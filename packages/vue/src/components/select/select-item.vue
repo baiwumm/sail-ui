@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import {useFocusRing, useHover} from "@sail-ui/primitives";
+import {useFocusRing, useHover, usePress} from "@sail-ui/primitives";
 import {cx, listboxItemVariants} from "@sail-ui/styles";
 import {injectSelectRootContext, SelectItem as SelectItemPrimitive, SelectItemText} from "reka-ui";
-import {computed, provide, ref, useAttrs} from "vue";
+import {computed, provide, ref, useId, useSlots, type Slots} from "vue";
 
-import {selectItemContextKey, type SelectItemContext} from "./context";
+import {useForwardedAttrs} from "../../shared/attrs";
+import {descriptionContextKey} from "../../shared/description-context";
+import {labelContextKey} from "../../shared/label-context";
+import {containsComponent, flattenVNodes} from "../../shared/vnode";
+import DescriptionRoot from "../description/description.vue";
+import LabelRoot from "../label/label.vue";
+import {selectItemContextKey, useSelectContext, type SelectItemContext} from "./context";
 import type {SelectItemProps} from "./types";
+import {valuesEqual} from "./utils";
 
 defineOptions({name: "SailSelectItem", inheritAttrs: false});
 
@@ -14,37 +21,59 @@ const props = withDefaults(defineProps<SelectItemProps>(), {
   variant: "default",
 });
 
-const attrs = useAttrs();
+const {attrs, className, forwarded} = useForwardedAttrs();
 const rootContext = injectSelectRootContext();
+const context = useSelectContext();
+const componentSlots = useSlots() as Slots;
+
 const itemRef = ref<HTMLDivElement | null>(null);
+const labelId = useId();
+const descriptionId = useId();
 
-const isDisabled = computed(() => props.isDisabled || Boolean(rootContext.disabled?.value));
-
-function matchesValue(value: unknown, currentValue: unknown, by: typeof rootContext.by) {
-  if (value === undefined || currentValue === undefined) {
-    return false;
-  }
-
-  if (typeof value === "string") {
-    return value === currentValue;
-  }
-
-  if (typeof by === "function") {
-    return by(value, currentValue);
-  }
-
-  if (typeof by === "string") {
-    return (
-      (value as Record<string, unknown>)?.[by] === (currentValue as Record<string, unknown>)?.[by]
-    );
-  }
-
-  return JSON.stringify(value) === JSON.stringify(currentValue);
-}
-
-const isSelected = computed(() =>
-  matchesValue(rootContext.modelValue.value, props.value, rootContext.by),
+const isDisabled = computed(
+  () =>
+    props.isDisabled ||
+    context.isDisabled.value ||
+    Boolean(rootContext.disabled?.value) ||
+    context.isItemDisabled(props.value),
 );
+
+const isSelected = computed(() => {
+  const current = rootContext.modelValue.value;
+
+  if (Array.isArray(current)) {
+    return current.some((value) => valuesEqual(value, props.value, rootContext.by));
+  }
+
+  return valuesEqual(current, props.value, rootContext.by);
+});
+
+const nodes = computed(() => flattenVNodes(componentSlots.default?.() ?? []));
+const hasLabel = computed(() => containsComponent(nodes.value, LabelRoot));
+const hasDescription = computed(() => containsComponent(nodes.value, DescriptionRoot));
+
+const itemAttrs = computed(() => {
+  const base: Record<string, unknown> = {...forwarded.value};
+
+  if (hasLabel.value && !base["aria-labelledby"]) {
+    base["aria-labelledby"] = labelId;
+  }
+
+  return base;
+});
+
+const describedBy = computed(() => {
+  const explicit = attrs["aria-describedby"];
+
+  if (explicit) {
+    return explicit as string;
+  }
+
+  return hasDescription.value ? descriptionId : undefined;
+});
+
+provide(labelContextKey, {id: labelId, elementType: "span"});
+provide(descriptionContextKey, {id: descriptionId});
 
 provide<SelectItemContext>(selectItemContextKey, {
   isSelected,
@@ -52,10 +81,11 @@ provide<SelectItemContext>(selectItemContextKey, {
 });
 
 const {isHovered} = useHover(itemRef, {isDisabled});
+const {isPressed} = usePress(itemRef, {isDisabled});
 const {isFocused, isFocusVisible} = useFocusRing(itemRef, {isDisabled});
 
 const classes = computed(() =>
-  cx(listboxItemVariants({variant: props.variant}).item(), attrs.class as string | undefined),
+  cx(listboxItemVariants({variant: props.variant}).item(), className.value),
 );
 </script>
 
@@ -69,14 +99,21 @@ const classes = computed(() =>
   >
     <div
       ref="itemRef"
-      v-bind="$attrs"
+      v-bind="itemAttrs"
+      :aria-describedby="describedBy"
+      :aria-disabled="isDisabled ? 'true' : undefined"
+      :aria-selected="isSelected ? 'true' : 'false'"
       :class="classes"
       :data-disabled="isDisabled ? 'true' : undefined"
-      :data-focused="isFocused ? '' : undefined"
+      :data-focused="isFocused ? 'true' : undefined"
       :data-focus-visible="isFocusVisible ? 'true' : undefined"
+      :data-highlighted="undefined"
       :data-hovered="isHovered ? 'true' : undefined"
+      :data-pressed="isPressed ? 'true' : undefined"
       :data-selected="isSelected ? 'true' : undefined"
+      :data-selection-mode="rootContext.multiple.value ? 'multiple' : 'single'"
       :data-slot="'list-box-item'"
+      :data-state="undefined"
     >
       <SelectItemText>
         <slot :selected="selected" />

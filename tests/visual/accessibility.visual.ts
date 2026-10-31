@@ -29,6 +29,13 @@ const GALLERY_SECTIONS = [
   "typography",
   "empty-state",
   "forms",
+  "collections-select",
+  "collections-listbox",
+  "collections-dropdown",
+  "collections-accordion",
+  "collections-tabs",
+  "collections-tag-group",
+  "collections-pagination",
 ] as const;
 
 async function collectContrastViolations(page: Page) {

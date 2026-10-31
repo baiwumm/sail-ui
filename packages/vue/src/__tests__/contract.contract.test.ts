@@ -60,6 +60,7 @@ import SelectPopover from "../components/select/select-popover.vue";
 import Select from "../components/select/select-root.vue";
 import SelectTrigger from "../components/select/select-trigger.vue";
 import SelectValue from "../components/select/select-value.vue";
+import type {SelectModelValue} from "../components/select/types";
 import Popover from "../components/popover/popover-root.vue";
 import PopoverArrow from "../components/popover/popover-arrow.vue";
 import PopoverContent from "../components/popover/popover-content.vue";
@@ -317,8 +318,10 @@ function createTooltipHost() {
 }
 
 interface SelectHostOptions {
+  disabledKeys?: string[];
   invalid?: boolean;
-  value?: string;
+  selectionMode?: "single" | "multiple";
+  value?: SelectModelValue;
 }
 
 function createSelectHost(options: SelectHostOptions = {}) {
@@ -330,15 +333,17 @@ function createSelectHost(options: SelectHostOptions = {}) {
 
   return defineComponent({
     setup() {
-      const value = ref<string | undefined>(options.value);
+      const value = ref<SelectModelValue | undefined>(options.value);
 
       return () =>
         h(
           Select,
           {
+            disabledKeys: options.disabledKeys,
             isInvalid: options.invalid,
             modelValue: value.value,
             placeholder: "Select one",
+            selectionMode: options.selectionMode,
           },
           {
             default: () => [
@@ -502,8 +507,10 @@ describe("contract snapshots", () => {
     ]);
     expectKnownSlots(html);
     expect(html).toContain('role="combobox"');
+    expect(html).toContain('aria-haspopup="listbox"');
     expect(html).toContain('aria-expanded="false"');
     expect(html).toContain('data-placeholder="true"');
+    expect(dataAttributesOfSlot(html, "select-trigger")[0]!["data-state"]).toBeUndefined();
     expect(html).not.toContain('data-slot="select-popover"');
     expect(html).not.toContain('role="listbox"');
   });
@@ -861,18 +868,26 @@ describe("interactive state contract", () => {
 
     const html = document.body.innerHTML;
     const popover = document.querySelector<HTMLElement>('[data-slot="select-popover"]')!;
+    const listbox = popover.querySelector<HTMLElement>('[data-slot="list-box"]')!;
     const clearButton = document.querySelector<HTMLElement>('[data-slot="select-clear-button"]')!;
     const items = [...document.querySelectorAll<HTMLElement>('[data-slot="list-box-item"]')];
     const california = items.find((item) => item.textContent?.includes("California"))!;
     const florida = items.find((item) => item.textContent?.includes("Florida"))!;
 
     expectKnownSlots(html);
+    expect(trigger.getAttribute("aria-haspopup")).toBe("listbox");
+    expect(trigger.getAttribute("aria-controls")).toBe(listbox.id);
     expect(popover.getAttribute("data-placement")).toBeTruthy();
-    expect(popover.getAttribute("role")).toBe("listbox");
+    expect(popover.getAttribute("role")).toBeNull();
+    expect(popover.getAttribute("data-state")).toBeNull();
+    expect(listbox.getAttribute("role")).toBe("listbox");
+    expect(listbox.getAttribute("aria-multiselectable")).toBeNull();
     expect(california.getAttribute("data-selected")).toBe("true");
+    expect(california.getAttribute("data-selection-mode")).toBe("single");
+    expect(california.getAttribute("data-state")).toBeNull();
     expect(florida.getAttribute("data-disabled")).toBe("true");
     expect(clearButton.hasAttribute("data-empty")).toBe(false);
-    expect(california.hasAttribute("data-highlighted")).toBe(true);
+    expect(california.hasAttribute("data-highlighted")).toBe(false);
 
     pointer(california, "pointerenter");
     await nextTick();

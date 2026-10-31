@@ -11,7 +11,9 @@ import type {TooltipRootProps} from "./types";
 defineOptions({name: "SailTooltipRoot", inheritAttrs: false});
 
 const props = defineProps<TooltipRootProps>();
-const openModel = defineModel<boolean>("open");
+// An explicit undefined default keeps Vue from casting an absent Boolean prop
+// to false, so `defaultOpen` can still initialize the overlay.
+const openModel = defineModel<boolean>("open", {default: undefined as unknown as boolean});
 
 const overlay = useOverlayState({
   isOpen: () => openModel.value,
@@ -23,7 +25,6 @@ const overlay = useOverlayState({
 
 const slots = computed(() => tooltipVariants());
 const triggerRef = ref<HTMLElement | null>(null);
-const contentRef = ref<HTMLElement | null>(null);
 const isDisabled = computed(() => Boolean(props.isDisabled));
 const triggerMode = computed<TooltipTriggerMode>(() => props.trigger ?? "hover");
 const delay = computed(() => props.delay ?? readCssTime("--tooltip-delay", 1500));
@@ -96,7 +97,6 @@ provide<TooltipContext>(tooltipContextKey, {
   ...overlay,
   slots,
   triggerRef,
-  contentRef,
   isDisabled,
   triggerMode,
   scheduleOpen,

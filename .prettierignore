@@ -4,6 +4,7 @@ coverage
 .turbo
 .nuxt
 .output
+.qoder
 .screenshots
 packages/styles/upstream
 packages/styles/generated
