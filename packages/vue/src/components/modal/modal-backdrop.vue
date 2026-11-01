@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx, modalVariants} from "@sail-ui/styles";
 import {DialogOverlay, DialogPortal} from "reka-ui";
-import {computed, provide, useAttrs} from "vue";
+import {computed, provide} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {modalContextKey, useModalContext} from "./context";
 import type {ModalBackdropProps} from "./types";
 
@@ -13,7 +14,7 @@ const props = withDefaults(defineProps<ModalBackdropProps>(), {
   isKeyboardDismissDisabled: false,
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const context = useModalContext();
 
 const mergedSlots = computed(() => ({
@@ -30,7 +31,7 @@ provide(modalContextKey, {
   slots: mergedSlots,
 });
 
-const classes = computed(() => cx(mergedSlots.value.backdrop(), attrs.class as string | undefined));
+const classes = computed(() => cx(mergedSlots.value.backdrop(), className.value));
 
 // Function refs also run on unmount, so a closed overlay never keeps a stale element.
 function setBackdropRef(element: unknown) {
@@ -43,7 +44,7 @@ function setBackdropRef(element: unknown) {
     <DialogOverlay as-child>
       <div
         :ref="setBackdropRef"
-        v-bind="$attrs"
+        v-bind="forwarded"
         :class="classes"
         :data-entering="context.isEntering.value ? 'true' : undefined"
         :data-exiting="context.isExiting.value ? 'true' : undefined"

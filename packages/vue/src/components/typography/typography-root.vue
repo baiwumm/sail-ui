@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx, typographyVariants} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, useAttrs} from "vue";
+import {computed} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import type {TypographyRootProps, TypographyType} from "./types";
 
 const defaultElementByType: Record<TypographyType, string> = {
@@ -26,7 +27,7 @@ const props = withDefaults(defineProps<TypographyRootProps>(), {
   type: "body",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const classes = computed(() =>
   cx(
     typographyVariants({
@@ -36,7 +37,7 @@ const classes = computed(() =>
       type: props.type,
       weight: props.weight,
     }).base(),
-    attrs.class as string | undefined,
+    className.value,
   ),
 );
 const element = computed(() => props.as ?? defaultElementByType[props.type]);
@@ -44,7 +45,7 @@ const element = computed(() => props.as ?? defaultElementByType[props.type]);
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="element"
     :as-child="asChild"
     :class="classes"

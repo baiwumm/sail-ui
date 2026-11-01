@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, useAttrs} from "vue";
+import {computed} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import type {BadgeAnchorProps} from "./types";
 
 defineOptions({name: "SailBadgeAnchor", inheritAttrs: false});
@@ -11,13 +12,13 @@ withDefaults(defineProps<BadgeAnchorProps>(), {
   as: "span",
 });
 
-const attrs = useAttrs();
-const classes = computed(() => cx("badge-anchor", attrs.class as string | undefined));
+const {className, forwarded} = useForwardedAttrs();
+const classes = computed(() => cx("badge-anchor", className.value));
 </script>
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"

@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, inject, useAttrs, useSlots, type Slots} from "vue";
+import {computed, inject, useSlots, type Slots} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {ExternalLinkIcon} from "../../shared/icons";
 import {hasSlotContent} from "../../shared/vnode";
 import {linkContextKey} from "./context";
@@ -14,16 +15,16 @@ withDefaults(defineProps<LinkIconProps>(), {
   as: "span",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const componentSlots = useSlots() as Slots;
 const slots = inject(linkContextKey, null)?.slots;
-const classes = computed(() => cx(slots?.value.icon(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots?.value.icon(), className.value));
 const hasIcon = computed(() => hasSlotContent(componentSlots.default));
 </script>
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"

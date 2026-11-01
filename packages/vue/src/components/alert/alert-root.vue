@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {alertVariants, cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, provide, useAttrs} from "vue";
+import {computed, provide} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {surfaceContextKey} from "../surface/context";
 import {alertContextKey} from "./context";
 import type {AlertRootProps} from "./types";
@@ -13,9 +14,9 @@ const props = withDefaults(defineProps<AlertRootProps>(), {
   as: "div",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const slots = computed(() => alertVariants({status: props.status}));
-const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.base(), className.value));
 
 provide(alertContextKey, {
   slots,
@@ -29,7 +30,7 @@ provide(
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"

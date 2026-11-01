@@ -3,8 +3,9 @@ import type {SkeletonVariants} from "@sail-ui/styles";
 
 import {cx, skeletonVariants} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, onMounted, ref, useAttrs} from "vue";
+import {computed, onMounted, ref} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import type {SkeletonRootProps} from "./types";
 
 defineOptions({name: "SailSkeleton", inheritAttrs: false});
@@ -37,7 +38,7 @@ function readAnimationVariable(): SkeletonVariants["animationType"] | undefined 
   return ANIMATION_VALUES.find((value) => value === cachedAnimation);
 }
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const cssAnimation = ref<SkeletonVariants["animationType"]>();
 
 onMounted(() => {
@@ -49,13 +50,13 @@ onMounted(() => {
 const classes = computed(() =>
   cx(
     skeletonVariants({animationType: props.animationType ?? cssAnimation.value}).base(),
-    attrs.class as string | undefined,
+    className.value,
   ),
 );
 </script>
 
 <template>
-  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes">
+  <Primitive v-bind="forwarded" :as="as" :as-child="asChild" :class="classes">
     <slot />
   </Primitive>
 </template>

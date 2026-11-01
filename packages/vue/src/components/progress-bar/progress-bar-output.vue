@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, inject, useAttrs, useSlots, type Slots} from "vue";
+import {computed, inject, useSlots, type Slots} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {hasSlotContent} from "../../shared/vnode";
 import {progressBarContextKey} from "./context";
 import type {ProgressBarOutputProps} from "./types";
@@ -13,18 +14,16 @@ withDefaults(defineProps<ProgressBarOutputProps>(), {
   as: "span",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const componentSlots = useSlots() as Slots;
 const context = inject(progressBarContextKey, null);
-const classes = computed(() =>
-  cx(context?.slots.value.output(), attrs.class as string | undefined),
-);
+const classes = computed(() => cx(context?.slots.value.output(), className.value));
 const hasContent = computed(() => hasSlotContent(componentSlots.default));
 </script>
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"

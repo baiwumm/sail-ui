@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, inject, useAttrs} from "vue";
+import {computed, inject} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {progressBarContextKey} from "./context";
 import type {ProgressBarFillProps} from "./types";
 
@@ -12,13 +13,13 @@ withDefaults(defineProps<ProgressBarFillProps>(), {
   as: "div",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const context = inject(progressBarContextKey, null);
 const classes = computed(() => {
   // Destructured because the linter mistakes the tv slot `fill()` for Array#fill.
   const fill = context?.slots.value.fill;
 
-  return cx(fill?.(), attrs.class as string | undefined);
+  return cx(fill?.(), className.value);
 });
 const style = computed(() =>
   context?.isIndeterminate.value ? undefined : {width: `${context?.percentage.value ?? 0}%`},
@@ -27,7 +28,7 @@ const style = computed(() =>
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"

@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {avatarGroupVariants, cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, h, provide, useAttrs, useSlots, type Slots, type VNode} from "vue";
+import {computed, h, provide, useSlots, type Slots, type VNode} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {RenderNodes, flattenVNodes, isRenderableVNode} from "../../shared/vnode";
 import AvatarGroupCount from "./avatar-group-count.vue";
 import {avatarGroupContextKey} from "./context";
@@ -17,9 +18,9 @@ const props = withDefaults(defineProps<AvatarGroupRootProps>(), {
   size: "md",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const slots = computed(() => avatarGroupVariants({isGrid: props.isGrid, overlap: props.overlap}));
-const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.base(), className.value));
 
 provide(avatarGroupContextKey, {
   slots,
@@ -63,7 +64,7 @@ function renderChildren(): VNode[] {
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"

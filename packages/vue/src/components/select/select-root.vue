@@ -3,8 +3,9 @@ import {useOverlayState} from "@sail-ui/primitives";
 import {cx, selectVariants} from "@sail-ui/styles";
 import type {AcceptableValue} from "reka-ui";
 import {FieldRoot, SelectRoot as SelectRootPrimitive} from "reka-ui";
-import {computed, provide, useAttrs} from "vue";
+import {computed, provide} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {selectContextKey, type SelectContext} from "./context";
 import type {SelectModelValue, SelectRootProps, SelectSelectionMode} from "./types";
 import {valuesEqual} from "./utils";
@@ -20,7 +21,7 @@ const props = withDefaults(defineProps<SelectRootProps>(), {
   variant: "primary",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const model = defineModel<SelectModelValue>();
 // An explicit undefined default keeps Vue from casting an absent Boolean prop
 // to false, so `defaultOpen` can still initialize the overlay.
@@ -77,7 +78,7 @@ provide<SelectContext>(selectContextKey, {
   slots,
 });
 
-const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.base(), className.value));
 
 function handleOpenChange(isOpen: boolean) {
   if (isOpen) {
@@ -96,7 +97,7 @@ defineExpose({
 
 <template>
   <FieldRoot
-    v-bind="$attrs"
+    v-bind="forwarded"
     :aria-invalid="isInvalid || undefined"
     :class="classes"
     :data-invalid="isInvalid ? 'true' : undefined"

@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cardVariants, cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, provide, useAttrs} from "vue";
+import {computed, provide} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {surfaceContextKey} from "../surface/context";
 import {cardContextKey} from "./context";
 import type {CardRootProps} from "./types";
@@ -14,9 +15,9 @@ const props = withDefaults(defineProps<CardRootProps>(), {
   variant: "default",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const slots = computed(() => cardVariants({variant: props.variant}));
-const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.base(), className.value));
 
 provide(cardContextKey, {slots});
 provide(
@@ -26,7 +27,7 @@ provide(
 </script>
 
 <template>
-  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes" :data-slot="'card'">
+  <Primitive v-bind="forwarded" :as="as" :as-child="asChild" :class="classes" :data-slot="'card'">
     <slot />
   </Primitive>
 </template>

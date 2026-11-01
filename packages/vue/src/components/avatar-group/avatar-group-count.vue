@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
-import {computed, inject, useAttrs} from "vue";
+import {computed, inject} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import AvatarFallback from "../avatar/avatar-fallback.vue";
 import AvatarRoot from "../avatar/avatar-root.vue";
 import {avatarGroupContextKey} from "./context";
@@ -13,14 +14,9 @@ const props = withDefaults(defineProps<AvatarGroupCountProps>(), {
   as: "span",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const group = inject(avatarGroupContextKey, null);
-const classes = computed(() => cx(group?.slots.value.count(), attrs.class as string | undefined));
-const forwardedAttrs = computed(() => {
-  const {class: _class, ...rest} = attrs;
-
-  return rest;
-});
+const classes = computed(() => cx(group?.slots.value.count(), className.value));
 
 const finalSize = computed(() => props.size ?? group?.size.value);
 const finalColor = computed(() => props.color ?? group?.color.value);
@@ -29,7 +25,7 @@ const finalVariant = computed(() => props.variant ?? group?.variant.value);
 
 <template>
   <AvatarRoot
-    v-bind="forwardedAttrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"

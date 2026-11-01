@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {breadcrumbsVariants, cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {cloneVNode, computed, provide, useAttrs, useSlots, type Slots, type VNode} from "vue";
+import {cloneVNode, computed, provide, useSlots, type Slots, type VNode} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {RenderNodes, flattenVNodes, isRenderableVNode} from "../../shared/vnode";
 import BreadcrumbsItem from "./breadcrumbs-item.vue";
 import {breadcrumbsContextKey} from "./context";
@@ -15,10 +16,10 @@ const props = withDefaults(defineProps<BreadcrumbsRootProps>(), {
   isDisabled: false,
 });
 
-const attrs = useAttrs();
+const {attrs, className, forwarded} = useForwardedAttrs();
 const componentSlots = useSlots() as Slots;
 const slots = computed(() => breadcrumbsVariants());
-const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.base(), className.value));
 const ariaLabel = computed(() => (attrs["aria-label"] as string | undefined) ?? "Breadcrumbs");
 
 provide(breadcrumbsContextKey, {
@@ -47,7 +48,7 @@ function renderChildren(): VNode[] {
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :aria-label="ariaLabel"
     :as="as"
     :as-child="asChild"

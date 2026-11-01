@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
-import {computed, useAttrs} from "vue";
+import {computed} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {useSheetContext} from "./context";
 
 defineOptions({name: "SailSheetBody", inheritAttrs: false});
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const {slots} = useSheetContext();
 
-const classes = computed(() => cx(slots.value.body(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.body(), className.value));
 </script>
 
 <template>
-  <div v-bind="$attrs" :class="classes" :data-slot="'sheet-body'">
+  <div v-bind="forwarded" :class="classes" :data-slot="'sheet-body'">
     <slot />
   </div>
 </template>

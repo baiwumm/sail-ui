@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {surfaceVariants, cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, provide, useAttrs} from "vue";
+import {computed, provide} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {surfaceContextKey} from "./context";
 import type {SurfaceProps} from "./types";
 
@@ -13,20 +14,24 @@ const props = withDefaults(defineProps<SurfaceProps>(), {
   variant: "default",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 
 provide(
   surfaceContextKey,
   computed(() => props.variant),
 );
 
-const classes = computed(() =>
-  cx(surfaceVariants({variant: props.variant}), attrs.class as string | undefined),
-);
+const classes = computed(() => cx(surfaceVariants({variant: props.variant}), className.value));
 </script>
 
 <template>
-  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes" :data-slot="'surface'">
+  <Primitive
+    v-bind="forwarded"
+    :as="as"
+    :as-child="asChild"
+    :class="classes"
+    :data-slot="'surface'"
+  >
     <slot />
   </Primitive>
 </template>

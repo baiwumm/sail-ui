@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx, progressBarVariants} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, provide, useAttrs, useId, useSlots, type Slots} from "vue";
+import {computed, provide, useId, useSlots, type Slots} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {labelContextKey} from "../../shared/label-context";
 import {useProgressState} from "../../shared/progress";
 import {flattenVNodes} from "../../shared/vnode";
@@ -18,12 +19,12 @@ const props = withDefaults(defineProps<ProgressBarRootProps>(), {
   maxValue: 100,
 });
 
-const attrs = useAttrs();
+const {attrs, className, forwarded} = useForwardedAttrs();
 const componentSlots = useSlots() as Slots;
 const labelId = useId();
 
 const slots = computed(() => progressBarVariants({color: props.color, size: props.size}));
-const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.base(), className.value));
 
 const state = useProgressState({
   value: () => props.value,
@@ -69,7 +70,7 @@ provide(labelContextKey, {id: labelId, elementType: "span"});
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"

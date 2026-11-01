@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, inject, useAttrs} from "vue";
+import {computed, inject} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {CENTER, progressCircleContextKey} from "./context";
 import type {ProgressCircleTrackProps} from "./types";
 
@@ -12,14 +13,14 @@ withDefaults(defineProps<ProgressCircleTrackProps>(), {
   as: "svg",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const context = inject(progressCircleContextKey, null);
-const classes = computed(() => cx(context?.slots.value.track(), attrs.class as string | undefined));
+const classes = computed(() => cx(context?.slots.value.track(), className.value));
 </script>
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"

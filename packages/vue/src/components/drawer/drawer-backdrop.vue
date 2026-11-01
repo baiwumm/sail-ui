@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx, drawerVariants} from "@sail-ui/styles";
 import {DialogOverlay, DialogPortal} from "reka-ui";
-import {computed, provide, useAttrs} from "vue";
+import {computed, provide} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {drawerContextKey, useDrawerContext} from "./context";
 import type {DrawerBackdropProps} from "./types";
 
@@ -13,7 +14,7 @@ const props = withDefaults(defineProps<DrawerBackdropProps>(), {
   isKeyboardDismissDisabled: false,
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const context = useDrawerContext();
 
 const mergedSlots = computed(() => ({
@@ -30,7 +31,7 @@ provide(drawerContextKey, {
   slots: mergedSlots,
 });
 
-const classes = computed(() => cx(mergedSlots.value.backdrop(), attrs.class as string | undefined));
+const classes = computed(() => cx(mergedSlots.value.backdrop(), className.value));
 
 // Function refs also run on unmount, so a closed overlay never keeps a stale element.
 function setBackdropRef(element: unknown) {
@@ -43,7 +44,7 @@ function setBackdropRef(element: unknown) {
     <DialogOverlay as-child>
       <div
         :ref="setBackdropRef"
-        v-bind="$attrs"
+        v-bind="forwarded"
         :class="classes"
         :data-entering="context.isEntering.value ? 'true' : undefined"
         :data-exiting="context.isExiting.value ? 'true' : undefined"

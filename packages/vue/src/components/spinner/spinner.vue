@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx, spinnerVariants} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, useAttrs, useId} from "vue";
+import {computed, useId} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import type {SpinnerRootProps} from "./types";
 
 defineOptions({name: "SailSpinner", inheritAttrs: false});
@@ -11,20 +12,20 @@ const props = withDefaults(defineProps<SpinnerRootProps>(), {
   as: "span",
 });
 
-const attrs = useAttrs();
+const {attrs, className, forwarded} = useForwardedAttrs();
 const iconId = useId();
 const gradientOneId = `«data-slot-icon-def-1»-${iconId}`;
 const gradientTwoId = `«data-slot-icon-def-2»-${iconId}`;
 
 const classes = computed(() =>
-  cx(spinnerVariants({color: props.color, size: props.size}), attrs.class as string | undefined),
+  cx(spinnerVariants({color: props.color, size: props.size}), className.value),
 );
 const label = computed(() => (attrs["aria-label"] as string | undefined) ?? "Loading");
 </script>
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :aria-label="label"

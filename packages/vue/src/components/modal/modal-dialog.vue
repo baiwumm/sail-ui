@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
 import {DialogContent} from "reka-ui";
-import {computed, useAttrs} from "vue";
+import {computed} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {useModalContext} from "./context";
 
 defineOptions({name: "SailModalDialog", inheritAttrs: false});
 
-const attrs = useAttrs();
+const {attrs, className, forwarded} = useForwardedAttrs();
 const {placement, slots, contentId, isDismissable, isKeyboardDismissDisabled} = useModalContext();
 
-const classes = computed(() => cx(slots.value.dialog(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.dialog(), className.value));
 
 function handlePointerDownOutside(event: Event) {
   if (!isDismissable.value) {
@@ -30,7 +31,7 @@ function handleEscapeKeyDown(event: KeyboardEvent) {
        aria-describedby would point at a missing element. Forward only a
        consumer-provided value. -->
   <DialogContent
-    v-bind="$attrs"
+    v-bind="forwarded"
     :id="contentId"
     :aria-describedby="attrs['aria-describedby']"
     aria-modal="true"

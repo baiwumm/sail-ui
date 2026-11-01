@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {chipVariants, cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, h, provide, useAttrs, useSlots, type Slots, type VNode} from "vue";
+import {computed, h, provide, useSlots, type Slots, type VNode} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {RenderNodes, plainTextChild} from "../../shared/vnode";
 import ChipLabel from "./chip-label.vue";
 import {chipContextKey} from "./context";
@@ -14,12 +15,12 @@ const props = withDefaults(defineProps<ChipRootProps>(), {
   as: "span",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const componentSlots = useSlots() as Slots;
 const slots = computed(() =>
   chipVariants({color: props.color, size: props.size, variant: props.variant}),
 );
-const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.base(), className.value));
 
 provide(chipContextKey, {slots});
 
@@ -35,7 +36,7 @@ function renderChildren(): VNode[] {
 </script>
 
 <template>
-  <Primitive v-bind="$attrs" :as="as" :as-child="asChild" :class="classes" :data-slot="'chip'">
+  <Primitive v-bind="forwarded" :as="as" :as-child="asChild" :class="classes" :data-slot="'chip'">
     <RenderNodes :render="renderChildren" />
   </Primitive>
 </template>

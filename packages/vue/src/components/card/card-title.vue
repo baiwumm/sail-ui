@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, inject, useAttrs} from "vue";
+import {computed, inject} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {cardContextKey} from "./context";
 import type {CardTitleProps} from "./types";
 
@@ -12,14 +13,14 @@ withDefaults(defineProps<CardTitleProps>(), {
   as: "h3",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const slots = inject(cardContextKey, null)?.slots;
-const classes = computed(() => cx(slots?.value.title(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots?.value.title(), className.value));
 </script>
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"

@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import {cx, descriptionVariants} from "@sail-ui/styles";
 import {FieldDescription, injectFieldRootContext} from "reka-ui";
-import {computed, inject, onBeforeUnmount, onMounted, useAttrs, useId} from "vue";
+import {computed, inject, onBeforeUnmount, onMounted, useId} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {descriptionContextKey} from "../../shared/description-context";
 import {fieldContextKey} from "../../shared/field-context";
 
 defineOptions({name: "SailDescription", inheritAttrs: false});
 
-const attrs = useAttrs();
+const {attrs, className, forwarded} = useForwardedAttrs();
 const field = injectFieldRootContext(null);
 const sailField = inject(fieldContextKey, null);
 const descriptionContext = inject(descriptionContextKey, null);
 const fallbackId = useId();
-const classes = computed(() => cx(descriptionVariants(), attrs.class as string | undefined));
+const classes = computed(() => cx(descriptionVariants(), className.value));
 const resolvedId = computed(
   () =>
     (attrs.id as string | undefined) ??
@@ -37,7 +38,7 @@ onBeforeUnmount(() => unregister?.());
 <template>
   <FieldDescription
     v-if="field"
-    v-bind="$attrs"
+    v-bind="forwarded"
     :id="resolvedId"
     as="span"
     :class="classes"
@@ -45,7 +46,7 @@ onBeforeUnmount(() => unregister?.());
   >
     <slot />
   </FieldDescription>
-  <span v-else v-bind="$attrs" :id="resolvedId" :class="classes" :data-slot="'description'">
+  <span v-else v-bind="forwarded" :id="resolvedId" :class="classes" :data-slot="'description'">
     <slot />
   </span>
 </template>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import {cx, modalVariants} from "@sail-ui/styles";
-import {computed, provide, useAttrs} from "vue";
+import {computed, provide} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {modalContextKey, type ModalPlacement, useModalContext} from "./context";
 import type {ModalContainerProps} from "./types";
 
@@ -11,7 +12,7 @@ const props = withDefaults(defineProps<ModalContainerProps>(), {
   placement: "auto",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const context = useModalContext();
 
 const mergedSlots = computed(() => ({
@@ -26,14 +27,12 @@ provide(modalContextKey, {
   slots: mergedSlots,
 });
 
-const classes = computed(() =>
-  cx(mergedSlots.value.container(), attrs.class as string | undefined),
-);
+const classes = computed(() => cx(mergedSlots.value.container(), className.value));
 </script>
 
 <template>
   <div
-    v-bind="$attrs"
+    v-bind="forwarded"
     :class="classes"
     :data-entering="context.isEntering.value ? 'true' : undefined"
     :data-exiting="context.isExiting.value ? 'true' : undefined"

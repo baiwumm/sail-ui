@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
-import {cloneVNode, computed, createTextVNode, h, inject, isVNode, useAttrs, type VNode} from "vue";
+import {cloneVNode, computed, createTextVNode, h, inject, isVNode, type VNode} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {ChevronRightIcon} from "../../shared/icons";
 import {RenderNodes} from "../../shared/vnode";
 import Link from "../link/link-root.vue";
@@ -14,10 +15,10 @@ const props = withDefaults(defineProps<BreadcrumbsItemInternalProps>(), {
   isCurrent: false,
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const context = inject(breadcrumbsContextKey, null);
 const slots = context?.slots;
-const itemClasses = computed(() => cx(slots?.value.item(), attrs.class as string | undefined));
+const itemClasses = computed(() => cx(slots?.value.item(), className.value));
 const linkClasses = computed(() => slots?.value.link());
 const isDisabled = computed(
   () => props.isDisabled === true || props.isCurrent || Boolean(context?.isDisabled.value),
@@ -46,7 +47,7 @@ function renderSeparator(): VNode {
 
 <template>
   <li
-    v-bind="$attrs"
+    v-bind="forwarded"
     :class="itemClasses"
     :data-current="isCurrent ? 'true' : undefined"
     :data-disabled="isDisabled ? 'true' : undefined"

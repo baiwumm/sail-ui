@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {cx, emptyStateVariants} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, useAttrs, useSlots, type Slots} from "vue";
+import {computed, useSlots, type Slots} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {hasSlotContent} from "../../shared/vnode";
 import type {EmptyStateRootProps} from "./types";
 
@@ -12,15 +13,15 @@ withDefaults(defineProps<EmptyStateRootProps>(), {
   as: "div",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const componentSlots = useSlots() as Slots;
-const classes = computed(() => cx(emptyStateVariants(), attrs.class as string | undefined));
+const classes = computed(() => cx(emptyStateVariants(), className.value));
 const hasContent = computed(() => hasSlotContent(componentSlots.default));
 </script>
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"
