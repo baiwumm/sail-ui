@@ -153,6 +153,7 @@ defineExpose({
     :disabled="isDisabled"
     :ignore-filter="ignoreFilter || undefined"
     :model-value="value"
+    :name="name"
     :open="overlay.isMounted.value"
     :open-on-click="false"
     :open-on-focus="false"

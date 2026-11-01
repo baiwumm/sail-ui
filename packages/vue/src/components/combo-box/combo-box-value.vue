@@ -15,10 +15,16 @@ const {className, forwarded} = useForwardedAttrs();
 
 const classes = computed(() => cx(context.slots.value.value(), className.value));
 const label = computed(() => context.binding.labelFor(context.binding.modelValue.value));
+const isEmpty = computed(() => !label.value);
 </script>
 
 <template>
-  <span v-bind="forwarded" :class="classes" :data-slot="'combo-box-value'">
+  <span
+    v-bind="forwarded"
+    :class="classes"
+    :data-placeholder="isEmpty ? 'true' : undefined"
+    :data-slot="'combo-box-value'"
+  >
     <slot>{{ label }}</slot>
   </span>
 </template>

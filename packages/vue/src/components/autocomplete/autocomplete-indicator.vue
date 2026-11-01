@@ -26,6 +26,7 @@ const customIndicator = computed(() => {
   }
 
   return cloneVNode(children[0]!, {
+    ...forwarded.value,
     class: classes.value,
     "data-open": isOpen.value ? "true" : undefined,
     "data-slot": "autocomplete-indicator",

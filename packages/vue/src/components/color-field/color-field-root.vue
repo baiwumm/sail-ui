@@ -97,6 +97,7 @@ function handleUpdate(value: unknown) {
     :channel="channel"
     :class="classes"
     :color-space="colorSpace"
+    :data-channel="channel ?? 'hex'"
     :data-disabled="isDisabled ? 'true' : undefined"
     :data-invalid="isInvalid ? 'true' : undefined"
     :data-readonly="isReadOnly ? 'true' : undefined"
