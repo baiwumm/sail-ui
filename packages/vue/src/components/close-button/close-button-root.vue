@@ -45,7 +45,7 @@ const {isFocused, isFocusVisible} = useFocusRing(buttonRef, {isDisabled: isInter
   <button
     ref="buttonRef"
     v-bind="forwarded"
-    :aria-disabled="isPending ? 'true' : undefined"
+    :aria-disabled="isPending || isDisabled ? 'true' : undefined"
     :aria-label="ariaLabel"
     :class="classes"
     :data-disabled="isDisabled ? 'true' : undefined"

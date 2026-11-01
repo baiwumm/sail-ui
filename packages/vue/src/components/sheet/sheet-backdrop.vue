@@ -2,8 +2,9 @@
 import {cx, sheetVariants} from "@sail-ui/styles";
 import {DialogOverlay, DialogPortal} from "reka-ui";
 import type {CSSProperties, StyleValue} from "vue";
-import {computed, provide, ref, useAttrs} from "vue";
+import {computed, provide, ref} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {sheetContextKey, useSheetContext} from "./context";
 import type {SheetBackdropProps} from "./types";
 import {useSheetBackdropMotion} from "./use-sheet-motion";
@@ -15,7 +16,7 @@ const props = withDefaults(defineProps<SheetBackdropProps>(), {
   isKeyboardDismissDisabled: false,
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const context = useSheetContext();
 
 const mergedSlots = computed(() => ({
@@ -32,9 +33,7 @@ provide(sheetContextKey, {
   slots: mergedSlots,
 });
 
-const overlayClasses = computed(() =>
-  cx(mergedSlots.value.overlay(), attrs.class as string | undefined),
-);
+const overlayClasses = computed(() => cx(mergedSlots.value.overlay(), className.value));
 const backdropClasses = computed(() => mergedSlots.value.backdrop());
 
 // The upstream overlay layout comes from React Aria's inline styles; the Sheet
@@ -64,7 +63,6 @@ const overlayStyle = computed<StyleValue>(() => {
       display: "flex",
     },
     alignment,
-    attrs.style as CSSProperties,
   ];
 });
 
@@ -72,6 +70,10 @@ const overlayRef = ref<HTMLElement | null>(null);
 const backdropRef = ref<HTMLElement | null>(null);
 
 useSheetBackdropMotion(backdropRef, context.isEntering, context.isExiting);
+
+// While the overlay is closed but still mounted (the exit hold) the surface
+// stays visible for the animation; hide it from assistive technology.
+const isOverlayHidden = computed(() => !context.isOpen.value);
 
 // Function refs also run on unmount, so a closed overlay never keeps a stale element.
 function setOverlayRef(element: unknown) {
@@ -85,11 +87,14 @@ function setOverlayRef(element: unknown) {
     <DialogOverlay as-child>
       <div
         :ref="setOverlayRef"
+        v-bind="forwarded"
+        :aria-hidden="isOverlayHidden ? 'true' : undefined"
         :class="overlayClasses"
         :data-closed="context.isOpen.value ? undefined : ''"
         :data-entering="context.isEntering.value ? 'true' : undefined"
         :data-exiting="context.isExiting.value ? 'true' : undefined"
         :data-slot="'sheet-overlay'"
+        :inert="isOverlayHidden || undefined"
         :style="overlayStyle"
       >
         <div

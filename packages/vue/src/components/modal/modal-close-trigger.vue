@@ -2,8 +2,9 @@
 import {closeButtonVariants, cx} from "@sail-ui/styles";
 import {useFocusRing, useHover} from "@sail-ui/primitives";
 import {DialogClose} from "reka-ui";
-import {computed, ref, useAttrs} from "vue";
+import {computed, ref} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
 import {useModalContext} from "./context";
 import type {ModalCloseTriggerProps} from "./types";
 
@@ -14,7 +15,7 @@ const props = withDefaults(defineProps<ModalCloseTriggerProps>(), {
   type: "button",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const {slots} = useModalContext();
 const buttonRef = ref<HTMLButtonElement | null>(null);
 const isDisabled = computed(() => props.isDisabled);
@@ -23,11 +24,7 @@ const {isHovered} = useHover(buttonRef, {isDisabled});
 const {isFocusVisible} = useFocusRing(buttonRef, {isDisabled});
 
 const classes = computed(() =>
-  cx(
-    closeButtonVariants({variant: "default"}),
-    slots.value.closeTrigger(),
-    attrs.class as string | undefined,
-  ),
+  cx(closeButtonVariants({variant: "default"}), slots.value.closeTrigger(), className.value),
 );
 </script>
 
@@ -35,7 +32,7 @@ const classes = computed(() =>
   <DialogClose as-child>
     <button
       ref="buttonRef"
-      v-bind="$attrs"
+      v-bind="{...forwarded, slot: 'close'}"
       aria-label="Close"
       :class="classes"
       :data-focus-visible="isFocusVisible ? 'true' : undefined"

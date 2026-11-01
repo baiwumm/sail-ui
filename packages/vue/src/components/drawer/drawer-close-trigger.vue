@@ -32,7 +32,7 @@ const classes = computed(() =>
   <DialogClose as-child>
     <button
       ref="buttonRef"
-      v-bind="forwarded"
+      v-bind="{...forwarded, slot: 'close'}"
       aria-label="Close"
       :class="classes"
       :data-focus-visible="isFocusVisible ? 'true' : undefined"

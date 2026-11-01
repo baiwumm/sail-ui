@@ -15,7 +15,11 @@ const classes = computed(() => cx(slots.value.heading(), className.value));
 </script>
 
 <template>
-  <DialogTitle v-bind="forwarded" :class="classes" :data-slot="'alert-dialog-heading'">
+  <DialogTitle
+    v-bind="{...forwarded, slot: 'title'}"
+    :class="classes"
+    :data-slot="'alert-dialog-heading'"
+  >
     <slot />
   </DialogTitle>
 </template>
