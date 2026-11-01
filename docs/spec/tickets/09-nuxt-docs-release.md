@@ -1,7 +1,7 @@
 # T09 — Nuxt module + 文档站 + 发布门禁
 
 - Milestone: M4
-- Status: In progress（2026-11-01：切片 A–C 已落地，见文末进度记录；剩余覆盖层视觉矩阵、RTL 冒烟与 canary 发布）
+- Status: In progress（2026-11-02：切片 A–C 与覆盖层视觉矩阵已落地，见文末进度记录；剩余 RTL 冒烟、体积基线与 canary 发布）
 - Blocked by: [T03](./03-display-and-feedback.md), [T04](./04-form-controls.md), [T05](./05-overlays.md), [T06](./06-collections-and-pickers.md), [T07](./07-date-and-color.md), [T08](./08-advanced-data.md)
 - Unblocks: —
 - Related: [Spec §5.8](../0001-heroui-v3-vue-port.spec.md), [Spec §5.11](../0001-heroui-v3-vue-port.spec.md), [Roadmap](../../roadmap.md)
@@ -121,9 +121,22 @@
   - 全文搜索：`/search?q=` 基于 Content 搜索段 + title>heading>body 打分，顶栏过滤框回车即搜。
   - 验证：88 页全 200 sweep（wrangler dev 本地 worker）；docs lint/typecheck/build 全绿；`pnpm verify`、visual 86、browser 348 全绿。
 
+### 进度记录（2026-11-02）：覆盖层视觉截图矩阵
+
+- 两侧 playground 顶部新增 `#overlays` 矩阵 section：alert-dialog（auto/top/center/bottom）、drawer/sheet（四向）、popover/tooltip（四向），React 侧为上游 HeroUI 镜像；reference-react 补齐 `?animations=slow` 支持（style.css 同规则）。
+- `tests/visual/parity.visual.ts` 新增两组测试 × 5 组件 × light/dark：placement 矩阵（`data-placement` 断言 + 视口 rect 对比 + 面板截图）与进出场关键帧（slow-motion + `document.getAnimations()` 逐帧 pause/seek 到同一 currentTime）。当前 104 通过；drawer/sheet 关键帧标记 `test.fixme`（JS 驱动动画，逐帧冻结抓不住，见测试内 TODO 注释）。
+- **顺带修复 3 个真实 parity 缺陷**（均由矩阵直接暴露）：
+  1. `packages/vue` popover/tooltip：Reka 定位时把箭头高度（12px）加进主轴偏移，RAC 不加 → 面板比上游低 12px。箭头组件把高度写入 context（`arrowHeight`），content 以 `sideOffset - arrowHeight` 补偿。
+  2. modal 家族（modal/alert-dialog/drawer/sheet）backdrop 缺少 React Aria 内联写入的 `--visual-viewport-*` / `--page-*` 变量 → container 高度塌陷，top/bottom placement 全错（center 因对称恰好巧合）。新增 `shared/viewport-vars.ts`（SSR 安全、resize 监听），四个 backdrop 绑定。
+  3. Vue sheet-dialog 缺少 React Aria 内联的 `height: 100%` 拉伸 → left/right placement 面板高度塌陷。
+- `packages/testing/src/visual.ts`：`compareScreenshots` 容忍 ≤2px 尺寸差（小数坐标区域截图按像素取整会差 1px，裁剪到公共区比较）。
+- popover/tooltip（RAC 保留小数坐标，`@floating-ui/vue` 按整像素取整）存在固有亚像素渲染差，锚定型截图 diff 上限放宽到 5%（`ANCHORED_MAX_DIFF_RATIO`，代码内注释说明）。
+- 已知环境坑：FlClash 代理可能临时占用 4173/5174 端口导致 EACCES，重跑即可；React `Tooltip.Trigger` 在上游构建中不接线（裸 `<Button>` 才是可用 trigger 写法）；上游 `Sheet.Close` 要求组件子元素（裸文本会 React error #130）。
+- 顺带修正：既有 browser 测试 `Popover › closes when the pointer presses outside` 的 locator 加 `#popover` 作用域（矩阵新增 trigger 触发 strict mode 冲突）。
+
 ### 剩余任务（按优先级）
 
-1. **覆盖层视觉截图矩阵**（T05 顺延项）：alert-dialog / drawer / sheet / popover / tooltip × light/dark × placement × 进出场关键帧。需要在 `apps/reference-react` 与 `apps/playground` 两侧 gallery 各加 overlay section（Modal/Select 已有，参照 `tests/visual/parity.visual.ts` 的对比模式），并确认进出场关键帧的截图时机（参考 T05 的"entering state before the first frame"测试手法）。
+1. **覆盖层关键帧收尾**：drawer/sheet 关键帧（`test.fixme` 中）——JS 驱动动画需要一个能同时钉住 Vue/RAC 进出场生命周期的冻结策略；alert-dialog/popover/tooltip 关键帧与全部 placement 矩阵已完成。
 2. **RTL Drawer/Table 冒烟**：roadmap M3 顺延项。Drawer 用现有 `tests/browser/rtl.spec.ts` 的 calendar 模式补；Table 验证虚拟化 RTL 的列方向/键盘。完成后勾掉 roadmap 中 M3 的 RTL 项。
 3. **Bundle/CSS 体积记录**：T09 acceptance 中的体积基线（无硬 SLA，回归 >10% 需说明）。
 4. **canary 发布**（用户前置动作完成后执行）：

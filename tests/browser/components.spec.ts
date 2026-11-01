@@ -396,7 +396,7 @@ test.describe("Popover", () => {
   test("closes when the pointer presses outside", async ({page}) => {
     await page.goto("/");
 
-    const trigger = page.locator('[data-slot="popover-trigger"]');
+    const trigger = page.locator('#popover [data-slot="popover-trigger"]');
     const content = page.locator(".popover");
 
     await trigger.click();

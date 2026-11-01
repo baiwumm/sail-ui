@@ -78,7 +78,7 @@ import {
   PopoverTrigger,
 } from "@sail-ui/vue/popover";
 import {Tooltip, TooltipArrow, TooltipContent, TooltipTrigger} from "@sail-ui/vue/tooltip";
-import {onMounted, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 
 import Calendar from "./Calendar.vue";
 import Collections from "./Collections.vue";
@@ -102,6 +102,17 @@ const sheetOpen = ref(false);
 const filtersSheetOpen = ref(false);
 const isDark = ref(false);
 const showCompound = ref(false);
+
+// Overlay visual matrix (tests/visual): one uncontrolled overlay per placement.
+const alertDialogPlacements = ["auto", "top", "center", "bottom"] as const;
+const edgePlacements = ["bottom", "top", "left", "right"] as const;
+const popoverPlacements = ["bottom", "top", "left", "right"] as const;
+const tooltipPlacements = ["top", "bottom", "left", "right"] as const;
+const overlayOpen = reactive<Record<string, boolean>>({});
+
+function closeOverlay(key: string) {
+  overlayOpen[key] = false;
+}
 
 const states = [
   {id: "florida", label: "Florida"},
@@ -148,6 +159,129 @@ onMounted(() => {
         {{ isDark ? "Light" : "Dark" }}
       </Button>
     </header>
+
+    <section id="overlays" class="flex flex-col gap-4">
+      <h2 class="text-lg font-semibold">Overlay matrix</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <AlertDialog
+          v-for="placement in alertDialogPlacements"
+          :key="`alert-dialog-${placement}`"
+          v-model:open="overlayOpen[`alert-dialog-${placement}`]"
+        >
+          <AlertDialogTrigger class="button button--secondary button--md">
+            Dialog {{ placement }}
+          </AlertDialogTrigger>
+          <AlertDialogBackdrop>
+            <AlertDialogContainer :placement="placement">
+              <AlertDialogDialog class="sm:max-w-[400px]">
+                <AlertDialogCloseTrigger />
+                <AlertDialogHeader>
+                  <AlertDialogIcon status="danger" />
+                  <AlertDialogHeading>Delete project permanently?</AlertDialogHeading>
+                </AlertDialogHeader>
+                <AlertDialogBody>
+                  <p>
+                    This will permanently delete <strong>Sail UI</strong> and all of its data. This
+                    action cannot be undone.
+                  </p>
+                </AlertDialogBody>
+                <AlertDialogFooter>
+                  <Button variant="tertiary" @press="closeOverlay(`alert-dialog-${placement}`)">
+                    Cancel
+                  </Button>
+                  <Button variant="danger" @press="closeOverlay(`alert-dialog-${placement}`)">
+                    Delete project
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogDialog>
+            </AlertDialogContainer>
+          </AlertDialogBackdrop>
+        </AlertDialog>
+
+        <Drawer
+          v-for="placement in edgePlacements"
+          :key="`drawer-${placement}`"
+          v-model:open="overlayOpen[`drawer-${placement}`]"
+        >
+          <DrawerTrigger class="button button--secondary button--md">
+            Drawer {{ placement }}
+          </DrawerTrigger>
+          <DrawerBackdrop>
+            <DrawerContent :placement="placement">
+              <DrawerDialog>
+                <DrawerCloseTrigger />
+                <DrawerHandle v-if="placement === 'bottom'" />
+                <DrawerHeader>
+                  <DrawerHeading>Drawer</DrawerHeading>
+                </DrawerHeader>
+                <DrawerBody>
+                  <p>Sliding panel from the {{ placement }} edge with a scrollable body.</p>
+                </DrawerBody>
+                <DrawerFooter>
+                  <Button variant="tertiary" @press="closeOverlay(`drawer-${placement}`)">
+                    Cancel
+                  </Button>
+                  <Button variant="primary" @press="closeOverlay(`drawer-${placement}`)">
+                    Save
+                  </Button>
+                </DrawerFooter>
+              </DrawerDialog>
+            </DrawerContent>
+          </DrawerBackdrop>
+        </Drawer>
+
+        <Sheet
+          v-for="placement in edgePlacements"
+          :key="`sheet-${placement}`"
+          v-model:open="overlayOpen[`sheet-${placement}`]"
+          :placement="placement"
+        >
+          <SheetTrigger class="button button--secondary button--md">
+            Sheet {{ placement }}
+          </SheetTrigger>
+          <SheetBackdrop>
+            <SheetContent>
+              <SheetDialog>
+                <SheetCloseTrigger />
+                <SheetHandle v-if="placement === 'bottom'" />
+                <SheetHeader>
+                  <SheetHeading>Sheet</SheetHeading>
+                </SheetHeader>
+                <SheetBody>
+                  <p>Sheet panel from the {{ placement }} edge.</p>
+                </SheetBody>
+                <SheetFooter>
+                  <SheetClose class="button button--secondary button--md"> Close </SheetClose>
+                </SheetFooter>
+              </SheetDialog>
+            </SheetContent>
+          </SheetBackdrop>
+        </Sheet>
+
+        <Popover v-for="placement in popoverPlacements" :key="`popover-${placement}`">
+          <PopoverTrigger class="button button--secondary button--md">
+            Popover {{ placement }}
+          </PopoverTrigger>
+          <PopoverContent :placement="placement">
+            <PopoverArrow />
+            <PopoverDialog class="w-64">
+              <PopoverHeading>Popover title</PopoverHeading>
+              <p class="text-sm text-muted">Anchored content with an arrow.</p>
+            </PopoverDialog>
+          </PopoverContent>
+        </Popover>
+
+        <Tooltip v-for="placement in tooltipPlacements" :key="`tooltip-${placement}`" :delay="0">
+          <TooltipTrigger class="button button--secondary button--md">
+            Tooltip {{ placement }}
+          </TooltipTrigger>
+          <TooltipContent :placement="placement" show-arrow>
+            <TooltipArrow />
+            Tooltip content
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </section>
 
     <section id="buttons" class="flex flex-col gap-4">
       <h2 class="text-lg font-semibold">Button</h2>

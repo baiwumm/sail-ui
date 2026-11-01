@@ -1,13 +1,18 @@
 import {
+  AlertDialog,
   Button,
   Description,
+  Drawer,
   FieldError,
   Input,
   Label,
   ListBox,
   Modal,
+  Popover,
   Select,
+  Sheet,
   TextField,
+  Tooltip,
 } from "@heroui/react";
 import {useEffect, useState} from "react";
 
@@ -30,15 +35,25 @@ const states = [
   {id: "washington", label: "Washington"},
 ];
 
+// Overlay visual matrix (tests/visual): one overlay per placement.
+const alertDialogPlacements = ["auto", "top", "center", "bottom"] as const;
+const edgePlacements = ["bottom", "top", "left", "right"] as const;
+const popoverPlacements = ["bottom", "top", "left", "right"] as const;
+const tooltipPlacements = ["top", "bottom", "left", "right"] as const;
+
 export default function App() {
   const [inputValue, setInputValue] = useState("heroui.com");
   const [state, setState] = useState<string | null>("california");
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const theme = new URLSearchParams(window.location.search).get("theme");
+    const params = new URLSearchParams(window.location.search);
 
-    if (theme === "dark") {
+    if (params.get("animations") === "slow") {
+      document.documentElement.dataset.animations = "slow";
+    }
+
+    if (params.get("theme") === "dark") {
       setIsDark(true);
       document.documentElement.classList.add("dark");
     }
@@ -55,14 +70,126 @@ export default function App() {
         <div>
           <h1 className="text-2xl font-semibold">Sail UI playground</h1>
           <p className="text-sm text-muted">
-            Button · Input · Modal · Select · Collections · Forms · Display & feedback · Calendar ·
-            Date pickers · Date &amp; time fields · Combo box · Colors
+            Button · Input · Overlays · Select · Collections · Forms · Display & feedback · Calendar
+            · Date pickers · Date &amp; time fields · Combo box · Colors
           </p>
         </div>
         <Button variant="outline" size="sm" onPress={toggleTheme}>
           {isDark ? "Light" : "Dark"}
         </Button>
       </header>
+
+      <section id="overlays" className="flex flex-col gap-4">
+        <h2 className="text-lg font-semibold">Overlay matrix</h2>
+        <div className="flex flex-wrap items-center gap-3">
+          {alertDialogPlacements.map((placement) => (
+            <AlertDialog key={placement}>
+              <Button variant="secondary">Dialog {placement}</Button>
+              <AlertDialog.Backdrop>
+                <AlertDialog.Container placement={placement}>
+                  <AlertDialog.Dialog className="sm:max-w-[400px]">
+                    <AlertDialog.CloseTrigger />
+                    <AlertDialog.Header>
+                      <AlertDialog.Icon status="danger" />
+                      <AlertDialog.Heading>Delete project permanently?</AlertDialog.Heading>
+                    </AlertDialog.Header>
+                    <AlertDialog.Body>
+                      <p>
+                        This will permanently delete <strong>Sail UI</strong> and all of its data.
+                        This action cannot be undone.
+                      </p>
+                    </AlertDialog.Body>
+                    <AlertDialog.Footer>
+                      <Button slot="close" variant="tertiary">
+                        Cancel
+                      </Button>
+                      <Button slot="close" variant="danger">
+                        Delete project
+                      </Button>
+                    </AlertDialog.Footer>
+                  </AlertDialog.Dialog>
+                </AlertDialog.Container>
+              </AlertDialog.Backdrop>
+            </AlertDialog>
+          ))}
+
+          {edgePlacements.map((placement) => (
+            <Drawer key={placement}>
+              <Button variant="secondary">Drawer {placement}</Button>
+              <Drawer.Backdrop>
+                <Drawer.Content placement={placement}>
+                  <Drawer.Dialog>
+                    <Drawer.CloseTrigger />
+                    {placement === "bottom" && <Drawer.Handle />}
+                    <Drawer.Header>
+                      <Drawer.Heading>Drawer</Drawer.Heading>
+                    </Drawer.Header>
+                    <Drawer.Body>
+                      <p>Sliding panel from the {placement} edge with a scrollable body.</p>
+                    </Drawer.Body>
+                    <Drawer.Footer>
+                      <Button slot="close" variant="tertiary">
+                        Cancel
+                      </Button>
+                      <Button slot="close">Save</Button>
+                    </Drawer.Footer>
+                  </Drawer.Dialog>
+                </Drawer.Content>
+              </Drawer.Backdrop>
+            </Drawer>
+          ))}
+
+          {edgePlacements.map((placement) => (
+            <Sheet key={placement} placement={placement}>
+              <Sheet.Trigger>
+                <Button variant="secondary">Sheet {placement}</Button>
+              </Sheet.Trigger>
+              <Sheet.Backdrop>
+                <Sheet.Content>
+                  <Sheet.Dialog>
+                    <Sheet.CloseTrigger />
+                    {placement === "bottom" && <Sheet.Handle />}
+                    <Sheet.Header>
+                      <Sheet.Heading>Sheet</Sheet.Heading>
+                    </Sheet.Header>
+                    <Sheet.Body>
+                      <p>Sheet panel from the {placement} edge.</p>
+                    </Sheet.Body>
+                    <Sheet.Footer>
+                      <Sheet.Close>
+                        <Button variant="secondary">Close</Button>
+                      </Sheet.Close>
+                    </Sheet.Footer>
+                  </Sheet.Dialog>
+                </Sheet.Content>
+              </Sheet.Backdrop>
+            </Sheet>
+          ))}
+
+          {popoverPlacements.map((placement) => (
+            <Popover key={placement}>
+              <Button variant="secondary">Popover {placement}</Button>
+              <Popover.Content placement={placement}>
+                <Popover.Arrow />
+                <Popover.Dialog className="w-64">
+                  <Popover.Heading>Popover title</Popover.Heading>
+                  <p className="text-sm text-muted">Anchored content with an arrow.</p>
+                </Popover.Dialog>
+              </Popover.Content>
+            </Popover>
+          ))}
+
+          {tooltipPlacements.map((placement) => (
+            <Tooltip key={placement} delay={0}>
+              <Button variant="secondary">Tooltip {placement}</Button>
+              <Tooltip.Content placement={placement} showArrow>
+                <Tooltip.Arrow />
+                Tooltip content
+              </Tooltip.Content>
+            </Tooltip>
+          ))}
+        </div>
+      </section>
 
       <section id="buttons" className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Button</h2>
