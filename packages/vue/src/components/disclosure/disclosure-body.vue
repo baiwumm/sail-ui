@@ -7,11 +7,13 @@ import {useForwardedAttrs} from "../../shared/attrs";
 defineOptions({name: "SailDisclosureBody", inheritAttrs: false});
 
 const {className, forwarded} = useForwardedAttrs();
-const innerClasses = computed(() => cx(disclosureVariants().bodyInner(), className.value));
+const variants = disclosureVariants();
+const outerClasses = computed(() => variants.body());
+const innerClasses = computed(() => cx(variants.bodyInner(), className.value));
 </script>
 
 <template>
-  <div v-bind="forwarded" :class="disclosureVariants().body()" :data-slot="'disclosure-body'">
+  <div v-bind="forwarded" :class="outerClasses" :data-slot="'disclosure-body'">
     <div :class="innerClasses">
       <slot />
     </div>

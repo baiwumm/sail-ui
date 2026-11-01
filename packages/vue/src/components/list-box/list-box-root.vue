@@ -5,7 +5,7 @@ import {
   ListboxContent as ListboxContentPrimitive,
   ListboxRoot as ListboxRootPrimitive,
 } from "reka-ui";
-import {computed, getCurrentInstance, provide, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, provide, ref, watch} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
 import {useComboboxBinding, type ComboBoxModelValue} from "../../shared/combobox-context";
@@ -35,6 +35,18 @@ const combobox = useComboboxBinding();
 
 const listRef = ref<HTMLElement | null>(null);
 const isFocused = ref(false);
+
+/**
+ * Reka anchors the roving tabindex on the item carrying
+ * `data-state="checked"`, but list-box items strip that attribute to meet the
+ * upstream DOM contract — so Reka's own fallback always highlights the first
+ * item. Re-anchor on the selected item ourselves after Reka settles.
+ */
+interface HighlightableListboxRoot {
+  highlightItem: (value: unknown) => void;
+}
+
+const rekaRootRef = ref<HighlightableListboxRoot | null>(null);
 
 const slots = computed(() => listboxVariants({variant: props.variant}));
 const classes = computed(() => cx(slots.value, className.value));
@@ -145,6 +157,28 @@ function handleFocusOut(event: FocusEvent) {
   }
 }
 
+function scheduleAnchor(selection: ListBoxSelection) {
+  if (selectionMode.value === "none" || typeof window === "undefined") {
+    return;
+  }
+
+  const value = Array.isArray(selection) ? selection[0] : selection;
+
+  if (value === undefined || value === null) {
+    return;
+  }
+
+  // The timeout runs after Reka's own model watcher (a microtask), so the
+  // selected item wins over Reka's first-item fallback.
+  window.setTimeout(() => {
+    rekaRootRef.value?.highlightItem(value);
+  }, 0);
+}
+
+watch(rekaModel, (value) => scheduleAnchor(value));
+
+onMounted(() => scheduleAnchor(rekaModel.value));
+
 provide(listBoxContextKey, {
   selectionMode,
   selectedValue,
@@ -159,6 +193,7 @@ provide(listBoxContextKey, {
 <template>
   <ListboxRootPrimitive
     v-if="!combobox"
+    ref="rekaRootRef"
     as-child
     :by="comparator"
     :model-value="rekaModel"

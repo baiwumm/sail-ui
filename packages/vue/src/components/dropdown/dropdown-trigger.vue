@@ -2,7 +2,7 @@
 import {useFocusRing, useHover} from "@sail-ui/primitives";
 import {cx} from "@sail-ui/styles";
 import {DropdownMenuTrigger as DropdownMenuTriggerPrimitive} from "reka-ui";
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
 import {useDropdownContext} from "./context";
@@ -18,9 +18,17 @@ const props = withDefaults(defineProps<DropdownTriggerProps>(), {
 const context = useDropdownContext();
 const {attrs, className, forwarded} = useForwardedAttrs();
 
-if (typeof attrs.id === "string" && attrs.id.length > 0) {
-  context.triggerId.value = attrs.id;
-}
+// `aria-controls` names the trigger id, so a consumer changing `id` later has
+// to stay in sync.
+watch(
+  () => attrs.id,
+  (id) => {
+    if (typeof id === "string" && id.length > 0) {
+      context.triggerId.value = id;
+    }
+  },
+  {immediate: true},
+);
 
 const triggerRef = ref<HTMLElement | null>(null);
 const triggerId = computed(() => context.triggerId.value);
