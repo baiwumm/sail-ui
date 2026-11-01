@@ -4,6 +4,7 @@ import {SliderRoot} from "reka-ui";
 import {computed, onBeforeUnmount, onMounted, provide, ref, useId} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {useDisabledCascade} from "../../shared/disabled-cascade";
 import {useDocumentDirection} from "../../shared/direction";
 import {labelContextKey} from "../../shared/label-context";
 import {sliderContextKey, type SliderRootProps} from "./types";
@@ -69,13 +70,16 @@ function isRTL() {
   return resolvedDir.value === "rtl";
 }
 
+// `<Fieldset isDisabled>` cascades to the slider, which renders as a div.
+const cascadeDisabled = useDisabledCascade();
+
 provide(sliderContextKey, {
   values,
   min: computed(() => props.min),
   max: computed(() => props.max),
   step: computed(() => props.step),
   orientation: computed(() => props.orientation),
-  isDisabled: computed(() => props.isDisabled),
+  isDisabled: computed(() => props.isDisabled || cascadeDisabled.value),
   isRTL: computed(isRTL),
   isDragging,
   labelId,

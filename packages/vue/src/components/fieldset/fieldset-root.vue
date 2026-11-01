@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import {cx, fieldsetVariants} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, provide, useAttrs} from "vue";
+import {computed, provide} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
+import {disabledCascadeKey} from "../../shared/disabled-cascade";
 import {fieldsetContextKey} from "./context";
 import type {FieldsetRootProps} from "./types";
 
@@ -13,19 +15,26 @@ const props = withDefaults(defineProps<FieldsetRootProps>(), {
   isDisabled: false,
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
 const slots = computed(() => fieldsetVariants());
-const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.base(), className.value));
 
 provide(fieldsetContextKey, {
   slots,
   isDisabled: computed(() => props.isDisabled),
 });
+
+// Native `<fieldset disabled>` only disables form-associated elements, so the
+// state is also cascaded to the controls the browser cannot reach.
+provide(
+  disabledCascadeKey,
+  computed(() => props.isDisabled),
+);
 </script>
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="as"
     :as-child="asChild"
     :class="classes"

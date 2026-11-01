@@ -3,6 +3,7 @@ import {radioGroupVariants, cx} from "@sail-ui/styles";
 import {computed, provide, useId} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {useDisabledCascade} from "../../shared/disabled-cascade";
 import {radioGroupContextKey, type RadioGroupRootProps} from "./types";
 
 defineOptions({name: "SailRadioGroup", inheritAttrs: false});
@@ -22,15 +23,20 @@ const generatedName = useId();
 const name = computed(() => props.name ?? generatedName);
 const classes = computed(() => cx(radioGroupVariants({variant: props.variant}), className.value));
 
+// `<Fieldset isDisabled>` cascades to div-based groups the browser cannot
+// disable natively.
+const cascadeDisabled = useDisabledCascade();
+const isDisabled = computed(() => props.isDisabled || cascadeDisabled.value);
+
 provide(radioGroupContextKey, {
   name,
-  isDisabled: computed(() => props.isDisabled),
+  isDisabled,
   isInvalid: computed(() => props.isInvalid),
   isRequired: computed(() => props.isRequired),
   selectedValue: computed(() => model.value),
   hasSelection: computed(() => model.value !== undefined),
   select: (value: string) => {
-    if (props.isDisabled) {
+    if (isDisabled.value) {
       return;
     }
 

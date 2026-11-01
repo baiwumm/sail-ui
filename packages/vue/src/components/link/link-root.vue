@@ -2,8 +2,10 @@
 import {cx, linkVariants} from "@sail-ui/styles";
 import {useFocusRing, useHover, usePress, type PressEvent} from "@sail-ui/primitives";
 import {Primitive} from "reka-ui";
-import {computed, provide, ref, useAttrs, type ComponentPublicInstance} from "vue";
+import {computed, provide, ref, type ComponentPublicInstance} from "vue";
 
+import {useForwardedAttrs} from "../../shared/attrs";
+import {useDisabledCascade} from "../../shared/disabled-cascade";
 import {linkContextKey} from "./context";
 import type {LinkRootProps} from "./types";
 
@@ -15,16 +17,17 @@ const emit = defineEmits<{
   press: [event: PressEvent];
 }>();
 
-const attrs = useAttrs();
+const {attrs, className, forwarded} = useForwardedAttrs();
 const linkRef = ref<ComponentPublicInstance | null>(null);
 const element = computed(() => (linkRef.value?.$el as Element | null | undefined) ?? null);
-const isDisabled = computed(() => props.isDisabled === true);
+const cascadeDisabled = useDisabledCascade();
+const isDisabled = computed(() => props.isDisabled === true || cascadeDisabled.value);
 const isSpan = computed(() => !props.href || isDisabled.value);
 // Matches RAC's `!!props['aria-current']`: any truthy value, including the string "false", counts.
 const isCurrent = computed(() => Boolean(attrs["aria-current"]));
 
 const slots = computed(() => linkVariants());
-const classes = computed(() => cx(slots.value.base(), attrs.class as string | undefined));
+const classes = computed(() => cx(slots.value.base(), className.value));
 
 const {isHovered} = useHover(element, {isDisabled});
 const {isPressed} = usePress(element, {
@@ -39,7 +42,7 @@ provide(linkContextKey, {slots});
 <template>
   <Primitive
     ref="linkRef"
-    v-bind="$attrs"
+    v-bind="forwarded"
     :aria-disabled="isDisabled ? 'true' : undefined"
     :as="as ?? (isSpan ? 'span' : 'a')"
     :as-child="asChild"
