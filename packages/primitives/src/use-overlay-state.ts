@@ -63,6 +63,12 @@ const animationDuration = (animation: Animation) => {
   return duration + Math.max(0, delay);
 };
 
+const isInfiniteAnimation = (animation: Animation) => {
+  const iterations = animation.effect?.getTiming().iterations;
+
+  return iterations === Infinity;
+};
+
 const animationTarget = (animation: Animation): Element | null => {
   const effect = animation.effect as KeyframeEffect | null;
 
@@ -209,6 +215,13 @@ export function useOverlayState(props: UseOverlayStateProps = {}): UseOverlaySta
       }
 
       if (animationDuration(animation) <= 0) {
+        continue;
+      }
+
+      // Infinite animations (spinners, shimmers) never finish, so waiting for
+      // them would hold the overlay open until the fallback timer. They are
+      // content, not part of the exit choreography.
+      if (isInfiniteAnimation(animation)) {
         continue;
       }
 

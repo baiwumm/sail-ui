@@ -51,6 +51,19 @@ const attachRunningAnimation = (element: HTMLElement, duration: number) => {
   return animation;
 };
 
+const attachInfiniteAnimation = (element: HTMLElement, duration: number) => {
+  const animation = {
+    playState: "running",
+    effect: {getTiming: () => ({duration, delay: 0, iterations: Infinity}), target: element},
+    finished: new Promise<Animation>(() => undefined),
+  } as unknown as Animation;
+
+  const previous = element.getAnimations;
+  element.getAnimations = vi.fn(() => [...(previous?.call(element) ?? []), animation]);
+
+  return animation;
+};
+
 describe("useOverlayState", () => {
   const stops: (() => void)[] = [];
 
@@ -144,6 +157,25 @@ describe("useOverlayState", () => {
     expect(state.isMounted.value).toBe(true);
 
     await vi.waitFor(() => expect(state.isMounted.value).toBe(false), {timeout: 1_000});
+    expect(state.isExiting.value).toBe(false);
+  });
+
+  it("does not hold the exit for an infinite content animation", async () => {
+    const state = createState();
+    const element = document.createElement("div");
+
+    state.contentRef.value = element;
+    state.open();
+    attachRunningAnimation(element, 20);
+    attachInfiniteAnimation(element, 1_000);
+
+    state.close();
+
+    expect(state.isExiting.value).toBe(true);
+
+    // Without the infinite filter the 1s spinner would extend the hold past
+    // this window; only the 20ms exit animation is waited for.
+    await vi.waitFor(() => expect(state.isMounted.value).toBe(false), {timeout: 600});
     expect(state.isExiting.value).toBe(false);
   });
 
