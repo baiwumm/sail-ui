@@ -6,6 +6,7 @@ import {DatePickerRoot as DatePickerRootPrimitive} from "reka-ui";
 import {computed, provide, ref, useId} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {useDocumentDirection} from "../../shared/direction";
 import {fieldContextKey} from "../../shared/field-context";
 import {labelContextKey} from "../../shared/label-context";
 import {mapFirstDayOfWeek} from "../calendar/calendar-utils";
@@ -62,6 +63,11 @@ const overlay = useOverlayState({
 
 const {className, forwarded} = useForwardedAttrs();
 const slots = computed(() => datePickerVariants());
+
+// React Aria follows the document direction; Reka only knows an explicit
+// `dir`, so fall back to `<html dir>` like the other field components.
+const documentDirection = useDocumentDirection();
+const direction = computed(() => props.dir ?? documentDirection.value);
 
 const triggerRef = ref<HTMLButtonElement | null>(null);
 const anchorRef = ref<HTMLElement | null>(null);
@@ -162,7 +168,7 @@ defineExpose({
   <DatePickerRootPrimitive
     :id="id"
     :close-on-select="closeOnSelect"
-    :dir="dir"
+    :dir="direction"
     :disabled="isDisabled"
     :granularity="granularity"
     :hide-time-zone="hideTimeZone"
@@ -178,6 +184,7 @@ defineExpose({
     :open="overlay.isMounted.value"
     :paged-navigation="pagedNavigation"
     :placeholder="placeholderValue"
+    :prevent-deselect="true"
     :readonly="isReadOnly"
     :required="isRequired"
     :step="step"

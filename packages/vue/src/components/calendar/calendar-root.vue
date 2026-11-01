@@ -194,6 +194,7 @@ function handlePlaceholderUpdate(date: DateValue) {
     :disable-days-outside-current-view="true"
     :disabled="isDisabledValue"
     :first-day-of-week="weekStartsOn"
+    :initial-focus="initialFocus"
     :is-date-disabled="isDateDisabledMatcher"
     :is-date-unavailable="isDateUnavailableMatcher"
     :locale="locale"

@@ -49,6 +49,21 @@ const isSelectable = computed(() => !isDisabled.value && !isUnavailable.value);
 const isSelected = computed(
   () => isSelectable.value && (range.isSelected(props.date) || isHighlighted.value),
 );
+// While the value is invalid (e.g. a reversed range) the cells of the
+// highlighted range report invalid, matching react-aria's useCalendarCell.
+const isInvalidCell = computed(() => {
+  if (!range.isInvalid.value) {
+    return false;
+  }
+
+  const highlighted = highlightedRange.value;
+
+  return Boolean(
+    highlighted &&
+    props.date.compare(highlighted.start) >= 0 &&
+    props.date.compare(highlighted.end) <= 0,
+  );
+});
 const isSelectionStart = computed(() => {
   const highlighted = highlightedRange.value;
 
@@ -77,6 +92,7 @@ const {isFocusVisible} = useFocusRing(triggerRef, {isDisabled});
 <template>
   <td
     :aria-disabled="isSelectable ? undefined : 'true'"
+    :aria-invalid="isInvalidCell ? 'true' : undefined"
     :aria-selected="isSelected ? 'true' : undefined"
     role="gridcell"
   >
@@ -90,6 +106,7 @@ const {isFocusVisible} = useFocusRing(triggerRef, {isDisabled});
         :data-focus-visible="isFocusVisible ? 'true' : undefined"
         :data-focused="isFocused ? 'true' : undefined"
         :data-hovered="isHovered ? 'true' : undefined"
+        :data-invalid="isInvalidCell ? 'true' : undefined"
         :data-outside-month="isOutsideMonth ? 'true' : undefined"
         :data-outside-visible-range="isOutsideVisibleRange ? 'true' : undefined"
         :data-pressed="isPressed ? 'true' : undefined"

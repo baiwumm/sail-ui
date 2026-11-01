@@ -6,6 +6,7 @@ import {DateRangePickerRoot as DateRangePickerRootPrimitive} from "reka-ui";
 import {computed, provide, ref, useId} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {useDocumentDirection} from "../../shared/direction";
 import {fieldContextKey} from "../../shared/field-context";
 import {labelContextKey} from "../../shared/label-context";
 import {mapFirstDayOfWeek} from "../calendar/calendar-utils";
@@ -73,6 +74,11 @@ const overlay = useOverlayState({
 });
 
 const {className, forwarded} = useForwardedAttrs();
+
+// React Aria follows the document direction; Reka only knows an explicit
+// `dir`, so fall back to `<html dir>` like the other field components.
+const documentDirection = useDocumentDirection();
+const direction = computed(() => props.dir ?? documentDirection.value);
 const slots = computed(() => dateRangePickerVariants());
 
 const triggerRef = ref<HTMLButtonElement | null>(null);
@@ -98,25 +104,40 @@ const valueInvalid = computed(() => {
     return true;
   }
 
-  const date = currentValue.value?.end ?? currentValue.value?.start;
+  const range = currentValue.value;
 
-  if (!date) {
+  if (!range) {
     return false;
   }
 
-  if (props.isDateUnavailable?.(date)) {
+  // Both ends are validated and a reversed range is invalid, matching
+  // react-stately's range validation.
+  const dates: DateValue[] = [];
+
+  if (range.start) {
+    dates.push(range.start);
+  }
+
+  if (range.end) {
+    dates.push(range.end);
+  }
+
+  if (dates.length === 0) {
+    return false;
+  }
+
+  const [start, end] = dates;
+
+  if (start && end && end.compare(start) < 0) {
     return true;
   }
 
-  if (props.minValue && date.compare(props.minValue) < 0) {
-    return true;
-  }
-
-  if (props.maxValue && date.compare(props.maxValue) > 0) {
-    return true;
-  }
-
-  return false;
+  return dates.some(
+    (date) =>
+      Boolean(props.isDateUnavailable?.(date)) ||
+      Boolean(props.minValue && date.compare(props.minValue) < 0) ||
+      Boolean(props.maxValue && date.compare(props.maxValue) > 0),
+  );
 });
 
 const disabled = computed(() => props.isDisabled);
@@ -176,7 +197,7 @@ defineExpose({
     :id="id"
     :allow-non-contiguous-ranges="allowNonContiguousRanges"
     :close-on-select="closeOnSelect"
-    :dir="dir"
+    :dir="direction"
     :disabled="isDisabled"
     :fixed-date="fixedDate"
     :granularity="granularity"

@@ -235,6 +235,7 @@ function handlePlaceholderUpdate(date: DateValue) {
     :disabled="isDisabledValue"
     :first-day-of-week="weekStartsOn"
     :fixed-date="isBoundToPicker ? picker?.fixedDate.value : undefined"
+    :initial-focus="initialFocus"
     :is-date-disabled="isDateDisabledMatcher"
     :is-date-highlightable="isDateHighlightableMatcher"
     :is-date-unavailable="isDateUnavailableMatcher"

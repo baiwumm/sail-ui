@@ -198,6 +198,7 @@ export interface RekaRangeCalendarState extends RekaCalendarState {
   endValue: Ref<DateValue | undefined>;
   highlightedRange: Ref<{start: DateValue; end: DateValue} | null>;
   focusedValue: Ref<DateValue | undefined>;
+  isInvalid: Ref<boolean>;
   isSelected: (date: DateValue) => boolean;
   isSelectionStart: (date: DateValue) => boolean;
   isSelectionEnd: (date: DateValue) => boolean;
