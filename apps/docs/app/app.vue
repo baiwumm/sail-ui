@@ -6,6 +6,14 @@ const groups = docsNav;
 
 const query = ref("");
 
+function goToSearch() {
+  const needle = query.value.trim();
+
+  if (needle) {
+    navigateTo(`/search?q=${encodeURIComponent(needle)}`);
+  }
+}
+
 const filteredGroups = computed<DocGroup[]>(() => {
   const needle = query.value.trim().toLowerCase();
 
@@ -34,8 +42,9 @@ const filteredGroups = computed<DocGroup[]>(() => {
         v-model="query"
         aria-label="Search the docs"
         class="docs-header-search"
-        placeholder="Filter pages…"
+        placeholder="Filter pages… (Enter for full-text search)"
         size="sm"
+        @keydown.enter="goToSearch"
       />
       <SLink
         href="https://github.com/baiwumm/sail-ui"
