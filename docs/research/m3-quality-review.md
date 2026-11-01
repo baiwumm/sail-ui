@@ -85,14 +85,21 @@
 - avatar 组上下文按注入继承不限嵌套深度（上游仅直子级）；Typo 上的纯边角场景。
 - 上游 CloseButton pending 态的 live-region announce、RAC pending 进度 id：a11y 增强差异，未实现。
 
-## 待决策（进入 T09 前建议过目）
+## 待决策（2026-11-01 已过审，处置如下）
 
-1. **toggle-button-group single 模式方向键自动选中**（Radix radio 语义）与上游"仅移动焦点"不一致——本次已修复反选；方向键行为如需对齐需脱离 Reka RadioGroup（结构变更），建议单独 ticket 或记录为迁移差异。
-2. **tooltip 缺 warmup/shouldSkipAnimation**：上游连续扫过触发器时跳过 delay/退场；Sail 每次等满 `--tooltip-delay`。实现需要跨 tooltip 的全局 warmup 状态（AGENTS 禁模块级可变状态，需通过 app 级 provider），现有测试锁定当前行为；建议 T09 迁移指南记录，或单独 ticket。
-3. **ComboBox variant 上下文**：input 已留回退位，但 combo-box 未暴露 `variant`（上游有）——补 prop 属公共 API 变更，建议 T09 一并定。
-4. **日期家族 timezone 注入口**：格式化/比较用 `getLocalTimeZone()`，上游经 I18nProvider 可传 timeZone；跨时区 SSR 的 min/max 校验可能 hydration 不一致（低概率）。建议经 ConfigProvider 透传，T09 规格。
-5. **calendar `visibleDuration` 仅支持 months**（上游还有 weeks/days 视图）；**input-otp 缺 mask/autoComplete/textAlign/pasteTransformer**；**color-picker 缺 name**（隐藏 input 提交）——均为上游功能缺口，建议记录到迁移指南差异表，按需排期。
-6. **dir 暴露面**：集合/日期根组件多数未暴露 `dir` prop（Reka 读 ConfigProvider）——T09 Nuxt module 统一配 ConfigProvider 时一并解决。
+1. **toggle-button-group single 方向键自动选中** →【已决策】记录为迁移差异（radio 惯例，不改结构）；点击反选已实现。
+2. **tooltip warmup/shouldSkipAnimation** →【已决策】T09 随 Nuxt module 的 app 级 provider 实现；迁移指南已记录差异。
+3. **公共 API 补齐** →【已决策】已实现：ComboBox/Autocomplete `variant`（经 combobox binding 传导到内部 Input）、ColorPicker `name`（经 color context 回退到内部 ColorField）、InputOtp `mask`。
+4. **日期 timeZone 注入口** →【已决策】T09 经 ConfigProvider 统一提供（locale/dir/timeZone 一起定）；迁移指南已记录现状。
+5. **dir 暴露面** →【已决策】不逐组件加 prop，T09 Nuxt module 统一配 ConfigProvider；组件已支持显式 `dir` prop 与 `<html dir>` 回退。
+6. **calendar weeks/days 视图、input-otp 其余透传（autoComplete/textAlign/pasteTransformer）** →【已决策】记录到迁移指南差异表，不排期；otp `mask` 已补。
+
+7. **toggle-button-group single 模式方向键自动选中**（Radix radio 语义）与上游"仅移动焦点"不一致——本次已修复反选；方向键行为如需对齐需脱离 Reka RadioGroup（结构变更），建议单独 ticket 或记录为迁移差异。
+8. **tooltip 缺 warmup/shouldSkipAnimation**：上游连续扫过触发器时跳过 delay/退场；Sail 每次等满 `--tooltip-delay`。实现需要跨 tooltip 的全局 warmup 状态（AGENTS 禁模块级可变状态，需通过 app 级 provider），现有测试锁定当前行为；建议 T09 迁移指南记录，或单独 ticket。
+9. **ComboBox variant 上下文**：input 已留回退位，但 combo-box 未暴露 `variant`（上游有）——补 prop 属公共 API 变更，建议 T09 一并定。
+10. **日期家族 timezone 注入口**：格式化/比较用 `getLocalTimeZone()`，上游经 I18nProvider 可传 timeZone；跨时区 SSR 的 min/max 校验可能 hydration 不一致（低概率）。建议经 ConfigProvider 透传，T09 规格。
+11. **calendar `visibleDuration` 仅支持 months**（上游还有 weeks/days 视图）；**input-otp 缺 mask/autoComplete/textAlign/pasteTransformer**；**color-picker 缺 name**（隐藏 input 提交）——均为上游功能缺口，建议记录到迁移指南差异表，按需排期。
+12. **dir 暴露面**：集合/日期根组件多数未暴露 `dir` prop（Reka 读 ConfigProvider）——T09 Nuxt module 统一配 ConfigProvider 时一并解决。
 
 ## 与本次范围外但顺带完成
 

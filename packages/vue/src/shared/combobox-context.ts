@@ -1,3 +1,4 @@
+import type {InputVariants} from "@sail-ui/styles";
 import type {ComputedRef, InjectionKey, Ref, WritableComputedRef} from "vue";
 
 import {computed, inject, ref, watch} from "vue";
@@ -22,6 +23,8 @@ export interface ComboboxBinding {
   isDisabled: ComputedRef<boolean>;
   isMultiple: ComputedRef<boolean>;
   isOpen: Ref<boolean>;
+  /** Visual variant contributed by the owning ComboBox/Autocomplete root. */
+  variant: ComputedRef<InputVariants["variant"] | undefined>;
   allowsCustomValue: ComputedRef<boolean>;
   isSelected: (value: ComboBoxKey) => boolean;
   setSelected: (value: ComboBoxModelValue) => void;
@@ -40,6 +43,7 @@ export interface UseComboboxBindingOptions {
   inputValue: WritableComputedRef<string>;
   isDisabled: ComputedRef<boolean>;
   isOpen: Ref<boolean>;
+  variant?: ComputedRef<InputVariants["variant"] | undefined>;
   allowsCustomValue: ComputedRef<boolean>;
   displayValue?: (value: ComboBoxKey) => string | undefined;
   onSelectionChange?: (value: ComboBoxModelValue) => void;
@@ -141,6 +145,7 @@ export function createComboboxBinding(
     isDisabled: options.isDisabled,
     isMultiple: computed(() => false),
     isOpen: options.isOpen,
+    variant: options.variant ?? computed(() => undefined),
     isSelected,
     labelFor,
     modelValue: options.modelValue,

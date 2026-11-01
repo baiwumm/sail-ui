@@ -42,7 +42,9 @@ if (model.value === undefined && props.defaultValue !== undefined) {
   model.value = props.defaultValue;
 }
 
-const variant = computed(() => props.variant ?? textField?.variant.value);
+const variant = computed(
+  () => props.variant ?? textField?.variant.value ?? combobox?.variant.value,
+);
 
 const classes = computed(() =>
   cx(inputVariants({fullWidth: props.fullWidth, variant: variant.value}), className.value),

@@ -9,6 +9,11 @@ export type ColorValue = string | Color;
 export interface ColorPickerContext {
   color: Readonly<Ref<Color>>;
   setColor: (value: ColorValue) => void;
+  /**
+   * The owning picker's form name. Standalone providers (ColorField) expose
+   * their own name so nested parts resolve the closest form identity.
+   */
+  name: Ref<string | undefined>;
 }
 
 export const colorPickerContextKey: InjectionKey<ColorPickerContext> = Symbol("sail-color-picker");

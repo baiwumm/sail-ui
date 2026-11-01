@@ -16,6 +16,8 @@ export interface InputOtpRootProps {
   placeholder?: string;
   /** @default "numeric" */
   inputMode?: InputOtpMode;
+  /** Masks the slot inputs as a password field. @default false */
+  mask?: boolean;
   /** @default false */
   isDisabled?: boolean;
   /** @default false */

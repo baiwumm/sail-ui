@@ -3,7 +3,7 @@ import type {ColorValue} from "../../shared/color-context";
 
 import {colorFieldVariants, cx} from "@sail-ui/styles";
 import {ColorFieldRoot as ColorFieldRootPrimitive} from "reka-ui";
-import {computed, provide, ref, useId} from "vue";
+import {computed, inject, provide, ref, useId} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
 import {colorPickerContextKey, toColor, toHex, useColorBinding} from "../../shared/color-context";
@@ -46,6 +46,11 @@ const isInvalid = computed(() => props.isInvalid);
 const isReadOnly = computed(() => props.isReadOnly);
 const isRequired = computed(() => props.isRequired);
 
+// Injected before the provide below: inside a ColorPicker the field falls
+// back to the picker's form name when it has none of its own.
+const enclosingPicker = inject(colorPickerContextKey, null);
+const name = computed(() => props.name ?? enclosingPicker?.name.value);
+
 function registerDescription(id: string) {
   if (!descriptionIds.value.includes(id)) {
     descriptionIds.value = [...descriptionIds.value, id];
@@ -78,6 +83,7 @@ provide(colorFieldContextKey, {
 
 provide(colorPickerContextKey, {
   color: computed(() => toColor(binding.value.value)),
+  name,
   setColor(next) {
     binding.setValue(next);
     emit("update:color", toColor(next));

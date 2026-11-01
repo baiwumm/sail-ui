@@ -19,6 +19,7 @@ defineOptions({name: "SailColorPicker", inheritAttrs: false});
 const props = withDefaults(defineProps<ColorPickerRootProps>(), {
   defaultValue: undefined,
   defaultOpen: false,
+  name: undefined,
 });
 
 const emit = defineEmits<ColorPickerRootEmits>();
@@ -55,6 +56,7 @@ provide<ColorPickerRootContext>(colorPickerRootContextKey, {
 
 provide(colorPickerContextKey, {
   color,
+  name: computed(() => props.name),
   setColor(next: ColorValue) {
     binding.setValue(next);
 

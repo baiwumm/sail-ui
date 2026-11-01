@@ -1,3 +1,5 @@
+import type {InputVariants} from "@sail-ui/styles";
+
 import type {ComboBoxKey, ComboBoxModelValue} from "../../shared/combobox-context";
 export type ComboBoxMenuTrigger = "focus" | "input" | "manual";
 
@@ -19,6 +21,8 @@ export interface ComboBoxRootProps {
   isDisabled?: boolean;
   isInvalid?: boolean;
   isRequired?: boolean;
+  /** The visual variant contributed to the input inside the combo box. @default "primary" */
+  variant?: InputVariants["variant"];
   fullWidth?: boolean;
   name?: string;
   open?: boolean;

@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<InputOtpRootProps>(), {
   inputMode: "numeric",
   isDisabled: false,
   isInvalid: false,
+  mask: false,
 });
 
 const emit = defineEmits<InputOtpRootEmits>();
@@ -107,6 +108,7 @@ provide(inputOtpContextKey, {
   <PinInputRoot
     :id="id"
     :disabled="isDisabled"
+    :mask="mask"
     :model-value="rekaValue"
     :name="name"
     :otp="true"

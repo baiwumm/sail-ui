@@ -107,6 +107,7 @@ const {binding} = createComboboxBinding({
   onClear: () => props.onClear?.(),
   onSelectionChange: (next) => emit("selection-change", next),
   open: overlay.open,
+  variant: computed(() => props.variant),
 });
 
 provide(comboboxContextKey, binding);

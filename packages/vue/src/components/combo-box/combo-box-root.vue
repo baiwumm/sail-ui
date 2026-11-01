@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<ComboBoxRootProps>(), {
   isDisabled: false,
   isInvalid: false,
   isRequired: false,
+  variant: undefined,
   fullWidth: false,
   defaultInputValue: "",
 });
@@ -86,6 +87,7 @@ const {binding} = createComboboxBinding({
   onClear: undefined,
   onSelectionChange: (next) => emit("selection-change", next),
   open: overlay.open,
+  variant: computed(() => props.variant),
 });
 
 provide(comboboxContextKey, binding);

@@ -598,6 +598,12 @@ export default defineNuxtConfig({
 | 日期字段的 min/max 无效态              | Reka 初始渲染即标记 `data-invalid`；RAC 默认 `validationBehavior="native"` 要失焦/提交后才显示            | Vue 立即显示无效样式；逐像素对照 React 时给 `DateField` 传 `validationBehavior="aria"` |
 | ColorArea 的默认值与通道               | RAC 默认值 `#ffffff`，缺省轴按颜色空间通道顺序（sRGB 为 red/green）；Reka 默认 `#ff0000` + hue/saturation | 需要同图时显式传 `default-value`、`color-space`、`x-channel`、`y-channel`              |
 | 颜色 hex 字符串大小写                  | RAC 的 `toString("hex")` 输出大写，Reka 输出小写                                                          | 展示与比较前统一大小写；`v-model` 两种都接受                                           |
+| `ToggleButtonGroup` 单选的方向键       | RAC 仅移动焦点，Enter/Space 激活                                                                          | Vue 保持 radio 惯例：方向键移动并选中；点击已选项可反选（与上游一致）                  |
+| Tooltip 连续扫过                       | RAC 有全局 warmup：第一个 tooltip 打开后，closeDelay 窗口内换触发器立即打开并跳过退场                     | Vue 每次等满 `--tooltip-delay` 并播完整退场；warmup 计划随 `@sail-ui/nuxt` 提供        |
+| 日期的 timeZone                        | RAC 经 `I18nProvider timeZone` 渲染                                                                       | Vue 使用浏览器本地时区；显式时区支持将随 ConfigProvider 提供                           |
+| 日期组件的 dir                         | RAC 自动跟随 `document.dir`                                                                               | Vue 组件读显式 `dir` prop 或 `<html dir>`；`ConfigProvider` 可统一指定                 |
+| Calendar 的视图                        | 上游支持 `visibleDuration` 为 weeks/days 的周/日视图                                                      | Vue 仅支持 months；周/日视图见迁移差异，暂不排期                                       |
+| InputOtp 的额外 props                  | RAC 透传 OTPInput 的 `autoComplete`/`textAlign`/`pasteTransformer`                                        | Vue 暂只暴露 `mask` 与 `inputMode`；其余按需在迁移差异中追加                           |
 
 ## 10. 迁移检查清单
 

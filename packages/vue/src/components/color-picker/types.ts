@@ -12,6 +12,11 @@ export interface ColorPickerRootProps {
   open?: boolean;
   /** @default false */
   defaultOpen?: boolean;
+  /**
+   * The name submitted with the owning form. Composed parts fall back to it,
+   * so a ColorField inside the picker submits under the picker's name.
+   */
+  name?: string;
 }
 
 export interface ColorPickerRootEmits {
