@@ -1,24 +1,29 @@
 <script setup lang="ts">
 import {cx, separatorVariants} from "@sail-ui/styles";
 import {Primitive} from "reka-ui";
-import {computed, useAttrs} from "vue";
+import {computed, inject} from "vue";
 
-import type {SeparatorRootProps} from "./types";
+import {useForwardedAttrs} from "../../shared/attrs";
+import {separatorToolbarContextKey, type SeparatorRootProps} from "./types";
 
 defineOptions({name: "SailSeparator", inheritAttrs: false});
 
 const props = withDefaults(defineProps<SeparatorRootProps>(), {
   isDecorative: false,
-  orientation: "horizontal",
   variant: "default",
 });
 
-const attrs = useAttrs();
+const {className, forwarded} = useForwardedAttrs();
+const toolbar = inject(separatorToolbarContextKey, null);
+
+// The separator's own orientation wins; inside a toolbar the context provides
+// the orientation flipped relative to the toolbar, matching upstream.
+const orientation = computed(() => props.orientation ?? toolbar?.orientation.value ?? "horizontal");
 
 const element = computed(() => {
   const requested = (props.as as string | undefined) ?? props.elementType ?? "div";
 
-  if (props.isDecorative && requested === "hr" && props.orientation === "vertical") {
+  if (props.isDecorative && requested === "hr" && orientation.value === "vertical") {
     return "div";
   }
 
@@ -26,10 +31,7 @@ const element = computed(() => {
 });
 
 const classes = computed(() =>
-  cx(
-    separatorVariants({orientation: props.orientation, variant: props.variant}),
-    attrs.class as string | undefined,
-  ),
+  cx(separatorVariants({orientation: orientation.value, variant: props.variant}), className.value),
 );
 
 const isNativeHr = computed(() => element.value === "hr");
@@ -37,7 +39,7 @@ const isNativeHr = computed(() => element.value === "hr");
 
 <template>
   <Primitive
-    v-bind="$attrs"
+    v-bind="forwarded"
     :as="element"
     :as-child="asChild"
     :class="classes"

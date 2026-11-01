@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {toolbarVariants, cx} from "@sail-ui/styles";
-import {computed, provide, ref} from "vue";
+import {computed, onBeforeUnmount, onMounted, provide, ref} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
 import {useDocumentDirection} from "../../shared/direction";
+import {separatorToolbarContextKey} from "../separator/types";
 import {toolbarContextKey, type ToolbarRootProps} from "./types";
 
 defineOptions({name: "SailToolbar", inheritAttrs: false});
@@ -30,6 +31,12 @@ provide(toolbarContextKey, {
   orientation: computed(() => props.orientation),
 });
 
+// Upstream flips the orientation of inner separators: a horizontal toolbar
+// renders vertical separator rules (toolbar.css sizes them with h-1/2).
+provide(separatorToolbarContextKey, {
+  orientation: computed(() => (props.orientation === "horizontal" ? "vertical" : "horizontal")),
+});
+
 const FOCUSABLE_SELECTOR = [
   "a[href]",
   "button:not([disabled])",
@@ -45,6 +52,12 @@ const resolvedDir = computed(() => props.dir ?? documentDirection.value);
 
 function isRTL() {
   return resolvedDir.value === "rtl";
+}
+
+function collectItems(toolbar: HTMLElement) {
+  return [...toolbar.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)].filter(
+    (item) => !item.hasAttribute("hidden") && item.getAttribute("aria-hidden") !== "true",
+  );
 }
 
 /**
@@ -72,9 +85,7 @@ function handleKeydown(event: KeyboardEvent) {
     return;
   }
 
-  const items = [...toolbar.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)].filter(
-    (item) => !item.hasAttribute("hidden") && item.getAttribute("aria-hidden") !== "true",
-  );
+  const items = collectItems(toolbar);
 
   if (items.length === 0) {
     return;
@@ -94,19 +105,90 @@ function handleKeydown(event: KeyboardEvent) {
   event.preventDefault();
   items[nextIndex]?.focus();
 }
+
+// The toolbar is a single tab stop like the upstream RAC Toolbar: Tab moves
+// focus out of the entire toolbar by focusing the last (Shift+Tab: first)
+// focusable child and letting the browser continue from there.
+let lastFocusedElement: HTMLElement | null = null;
+
+function handleTabCapture(event: KeyboardEvent) {
+  if (event.key !== "Tab") {
+    return;
+  }
+
+  const toolbar = toolbarRef.value;
+
+  if (!toolbar) {
+    return;
+  }
+
+  const items = collectItems(toolbar);
+
+  if (items.length === 0) {
+    return;
+  }
+
+  lastFocusedElement =
+    document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+  if (event.shiftKey) {
+    items[0]?.focus();
+  } else {
+    items[items.length - 1]?.focus();
+  }
+}
+
+function handleFocusCapture(event: FocusEvent) {
+  const toolbar = toolbarRef.value;
+  const from = event.relatedTarget as Node | null;
+
+  if (
+    lastFocusedElement &&
+    toolbar &&
+    from &&
+    !toolbar.contains(from) &&
+    toolbar.contains(event.target as Node)
+  ) {
+    lastFocusedElement.focus();
+    lastFocusedElement = null;
+  }
+}
+
+function handleBlurCapture(event: FocusEvent) {
+  const toolbar = toolbarRef.value;
+  const to = event.relatedTarget as Node | null;
+
+  if (!lastFocusedElement && toolbar && to && !toolbar.contains(to)) {
+    lastFocusedElement = event.target instanceof HTMLElement ? event.target : null;
+  }
+}
+
+// A toolbar nested inside another one degrades to `group` upstream.
+const isInToolbar = ref(false);
+
+onMounted(() => {
+  isInToolbar.value = Boolean(toolbarRef.value?.parentElement?.closest('[role="toolbar"]'));
+});
+
+onBeforeUnmount(() => {
+  lastFocusedElement = null;
+});
 </script>
 
 <template>
   <div
     ref="toolbarRef"
     v-bind="forwarded"
-    role="toolbar"
+    :role="isInToolbar ? 'group' : 'toolbar'"
     :aria-orientation="orientation"
     :class="classes"
     :data-orientation="orientation"
     :data-slot="'toolbar'"
     :dir="resolvedDir"
+    @focusin.capture="handleFocusCapture"
+    @focusout.capture="handleBlurCapture"
     @keydown="handleKeydown"
+    @keydown.capture="handleTabCapture"
   >
     <slot />
   </div>
