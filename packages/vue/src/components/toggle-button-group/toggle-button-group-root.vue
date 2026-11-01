@@ -4,6 +4,7 @@ import {RadioGroupRoot, ToggleGroupRoot} from "reka-ui";
 import {computed, inject, provide} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {useDisabledCascade} from "../../shared/disabled-cascade";
 import {useDocumentDirection} from "../../shared/direction";
 import {toolbarContextKey} from "../toolbar/types";
 import {toggleButtonGroupContextKey, type ToggleButtonGroupRootProps} from "./types";
@@ -25,6 +26,10 @@ const documentDirection = useDocumentDirection();
 const resolvedDir = computed(() => props.dir ?? documentDirection.value);
 
 const isSingle = computed(() => props.type !== "multiple");
+
+// `<Fieldset isDisabled>` cascades to the group the browser cannot reach.
+const cascadeDisabled = useDisabledCascade();
+const isDisabled = computed(() => props.isDisabled || cascadeDisabled.value);
 
 const orientation = computed(() => props.orientation ?? toolbar?.orientation.value ?? "horizontal");
 
@@ -66,7 +71,7 @@ function isSelected(value: unknown) {
 }
 
 function toggle(value: unknown) {
-  if (props.isDisabled) {
+  if (isDisabled.value) {
     return;
   }
 
@@ -83,7 +88,7 @@ function toggle(value: unknown) {
 
 provide(toggleButtonGroupContextKey, {
   isSingle,
-  isDisabled: computed(() => props.isDisabled),
+  isDisabled,
   size: computed(() => props.size),
   selected,
   isSelected,

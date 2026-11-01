@@ -207,6 +207,11 @@ describe("ToggleButtonGroup", () => {
     await nextTick();
     expect(values.value).toBe("italic");
 
+    // Upstream single mode deselects when the selected item is activated again.
+    await buttons[1]!.trigger("click");
+    await nextTick();
+    expect(values.value).toBeUndefined();
+
     wrapper.unmount();
   });
 

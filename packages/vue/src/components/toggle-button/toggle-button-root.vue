@@ -5,6 +5,7 @@ import {RadioGroupItem, Toggle, ToggleGroupItem} from "reka-ui";
 import {computed, inject, ref, type ComponentPublicInstance} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {useDisabledCascade} from "../../shared/disabled-cascade";
 import {toggleButtonGroupContextKey} from "../toggle-button-group/types";
 import type {ToggleButtonRootProps} from "./types";
 
@@ -29,7 +30,10 @@ const toggleRef = ref<ComponentPublicInstance | null>(null);
 const element = computed(() => (toggleRef.value?.$el as Element | null | undefined) ?? null);
 
 const size = computed(() => props.size ?? group?.size.value);
-const isDisabled = computed(() => group?.isDisabled.value || props.isDisabled);
+const cascadeDisabled = useDisabledCascade();
+const isDisabled = computed(
+  () => group?.isDisabled.value || props.isDisabled || cascadeDisabled.value,
+);
 const isSelected = computed(() => (group ? group.isSelected(props.value) : model.value === true));
 
 const {isHovered} = useHover(element, {isDisabled});
@@ -59,6 +63,20 @@ const stateAttrs = computed(() => ({
   "data-selected": isSelected.value ? "true" : undefined,
   "data-slot": "toggle-button",
 }));
+
+/**
+ * Upstream single mode deselects when the selected item is activated again.
+ * Reka's radio only ever (re)selects, so preventDefault stops its handler and
+ * the group context toggles the value off instead.
+ */
+function handleSingleClick(event: MouseEvent) {
+  if (!group?.isSingle.value || isDisabled.value || !group.isSelected(props.value)) {
+    return;
+  }
+
+  event.preventDefault();
+  group.toggle(props.value);
+}
 </script>
 
 <template>
@@ -79,6 +97,7 @@ const stateAttrs = computed(() => ({
     :class="classes"
     :disabled="isDisabled"
     :value="value ?? ''"
+    @click="handleSingleClick"
   >
     <slot :is-selected="isSelected" />
   </RadioGroupItem>
