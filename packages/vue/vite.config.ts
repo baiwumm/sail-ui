@@ -41,6 +41,9 @@ export default defineConfig({
       include: ["src/**/*.ts", "src/**/*.vue"],
       outDir: "dist",
       tsconfigPath: "./tsconfig.build.json",
+      // Emit the @sail-ui/* alias instead of a relative path into the styles
+      // sources, so the published types resolve through package exports.
+      pathsToAliases: true,
     }),
   ],
 });

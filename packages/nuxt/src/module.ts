@@ -70,7 +70,9 @@ const isComponentExport = (value: unknown): boolean => {
   );
 };
 
-async function readVuePackage(resolver: ReturnType<typeof createResolver>): Promise<VuePackageExports> {
+async function readVuePackage(
+  resolver: ReturnType<typeof createResolver>,
+): Promise<VuePackageExports> {
   try {
     const packagePath = await resolver.resolvePath("@sail-ui/vue/package.json");
 
@@ -101,7 +103,6 @@ const findUserAppComponent = (srcDir: string, rootDir: string): string | undefin
 };
 
 const module: NuxtModule<SailUIModuleOptions> = defineNuxtModule<SailUIModuleOptions>({
-
   meta: {
     name: "@sail-ui/nuxt",
     configKey: "sailUI",

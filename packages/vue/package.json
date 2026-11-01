@@ -434,7 +434,7 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && node ../../scripts/fix-vue-dts.mjs",
     "lint": "eslint src --max-warnings=0",
     "typecheck": "vue-tsc --noEmit -p tsconfig.json"
   },
