@@ -2,7 +2,7 @@
 
 Instructions for AI agents and contributors working on **Sail UI** — an unofficial Vue 3 / Nuxt port of HeroUI v3.
 
-> **Current phase: M4 in progress (T09 slice A-C landed; docs content sweep, overlay visual matrix and canary publishing remain).** T01 (M0 architecture spike), T02 (contract tooling), T03 (24 display/layout/feedback components), T04 (19 form controls), T05 (7 overlays + Toast), T06 (15 collections/pickers), T07 (15 date/color/autocomplete components), and T08 (Table / Meter / ScrollShadow / InputOtp) are complete. The workspace builds and `pnpm verify` plus browser CI are the gates. T08 delivered the remaining 4 components (84 total); T09 (docs/release) is next. Table is data-driven (`columns`/`data`, no RAC parts) per ADR 0005.
+> **Current phase: M4 in progress — T09 mostly landed (nuxt module, release gates, 84 docs pages, search; see the T09 ticket progress record). Remaining: overlay visual matrix, RTL smoke for Drawer/Table, canary publish (blocked on npm scope/token + D1 database_id).** T01 (M0 architecture spike), T02 (contract tooling), T03 (24 display/layout/feedback components), T04 (19 form controls), T05 (7 overlays + Toast), T06 (15 collections/pickers), T07 (15 date/color/autocomplete components), and T08 (Table / Meter / ScrollShadow / InputOtp) are complete. The workspace builds and `pnpm verify` plus browser CI are the gates. T08 delivered the remaining 4 components (84 total); T09 (docs/release) is next. Table is data-driven (`columns`/`data`, no RAC parts) per ADR 0005.
 
 ---
 

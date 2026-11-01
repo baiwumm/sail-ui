@@ -1,7 +1,7 @@
 # T09 — Nuxt module + 文档站 + 发布门禁
 
 - Milestone: M4
-- Status: Pending
+- Status: In progress（2026-11-01：切片 A–C 已落地，见文末进度记录；剩余覆盖层视觉矩阵、RTL 冒烟与 canary 发布）
 - Blocked by: [T03](./03-display-and-feedback.md), [T04](./04-form-controls.md), [T05](./05-overlays.md), [T06](./06-collections-and-pickers.md), [T07](./07-date-and-color.md), [T08](./08-advanced-data.md)
 - Unblocks: —
 - Related: [Spec §5.8](../0001-heroui-v3-vue-port.spec.md), [Spec §5.11](../0001-heroui-v3-vue-port.spec.md), [Roadmap](../../roadmap.md)
@@ -106,6 +106,36 @@
 - 企业级 SLA/性能承诺。
 
 ## Risks
+
+## 进度记录（2026-11-01）
+
+### 已完成
+
+- **切片 A：`@sail-ui/nuxt` 模块**（commit `2259da6`）
+  - 构建时从 `@sail-ui/vue` dist 内省全部导出并按 `prefix`（默认 `S`）自动注册，重名 part 去重；注入 styles 入口 + Tailwind v4；`useToast` 自动导入；`wrapApp` 默认通过覆盖 Nuxt 的 `app-component.mjs` 模板挂载 `SailUIProvider`（ConfigProvider + ToastProvider）。nuxt-fixture 已改为纯模块用法。
+- **切片 B：发布门禁**（commit `f8dcc6d`）
+  - 5 个包 README；`pack:check` 扩展到 4 包 tarball + 消费者类型解析检查（bundler + node16，替代 attw 的 pnpm 伪影）；vue dts 修复（`.vue` 说明符 → `.vue.js`、workspace 别名 → 包名）；changesets（public access）+ `release.yml`（`NPM_PUBLISH_ENABLED` 变量门控）+ `ci.yml`（verify/contract/pack 三 job）。
+- **切片 C：文档站**（commits `4bb67ab`、`964a7c9`、`2dc4691`、`256ab09`）
+  - `apps/docs`：Nuxt 4 + Nuxt Content 3，英文内容；nitro `cloudflare_module` preset + `wrangler.jsonc`（D1 绑定 `DB`）；上游版式对齐（220px 侧栏/TOC/Inter/prose/代码块，全部取色自 `@sail-ui/styles` 主题变量）；chrome dogfood（SInput 过滤、SLink、SButtonGroup 主题切换，light/dark/system）。
+  - **84 个组件页全部交付**（含真实 MDC demo + 核对过的 API 表 + 迁移差异）；总览页与侧栏导航由 `apps/docs/scripts/gen-components.mjs` 从组件矩阵生成（自动检测已交付页面，输出 `app/docs-nav.generated.ts`）。
+  - 全文搜索：`/search?q=` 基于 Content 搜索段 + title>heading>body 打分，顶栏过滤框回车即搜。
+  - 验证：88 页全 200 sweep（wrangler dev 本地 worker）；docs lint/typecheck/build 全绿；`pnpm verify`、visual 86、browser 348 全绿。
+
+### 剩余任务（按优先级）
+
+1. **覆盖层视觉截图矩阵**（T05 顺延项）：alert-dialog / drawer / sheet / popover / tooltip × light/dark × placement × 进出场关键帧。需要在 `apps/reference-react` 与 `apps/playground` 两侧 gallery 各加 overlay section（Modal/Select 已有，参照 `tests/visual/parity.visual.ts` 的对比模式），并确认进出场关键帧的截图时机（参考 T05 的"entering state before the first frame"测试手法）。
+2. **RTL Drawer/Table 冒烟**：roadmap M3 顺延项。Drawer 用现有 `tests/browser/rtl.spec.ts` 的 calendar 模式补；Table 验证虚拟化 RTL 的列方向/键盘。完成后勾掉 roadmap 中 M3 的 RTL 项。
+3. **Bundle/CSS 体积记录**：T09 acceptance 中的体积基线（无硬 SLA，回归 >10% 需说明）。
+4. **canary 发布**（用户前置动作完成后执行）：
+   - 用户：创建 npm `@sail-ui` scope → 仓库 Secrets 配 `NPM_TOKEN` → 仓库 Variables 设 `NPM_PUBLISH_ENABLED=true`；
+   - 用户（文档站部署）：`wrangler d1 create sail-ui-docs` → 把 database_id 填入 `apps/docs/wrangler.jsonc` → `pnpm --filter @sail-ui/docs build && npx wrangler deploy`（在 apps/docs 下）；
+   - 机器：merge 后 release workflow 走 changesets version + `changeset publish --tag canary`；发布后在干净项目 `pnpm add @sail-ui/vue@canary` 渲染验证（对应 Demo 步骤 5）。
+
+### 续接上下文
+
+- 本地预览：`pnpm --filter @sail-ui/docs build` 后在 `apps/docs` 跑 `npx wrangler dev .output/server/index.mjs --assets .output/public --port 8788`（D1 本地模拟即可）。
+- 文档 demo 规范：部件名是**单数**（`TabList` 不是 `TabsList`，`STab-list` 不是 `STabs-list`），写错在 SSR 报 `RovingFocusGroupContext` 注入错误；demo 必须用 playground 已验证的复合结构；模板内 TS 断言（`as const`）必须放在 `<script setup lang="ts">` 里。
+- 主题切换写 `<html>` 的 `dark` 类 + `data-theme`；文档站所有取色走 `@sail-ui/styles` 变量，无第二套主题。
 
 | 风险                               | 处理                                                                |
 | ---------------------------------- | ------------------------------------------------------------------- |
