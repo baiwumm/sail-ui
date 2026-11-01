@@ -41,6 +41,7 @@ export interface SearchFieldContext {
   isEmpty: Ref<boolean>;
   isDisabled: Ref<boolean>;
   isInvalid: Ref<boolean>;
+  label: Ref<string | undefined>;
   setValue: (value: string) => void;
   clear: () => void;
   submit: (value: string) => void;

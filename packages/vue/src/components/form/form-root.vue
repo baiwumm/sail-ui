@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
-import {isComposing} from "../../shared/composition";
 import type {FormRootProps} from "./types";
 
 defineOptions({name: "SailForm", inheritAttrs: false});
@@ -17,12 +16,10 @@ const emit = defineEmits<{
 }>();
 
 const {className, forwarded} = useForwardedAttrs();
-const isComposingSubmit = ref(false);
 
 const classes = computed(() => className.value);
 
 function handleSubmit(event: SubmitEvent) {
-  isComposingSubmit.value = false;
   emit("submit", event);
 }
 
@@ -32,21 +29,6 @@ function handleSubmit(event: SubmitEvent) {
  */
 function handleInvalid(event: Event) {
   emit("invalid", event);
-}
-
-/**
- * Enter confirms the IME candidate while a composition is active. The form
- * must not submit while the user is still typing.
- */
-function handleKeydown(event: KeyboardEvent) {
-  if (event.key !== "Enter" || !isComposing(event)) {
-    isComposingSubmit.value = false;
-
-    return;
-  }
-
-  isComposingSubmit.value = true;
-  event.stopPropagation();
 }
 </script>
 
@@ -60,7 +42,6 @@ function handleKeydown(event: KeyboardEvent) {
     :name="name"
     :novalidate="noValidate || undefined"
     @invalid.capture="handleInvalid"
-    @keydown="handleKeydown"
     @submit="handleSubmit"
   >
     <slot />

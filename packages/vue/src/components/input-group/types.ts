@@ -30,7 +30,6 @@ export interface InputGroupSuffixProps {
 
 export interface InputGroupContext {
   isDisabled: Ref<boolean>;
-  isInvalid: Ref<boolean>;
 }
 
 export const inputGroupContextKey: InjectionKey<InputGroupContext> = Symbol("sail-input-group");

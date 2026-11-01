@@ -5,6 +5,7 @@ import {Primitive} from "reka-ui";
 import {computed, inject, ref, useAttrs, type ComponentPublicInstance} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {useDisabledCascade} from "../../shared/disabled-cascade";
 import {buttonGroupContextKey} from "../button-group/types";
 import type {ButtonProps} from "./types";
 
@@ -31,10 +32,20 @@ const element = computed(() => (buttonRef.value?.$el as Element | null | undefin
 const size = computed(() => props.size ?? group?.size.value);
 const variant = computed(() => props.variant ?? group?.variant.value);
 const fullWidth = computed(() => props.fullWidth || Boolean(group?.fullWidth.value));
+const cascadeDisabled = useDisabledCascade();
 const isDisabled = computed(
-  () => props.isDisabled || Boolean(group?.isDisabled.value) || props.isLoading,
+  () =>
+    props.isDisabled ||
+    Boolean(group?.isDisabled.value) ||
+    props.isLoading ||
+    cascadeDisabled.value,
 );
 const isNativeButton = computed(() => !props.as || props.as === "button");
+// A pending submit button must not trigger implicit form submission
+// (Enter in an input), matching the upstream pending behaviour.
+const resolvedType = computed(() =>
+  isNativeButton.value && props.isLoading ? "button" : props.type,
+);
 
 const {isHovered} = useHover(element, {isDisabled});
 const {isPressed} = usePress(element, {
@@ -73,7 +84,7 @@ const spinnerClasses = computed(() => spinnerVariants({color: "current", size: "
     :data-pressed="isPressed ? 'true' : undefined"
     :data-slot="dataSlot"
     :disabled="isDisabled || undefined"
-    :type="isNativeButton ? type : undefined"
+    :type="isNativeButton ? resolvedType : undefined"
   >
     <span
       v-if="isLoading"

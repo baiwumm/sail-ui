@@ -70,6 +70,7 @@ onBeforeUnmount(() => {
     :aria-valuemax="context.max.value"
     :aria-valuemin="context.min.value"
     :aria-valuenow="value"
+    :aria-valuetext="context.format(value)"
     :class="classes"
     :data-dragging="isDragging ? 'true' : undefined"
     :data-focused="isFocused ? 'true' : undefined"

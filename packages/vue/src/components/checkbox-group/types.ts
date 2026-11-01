@@ -18,6 +18,7 @@ export interface CheckboxGroupRootProps {
 
 export interface CheckboxGroupContext {
   isSelected: (value: string) => boolean;
+  variant: Ref<CheckboxGroupVariants["variant"] | undefined>;
   isDisabled: Ref<boolean>;
   isInvalid: Ref<boolean>;
   isRequired: Ref<boolean>;

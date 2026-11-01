@@ -33,7 +33,7 @@ export interface RadioContext {
   isDisabled: Ref<boolean>;
   isInvalid: Ref<boolean>;
   isRequired: Ref<boolean>;
-  name: Ref<string>;
+  name: Ref<string | undefined>;
   value: Ref<string>;
   tabIndex: Ref<number>;
   select: () => void;

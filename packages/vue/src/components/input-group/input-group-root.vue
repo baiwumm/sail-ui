@@ -1,30 +1,33 @@
 <script setup lang="ts">
 import {useHover} from "@sail-ui/primitives";
 import {cx, inputGroupVariants} from "@sail-ui/styles";
-import {computed, provide, ref} from "vue";
+import {computed, inject, provide, ref} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {textFieldContextKey} from "../input/types";
 import {inputGroupContextKey, type InputGroupRootProps} from "./types";
 
 defineOptions({name: "SailInputGroup", inheritAttrs: false});
 
 const props = withDefaults(defineProps<InputGroupRootProps>(), {
-  variant: "primary",
   fullWidth: false,
   isDisabled: false,
   isInvalid: false,
 });
 
 const {className, forwarded} = useForwardedAttrs();
+const textField = inject(textFieldContextKey, null);
 const groupRef = ref<HTMLElement | null>(null);
 const isFocusWithin = ref(false);
+
+const variant = computed(() => props.variant ?? textField?.variant.value);
 
 const {isHovered} = useHover(groupRef, {isDisabled: computed(() => props.isDisabled)});
 
 const slots = computed(() =>
   inputGroupVariants({
     fullWidth: props.fullWidth,
-    variant: props.variant,
+    variant: variant.value,
   }),
 );
 
@@ -32,7 +35,6 @@ const classes = computed(() => cx(slots.value.base(), className.value));
 
 provide(inputGroupContextKey, {
   isDisabled: computed(() => props.isDisabled),
-  isInvalid: computed(() => props.isInvalid),
 });
 
 /**

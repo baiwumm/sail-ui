@@ -7,6 +7,10 @@ export interface LabelContext {
    * `span` instead of a `label` element.
    */
   elementType?: "label" | "span";
+  /**
+   * The id of the control the label names, rendered as the `for` attribute.
+   */
+  htmlFor?: string;
 }
 
 export const labelContextKey: InjectionKey<LabelContext> = Symbol("sail-label");

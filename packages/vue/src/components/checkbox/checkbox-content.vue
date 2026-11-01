@@ -33,7 +33,9 @@ watch(
       inputRef.value.indeterminate = Boolean(indeterminate);
     }
   },
-  {immediate: true},
+  // "post" runs after the DOM update, so an initially indeterminate checkbox
+  // reaches the native input while it exists instead of during setup.
+  {immediate: true, flush: "post"},
 );
 
 // The label renders a `<span>` so the clickable row stays a plain label

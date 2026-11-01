@@ -233,4 +233,21 @@ describe("Checkbox", () => {
 
     wrapper.unmount();
   });
+
+  it("inherits the group variant", () => {
+    const wrapper = mount(CheckboxGroup, {
+      props: {variant: "secondary", defaultValue: ["a"]},
+      slots: {
+        default: () => [h(Checkbox, {value: "a"})],
+      },
+    });
+
+    const checkbox = wrapper.get('[data-slot="checkbox"]');
+
+    // The CSS variant class lives on the member (checkbox.css), so a group
+    // variant must propagate to each checkbox.
+    expect(checkbox.classes()).toContain("checkbox--secondary");
+
+    wrapper.unmount();
+  });
 });

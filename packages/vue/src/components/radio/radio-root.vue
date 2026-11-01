@@ -24,7 +24,9 @@ const isSelected = computed(() =>
 const isDisabled = computed(() => group?.isDisabled.value || props.isDisabled);
 const isInvalid = computed(() => group?.isInvalid.value || props.isInvalid);
 const isRequired = computed(() => group?.isRequired.value || props.isRequired);
-const name = computed(() => props.name ?? group?.name.value ?? props.value);
+// A radio without a name does not participate in form submission, matching
+// the upstream contract.
+const name = computed(() => props.name ?? group?.name.value);
 
 const classes = computed(() => cx(radioVariants().base(), className.value));
 

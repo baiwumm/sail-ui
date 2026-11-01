@@ -36,6 +36,7 @@ provide(searchFieldContextKey, {
   isEmpty,
   isDisabled: computed(() => props.isDisabled),
   isInvalid: computed(() => props.isInvalid),
+  label: computed(() => props.label),
   setValue: (value: string) => {
     model.value = value;
   },

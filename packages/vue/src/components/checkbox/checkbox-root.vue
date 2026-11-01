@@ -10,7 +10,6 @@ defineOptions({name: "SailCheckbox", inheritAttrs: false});
 
 const props = withDefaults(defineProps<CheckboxRootProps>(), {
   value: "on",
-  variant: "primary",
   isDisabled: false,
   isInvalid: false,
   isRequired: false,
@@ -20,6 +19,7 @@ const model = defineModel<boolean | "indeterminate">({default: false});
 const group = inject(checkboxGroupContextKey, null);
 const {className, forwarded} = useForwardedAttrs();
 
+const variant = computed(() => props.variant ?? group?.variant.value);
 const isSelected = computed(() => (group ? group.isSelected(props.value) : model.value === true));
 const isIndeterminate = computed(() => (group ? false : model.value === "indeterminate"));
 const isDisabled = computed(() => group?.isDisabled.value || props.isDisabled);
@@ -27,7 +27,7 @@ const isInvalid = computed(() => group?.isInvalid.value || props.isInvalid);
 const isRequired = computed(() => group?.isRequired.value || props.isRequired);
 
 const classes = computed(() =>
-  cx(checkboxVariants({variant: props.variant}).base(), className.value),
+  cx(checkboxVariants({variant: variant.value}).base(), className.value),
 );
 
 function toggle() {

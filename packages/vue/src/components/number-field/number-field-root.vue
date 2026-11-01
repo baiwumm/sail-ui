@@ -33,15 +33,20 @@ const classes = computed(() =>
 );
 
 const labelId = useId();
+// Reka renders the spin button input with this id, so a plain `<label for>`
+// can name it and focus it on click like the upstream RAC label.
+const inputId = useId();
 
-provide(numberFieldContextKey, {labelId});
+provide(numberFieldContextKey, {labelId, inputId});
 
-// The label of a number field names the spin button, so it renders as a span.
-provide(labelContextKey, {id: labelId, elementType: "span"});
+// The label of a number field names the spin button, so it renders as a real
+// label associated through `for`.
+provide(labelContextKey, {id: labelId, elementType: "label", htmlFor: inputId});
 </script>
 
 <template>
   <NumberFieldRoot
+    :id="inputId"
     v-model="model"
     v-bind="forwarded"
     :class="classes"

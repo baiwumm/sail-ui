@@ -63,6 +63,7 @@ function resetComboboxSearch() {
     @update:model-value="comboboxText = $event"
   >
     <input
+      :aria-label="context?.label.value"
       :class="classes"
       :data-slot="'search-field-input'"
       :disabled="context?.isDisabled.value"
@@ -74,6 +75,7 @@ function resetComboboxSearch() {
   <input
     v-else
     v-bind="forwarded"
+    :aria-label="context?.label.value"
     :class="classes"
     :data-slot="'search-field-input'"
     :disabled="context?.isDisabled.value"

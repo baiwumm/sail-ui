@@ -45,7 +45,14 @@ const renderAsSpan = computed(() => labelContext?.elementType === "span");
   <FieldLabel v-else-if="field" v-bind="forwarded" :class="classes" :data-slot="'label'">
     <slot />
   </FieldLabel>
-  <label v-else v-bind="forwarded" :id="resolvedId" :class="classes" :data-slot="'label'">
+  <label
+    v-else
+    v-bind="forwarded"
+    :id="resolvedId"
+    :for="labelContext?.htmlFor"
+    :class="classes"
+    :data-slot="'label'"
+  >
     <slot />
   </label>
 </template>

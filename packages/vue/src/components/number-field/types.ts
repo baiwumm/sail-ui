@@ -56,6 +56,10 @@ export interface NumberFieldContext {
    * The id of the label that names the input of the number field.
    */
   labelId: string;
+  /**
+   * The id of the spin button input, used by the label `for` association.
+   */
+  inputId: string;
 }
 
 export const numberFieldContextKey: InjectionKey<NumberFieldContext> = Symbol("sail-number-field");
