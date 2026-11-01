@@ -1,40 +1,8 @@
 <script setup lang="ts">
-interface DocLink {
-  label: string;
-  to: string;
-}
+import {docsNav} from "./docs-nav.generated";
+import type {DocGroup} from "./docs-nav";
 
-interface DocGroup {
-  title: string;
-  links: DocLink[];
-}
-
-const groups: DocGroup[] = [
-  {
-    title: "Getting started",
-    links: [
-      {label: "Introduction", to: "/"},
-      {label: "Installation", to: "/docs/getting-started"},
-      {label: "Theming", to: "/docs/theming"},
-      {label: "Migration from HeroUI", to: "/docs/migration"},
-    ],
-  },
-  {
-    title: "Components",
-    links: [
-      {label: "Overview", to: "/docs/components"},
-      {label: "Button", to: "/docs/components/button"},
-      {label: "Input", to: "/docs/components/input"},
-      {label: "Checkbox", to: "/docs/components/checkbox"},
-      {label: "Select", to: "/docs/components/select"},
-      {label: "Modal", to: "/docs/components/modal"},
-      {label: "Toast", to: "/docs/components/toast"},
-      {label: "Table", to: "/docs/components/table"},
-      {label: "Calendar", to: "/docs/components/calendar"},
-      {label: "Accordion", to: "/docs/components/accordion"},
-    ],
-  },
-];
+const groups = docsNav;
 
 const query = ref("");
 
