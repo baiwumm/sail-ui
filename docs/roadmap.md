@@ -49,9 +49,9 @@
 - [x] 7 个覆盖层/Toast（[T05](./spec/tickets/05-overlays.md)）
 - [x] 15 个集合/选择器（[T06](./spec/tickets/06-collections-and-pickers.md)）
 - [x] 覆盖层动画/焦点/SSR/层级
-- [ ] Select 与 popover 状态机打通
-- [ ] 迁移指南初稿（覆盖层差异已记录，集合/日期待补）
-- [ ] MVP 40 的 API 冻结（允许修 bug，不再大改命名）
+- [x] Select 与 popover 状态机打通
+- [x] 迁移指南初稿（覆盖层/集合/日期颜色差异已记录；文档站页面顺延 T09）
+- [x] MVP 40 的 API 冻结（允许修 bug，不再大改命名）
 
 风险：退场动画、Toast 每请求隔离、Select 选中属性。
 
@@ -72,10 +72,10 @@
 
 - [x] 15 个日期/颜色/自动完成（[T07](./spec/tickets/07-date-and-color.md)）
 - [x] 4 个高级数据（[T08](./spec/tickets/08-advanced-data.md)）
-- [ ] Table：键盘/ARIA/排序/选择/列宽/虚拟化/LoadMore
-- [ ] Meter / ScrollShadow / OTP
-- [ ] RTL 冒烟（Calendar/Drawer/Select/Table）
-- [ ] 视觉基线全量
+- [x] Table：键盘/ARIA/排序/选择/列宽/虚拟化/LoadMore
+- [x] Meter / ScrollShadow / OTP
+- [ ] RTL 冒烟（Calendar/ColorSlider/Popover/Tooltip/Pagination 已覆盖；Drawer/Table 待补，随 T09 收尾）
+- [ ] 视觉基线全量（T03–T08 gallery 基线已入库；覆盖层截图矩阵顺延 T09）
 
 风险：Table 是最大不确定项；如果超出预算，先交付基础网格，列宽/虚拟化延后到 M4，但不得静默降级。
 
