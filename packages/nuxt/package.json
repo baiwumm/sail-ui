@@ -1,0 +1,41 @@
+{
+  "name": "@sail-ui/nuxt",
+  "version": "0.0.0",
+  "description": "Nuxt module for Sail UI: auto-imported components, styles, Tailwind v4, and providers",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/module.mjs",
+  "types": "./dist/module.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/module.d.ts",
+      "import": "./dist/module.mjs",
+      "default": "./dist/module.mjs"
+    },
+    "./runtime/*": "./dist/runtime/*"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json --emitDeclarationOnly --declaration --outDir dist && unbuild",
+    "dev:prepare": "unbuild --stub"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^4.6.3",
+    "@sail-ui/styles": "workspace:*",
+    "@sail-ui/vue": "workspace:*",
+    "@tailwindcss/vite": "4.3.3",
+    "reka-ui": "2.11.0"
+  },
+  "peerDependencies": {
+    "nuxt": "^4.0.0"
+  },
+  "devDependencies": {
+    "@nuxt/schema": "^4.6.3",
+    "typescript": "5.9.3",
+    "unbuild": "3.6.1",
+    "vue": "3.5.44",
+    "rimraf": "^6.0.1"
+  }
+}

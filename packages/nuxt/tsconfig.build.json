@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@sail-ui/styles": [
+        "../styles/dist/index.d.ts"
+      ],
+      "@sail-ui/vue": [
+        "../vue/dist/index.d.ts"
+      ],
+      "@sail-ui/vue/toast": [
+        "../vue/dist/components/toast/index.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
