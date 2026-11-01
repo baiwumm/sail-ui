@@ -1,0 +1,23 @@
+{
+  // Cloudflare Workers deployment for the docs site. `pnpm build` produces the
+  // Nitro cloudflare_module output consumed here; deploy with `wrangler deploy`.
+  //
+  // Before the first deploy: `wrangler d1 create sail-ui-docs` and replace the
+  // placeholder database_id below. Nuxt Content keeps the rendered documents
+  // in this D1 database (binding `DB`, wired by its cloudflare preset).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sail-ui-docs",
+  "main": ".output/server/index.mjs",
+  "compatibility_date": "2026-10-30",
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".output/public",
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sail-ui-docs",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+    },
+  ],
+}

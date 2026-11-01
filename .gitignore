@@ -24,3 +24,5 @@ storybook-static/
 *.tgz
 .fixtures/
 </content>
+
+.wrangler

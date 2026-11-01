@@ -9,6 +9,10 @@
       "dependsOn": ["^build"],
       "outputs": [".nuxt/**", ".output/**"]
     },
+    "@sail-ui/docs#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".nuxt/**", ".output/**"]
+    },
     "dev": {
       "cache": false,
       "persistent": true

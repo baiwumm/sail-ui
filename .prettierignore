@@ -11,3 +11,4 @@ packages/styles/generated
 packages/styles/contracts
 packages/styles/manifest.json
 pnpm-lock.yaml
+.wrangler

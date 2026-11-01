@@ -1,0 +1,100 @@
+// Generates the components overview page from the component matrix, so the
+// docs index can never drift from the repository's source of truth.
+import {readFileSync, writeFileSync} from "node:fs";
+import {dirname, join} from "node:path";
+import {fileURLToPath} from "node:url";
+
+const root = join(dirname(dirname(fileURLToPath(import.meta.url))), "..", "..");
+const matrixPath = join(root, "docs", "component-matrix.md");
+const outPath = join(root, "apps", "docs", "content", "docs", "components.md");
+
+const documented = new Set([
+  "button",
+  "input",
+  "checkbox",
+  "select",
+  "modal",
+  "toast",
+  "table",
+  "calendar",
+  "accordion",
+]);
+
+const matrix = readFileSync(matrixPath, "utf8");
+const lines = matrix.split("\n");
+
+const groupTitles = {
+  "展示 / 布局 / 反馈（24）": "Display, layout & feedback (24)",
+  "表单 / 操作（19）": "Forms & actions (19)",
+  "覆盖层 / 反馈（7）": "Overlays & feedback (7)",
+  "集合 / 选择（15）": "Collections & pickers (15)",
+  "日期 / 颜色 / 自动完成（15）": "Dates, colors & autocomplete (15)",
+  "高级数据（4）": "Advanced data (4)",
+};
+
+let currentTitle = "";
+const groups = [];
+
+for (const line of lines) {
+  const heading = line.match(/^## (.+)$/);
+
+  if (heading) {
+    currentTitle = heading[1].trim();
+    continue;
+  }
+
+  if (currentTitle === "" || currentTitle.includes("统计") || currentTitle.includes("内部组合")) {
+    continue;
+  }
+
+  if (!line.startsWith("|")) {
+    continue;
+  }
+
+  const cells = line
+    .split("|")
+    .map((cell) => cell.trim())
+    .filter(Boolean);
+
+  if (cells.length < 4 || cells[0].startsWith("组件") || cells[0].startsWith("---")) {
+    continue;
+  }
+
+  let group = groups.find((entry) => entry.title === currentTitle);
+
+  if (!group) {
+    group = {title: currentTitle, rows: []};
+    groups.push(group);
+  }
+
+  group.rows.push({
+    mvp: cells[3] === "✅",
+    name: cells[0].replaceAll("`", ""),
+    notes: cells[4] ?? "",
+  });
+}
+
+let markdown = `---
+title: Components
+description: All 84 Sail UI components with their maturity.
+---
+
+# Components
+
+${groups.length} groups, listed straight from the [component matrix](https://github.com/baiwumm/sail-ui/blob/main/docs/component-matrix.md). Components with a link have a full documentation page; the others follow the same API conventions and are documented ticket by ticket in the repository.
+`;
+
+for (const group of groups) {
+  markdown += `\n## ${groupTitles[group.title] ?? group.title}\n\n| Component | Docs | Notes |\n| --- | --- | --- |\n`;
+
+  for (const row of group.rows) {
+    const name = documented.has(row.name)
+      ? `[${row.name}](/docs/components/${row.name})`
+      : row.name;
+    const notes = row.notes.replaceAll("|", "\\|");
+    markdown += `| \`${row.name}\` | ${documented.has(row.name) ? name : "—"} | ${notes} |\n`;
+  }
+}
+
+writeFileSync(outPath, markdown);
+console.log(`gen-components: wrote ${outPath}`);

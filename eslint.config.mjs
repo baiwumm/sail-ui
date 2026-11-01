@@ -10,6 +10,7 @@ export default tseslint.config(
       "**/node_modules/**",
       "**/.nuxt/**",
       "**/.output/**",
+      "**/.wrangler/**",
       "**/.turbo/**",
       "**/coverage/**",
       "**/test-results/**",
