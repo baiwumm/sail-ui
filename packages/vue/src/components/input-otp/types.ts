@@ -1,6 +1,8 @@
 import type {InputOTPVariants, inputOTPVariants} from "@sail-ui/styles";
 import type {ComputedRef, Ref} from "vue";
 
+export type InputOtpMode = "numeric" | "text";
+
 export interface InputOtpRootProps {
   /** The OTP value when the field is controlled. */
   modelValue?: string;
@@ -13,7 +15,7 @@ export interface InputOtpRootProps {
   /** Placeholder forwarded to the native slot inputs. */
   placeholder?: string;
   /** @default "numeric" */
-  inputMode?: "numeric" | "text";
+  inputMode?: InputOtpMode;
   /** @default false */
   isDisabled?: boolean;
   /** @default false */
@@ -49,5 +51,6 @@ export interface InputOtpContext {
   characters: ComputedRef<string[]>;
   activeIndex: Ref<number | null>;
   inputClassName: ComputedRef<string | undefined>;
+  inputMode: ComputedRef<InputOtpMode>;
   setActiveIndex: (index: number | null) => void;
 }

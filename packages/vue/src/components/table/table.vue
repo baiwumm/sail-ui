@@ -893,11 +893,11 @@ watch(
         <div
           ref="tableEl"
           :aria-busy="isLoading ? 'true' : undefined"
-          :aria-colcount="columns.length"
+          :aria-colcount="Math.max(columns.length, 1)"
           :aria-label="gridLabel"
           :aria-labelledby="gridLabelledBy"
           :aria-multiselectable="selectionMode === 'multiple' ? 'true' : undefined"
-          :aria-rowcount="rows.length + 1"
+          :aria-rowcount="rows.length + 1 + (hasMore ? 1 : 0)"
           :class="cx(variants.content(), contentClass)"
           :style="contentStyle"
           :tabindex="activeCell ? -1 : 0"
@@ -912,7 +912,7 @@ watch(
             data-slot="table-header"
             role="rowgroup"
           >
-            <div :style="rowGridStyle" role="row">
+            <div :aria-rowindex="1" :style="rowGridStyle" role="row">
               <div
                 v-for="(header, columnIndex) in headerGroup?.headers ?? []"
                 :key="header.id"
@@ -1068,14 +1068,14 @@ watch(
                     <slot
                       :name="`cell-${cell.column.id}`"
                       :column="resolveColumn(cell.column.id)"
-                      :row="item.row"
+                      :row="item.row.original"
                       :row-index="item.index"
                       :value="cell.getValue()"
                     >
                       <slot
                         name="cell"
                         :column="resolveColumn(cell.column.id)"
-                        :row="item.row"
+                        :row="item.row.original"
                         :row-index="item.index"
                         :value="cell.getValue()"
                       >
@@ -1087,7 +1087,7 @@ watch(
               </div>
             </div>
             <div v-if="isEmpty" role="row">
-              <div role="rowheader">
+              <div :class="variants.cell()" data-slot="table-cell" role="rowheader">
                 <slot name="empty" />
               </div>
             </div>
@@ -1122,11 +1122,11 @@ watch(
         v-else
         ref="tableEl"
         :aria-busy="isLoading ? 'true' : undefined"
-        :aria-colcount="columns.length"
+        :aria-colcount="Math.max(columns.length, 1)"
         :aria-label="gridLabel"
         :aria-labelledby="gridLabelledBy"
         :aria-multiselectable="selectionMode === 'multiple' ? 'true' : undefined"
-        :aria-rowcount="rows.length + 1"
+        :aria-rowcount="rows.length + 1 + (hasMore ? 1 : 0)"
         :class="cx(variants.content(), contentClass)"
         :style="contentStyle"
         :tabindex="activeCell ? -1 : 0"
@@ -1300,11 +1300,21 @@ watch(
             </td>
           </tr>
           <tr v-if="isEmpty" role="row">
-            <td :colspan="columnCount" role="rowheader">
+            <td
+              :class="variants.cell()"
+              :colspan="columnCount"
+              data-slot="table-cell"
+              role="rowheader"
+            >
               <slot name="empty" />
             </td>
           </tr>
-          <tr v-if="isLoading" :class="variants.row()" data-slot="table-row" role="row">
+          <tr
+            v-if="isLoading && rows.length === 0"
+            :class="variants.row()"
+            data-slot="table-row"
+            role="row"
+          >
             <td
               :class="variants.cell()"
               :colspan="columnCount"

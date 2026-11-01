@@ -64,6 +64,7 @@ function handleFocusOut() {
     <PinInputInput
       :class="inputClasses"
       :index="index"
+      :inputmode="context?.inputMode.value"
       :style="inputStyle"
       :tabindex="index === 0 ? undefined : -1"
     />

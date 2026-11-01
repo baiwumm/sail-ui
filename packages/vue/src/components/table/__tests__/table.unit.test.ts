@@ -200,25 +200,37 @@ describe("Table", () => {
     expect(emptyRow.attributes("role")).toBe("row");
     expect(emptyCell.attributes("role")).toBe("rowheader");
     expect(emptyCell.attributes("colspan")).toBe("3");
-    expect(emptyCell.attributes("data-slot")).toBeUndefined();
+    // The empty cell shares the loading cell styling so both self-designed
+    // extensions stay internally consistent.
+    expect(emptyCell.attributes("data-slot")).toBe("table-cell");
+    expect(emptyCell.classes()).toContain("table__cell");
     expect(emptyCell.find(".empty-content").text()).toBe("No results found");
 
     wrapper.unmount();
   });
 
   it("renders a loading row and busy state", () => {
-    const wrapper = mountTable({isLoading: true});
+    const wrapper = mountTable({isLoading: true, data: []});
 
     expect(wrapper.get("table").attributes("aria-busy")).toBe("true");
     expect(wrapper.get("[data-slot='table-body']").attributes("data-empty")).toBeUndefined();
-    expect(wrapper.findAll("[data-slot='table-row']")).toHaveLength(4);
+    expect(wrapper.findAll("[data-slot='table-row']")).toHaveLength(1);
 
-    const loadingRow = wrapper.findAll("[data-slot='table-row']")[3];
+    const loadingRow = wrapper.findAll("[data-slot='table-row']")[0];
     const loadingCell = loadingRow?.get("[data-slot='table-cell']");
 
     expect(loadingRow?.attributes("role")).toBe("row");
     expect(loadingCell?.attributes("colspan")).toBe("3");
     expect(loadingCell?.text()).toBe("Loading...");
+
+    wrapper.unmount();
+  });
+
+  it("does not append a loading row while data rows are shown", () => {
+    const wrapper = mountTable({isLoading: true});
+
+    expect(wrapper.get("table").attributes("aria-busy")).toBe("true");
+    expect(wrapper.findAll("[data-slot='table-row']")).toHaveLength(3);
 
     wrapper.unmount();
   });

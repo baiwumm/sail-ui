@@ -95,6 +95,7 @@ provide(inputOtpContextKey, {
   activeIndex,
   characters,
   inputClassName: computed(() => props.inputClassName),
+  inputMode: computed(() => props.inputMode),
   isDisabled: computed(() => props.isDisabled),
   isInvalid: computed(() => props.isInvalid),
   setActiveIndex,

@@ -227,7 +227,9 @@ describe("T08 SSR", () => {
     expect(html).not.toContain("<table");
     expect(html).toContain('data-slot="table-content"');
     expect(html).toContain('role="grid"');
-    expect(html).toContain('aria-rowcount="31"');
+    // 30 data rows + header + load-more sentinel (all render role="row").
+    expect(html).toContain('aria-rowcount="32"');
+    expect(html).toContain('aria-rowindex="1"');
     expect(html).toContain("h-64");
     expect(html).toContain("position:sticky");
     expect(html).toContain("grid-template-columns:repeat(2, minmax(0, 1fr))");

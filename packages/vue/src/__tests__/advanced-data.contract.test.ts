@@ -281,7 +281,9 @@ describe("T08 data-slot parity", () => {
     expect(html).not.toContain("<tbody");
     expect(html).toContain("table__content");
     expect(html).toContain('role="grid"');
-    expect(html).toContain('aria-rowcount="31"');
+    // 30 data rows + header + load-more sentinel (all render role="row").
+    expect(html).toContain('aria-rowcount="32"');
+    expect(html).toContain('aria-rowindex="1"');
     expect(html).toContain("position:sticky");
     expect(html).toContain("grid-template-columns:repeat(2, minmax(0, 1fr))");
     expect(html).toContain("translateY(50px)");
