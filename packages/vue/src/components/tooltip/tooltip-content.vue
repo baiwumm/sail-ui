@@ -46,7 +46,9 @@ const forwardedAttrs = computed(() => {
 
 const classes = computed(() => cx(context.slots.value.base(), attrs.class as string | undefined));
 
-const sideOffset = computed(() => props.sideOffset ?? (props.showArrow ? 7 : 3));
+const sideOffset = computed(
+  () => (props.sideOffset ?? (props.showArrow ? 7 : 3)) - context.arrowHeight.value,
+);
 
 const contentStyle = computed(() => [
   attrs.style,

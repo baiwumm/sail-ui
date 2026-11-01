@@ -33,6 +33,8 @@ const forwardedAttrs = computed(() => {
 
 const classes = computed(() => cx(context.slots.value.base(), attrs.class as string | undefined));
 
+const positionedSideOffset = computed(() => props.sideOffset - context.arrowHeight.value);
+
 const contentStyle = computed(() => [
   attrs.style,
   {
@@ -71,7 +73,7 @@ onBeforeUnmount(() => {
       :data-exiting="context.isExiting.value ? 'true' : undefined"
       :reference="context.triggerRef.value ?? undefined"
       :side="placement"
-      :side-offset="sideOffset"
+      :side-offset="positionedSideOffset"
       :style="contentStyle"
     >
       <slot />

@@ -24,11 +24,13 @@ const overlay = useOverlayState({
 
 const slots = computed(() => popoverVariants());
 const triggerRef = ref<HTMLElement | null>(null);
+const arrowHeight = ref(0);
 
 provide<PopoverContext>(popoverContextKey, {
   ...overlay,
   slots,
   triggerRef,
+  arrowHeight,
 });
 
 function handleOpenChange(isOpen: boolean) {

@@ -3,9 +3,14 @@ import {TooltipArrow as TooltipArrowPrimitive} from "reka-ui";
 
 import {useForwardedAttrs} from "../../shared/attrs";
 
+import {useTooltipContext} from "./context";
+
 defineOptions({name: "SailTooltipArrow", inheritAttrs: false});
 
 const {forwarded} = useForwardedAttrs();
+// Reka folds the measured arrow height into the popper's main-axis offset; the
+// content subtracts it so the box lands at the raw offset like upstream.
+useTooltipContext().arrowHeight.value = 12;
 </script>
 
 <template>

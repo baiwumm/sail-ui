@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {cx} from "@sail-ui/styles";
 import {DialogContent} from "reka-ui";
-import type {StyleValue} from "vue";
+import type {CSSProperties, StyleValue} from "vue";
 import {computed, ref, useAttrs} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
@@ -37,6 +37,11 @@ const forwarded = computed(() => {
 });
 const classes = computed(() => cx(slots.value.dialog(), attrs.class as string | undefined));
 
+// React Aria stretches the sheet panel to its wrapper inline; mirror that here
+// so side placements fill the full height. Content-sized placements (bottom/
+// top) resolve to auto because their wrapper height is content-driven.
+const baseStyle: CSSProperties = {height: "100%"};
+
 function setDialogRef(element: unknown) {
   dialogRef.value = resolveElement(element);
   contextDialogRef.value = dialogRef.value;
@@ -67,7 +72,7 @@ function handlePointerDownOutside(event: Event) {
     :class="classes"
     :data-placement="placement"
     :data-slot="'sheet-dialog'"
-    :style="attrs.style as StyleValue"
+    :style="[baseStyle, attrs.style as StyleValue]"
     @escape-key-down="handleEscapeKeyDown"
     @pointer-down-outside="handlePointerDownOutside"
   >

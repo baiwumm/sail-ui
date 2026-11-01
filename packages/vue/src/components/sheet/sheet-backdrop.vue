@@ -5,6 +5,7 @@ import type {CSSProperties, StyleValue} from "vue";
 import {computed, provide, ref} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {useViewportVars} from "../../shared/viewport-vars";
 import {sheetContextKey, useSheetContext} from "./context";
 import type {SheetBackdropProps} from "./types";
 import {useSheetBackdropMotion} from "./use-sheet-motion";
@@ -35,6 +36,7 @@ provide(sheetContextKey, {
 
 const overlayClasses = computed(() => cx(mergedSlots.value.overlay(), className.value));
 const backdropClasses = computed(() => mergedSlots.value.backdrop());
+const viewportVars = useViewportVars();
 
 // The upstream overlay layout comes from React Aria's inline styles; the Sheet
 // CSS only sizes and rounds the surface, so Sail supplies the fixed layer here.
@@ -63,6 +65,7 @@ const overlayStyle = computed<StyleValue>(() => {
       display: "flex",
     },
     alignment,
+    viewportVars.value,
   ];
 });
 

@@ -3,9 +3,14 @@ import {PopoverArrow as PopoverArrowPrimitive} from "reka-ui";
 
 import {useForwardedAttrs} from "../../shared/attrs";
 
+import {usePopoverContext} from "./context";
+
 defineOptions({name: "SailPopoverArrow", inheritAttrs: false});
 
 const {forwarded} = useForwardedAttrs();
+// Reka folds the measured arrow height into the popper's main-axis offset; the
+// content subtracts it so the box lands at the raw `sideOffset` like upstream.
+usePopoverContext().arrowHeight.value = 12;
 </script>
 
 <template>

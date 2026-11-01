@@ -4,6 +4,7 @@ import {DialogOverlay, DialogPortal} from "reka-ui";
 import {computed, provide} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
+import {useViewportVars} from "../../shared/viewport-vars";
 import {alertDialogContextKey, useAlertDialogContext} from "./context";
 import type {AlertDialogBackdropProps} from "./types";
 
@@ -32,6 +33,7 @@ provide(alertDialogContextKey, {
 });
 
 const classes = computed(() => cx(mergedSlots.value.backdrop(), className.value));
+const viewportVars = useViewportVars();
 
 // Function refs also run on unmount, so a closed overlay never keeps a stale element.
 function setBackdropRef(element: unknown) {
@@ -49,6 +51,7 @@ function setBackdropRef(element: unknown) {
         :data-entering="context.isEntering.value ? 'true' : undefined"
         :data-exiting="context.isExiting.value ? 'true' : undefined"
         :data-slot="'alert-dialog-backdrop'"
+        :style="viewportVars"
         @click.stop
       >
         <slot />

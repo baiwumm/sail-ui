@@ -25,6 +25,7 @@ const overlay = useOverlayState({
 
 const slots = computed(() => tooltipVariants());
 const triggerRef = ref<HTMLElement | null>(null);
+const arrowHeight = ref(0);
 const isDisabled = computed(() => Boolean(props.isDisabled));
 const triggerMode = computed<TooltipTriggerMode>(() => props.trigger ?? "hover");
 const delay = computed(() => props.delay ?? readCssTime("--tooltip-delay", 1500));
@@ -97,6 +98,7 @@ provide<TooltipContext>(tooltipContextKey, {
   ...overlay,
   slots,
   triggerRef,
+  arrowHeight,
   isDisabled,
   triggerMode,
   scheduleOpen,
