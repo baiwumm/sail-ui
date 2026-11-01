@@ -3,6 +3,7 @@ import {describe, expect, it} from "vitest";
 import {defineComponent, h, nextTick, ref} from "vue";
 
 import Textarea from "../textarea-root.vue";
+import TextField from "../../input/text-field.vue";
 
 describe("Textarea", () => {
   it("renders the upstream slot and variant classes", () => {
@@ -59,5 +60,22 @@ describe("Textarea", () => {
 
     expect(wrapper.get("textarea").attributes("disabled")).toBeDefined();
     expect(wrapper.get('[data-slot="textarea"]').attributes("data-disabled")).toBe("true");
+  });
+
+  it("renders a textarea element inside a TextField and inherits its variant", () => {
+    const wrapper = mount(TextField, {
+      props: {variant: "secondary"},
+      slots: {
+        default: () => [h(Textarea, {rows: 4})],
+      },
+    });
+
+    // Reka FieldControl defaults to input; the textarea must override it.
+    const textarea = wrapper.get("textarea");
+
+    expect(textarea.attributes("rows")).toBe("4");
+    expect(textarea.classes()).toContain("textarea--secondary");
+
+    wrapper.unmount();
   });
 });

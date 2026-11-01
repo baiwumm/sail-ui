@@ -2,7 +2,7 @@
 import {useFocusRing, useHover} from "@sail-ui/primitives";
 import {cx, textAreaVariants} from "@sail-ui/styles";
 import {FieldControl, injectFieldRootContext} from "reka-ui";
-import {computed, inject, nextTick, ref, watch, type ComponentPublicInstance} from "vue";
+import {computed, inject, nextTick, onMounted, ref, watch, type ComponentPublicInstance} from "vue";
 
 import {useForwardedAttrs} from "../../shared/attrs";
 import {textFieldContextKey} from "../input/types";
@@ -11,7 +11,6 @@ import type {TextAreaRootProps} from "./types";
 defineOptions({name: "SailTextarea", inheritAttrs: false});
 
 const props = withDefaults(defineProps<TextAreaRootProps>(), {
-  variant: "primary",
   fullWidth: false,
   isDisabled: false,
   isInvalid: false,
@@ -60,6 +59,10 @@ function resize() {
 
 watch(model, () => nextTick(resize));
 
+// Initial content must also drive the height, otherwise autoResize starts
+// from the rows attribute until the first input.
+onMounted(resize);
+
 function handleInput(event: Event) {
   model.value = (event.target as HTMLTextAreaElement).value;
   resize();
@@ -71,6 +74,7 @@ function handleInput(event: Event) {
     v-if="field"
     ref="textareaRef"
     v-bind="forwarded"
+    as="textarea"
     :aria-invalid="isInvalid ? true : undefined"
     :class="classes"
     :data-disabled="isDisabled ? 'true' : undefined"
@@ -81,6 +85,7 @@ function handleInput(event: Event) {
     :data-slot="'textarea'"
     :disabled="isDisabled"
     :model-value="model"
+    :name="name"
     :rows="rows"
     @update:model-value="model = $event"
   />
@@ -97,6 +102,7 @@ function handleInput(event: Event) {
     :data-invalid="isInvalid ? 'true' : undefined"
     :data-slot="'textarea'"
     :disabled="isDisabled"
+    :name="name"
     :rows="rows"
     :value="model"
     @input="handleInput"
